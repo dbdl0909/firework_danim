@@ -31,7 +31,7 @@
 			<a href="/community/communityModify?communityNo=${detailView.communityNo}"><span type="button" class="btn btn-primary">수정</span></a>
 			<a href="/community/list?communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
 		</form>	
-	</div>	
+	</div> 	
 </body>
 </html>
 
