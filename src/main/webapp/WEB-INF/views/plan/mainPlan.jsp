@@ -37,16 +37,17 @@
     </c:forEach>
 		            
 	function initMap() {
+		//처음 지도 위치
 		var main = {lat: 36.337, lng: 127.402};
-    	
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 7,
 			center: main
-		});//처음 지도 위치
+		});
 		
 		var markerArray = [];
 		var marker;
-		for (var i = 0; i < cityInfoList.length; i++) {
+		//cityInfoList의 length만큼 마커를 찍어준다.
+		for (var i=0; i<cityInfoList.length; i++) {
 			marker = new google.maps.Marker({
 				icon: "../../resources/images/placeholder.png",
 				position: {lat: Number(cityInfoList[i].latitude), lng: Number(cityInfoList[i].langitude)},
@@ -56,19 +57,31 @@
 				//zIndex: cityInfoList[i][3],
 				index:i
 				
-			});//반복할때마다 마커를 찍어준다
+			});
 			markerArray.push(marker);
 		}
 		
+		var infoArray = new Array();
+		var prevInfowindow = false;
 		for(var i = 0; i < markerArray.length; i++) {
+			//infoArray 배열에 차례대로 각 도시의 summary를 담는다.
+			infoArray.push(cityInfoList[i].summary);
 			google.maps.event.addListener(markerArray[i], 'click', function() {
+				var infowindow = new google.maps.InfoWindow({
+					content: infoArray[this.index]
+				});
 				//console.log(this.index);
 				map.setZoom(11);
 				map.setCenter(markerArray[this.index].getPosition());
+				
+				//prevInfowindow 변수를 사용해서 이전의 infowindow를 닫는다.
+				if(prevInfowindow) {
+					prevInfowindow.close();
+				}
+				prevInfowindow = infowindow;
+				infowindow.open(map, markerArray[this.index]);
 			});
-		}
-		
-		
+		}	
 	}
     </script>
 </head>
@@ -76,10 +89,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
     <div id="map">
 	</div>
-	${listCityInfoName}
+<%-- 	${listCityInfoName}
 	
 	<c:forEach items="${listCityInfoName}" var="listCityInfoName">
 	<span>${listCityInfoName.cityInfoName}</span>
-	</c:forEach>
+	</c:forEach> --%>
 	</body>
 </html>
