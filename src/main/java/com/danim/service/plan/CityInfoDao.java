@@ -10,18 +10,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CityInfoDao {
-	
 	    private static final Logger logger = LoggerFactory.getLogger(CityInfoDao.class);
-	    private final String namesPace = "com.danim.service.CityInfoMapper";
+	    
 	    @Autowired
 	    private SqlSessionTemplate sessionTemplate;
 	    
-	    // 도 이름을 갖고와서 시를 출력하는 매퍼
+	    private final String namesPace = "com.danim.service.CityInfoMapper";
+	    
+	    //클릭한 도에 해당하는 도시들 가져오는 매퍼
 	    public List<CityInfoDto> selectCityInfoByCityInfoDoName(String cityInfoDoName) {
-			logger.info("DAO: {}",cityInfoDoName);
-	        return sessionTemplate.selectList(namesPace+".selectCityInfoByCityInfoDoName", cityInfoDoName);
-	        
+			logger.info("cityInfoDoName(도 이름) : {} <-- selectCityInfoByCityInfoDoName() CityInfoDao.java", cityInfoDoName);
+			
+	        return sessionTemplate.selectList(namesPace + ".selectCityInfoByCityInfoDoName", cityInfoDoName);
 	    }
-
-	
 }

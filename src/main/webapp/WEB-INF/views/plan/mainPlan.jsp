@@ -18,52 +18,47 @@
       #map {
         height: 100%;
       }
-    </style><!-- 구글에 등록된 기본 맵 스타일-->
+    </style><!-- 구글에 등록된 기본 맵 스타일 -->
     <script>
     <%-- 구글 지도 (현재위치 설정) --%>
     
-    var metropolis = [ ['Seoul', 37.566678, 126.97843, 16],//서울특별시
-		               ['Busan', 35.1795543, 129.0756416, 15],//부산광역시
-		               ['Daegu', 35.8714354, 128.601445, 14],//대구광역시
-		               ['Incheon', 37.4562557, 126.7052062, 13],//인천광역시
-		               ['Gwangju', 35.1595454, 126.8526012, 12],//광주광역시
-		               ['Daejeon', 36.3504119, 127.3845475, 11],//대전광역시
-		               ['Ulsan', 35.539624, 129.3113596, 10],//울산광역시
-/* 
-		               ['Gyeonggido', 37.275051, 127.0094448, 9],//경기도
-		               ['Gangwondo', 37.8855687, 127.7301849, 8],//강원도
-		               ['Chungcheongnam', 36.659444, 126.6710533, 7],//충청남도
-		               ['Chungcheongbukdo', 36.635684, 127.491389, 6],//충청북도
-		               ['Gyeongsangnamdo', 35.2383, 128.692393, 5],//경상남도
-		               ['Gyeongsangbukdo', 36.576098, 128.505732, 4],//경상북도
-		               ['Jeollanamdo', 34.816219, 126.462912, 3],//전라남도
-		               ['Jeollabukdo', 35.8197638, 127.1081298, 2],//전라북도
-		               ['Jejuisland', 33.4888341, 126.4980797, 1]//제주도 */
-
-		             ];// 지역 대분류
+    var cityInfoList = new Array();
+    
+    /* javascript 에서 jstl 사용해 리스트에 담겨있는 도시 리스트를 가져온다. */
+    <c:forEach var="listCityInfo" items="${listCityInfoByCityInfoDoName}">
+    	var cityInfo = new Object();
+    	cityInfo.name = "${listCityInfo.cityInfoName}";
+    	cityInfo.langitude = "${listCityInfo.cityInfoLangitude}";
+    	cityInfo.latitude = "${listCityInfo.cityInfoLatitude}";
+    	cityInfo.summary = "${listCityInfo.cityInfoSummary}";
+    	cityInfo.image = "${listCityInfo.cityInfoImage}";
+    	/* 담은 정보들을 cityInfoList에 담는다. */
+    	cityInfoList.push(cityInfo);
+    </c:forEach>
 		            
-    function initMap() {
-    	var main = {lat: 36.337, lng: 127.402};
+	function initMap() {
+		var main = {lat: 36.337, lng: 127.402};
     	
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 7,
 			center: main
-		});//처음 지도 위치.
+		});//처음 지도 위치
 		
 		var markerArray = [];
 		var marker;
-		for (var i = 0; i < metropolis.length; i++) {
+		for (var i = 0; i < cityInfoList.length; i++) {
 			marker = new google.maps.Marker({
-			      position: {lat: metropolis[i][1], lng: metropolis[i][2]},
-			      map: map,
-			      title: metropolis[i][0],
-			      zIndex: metropolis[i][3],
-			      index:i
-			      
+				icon: "../../resources/images/placeholder.png",
+				position: {lat: Number(cityInfoList[i].latitude), lng: Number(cityInfoList[i].langitude)},
+			    				//위도와 경도를 Number 타입으로 바꾼다.
+				map: map,
+				title: cityInfoList[i].name,
+				//zIndex: cityInfoList[i][3],
+				index:i
+				
 			});//반복할때마다 마커를 찍어준다
 			markerArray.push(marker);
 		}
-		
 		
 		for(var i = 0; i < markerArray.length; i++) {
 			google.maps.event.addListener(markerArray[i], 'click', function() {
