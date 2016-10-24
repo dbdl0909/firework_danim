@@ -11,6 +11,7 @@
         <small><a href="/diary?SendYear=${SendYear}&SandMonth=${SandMonth}&SandPage=prev">[PREV]</a></small> 
         ${ddayYear}년 ${ddayMonth+1}월
         <small><a href="/diary?SendYear=${SendYear}&ddayMonth=${SandMonth}&SandPage=next">[NEXT]</a></small> 
+        
     </h1>
     <table class="table table-bordered">
         <thead>
