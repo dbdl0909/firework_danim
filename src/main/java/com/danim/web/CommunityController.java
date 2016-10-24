@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.danim.service.community.CommunityDto;
 import com.danim.service.community.CommunityService;
 import com.danim.util.FileUpload;
-
+ 
 @Controller
 public class CommunityController { 
 
