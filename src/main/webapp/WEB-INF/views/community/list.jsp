@@ -39,13 +39,13 @@
 			</thead>
 			<tbody>
 			
-			<c:forEach items="${list }" var="list">
-				<tr onclick="onView('${list.seq }');"> 
-					<td>${list.seq }</td>
-					<td>${list.title }</td>
-					<td>${list.name }</td>
-					<td> <fmt:formatDate value="${list.recodeDate }" pattern="YYYY-MM-dd"   /></td>
-					<td>${list.hit }</td>
+			<c:forEach items="${communityList}" var="list">
+				<tr> 
+					<td>${list.communityNo }</td>
+					<td>${list.communitySubject }</td>
+					<td>${list.memberId}</td>
+					<td>${list.communityDate}</td>
+					<td>${list.communityReadcount}</td>
 				</tr>
 			</c:forEach>
 				

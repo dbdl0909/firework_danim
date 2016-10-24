@@ -3,6 +3,7 @@ package com.danim.web;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
@@ -29,8 +31,9 @@ public class CommunityController {
 	private CommunityService communityService;
 	
 	@RequestMapping(value = "/community/list")
-	public String home(Model model, CommunityDto communityDto) {
-
+	public String home(Model model, @RequestParam(value="communityCategoryNo") String communityCategoryNo) {
+		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo);
+		model.addAttribute("communityList", communityList);
 		return "/community/list";
 	}
 
@@ -48,7 +51,7 @@ public class CommunityController {
 		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());
 		
 		communityService.insertCommunityItem(communityDto);
-		return "redirect:/community/list";
+		return "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
 	}
 	
 	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.GET)
