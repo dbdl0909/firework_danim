@@ -7,10 +7,16 @@
 <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="../../../resources/js/jquery.raty.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#star').raty();	
+})
+</script>
 </head>
 
 <body>
-	<div class="container ">
+	<div class="container">
 		<div class="contents">
 			<div class="title-wrap panel-heading">
 				${detailView.communitySubject}
@@ -31,7 +37,14 @@
 			<a href="/community/communityModify?communityNo=${detailView.communityNo}"><span type="button" class="btn btn-primary">수정</span></a>
 			<a href="/community/list?communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
 		</form>	
-	</div> 	
+		<div id="replyWrap">
+			<form name="replyForm" action="/community/communityReply" method="post">
+				작성자 : <input type="text" name=""/>
+				내용 : <input type="text" />
+				별점 : <div id="star"></div>
+			</form>
+		</div>
+	</div>	
 </body>
 </html>
 
