@@ -2,7 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.danim.service.CityInfoMapper">
-	<select id="selectCityInfoByCityInfoDoName"
+	<select id="selectCityInfo"
+			resultType="com.danim.service.plan.CityInfoDto">
+		SELECT
+			city_info_no  as 'cityInfoNo',
+			city_info_do_name as 'cityInfoDoName',
+			city_info_name as 'cityInfoName',
+			city_info_langitude as 'cityInfoLangitude',
+			city_info_latitude as 'cityInfoLatitude',
+			city_info_summary as 'cityInfoSummary',
+			city_info_image as 'cityInfoImage'
+		FROM
+			city_info
+	</select>
+
+	<!-- <select id="selectCityInfoByCityInfoDoName"
 			resultType="com.danim.service.plan.CityInfoDto"
 			parameterType="String">
 		SELECT
@@ -17,5 +31,5 @@
 			city_info
 		WHERE
 			city_info_do_name = #{city_info_do_name};
-	</select>
+	</select> -->
 </mapper>

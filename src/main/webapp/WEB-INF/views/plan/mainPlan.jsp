@@ -23,10 +23,12 @@
     <%-- 구글 지도 (현재위치 설정) --%>
     
     var cityInfoList = new Array();
+    var markerArray = new Array();
     
-    /* javascript 에서 jstl 사용해 리스트에 담겨있는 도시 리스트를 가져온다. */
-    <c:forEach var="listCityInfo" items="${listCityInfoByCityInfoDoName}">
+    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */
+    <c:forEach var="listCityInfo" items="${listCityInfo}">
     	var cityInfo = new Object();
+    	cityInfo.no = "${listCityInfo.cityInfoNo}";
     	cityInfo.name = "${listCityInfo.cityInfoName}";
     	cityInfo.langitude = "${listCityInfo.cityInfoLangitude}";
     	cityInfo.latitude = "${listCityInfo.cityInfoLatitude}";
@@ -35,6 +37,8 @@
     	/* 담은 정보들을 cityInfoList에 담는다. */
     	cityInfoList.push(cityInfo);
     </c:forEach>
+    
+    console.log("cityInfoList.length : " + cityInfoList.length);
 		            
 	function initMap() {
 		//처음 지도 위치
@@ -44,11 +48,10 @@
 			center: main
 		});
 		
-		var markerArray = [];
-		var marker;
 		//cityInfoList의 length만큼 마커를 찍어준다.
 		for (var i=0; i<cityInfoList.length; i++) {
-			marker = new google.maps.Marker({
+			//console.log(i);
+			var marker = new google.maps.Marker({
 				icon: "../../resources/images/placeholder.png",
 				position: {lat: Number(cityInfoList[i].latitude), lng: Number(cityInfoList[i].langitude)},
 			    				//위도와 경도를 Number 타입으로 바꾼다.
@@ -56,10 +59,33 @@
 				title: cityInfoList[i].name,
 				//zIndex: cityInfoList[i][3],
 				index:i
-				
 			});
+			marker.setVisible(false);
 			markerArray.push(marker);
 		}
+		var zoom = map.getZoom();
+		console.log("current zoom : " + zoom);
+		for(i=73; i<79; i++) {
+			markerArray[i].setVisible(true);
+		}
+		
+ 	    //광역시는 zoom 8 (city_no_74 ~ city_no_80)
+	    //그 외는 zoom 9 (city_no_01 ~ city_no_73)
+		google.maps.event.addListener(map, 'zoom_changed', function() {
+			//zoom이 몇인지 담는다.
+			zoom = map.getZoom();
+			console.log(zoom);
+
+			if(zoom >= 9) {
+				for(i=0; i<72; i++) {
+					markerArray[i].setVisible(true);
+				}
+			} else if(zoom == 8) {
+				for(i=0; i<72; i++) {
+					markerArray[i].setVisible(false);
+				}
+			}
+		});
 		
 		var infoArray = new Array();
 		var prevInfowindow = false;

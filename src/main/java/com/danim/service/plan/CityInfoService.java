@@ -14,7 +14,15 @@ public class CityInfoService {
 	@Autowired
     private CityInfoDao cityInfoDao;
 	
-	//클릭한 도에 해당하는 도시리스트 가져오는 메서드
+	public List<CityInfoDto> selectCityInfoAll() {
+		logger.info("selectCityInfoByCityInfoDoName() CityInfoService.java");
+		List<CityInfoDto> listCityInfo = cityInfoDao.selectCityInfoAll();
+		logger.info("listCityInfo : {} <-- selectCityInfoByCityInfoDoName() CityInfoService.java", listCityInfo);
+		
+		return listCityInfo;
+	}
+	
+	/*//클릭한 도에 해당하는 도시리스트 가져오는 메서드
 	public List<CityInfoDto> selectCityInfoByCityInfoDoName(String doArea) {
 		logger.info("doArea(도 이름) : {} <-- selectCityInfoByCityInfoDoName() CityInfoService.java", doArea);
 		
@@ -23,6 +31,6 @@ public class CityInfoService {
 		logger.info("listCityInfoByCityInfoDoName : {} <-- selectCityInfoByCityInfoDoName() CityInfoService.java", listCityInfoByCityInfoDoName);
 		
 		return listCityInfoByCityInfoDoName;
-    }
+    }*/
 
 };
