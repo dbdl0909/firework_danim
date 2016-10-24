@@ -38,17 +38,26 @@
 				</tr>
 			</thead>
 			<tbody>
-			
-			<c:forEach items="${communityList}" var="list">
+			<c:forEach items="${communityList}" var="list">	
+				<c:if test="${list.communityNotice == 'T'}">
+					<tr>
+						<td style="font-weight:bold;">${list.communityNo}</td>
+						<td style="font-weight:bold;">[공지]${list.communitySubject }</td>
+						<td style="font-weight:bold;">${list.memberId}</td>
+						<td style="font-weight:bold;">${list.communityDate}</td>
+						<td style="font-weight:bold;">${list.communityReadcount}</td>	
+					</tr>
+				</c:if>	
+			</c:forEach>	
+			<c:forEach items="${communityList}" var="list">			
 				<tr> 
-					<td>${list.communityNo }</td>
-					<td>${list.communitySubject }</td>
+					<td>${list.communityNo}</td>
+					<td>${list.communitySubject}</td>
 					<td>${list.memberId}</td>
 					<td>${list.communityDate}</td>
 					<td>${list.communityReadcount}</td>
 				</tr>
-			</c:forEach>
-				
+			</c:forEach>				
 			</tbody>
 		</table>
 	</div>	
