@@ -37,12 +37,9 @@ public class PlanController {
 		return "plan/mainPlan";
 	}
 	
-	/*@RequestMapping(value = "/plan/planTest")
+	@RequestMapping(value = "/plan/divisionTest")
 	public String planTest() {
-		logger.info("Welcome planTest! The client locale is {}.");
-		
-		
-		return "plan/planTest";
-	}*/
+		return "plan/divisionTest";
+	}
 
 }

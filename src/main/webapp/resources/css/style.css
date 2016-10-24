@@ -203,6 +203,40 @@ p {
 	clear:both;
 }
 
+/* 지도전용 css */
+#mainPlanCityInfoImage {
+	float:left;
+}
+
+#mainPlanDivRoot {
+	margin:auto;
+	width:100%;
+}
+#mainPlanDivTop {
+	width:100%;
+	height:100px;
+	background-color:#c0c0c0;
+	text-align:center;
+}
+#mainPlanDivLeft {
+	width:20%;
+	height:650px;
+	float:left;
+	background-color:#ced6d7;
+	text-align:left;
+	overflow-y:scroll;
+}
+#mainPlanDivLeft ul li{
+	height:200px;
+	list-style:none;
+}
+#mainPlanDivContent {
+	width:80%;
+	height:auto;
+	float:left;
+}
+
+
 /* 게시판전용 css */
 .container #communityInsertForm{width:100%; margin:30px auto;}
 .container #communityInsertForm .communityTitleWrap{margin:3px 0;}
