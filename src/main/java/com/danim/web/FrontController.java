@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FrontController {
 	private static final Logger logger = LoggerFactory.getLogger(FrontController.class);
 	
-	@RequestMapping(value = "/member")
-	public void memberController() {
+	@RequestMapping(value = "/")
+	public String indexController() {
+		return "index";
 		
 	}
 }
