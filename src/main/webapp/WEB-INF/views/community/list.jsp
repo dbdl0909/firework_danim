@@ -49,14 +49,18 @@
 					</tr>
 				</c:if>	
 			</c:forEach>	
-			<c:forEach items="${communityList}" var="list">			
+			<c:forEach items="${communityList}" var="list">	
+			
 				<tr> 
-					<td>${list.communityNo}</td>
-					<td>${list.communitySubject}</td>
-					<td>${list.memberId}</td>
-					<td>${list.communityDate}</td>
-					<td>${list.communityReadcount}</td>
+							
+						<td>${list.communityNo}</td>
+						<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a></td>
+						<td>${list.memberId}</td>
+						<td>${list.communityDate}</td>
+						<td>${list.communityReadcount}</td>
+					
 				</tr>
+				
 			</c:forEach>				
 			</tbody>
 		</table>

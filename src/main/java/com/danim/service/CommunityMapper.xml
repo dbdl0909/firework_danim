@@ -2,7 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.danim.service"> 
+<mapper namespace="com.danim.service">
+	<select id="selectDetailViewByCommunityNo"
+			parameterType="int"
+			resultType="com.danim.service.community.CommunityDto">
+		SELECT
+			community_no as communityNo,
+			community_category_no as communityCategoryNo,
+			member_id as memberId,
+			community_subject as communitySubject,
+			community_content as communityContent,
+			community_readcount as communityReadcount,
+			community_rating as communityRating,
+			community_date as communityDate
+		FROM
+			community
+		WHERE
+			community_no = #{communityNo};
+	</select> 
 	<select id="selectCommunityList"
 			resultType="com.danim.service.community.CommunityDto">
 		SELECT 

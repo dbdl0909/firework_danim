@@ -55,8 +55,8 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.GET)
-	public String view(Model model, CommunityDto communityDto) {
-
+	public String communityDetailView(Model model, @RequestParam(value="communityNo") int communityNo) {
+		model.addAttribute("detailView", communityService.selectDetailViewByCommunityNo(communityNo));
 		return "/community/communityDetail";
 	}
 	

@@ -21,4 +21,8 @@ public class CommunityService {
 	public List<CommunityDto> selectCommunityList(String communityCategoryNo){
 		return sqlSession.selectList(NS+".selectCommunityList", communityCategoryNo);	
 	};
+	
+	public CommunityDto selectDetailViewByCommunityNo(int communityNo){		
+		return sqlSession.selectOne(NS+".selectDetailViewByCommunityNo", communityNo);
+	}
 }
