@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	@RequestMapping(value = "/member/memberInsertForm")
+	@RequestMapping(value = "/member/memberJoinForm")
 	public String mainPlan() {
 		logger.info("Welcome mainPlan! The client locale is {}.");
-		return "member/memberInsertForm";
+		return "member/memberJoinForm";
 	}
 }
