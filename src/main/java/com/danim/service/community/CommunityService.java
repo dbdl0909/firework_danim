@@ -2,23 +2,18 @@ package com.danim.service.community;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service 
 public class CommunityService {
+	private final String NS = "com.danim.service";
+	@Autowired 
+    private SqlSessionTemplate sqlSession;
 
-	public CommunityDto getBoardItem(CommunityDto board){
-		return board;};
+	public void insertCommunityItem(CommunityDto communityDto){
+		sqlSession.insert(NS+".insertCommunityItem",communityDto);	
+	};
 
-	public List<CommunityDto> getBoardList(CommunityDto communityDto){
-		return null;};
-
-	public void insertBoardItem(CommunityDto communityDto){};
-
-	public void updateBoardItem(CommunityDto communityDto){};
-
-	public void deleteBoardItem(CommunityDto communityDto){};
-
-	public Integer countBoardList(CommunityDto communityDto){
-		return null;};
 }

@@ -20,18 +20,18 @@
 			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
 			<select name="communityCategoryNo">
 			<optgroup label=":::::::: 커뮤니티 ::::::::">
-				<option value="communityCategory01" selected="selected"> 플랜</option>
-				<option value="communityCategory02"> 후기</option>
-				<option value="communityCategory03"> 자유게시판</option>
-				<option value="communityCategory04"> 동행찾기</option>
+				<option value="community_category_01" selected="selected"> 플랜</option>
+				<option value="community_category_02"> 후기</option>
+				<option value="community_category_03"> 자유게시판</option>
+				<option value="community_category_04"> 동행찾기</option>
 			</optgroup>					
 			<optgroup label=":::::::: 고객센터 ::::::::">	
-				<option value="communityCategory05"> 숙박시설</option>
-				<option value="communityCategory06"> 교통편</option>
-				<option value="communityCategory07"> 예약/결제</option>
-				<option value="communityCategory08"> 취소/환불/변경</option>
-				<option value="communityCategory09"> 회원/로그인</option>
-				<option value="communityCategory10"> 여행관련</option>
+				<option value="community_category_05"> 숙박시설</option>
+				<option value="community_category_06"> 교통편</option>
+				<option value="community_category_07"> 예약/결제</option>
+				<option value="community_category_08"> 취소/환불/변경</option>
+				<option value="community_category_09"> 회원/로그인</option>
+				<option value="community_category_10"> 여행관련</option>
 			</optgroup>	
 			</select>
 		</div>
@@ -79,15 +79,15 @@ var oEditors = [];
 
 var onWrite = function(){
 	oEditors.getById["communityContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
-	var boardWriteForm = document.getElementById("boardWriteForm");  
-	boardWriteForm.action ="writeSubmit";              
+	var boardWriteForm = document.getElementById("communityInsertForm");  
+	boardWriteForm.action ="/community/communityInsert";              
 	boardWriteForm.submit();  
 };
 
 var onModify = function(){
 	oEditors.getById["communityContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
-	var boardWriteForm = document.getElementById("boardWriteForm");  
-	boardWriteForm.action ="modifySubmit";              
+	var boardWriteForm = document.getElementById("communityInsertForm");  
+	boardWriteForm.action ="/community/communityModify";              
 	boardWriteForm.submit();  
 };
 

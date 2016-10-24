@@ -30,10 +30,8 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/community/list")
 	public String home(Model model, CommunityDto communityDto) {
-		communityDto.setTotalItemCount(communityService.countBoardList(communityDto));
-		communityDto.setItemPerPage(10);
-		model.addAttribute("list", communityService.getBoardList(communityDto));
-		return "list";
+
+		return "/community/list";
 	}
 
 	@RequestMapping(value = "/community/write", method = RequestMethod.GET)
@@ -41,21 +39,27 @@ public class CommunityController {
 		return "community/write";
 	}
 	
-	@RequestMapping(value = "/community/writeSubmit", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/communityInsert", method = RequestMethod.POST)
 	public String writeSubmit(Model model, CommunityDto communityDto) {
-		return null;
+		logger.info("categoryNo {} CommunityController.java", communityDto.getCommunityCategoryNo());
+		logger.info("memberId {} CommunityController.java", communityDto.getMemberId());
+		logger.info("communitySubject {} ", communityDto.getCommunitySubject());
+		logger.info("communityNotice {} CommunityController.java", communityDto.getCommunityNotice());
+		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());
+		
+		communityService.insertCommunityItem(communityDto);
+		return "redirect:/community/list";
 	}
 	
-	@RequestMapping(value = "/community/view", method = RequestMethod.GET)
+	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.GET)
 	public String view(Model model, CommunityDto communityDto) {
-		model.addAttribute("item", communityService.getBoardItem(communityDto));
-		return "community/view";
+
+		return "/community/communityDetail";
 	}
 	
 	@RequestMapping(value = "/community/modify", method = RequestMethod.POST)
 	public String modify(Model model, CommunityDto communityDto) {
-		model.addAttribute("item", communityService.getBoardItem(communityDto));
-		model.addAttribute("modify", "true");
+
 		return "community/write";
 	}
 	

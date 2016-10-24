@@ -59,13 +59,13 @@
 	<form class="form-wrap" method="post">
 		<ul class="pagination">
 			<li><a href="javascript:goPage('${board.jumpPrevPage}')">&laquo;</a></li>
-			<c:forEach begin="${board.pageBegin }" end="${board.pageEnd }" var="idx">
-				<c:if test="${board.currentPage == idx}"><li class="active"><a href="#">${idx }</a></li></c:if> 
-				<c:if test="${board.currentPage != idx}"><li><a href="javascript:goPage('${idx}')">${idx }</a></li></c:if>
+			<c:forEach begin="${board.pageBegin}" end="${board.pageEnd}" var="idx">
+				<c:if test="${board.currentPage == idx}"><li class="active"><a href="#">${idx}</a></li></c:if> 
+				<c:if test="${board.currentPage != idx}"><li><a href="javascript:goPage('${idx}')">${idx}</a></li></c:if>
 			</c:forEach>
-			<li><a href="javascript:goPage('${board.jumpNextPage }')">&raquo;</a></li>
+			<li><a href="javascript:goPage('${board.jumpNextPage}')">&raquo;</a></li>
 		</ul>
-		<input type="hidden" name="page" class="page" value="${board.currentPage }" />
+		<input type="hidden" name="page" class="page" value="${board.currentPage}" />
 		<div class="search">
 			<div class="col-lg-4">
 				<div class="input-group">
@@ -76,8 +76,8 @@
 						<option value="author">작성자</option>
 					</select>
 					</span>
-					<input type="hidden" class="searchOptionVal" value="${board.searchOption }" />
-					<input type="text" name="searchInput" class="form-control" value="${board.searchInput }" />
+					<input type="hidden" class="searchOptionVal" value="${board.searchOption}" />
+					<input type="text" name="searchInput" class="form-control" value="${board.searchInput}" />
 					 <span class="input-group-btn">
 						<button type="button" onclick="onSearch()" class="btn btn-"><span class="glyphicon glyphicon-search"></span> 검색</button>
 					</span>
