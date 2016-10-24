@@ -11,19 +11,42 @@
 <script type="text/javascript" src="../../resources/se/js/jindo.min.js" charset="utf-8" ></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<style type="text/css">
-#boardWriteForm{margin: 30px 0;}
-</style>
+<link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
 <div class="container">
-	<form id="boardWriteForm" method="post">
-		<div>
-			<div><b>제목</b></div>
-			<input type="text" id="title" name="title" value="" maxlength="100" style="width: 100%;"/>
+	<form id="communityInsertForm" method="post">
+		<div class="communityTitleWrap">
+			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
+			<select name="communityCategoryNo">
+			<optgroup label=":::::::: 커뮤니티 ::::::::">
+				<option value="communityCategory01" selected="selected"> 플랜</option>
+				<option value="communityCategory02"> 후기</option>
+				<option value="communityCategory03"> 자유게시판</option>
+				<option value="communityCategory04"> 동행찾기</option>
+			</optgroup>					
+			<optgroup label=":::::::: 고객센터 ::::::::">	
+				<option value="communityCategory05"> 숙박시설</option>
+				<option value="communityCategory06"> 교통편</option>
+				<option value="communityCategory07"> 예약/결제</option>
+				<option value="communityCategory08"> 취소/환불/변경</option>
+				<option value="communityCategory09"> 회원/로그인</option>
+				<option value="communityCategory10"> 여행관련</option>
+			</optgroup>	
+			</select>
 		</div>
-		<div class="contentDiv">
-		 	<textarea id="txtContent" name="contents" rows="30" style="width:100%;"></textarea>
+		<div class="communityTitleWrap">
+			<label class="communityTitle"  for="memberId"><span>작성자</span></label>		
+			<input type="text" id="memberId" name="memberId" value="id001" readonly="readonly"/>
+		</div>
+		<div class="communityTitleWrap">
+			<label class="communityTitle"  for="communitySubject"><span>글 제목</span></label>
+			<input type="text" id="communitySubject" name="communitySubject" />
+			<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
+			<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>		
+		</div>
+		<div class="communityContentWrap">
+		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;"></textarea>
 		</div>
 		<div class="buttonDiv">
 			<c:if test="${modify == 'true'}">
@@ -42,27 +65,27 @@
 var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
-	elPlaceHolder: document.getElementById('txtContent'), // html editor가 들어갈 textarea id
+	elPlaceHolder: document.getElementById('communityContent'), // html editor가 들어갈 textarea id
 	sSkinURI: "../../resources/se/SmartEditor2Skin.html",  // html editor가 skin url
 	fOnAppLoad: function () { 
         //수정모드를 구현할 때 사용할 부분. 로딩이 끝난 후 값이 체워지게 하는 구현을 하면 된다.
          var title = '${item.title}';               
          var contents = '${item.contents}';         //db에서 불러온 값을 여기에서 체워넣으면 됨.
          document.getElementById("title").value = title;     
-         oEditors.getById["txtContent"].exec("PASTE_HTML", [contents]); //로딩이 끝나면 contents를 txtContent에 넣음
+         oEditors.getById["communityContent"].exec("PASTE_HTML", [contents]); //로딩이 끝나면 contents를 communityContent에 넣음
      },
      fCreator: "createSEditor2"
  });
 
 var onWrite = function(){
-	oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
+	oEditors.getById["communityContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 	var boardWriteForm = document.getElementById("boardWriteForm");  
 	boardWriteForm.action ="writeSubmit";              
 	boardWriteForm.submit();  
 };
 
 var onModify = function(){
-	oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
+	oEditors.getById["communityContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
 	var boardWriteForm = document.getElementById("boardWriteForm");  
 	boardWriteForm.action ="modifySubmit";              
 	boardWriteForm.submit();  
@@ -70,7 +93,7 @@ var onModify = function(){
 
 var pasteHTML = function(filename){
     var sHTML = '<img src="${pageContext.request.contextPath}/resources/upload/'+filename+'">';
-    oEditors.getById["txtContent"].exec("PASTE_HTML", [sHTML]);
+    oEditors.getById["communityContent"].exec("PASTE_HTML", [sHTML]);
 };
 </script>
 </html>
