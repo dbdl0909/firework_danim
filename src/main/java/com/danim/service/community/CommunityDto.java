@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.danim.util.Pagination;
 
-public class CommunityDto extends Pagination {
+public class CommunityDto{
 
 	private String communityNo;
 	private char communityBan;

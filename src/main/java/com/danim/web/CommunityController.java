@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,9 +32,22 @@ public class CommunityController {
 	private CommunityService communityService;
 	
 	@RequestMapping(value = "/community/list")
-	public String home(Model model, @RequestParam(value="communityCategoryNo") String communityCategoryNo) {
-		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo);
+	public String home(Model model,
+			@RequestParam(value="communityCategoryNo") String communityCategoryNo,
+			@RequestParam(value="page", defaultValue="1") int page) {
+		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo, page);
+		logger.info("totalPage{}",communityService.countCommunityList(communityCategoryNo)/10);
+		int totalCount = communityService.countCommunityList(communityCategoryNo);
+		int lastPage = (int) Math.ceil((double)totalCount/10);
+		int endPage = communityService.endPage(communityService.startPage(page));
+		if(lastPage < endPage){
+			endPage = lastPage;			
+		}
 		model.addAttribute("communityList", communityList);
+        model.addAttribute("startPage", communityService.startPage(page));
+        model.addAttribute("page", page);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("lastPage", lastPage);
 		return "/community/list";
 	}
 
@@ -62,7 +76,6 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/community/modify", method = RequestMethod.POST)
 	public String modify(Model model, CommunityDto communityDto) {
-
 		return "community/write";
 	}
 	

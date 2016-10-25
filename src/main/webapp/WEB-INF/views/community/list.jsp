@@ -37,7 +37,7 @@
 					<th>조회수</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody>		
 			<c:forEach items="${communityList}" var="list">	
 				<c:if test="${list.communityNotice == 'T'}">
 					<tr>
@@ -66,16 +66,24 @@
 		<button type="button" onclick="onList()" class="btn btn-primary">목록</button>
 	</div>
 	<form class="form-wrap" method="post">
-		<ul class="pagination">
-			<li><a href="javascript:goPage('${board.jumpPrevPage}')">&laquo;</a></li>
-			<c:forEach begin="${board.pageBegin}" end="${board.pageEnd}" var="idx">
-				<c:if test="${board.currentPage == idx}"><li class="active"><a href="#">${idx}</a></li></c:if> 
-				<c:if test="${board.currentPage != idx}"><li><a href="javascript:goPage('${idx}')">${idx}</a></li></c:if>
+		<div>
+			<c:if test="${page == startPage}">
+				이전
+			</c:if>
+			<c:if test="${page>1}">
+				<a href="/community/list?communityCategoryNo=community_category_01&page=${page-1}">이전</a>
+			</c:if>
+			<c:forEach begin="${startPage}" end="${endPage}" var="i">
+				<a href="/community/list?communityCategoryNo=community_category_01&page=${i}">${i}</a>
 			</c:forEach>
-			<li><a href="javascript:goPage('${board.jumpNextPage}')">&raquo;</a></li>
-		</ul>
-		<input type="hidden" name="page" class="page" value="${board.currentPage}" />
-		<div class="search">
+			<c:if test="${page == lastPage}">
+				다음
+			</c:if>	
+			<c:if test="${page<lastPage}">
+				<a href="/community/list?communityCategoryNo=community_category_01&page=${page+1}">다음</a>
+			</c:if>
+		</div>
+		<%-- <div class="search">
 			<div class="col-lg-4">
 				<div class="input-group">
 					<span class="input-group-btn">
@@ -85,14 +93,14 @@
 						<option value="author">작성자</option>
 					</select>
 					</span>
-					<input type="hidden" class="searchOptionVal" value="${board.searchOption}" />
-					<input type="text" name="searchInput" class="form-control" value="${board.searchInput}" />
+					<input type="hidden" class="searchOptionVal" value="${CommunityDto.searchOption}" />
+					<input type="text" name="searchInput" class="form-control" value="${CommunityDto.searchInput}" />
 					 <span class="input-group-btn">
 						<button type="button" onclick="onSearch()" class="btn btn-"><span class="glyphicon glyphicon-search"></span> 검색</button>
 					</span>
 				</div>
 			</div>	
-		</div>
+		</div> --%>
 	</form>
 </div>
 </body>
