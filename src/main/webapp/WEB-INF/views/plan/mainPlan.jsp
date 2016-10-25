@@ -21,6 +21,7 @@
 		    var cityInfoList = new Array();
 		    var markerArray = new Array();
 		    var addButton;
+		    var markerIndex;
 		    
 		    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */
 		    <c:forEach var="listCityInfo" items="${listCityInfo}">
@@ -74,7 +75,7 @@
 				google.maps.event.addListener(map, 'zoom_changed', function() {
 					//zoom이 몇인지 담는다.
 					zoom = map.getZoom();
-					console.log(zoom);
+					//console.log(zoom);
 					
 					//zoom이 10일때부터 다른 모든 시들도 보여준다.
 					if(zoom >= 10) {
@@ -89,22 +90,27 @@
 				});
 				
 		 	    var infoNameArray = new Array();
-				var infoArray = new Array();
+				var infoSummaryArray = new Array();
 				var infoImageArray = new Array();
 				var prevInfowindow = false;
 				for(var i = 0; i < markerArray.length; i++) {
-					//infoArray 배열에 차례대로 각 도시의 summary를 담는다.
+					//infoArray 배열에 차례대로 각 도시의 name, summary, image들을 담는다.
 					infoNameArray.push(cityInfoList[i].name);
-					infoArray.push(cityInfoList[i].summary);
+					infoSummaryArray.push(cityInfoList[i].summary);
 					infoImageArray.push(cityInfoList[i].image);
+					
+					//makrerArray의 i번째를 클릭했을때 실행할 함수
 					google.maps.event.addListener(markerArray[i], 'click', function() {
-						var markerIndex = this.index;
-						console.log(markerIndex);
+						markerIndex = this.index;
+						//console.log(markerIndex);
 						
+						//시 마커를 클릭했을때 보여줄 내용을 담은 함수
 						var infowindow = new google.maps.InfoWindow({
 							content: "<img id='mainPlanCityInfoImage' src=" + infoImageArray[markerIndex] + "/>" +
-									 "<span id='mainPlanCityInfo'>" + infoArray[markerIndex] + "</span>" +
-									 "<div id='mainPlanAddButton'><img id='addButton' src='../../resources/images/addButton.png'/></div>"
+									 "<span id='mainPlanCityInfo'>" + infoSummaryArray[markerIndex] + "</span>" +
+									 "<div id='mainPlanAddButton'>" +
+									 	"<img id='addButton' src='../../resources/images/addButton.png'/>" +
+									 "</div>"
 						});
 						//console.log(this.index);
 						map.setZoom(11);
@@ -114,25 +120,61 @@
 						if(prevInfowindow) {
 							prevInfowindow.close();
 						}
+					    //prevInfowindow 변수에 infowindow를 담는다.
+						prevInfowindow = infowindow;
+					    //시 마커를 클릭했을때 infowindow를 오픈하여 내용을 보여준다. 
+						infowindow.open(map, markerArray[markerIndex]);
 						
-					    google.maps.event.addListener(infowindow, 'domready', function() {
+						google.maps.event.addListener(infowindow, 'domready', function() {
 					    	document.getElementById('addButton').addEventListener('click', function(event) {
 					    		//alert('click : ' + markerIndex);
-					    		$('#mainPlanDivLeft ul').append("<li>" + infoNameArray[markerIndex] + "<img id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" + "</li>");
+					    		$('#mainPlanDivLeft ul').append("<li class='leftMenuLi'>" + infoNameArray[markerIndex] + "<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" + "</li>");
+					    		lineFunction();
 					    	});
 						});
-					    
-						prevInfowindow = infowindow;
-						infowindow.open(map, markerArray[markerIndex]);
 					});
 				}	
 			}
+		</script>
+		<script>
+		var lineFunction =  function(){
+			//console.log(markerIndex);
+			//console.log(cityInfoList[markerIndex].latitude);
+			//console.log(cityInfoList[markerIndex].langitude);
+			var pathArray = new Array();
+			
+/*해야할것 클릭한 시만 리스트로 받아와서 경로를 추가해야한다!!
+ * 
+ *
+ *
+ */
+			
+			
+			var pathLine = new google.maps.Polyline({
+				path: [{lat: Number(cityInfoList[markerIndex].latitude), lng: Number(cityInfoList[markerIndex].langitude)}]
+			});
+		};
+			
+			$(document).ready(function(){
+				//removeButton 이미지 태그를 클릭했을때 실행할 함수
+				$('body').on('click', '.removeButton', function() {
+					//클릭한 태그의 번호를 가져와서 그 번호에 해당하는 li 태그를 제거한다.
+					var removeButtonIndex = $('.removeButton').index(this);
+					//console.log('removeButtonIndex : ' + removeButtonIndex);
+					$('.leftMenuLi').eq(removeButtonIndex).remove();
+					
+				});
+			});
 		</script>
 	</head>
 	<body>
 	    <div id="mainPlanDivRoot">
 	    	<div id="mainPlanDivTop">
-				메인메뉴
+				<h1>DANIM</h1>
+				<div>
+					출발일<input type="date"/>
+					
+				</div>
 			</div>
 			<div id="mainPlanDivLeft">
 				<ul>
