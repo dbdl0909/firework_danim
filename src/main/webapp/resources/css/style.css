@@ -204,6 +204,13 @@ p {
 }
 
 /* 지도전용 css */
+#map {
+	height: 100%;
+}
+#mainPlanCityInfo {
+	display:inline-block;
+	width:300px;
+}
 #mainPlanCityInfoImage {
 	float:left;
 }
@@ -215,7 +222,6 @@ p {
 #mainPlanDivTop {
 	width:100%;
 	height:100px;
-	background-color:#c0c0c0;
 	text-align:center;
 }
 #mainPlanDivLeft {
@@ -227,15 +233,25 @@ p {
 	overflow-y:scroll;
 }
 #mainPlanDivLeft ul li{
-	height:200px;
+	height:100px;
 	list-style:none;
 }
 #mainPlanDivContent {
 	width:80%;
-	height:auto;
+	height:650px;
 	float:left;
 }
 
+#mainPlanAddButton {
+	clear:left;
+	text-align:right;
+}
+#mainPlanRemoveButton {
+	clear:left;
+	float:right;
+	padding-top:5px;
+	padding-right:10px;
+}
 
 /* 게시판전용 css */
 .container #communityInsertForm{width:100%; margin:30px auto;}
