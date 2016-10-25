@@ -8,9 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MemberDao {
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 	
+	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
 	@Autowired
-	private final String NS = "com.danim.service.MemberMapper";
-
+	private final String namesPace = "com.danim.service.MemberMapper";
+	
+	public void insertMember(MemberDto memberDto) {
+		logger.info("insertMember() MemberDao.java");
+	}
+	
+/*	public void insertMemberInfo(MemberDao memberDto) {
+		logger.info("insertMemberInfo() MemberDao.java");
+	}
+	public void insertMemberTotal(MemberDao memberDto) {
+		logger.info("insertMemberTotal() MemberDao.java");
+		
+		//return sessionTemplate.insert(namesPace+".insertMemberTotal", memberDto);
+	}*/
+	
 }

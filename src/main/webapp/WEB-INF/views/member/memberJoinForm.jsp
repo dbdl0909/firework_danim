@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>DANIM JOIN</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -18,7 +18,7 @@
 	    }
 	</style>
 	<script>
-		//»ý³â¿ùÀÏ ´Þ·Â
+		//ìƒë…„ì›”ì¼ ë‹¬ë ¥
 		/* function init() {
 		    var _inputs = document.getElementsByTagName('input');
 		    for (var i = 0; i < _inputs.length; i++) {
@@ -35,67 +35,66 @@
 		}
 		window.onload = init; */
 	$(document).ready(function(){
-		
-	
-		jQuery( function($) {
-				// Á¤±Ô½ÄÀ» º¯¼ö¿¡ ÇÒ´ç
-				//¾ÆÀÌµð °Ë»ç
-					//Ã¹±ÛÀÚ´Â ¹«Á¶°Ç ¼Ò¹®ÀÚ, 5~15ÀÚ, Æ¯¼ö±âÈ£ »ç¿ëºÒ°¡(-,_ Á¦¿Ü)
-					//Æ¯¼ö±âÈ£(-,_)¸¸À¸·Î »ç¿ëºÒ°¡
-					// + ¾ÆÀÌµð Áßº¹È®ÀÎ
+		jQuery(function($) {
+				// ì •ê·œì‹ì„ ë³€ìˆ˜ì— í• ë‹¹
+				//ì•„ì´ë”” ê²€ì‚¬
+					//ì²«ê¸€ìžëŠ” ë¬´ì¡°ê±´ ì†Œë¬¸ìž, 5~15ìž, íŠ¹ìˆ˜ê¸°í˜¸ ì‚¬ìš©ë¶ˆê°€(-,_ ì œì™¸)
+					//íŠ¹ìˆ˜ê¸°í˜¸(-,_)ë§Œìœ¼ë¡œ ì‚¬ìš©ë¶ˆê°€
+					// + ì•„ì´ë”” ì¤‘ë³µí™•ì¸
 				var reMemberId = /^[a-z]{1}[a-z0-9_-]{3,16}$/;
-				//ÆÐ½º¿öµå °Ë»ç
-	 			   	//6~16ÀÚ, ¿µ¹®, ¼ýÀÚ, Æ¯¼ö¹®ÀÚ Á¶ÇÕ
-					//¼ýÀÚ¸¸À¸·Î´Â »ç¿ëºÒ°¡
-					//´ë¹®ÀÚ, ¼Ò¹®ÀÚ ±¸ºÐ
+				//íŒ¨ìŠ¤ì›Œë“œ ê²€ì‚¬
+	 			   	//6~16ìž, ì˜ë¬¸, ìˆ«ìž, íŠ¹ìˆ˜ë¬¸ìž ì¡°í•©
+					//ìˆ«ìžë§Œìœ¼ë¡œëŠ” ì‚¬ìš©ë¶ˆê°€
+					//ëŒ€ë¬¸ìž, ì†Œë¬¸ìž êµ¬ë¶„
 				var reMemberPassword = /^.*(?=.{6,16})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-				//´Ð³×ÀÓ °Ë»ç
-					//2~10ÀÚÀÇ ¿µ¹®, ÇÑ±Û, ¼ýÀÚ¸¸ °¡´É
-				var reMemberName = /[a-zA-Z0-9°¡-Èþ]{2,10}$/
-				//»ý³â¿ùÀÏ °Ë»ç
+				//ë‹‰ë„¤ìž„ ê²€ì‚¬
+					//2~10ìžì˜ ì˜ë¬¸, í•œê¸€, ìˆ«ìžë§Œ ê°€ëŠ¥
+				var reMemberName = /[a-zA-Z0-9ê°€-íž]{2,10}$/
+				//ìƒë…„ì›”ì¼ ê²€ì‚¬
 					//1916~2016
 				var reMemberBirth = /[12][0-9]{3}-[0-9]{2}-[0-9]{2}/;
-							//1000~2000, *000~*999(³â) / 00~99(¿ù) / 00~99(ÀÏ)
-				//ÀÌ¸ÞÀÏ °Ë»ç
-					//¹ß¼Û ÈÄ ÀÎÁõ
-					// + ÀÌ¸ÞÀÏ Áßº¹°Ë»ç
+							//1000~2000, *000~*999(ë…„) / 00~99(ì›”) / 00~99(ì¼)
+				//ì´ë©”ì¼ ê²€ì‚¬
+					//ë°œì†¡ í›„ ì¸ì¦
+					// + ì´ë©”ì¼ ì¤‘ë³µê²€ì‚¬
 				var reMemberEmail = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
-				// ¼±ÅÃÇÒ ¿ä¼Ò¸¦ º¯¼ö¿¡ ÇÒ´ç
+				// ì„ íƒí•  ìš”ì†Œë¥¼ ë³€ìˆ˜ì— í• ë‹¹
 				var
 					memberJoinForm = $('.memberJoinForm'),
 					memberId = $('#memberId'),
-					memberPassword1 = $('#memberPassword1'),
-					memberPassword2 = $('#memberPassword2'),
+					memberPassword1 = $('#memberInfoPassword1'),
+					memberPassword2 = $('#memberInfoPassword2'),
 					memberName = $('#memberName'),
-					memberBirth = $('#memberBirth'),
-					memberGender = $('#memberGender'),
-					memberEmail = $('#memberEmail');
+					memberBirth = $('#memberInfoBirth'),
+					memberEmail = $('#memberInfoEmail');
 	
 				memberJoinForm.submit(function() {
-					if(reMemberId.test(memberId.val()) != true) {						//¾ÆÀÌµð°Ë»ç
-						alert('¾ÆÀÌµð¸¦ È®ÀÎ ÈÄ ÀÔ·ÂÇÏ¼¼¿ä');
+					if(reMemberId.test(memberId.val()) != true) {						//ì•„ì´ë””ê²€ì‚¬
+						alert('ì•„ì´ë””ë¥¼ í™•ì¸ í›„ ìž…ë ¥í•˜ì„¸ìš”');
 						memberId.focus();
 						return false;
-					} else if(reMemberPassword.test(memberPassword1.val()) != true) {	//ºñ¹Ð¹øÈ£ °Ë»ç
-						alert('ºñ¹Ð¹øÈ£¸¦ È®ÀÎ ÈÄ ÀÔ·ÂÇÏ¼¼¿ä');
+					} else if(reMemberPassword.test(memberPassword1.val()) != true) {	//ë¹„ë°€ë²ˆí˜¸ ê²€ì‚¬
+						alert('ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸ í›„ ìž…ë ¥í•˜ì„¸ìš”');
 						memberPassword1.focus();
 						return false;
-					} else if(memberPassword1.val() != memberPassword2.val()) {			//ºñ¹Ð¹øÈ£ µ¿ÀÏÇÑÁö °Ë»ç
-						alert('ºñ¹Ð¹øÈ£¸¦ µ¿ÀÏÇÏ°Ô ÀÔ·ÂÇÏ¼¼¿ä');
+					} else if(memberPassword1.val() != memberPassword2.val()) {			//ë¹„ë°€ë²ˆí˜¸ ë™ì¼í•œì§€ ê²€ì‚¬
+						alert('ë¹„ë°€ë²ˆí˜¸ë¥¼ ë™ì¼í•˜ê²Œ ìž…ë ¥í•˜ì„¸ìš”');
 						memberPassword2.focus();
 						return false;
-					} else if(reMemberName.test(memberName.val()) != true) {			//´Ð³×ÀÓ °Ë»ç
-						alert('´Ð³×ÀÓÀ» È®ÀÎ ÈÄ ÀÔ·ÂÇÏ¼¼¿ä');
+					} else if(reMemberName.test(memberName.val()) != true) {			//ë‹‰ë„¤ìž„ ê²€ì‚¬
+						alert('ë‹‰ë„¤ìž„ì„ í™•ì¸ í›„ ìž…ë ¥í•˜ì„¸ìš”');
 						memberName.focus();
 						return false;
-					} else if(reMemberBirth.test(memberBirth.val()) != true) {			//»ý³â¿ùÀÏ °Ë»ç
-						alert('»ý³â¿ùÀÏÀ» È®ÀÎ ÈÄ ÀÔ·ÂÇÏ¼¼¿ä');
+					} else if(reMemberBirth.test(memberBirth.val()) != true) {			//ìƒë…„ì›”ì¼ ê²€ì‚¬
+						alert('ìƒë…„ì›”ì¼ì„ í™•ì¸ í›„ ìž…ë ¥í•˜ì„¸ìš”');
 						memberBirth.focus();
 						return false;
-					} else if(reMemberEmail.test(memberEmail.val()) != true) {			//ÀÌ¸ÞÀÏ °Ë»ç
-						alert('ÀÌ¸ÞÀÏÀ» È®ÀÎ ÈÄ ÀÔ·ÂÇÏ¼¼¿ä');
+					} else if(reMemberEmail.test(memberEmail.val()) != true) {			//ì´ë©”ì¼ ê²€ì‚¬
+						alert('ì´ë©”ì¼ì„ í™•ì¸ í›„ ìž…ë ¥í•˜ì„¸ìš”');
 						memberEmail.focus();
 						return false;
+					} else {
+						return true;
 					}
 				});
 		});
@@ -104,63 +103,64 @@
 </head>
 <body>
 	<div id="twitter">
-		<form class="memberJoinForm" action="" method="post"> 
+		<form class="memberJoinForm" action="/member/memberJoinSubmit" method="post"> 
+			<input type="hidden" name="memberIdCheck" value="T">	<!-- T(ë‚´ë¶€íšŒì›) : ì´ íŽ˜ì´ì§€ëŠ” ë‚´ë¶€íšŒì›ê°€ìž…íŽ˜ì´ì§€ -->
 			<div class='outerDiv'>
-				<label for="memberId">¾ÆÀÌµð</label> 
-				<input id="memberId" type="text" required /> 
-				<div class='message' id='memberIdDiv'> 5~15ÀÚÀÇ ¼Ò¹®ÀÚ¿Í ¼ýÀÚ, _, -¸¸ »ç¿ë °¡´ÉÇÕ´Ï´Ù</div>
+				<label for="memberId">ì•„ì´ë””</label>
+				<input id="memberId" name="memberId" type="text" required />
+				<div class='message' id='memberIdDiv'> 5~15ìžì˜ ì†Œë¬¸ìžì™€ ìˆ«ìž, _, -ë§Œ ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤</div>
 			</div>
 			<div class='clearfix'></div>
 			
 			<div class='outerDiv'>
-				<label for="memberPassword1">ºñ¹Ð¹øÈ£</label> 
-				<input id="memberPassword1" type="password" required /> 
-				<div class='message' id='memberPassword1Div'> 6~16ÀÚ ´ë¼Ò¹®ÀÚ, ¼ýÀÚ, Æ¯¼ö¹®ÀÚ¸¦ »ç¿ëÇÏ¼¼¿ä</div>
+				<label for="memberInfoPassword1">ë¹„ë°€ë²ˆí˜¸</label> 
+				<input id="memberInfoPassword1" name="memberInfoPassword" type="password" required /> 
+				<div class='message' id='memberInfoPassword1Div'> 6~16ìž ëŒ€ì†Œë¬¸ìž, ìˆ«ìž, íŠ¹ìˆ˜ë¬¸ìžë¥¼ ì‚¬ìš©í•˜ì„¸ìš”</div>
 			</div>
 			<div class='clearfix'></div>
 			
 			<div class='outerDiv'>
-				<label for="memberPassword2">ºñ¹Ð¹øÈ£ È®ÀÎ</label> 
-				<input id="memberPassword2" type="password" required /> 
-				<div class='message' id='memberPassword2Div'> ºñ¹Ð¹øÈ£¸¦ ´Ù½Ã ÇÑ ¹ø ÀÔ·ÂÇÏ¼¼¿ä</div>
+				<label for="memberInfoPassword2">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
+				<input id="memberInfoPassword2" type="password" required /> 
+				<div class='message' id='memberInfoPassword2Div'> ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ í•œ ë²ˆ ìž…ë ¥í•˜ì„¸ìš”</div>
 			</div>
 			<div class='clearfix'></div>
 			
 			<div class='outerDiv'>
-				<label for="memberName">´Ð³×ÀÓ</label> 
-				<input id="memberName" type="text" required  /> 
-				<div class='message' id='memberNameDiv'> 2~10ÀÚÀÇ ¿µ¹®, ¼ýÀÚ¸¸ °¡´ÉÇÕ´Ï´Ù</div>
+				<label for="memberName">ë‹‰ë„¤ìž„</label> 
+				<input id="memberName" name="memberName" type="text" required  /> 
+				<div class='message' id='memberNameDiv'> 2~10ìžì˜ ì˜ë¬¸, ìˆ«ìžë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤</div>
 			</div>
 			<div class='clearfix'></div>
 			
 			<div class='outerDiv'>
-				<label for="memberBirth">»ý³â¿ùÀÏ</label> 
+				<label for="memberInfoBirth">ìƒë…„ì›”ì¼</label> 
 				<div>
-	                <input class="form-control" id="memberBirth" type="date" style="height: 23px" required  />
+	                <input class="form-control" id="memberInfoBirth" name="memberInfoBirth" type="date" style="height: 23px" required />
 					<span class="result"></span>
            		</div>
-				<div class='message' id='memberNameDiv'> »ý³â¿ùÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä</div>
+				<div class='message' id='memberInfoBirthDiv'> ìƒë…„ì›”ì¼ì„ ìž…ë ¥í•˜ì„¸ìš”</div>
 			</div>
 			<div class='clearfix'></div>
 			
 			<div class='outerDiv'>
-				<label for="memberEmail">ÀÌ¸ÞÀÏ</label> 
-				<input id="memberEmail" type="email" required  /> 
-				<div class='message' id='memberEmailDiv'> ÀÌ¸ÞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä</div>
+				<label for="memberInfoEmail">ì´ë©”ì¼</label> 
+				<input id="memberInfoEmail" name="memberInfoEmail" type="email" required /> 
+				<div class='message' id='memberInfoEmailDiv'> ì´ë©”ì¼ì„ ìž…ë ¥í•˜ì„¸ìš”</div>
 			</div>
 			<div class='clearfix'></div>
 			
 			<div class='outerDiv'>
-				<label for="memberGender">¼ºº°</label> 
+				<label for="memberInfoGender">ì„±ë³„</label> 
 				<div class="radio">
-	                <label>¿©ÀÚ<input class="memberGenderInput" id="memberGender" type="radio" name="memberGender" value="woman" required  /></label>
-	                <label>³²ÀÚ<input class="memberGenderInput" id="memberGender" type="radio" name="memberGender" value="man"/></label>
-	            	<div class='message' id='memberGenderDiv'> ¼ºº°À» ¼±ÅÃÇÏ¼¼¿ä</div>
+	                <label>ì—¬ìž<input class="memberInfoGenderInput" id="memberInfoGender" name="memberInfoGender" type="radio" value="F" required /></label>
+	                <label>ë‚¨ìž<input class="memberInfoGenderInput" id="memberInfoGender" name="memberInfoGender" type="radio" value="M"/></label>
+	            	<div class='message' id='memberInfoGenderDiv'> ì„±ë³„ì„ ì„ íƒí•˜ì„¸ìš”</div>
 	            </div>					
 			</div>
 			<div class='clearfix'></div>
 			<div id='submit' class='outerDiv'>
-				<input type="submit" value="°¡ÀÔÇÏ±â" /> 
+				<input type="submit" value="ê°€ìž…í•˜ê¸°" /> 
 			</div>				
 		</form>
 	</div>
