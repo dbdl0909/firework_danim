@@ -21,7 +21,7 @@
 		);
 	</insert>
 	<insert id="insertMemberTotal"
-			parameterType="com.danim.service.member.MemberTotlaDto">
+			parameterType="com.danim.service.member.MemberTotalDto">
 		INSERT INTO
 			member_total(
 				member_id,
