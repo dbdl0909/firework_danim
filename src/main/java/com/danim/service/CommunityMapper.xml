@@ -3,6 +3,27 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.danim.service">
+	<!-- 공지사항 출력리스트  -->
+	<select id="selectCommunityNoticeList"
+		parameterType="String"
+		resultType="com.danim.service.community.CommunityDto">
+		SELECT 
+			community_no as communityNo,
+			member_id as memberId,
+			community_category_no as communityCategoryNo,
+			community_subject as communitySubject,
+			community_readcount as communityReadcount,
+			community_notice as communityNotice,
+			community_date as communityDate			
+		FROM
+			community
+		WHERE
+			community_category_no = #{communityCategoryNo}
+		AND
+			community_notice = 'T'	
+		ORDER BY communityNo DESC	
+	</select>
+	<!-- 해당 카테고리 내의 총 게시글 -->
 	<select id="countCommunityList" 
 		parameterType="String"
 		resultType="Integer" >
@@ -13,6 +34,7 @@
 	WHERE 
 		community_category_no = #{communityCategoryNo};
 	</select>	
+	<!-- 해당 게시글 detail -->
 	<select id="selectDetailViewByCommunityNo"
 			parameterType="int"
 			resultType="com.danim.service.community.CommunityDto">
@@ -31,6 +53,7 @@
 			community_no = #{communityNo};
 	
 	</select> 
+	<!-- 해당 카테고리 리스트 -->
 	<select id="selectCommunityList"
 			parameterType="java.util.Map"
 			resultType="com.danim.service.community.CommunityDto">
@@ -48,7 +71,8 @@
 			community_category_no = #{communityCategoryNo}
 		ORDER BY communityNo DESC	
 		LIMIT #{pageHelper.startRow} , #{pageHelper.linePerPage};	
-	</select>	
+	</select>
+	<!-- 게시글 입력 -->	
 	<insert 
 		id="insertCommunityItem" parameterType="com.danim.service.community.CommunityDto">
 		INSERT INTO

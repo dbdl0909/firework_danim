@@ -37,18 +37,18 @@
 					<th>조회수</th>
 				</tr>
 			</thead>
-			<tbody>		
-			<c:forEach items="${communityList}" var="list">	
-				<c:if test="${list.communityNotice == 'T'}">
-					<tr>
-						<td style="font-weight:bold;">${list.communityNo}</td>
-						<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${list.communityNo}">[공지]${list.communitySubject}</a></td>
-						<td style="font-weight:bold;">${list.memberId}</td>
-						<td style="font-weight:bold;">${list.communityDate}</td>
-						<td style="font-weight:bold;">${list.communityReadcount}</td>	
-					</tr>
-				</c:if>	
-			</c:forEach>	
+			<tbody>	
+			<!-- 공지글만 출력하는 포이치문 -->	
+			<c:forEach items="${communityNoticeList}" var="noticeList">	
+				<tr>
+					<td style="font-weight:bold;">${noticeList.communityNo}</td>
+					<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${noticeList.communityNo}">[공지]${noticeList.communitySubject}</a></td>
+					<td style="font-weight:bold;">${noticeList.memberId}</td>
+					<td style="font-weight:bold;">${noticeList.communityDate}</td>
+					<td style="font-weight:bold;">${noticeList.communityReadcount}</td>	
+				</tr>
+			</c:forEach>
+			<!-- 게시글 출력 포이치문 -->	
 			<c:forEach items="${communityList}" var="list">				
 				<tr> 							
 					<td>${list.communityNo}</td>
@@ -65,24 +65,32 @@
 		<button type="button" onclick="onWrite()" class="btn btn-primary">쓰기</button>
 		<button type="button" onclick="onList()" class="btn btn-primary">목록</button>
 	</div>
-	<form class="form-wrap" method="post">
-		<div>
-			<c:if test="${page == startPage}">
-				이전
-			</c:if>
+	<div >
+		<ul class="pagination">
+		<li>
 			<c:if test="${page>1}">
-				<a href="/community/list?communityCategoryNo=community_category_01&page=${page-1}">이전</a>
+				<a href="/community/list?communityCategoryNo=community_category_01&page=${page-1}">&laquo;</a>
 			</c:if>
-			<c:forEach begin="${startPage}" end="${endPage}" var="i">
-				<a href="/community/list?communityCategoryNo=community_category_01&page=${i}">${i}</a>
-			</c:forEach>
-			<c:if test="${page == lastPage}">
-				다음
-			</c:if>	
+		</li>
+		<c:forEach begin="${startPage}" end="${endPage}" var="i">
+		<li>
+			<c:choose>
+				<c:when test="${page == i}">
+					<a href="/community/list?communityCategoryNo=community_category_01&page=${i}" style="font-weigt:bold;">${i}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="/community/list?communityCategoryNo=community_category_01&page=${i}">${i}</a>
+				</c:otherwise>
+			</c:choose>
+		</li>
+		</c:forEach>
+		<li>
 			<c:if test="${page<lastPage}">
-				<a href="/community/list?communityCategoryNo=community_category_01&page=${page+1}">다음</a>
+				<a href="/community/list?communityCategoryNo=community_category_01&page=${page+1}">&raquo;</a>
 			</c:if>
-		</div>
+		</li>
+		</ul>
+	</div>
 		<%-- <div class="search">
 			<div class="col-lg-4">
 				<div class="input-group">
@@ -106,26 +114,12 @@
 </body>
 <script type="text/javascript">
 
-$('.searchOption').val($('.searchOptionVal').val());
 var onWrite = function(){
-	location.href = 'write'; 
+	location.href = '/community/write'; 
 };
 var onList = function(){
 	location.href = location.href;
 };
-var goPage = function(page){
-	var form = $('.form-wrap')[0];
-	$('.page').val(page);
-	form.submit();
-};
 
-var onSearch = function(){
-	var form = $('.form-wrap')[0];
-	form.submit();
-};
-
-var onView = function(seq){
-	location.href='view?seq='+seq;
-};
 </script>
 </html>

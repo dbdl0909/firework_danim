@@ -36,7 +36,10 @@ public class CommunityController {
 			@RequestParam(value="communityCategoryNo") String communityCategoryNo,
 			@RequestParam(value="page", defaultValue="1") int page) {
 		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo, page);
+		List<CommunityDto> communityNoticeList = communityService.selectCommunityNoticeList(communityCategoryNo);
 		logger.info("totalPage{}",communityService.countCommunityList(communityCategoryNo)/10);
+		//페이징시 마지막 페이지와 총 블럭페이지의 오차를 없애기위한 코드
+		// 마지막 페이지를 강제로 endpage로 치환하여 오차를 없애준다.
 		int totalCount = communityService.countCommunityList(communityCategoryNo);
 		int lastPage = (int) Math.ceil((double)totalCount/10);
 		int endPage = communityService.endPage(communityService.startPage(page));
@@ -44,6 +47,7 @@ public class CommunityController {
 			endPage = lastPage;			
 		}
 		model.addAttribute("communityList", communityList);
+		model.addAttribute("communityNoticeList", communityNoticeList);
         model.addAttribute("startPage", communityService.startPage(page));
         model.addAttribute("page", page);
         model.addAttribute("endPage", endPage);
@@ -91,8 +95,7 @@ public class CommunityController {
 		Calendar cal = Calendar.getInstance();
 		String fileName = imgfile.getOriginalFilename();
 		String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-		String replaceName = cal.getTimeInMillis() + fileType;  
-		
+		String replaceName = cal.getTimeInMillis() + fileType;		
 		String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/upload";
 		FileUpload.fileUpload(imgfile, path, replaceName);
 		model.addAttribute("path", path);
