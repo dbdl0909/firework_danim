@@ -25,7 +25,13 @@ public class CommunityService {
 	//게시글 입력 
 	public void insertCommunityItem(CommunityDto communityDto){
 		cummunityDao.insertCommunityItem(communityDto);	
-	};
+	}
+	//수정을 위한 수정화면출력
+	public CommunityDto modifyCommunityItemView(int communityNo){
+		CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
+		return communityDto;		
+	}
+	//수정된 값 처리
 	public void modifyCommunityItem(CommunityDto communityDto){
 		logger.info("categoryNo {} CommunityController.java", communityDto.getCommunityCategoryNo());
 		logger.info("memberId {} CommunityController.java", communityDto.getMemberId());
@@ -45,15 +51,22 @@ public class CommunityService {
         map.put("communityCategoryNo", communityCategoryNo);
         List<CommunityDto> communityList =  cummunityDao.selectCommunityList(map);        
 		return communityList;	
-	};
+	}
 	//해당 카테고리의 공지글만 출력
 	public List<CommunityDto> selectCommunityNoticeList(String communityCategoryNo){
 		List<CommunityDto> communityNoticeList = cummunityDao.selectCommunityNoticeList(communityCategoryNo);
 		return communityNoticeList;	
-	};
+	}
 	//해당 게시글의 디테일 뷰
-	public CommunityDto selectDetailViewByCommunityNo(int communityNo){		
-		return cummunityDao.selectDetailViewByCommunityNo(communityNo);		
+	//디테일 뷰 출력 시 readcount에 1씩 증가
+	public CommunityDto selectDetailViewByCommunityNo(int communityNo){
+		CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
+		int readCount = communityDto.getCommunityReadcount();
+		readCount++;
+		communityDto.setCommunityReadcount(readCount);
+		logger.info("readCount {} CommunityController.java", communityDto.getCommunityReadcount());
+		cummunityDao.updateReadCount(communityDto);
+		return communityDto;		
 	}
 	//해당 카테고리의 총 게시글 수
 	public int countCommunityList(String communityCategoryNo){		

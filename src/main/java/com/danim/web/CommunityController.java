@@ -80,7 +80,7 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/community/communityModify", method = RequestMethod.GET)
 	public String communityModify(Model model, @RequestParam(value="communityNo") int communityNo) {
-		model.addAttribute("detailView", communityService.selectDetailViewByCommunityNo(communityNo));
+		model.addAttribute("detailView", communityService.modifyCommunityItemView(communityNo));
 		model.addAttribute("communityNo", communityNo);
 		return "community/modify";
 	}

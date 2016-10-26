@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
 <mapper namespace="com.danim.service">
 	<select id="selectCityRouteByCityRouteNo"
-			resultType="com.danim.service.diaryCityRouteDto"
+			resultType="com.danim.service.diary.CityRouteDto"
 			parameterType="String">
 		SELECT 
 			city_route_no as 'cityRouteNo',

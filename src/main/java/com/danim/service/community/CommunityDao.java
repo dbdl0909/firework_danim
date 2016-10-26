@@ -28,7 +28,7 @@ public class CommunityDao {
 		return sqlSession.selectList(NS+".selectCommunityNoticeList", communityCategoryNo);	
 	}
 	
-	public CommunityDto selectDetailViewByCommunityNo(int communityNo){		
+	public CommunityDto selectDetailViewByCommunityNo(int communityNo){	
 		return sqlSession.selectOne(NS+".selectDetailViewByCommunityNo", communityNo);		
 	}
 	
@@ -38,4 +38,7 @@ public class CommunityDao {
 	public void modifyCommunityItem(CommunityDto communityDto){
 		sqlSession.update(NS+".modifyCommunityItem", communityDto);		
 	};
+	public void updateReadCount(CommunityDto communityDto) {		
+		sqlSession.update(NS+".updateReadCount", communityDto);	
+	}
 }
