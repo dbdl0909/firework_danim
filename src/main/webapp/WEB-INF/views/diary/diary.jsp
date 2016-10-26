@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,9 @@
 </head>
 <body class="container">
     <h1>
-        <small><a href="/diary?SendYear=${SendYear}&SandMonth=${SandMonth}&SandPage=prev">[PREV]</a></small> 
+        <small><a href="/diary/diary?dDayYear=${dDayYear}&dDayMonth=${dDayMonth}&dDayPage=prev">[PREV]</a></small> 
         ${ddayYear}년 ${ddayMonth+1}월
-        <small><a href="/diary?SendYear=${SendYear}&ddayMonth=${SandMonth}&SandPage=next">[NEXT]</a></small> 
+        <small><a href="/diary/diary?dDayYear=${dDayYear}&dDayMonth=${dDayMonth}&dDayPage=next">[NEXT]</a></small> 
         
     </h1>
     <table class="table table-bordered">
@@ -27,58 +28,56 @@
         </thead>
         <tbody>
             <tr>
-                <c:forEach     var="oneDay" items="${oneDayList}" varStatus="i">
+                <c:forEach     var="dayList" items="${dayList}" varStatus="i">
                         <td>
-                            <c:if test="${oneDay.scheduleList == null}">
-                                <div style="color:#BDBDBD">${oneDay.day}</div>
+                            <c:if test="${dayList.cityRouteList == null}">
+                                <div style="color:#BDBDBD">${dayList.day}</div>
                             </c:if>
-                            <c:if test="${oneDay.scheduleList != null}">
-                                    <c:if test="${oneDay.scheduleList.size() == 0}">
-                                        <a href="/diary/scheduleList?srcScheduleDate=${oneDay.year}-${oneDay.month}-${oneDay.day}">
+                            <c:if test="${dayList.cityRouteList != null}">
+                                    <c:if test="${dayList.cityRouteList.size() == 0}">
+                                        <a href="/diary/scheduleList?srcScheduleDate=${dayList.year}-${dayList.month}-${dayList.day}">
                                             <c:if test="${i.count%7==1}">
-                                                <div style="color:#FF0000">${oneDay.day}</div>
+                                                <div style="color:#FF0000">${dayList.day}</div>
                                             </c:if>
                                             <c:if test="${i.count%7==0}">
-                                                <div style="color:#0000FF">${oneDay.day}</div>
+                                                <div style="color:#0000FF">${dayList.day}</div>
                                             </c:if>
                                             <c:if test="${i.count%7>1}">
-                                                <div style="color:#000000">${oneDay.day}</div>
+                                                <div style="color:#000000">${dayList.day}</div>
                                             </c:if>
                                         </a>
                                     </c:if>
-                                    <c:if test="${oneDay.scheduleList.size() > 0}">
-                                        <a href="/diary/scheduleList?srcScheduleDate=${oneDay.year}-${oneDay.month}-${oneDay.day}">
+                                    <c:if test="${dayList.cityRouteList.size() > 0}">
+                                        <a href="/diary/scheduleList?srcScheduleDate=${dayList.year}-${dayList.month}-${dayList.day}">
                                             <!-- 일요일 -->
                                             <c:if test="${i.count%7==1}">
-                                                <div style="color:#FF0000;font-weight:bold;">${oneDay.day}</div>
+                                                <div style="color:#FF0000;font-weight:bold;">${dayList.day}</div>
                                             </c:if>
                                             <!-- 토요일 -->
                                             <c:if test="${i.count%7==0}">
-                                                <div style="color:#0000FF;font-weight:bold;">${oneDay.day}</div>
+                                                <div style="color:#0000FF;font-weight:bold;">${dayList.day}</div>
                                             </c:if>
                                             <!-- 월,화,수,목,금 -->
                                             <c:if test="${i.count%7 > 1}">
-                                                <div style="color:#000000;font-weight:bold;">${oneDay.day}</div>
+                                                <div style="color:#000000;font-weight:bold;">${dayList.day}</div>
                                             </c:if>
                                         </a>    
-                                        <c:forEach var="s" items="${oneDay.scheduleList}"> 
-                                            <div style="color:${s.scheduleFontColor}">
+                                        <c:forEach var="s" items="${oneDay.cityRouteList}"> 
                                                 <c:if test="${s.repeat == 'repeat'}">
-                                                    <span><img src="/resources/imgs/repeat.png"/></span>
+                                                    <span><input type="button"value="반복"></span>
                                                 </c:if>
-                                                <c:if test="${s.scheduleTitle.length()<6}">
-                                                    <span>${s.scheduleTitle}...</span>
+                                                <c:if test="${s.cityRouteNo.length()<6}">
+                                                    <span>${s.cityRouteNo}...</span>
                                                 </c:if>
-                                                <c:if test="${s.scheduleTitle.length()>5}">
-                                                    <span>${s.scheduleTitle.substring(0, 5)}...</span>
+                                                <c:if test="${s.cityRouteNo.length()>5}">
+                                                    <span>${s.cityRouteNo.substring(0, 5)}...</span>
                                                 </c:if>
-                                            </div>
                                         </c:forEach>
                                     </c:if>
                             </c:if>
                         </td>
                             
-                        <c:if test="${i.count%7==0 && i.count<oneDayList.size()}">
+                        <c:if test="${i.count%7==0 && i.count<dayList.size()}">
                             </tr><tr>
                         </c:if>
                 </c:forEach>

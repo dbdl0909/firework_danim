@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.danim.service">
+	<select id="selectCityRouteByCityRouteNo"
+			resultType="com.danim.service.diaryCityRouteDto"
+			parameterType="String">
+		SELECT 
+			city_route_no as 'cityRouteNo',
+			plan_no as 'planNo',
+			city_route_date as 'cityRouteDate',
+			city_route_departure_city as 'cityRouteDepartureCity',
+			city_route_arrival_city as 'cityRouteArrivalCity',
+			city_route_departure_time as 'cityRouteDepartureTime',
+			city_route_arrival_time as 'cityRouteArrivalTime'			
+		FROM
+			city_route
+		WHERE
+			city_route_no = #{cityRouteNo};
+	</select>
+</mapper>
