@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.danim.service.SearchMapper">
+	<!-- 검색을 통해 도시이름을 조회하기 위한 쿼리 -->
+	<select id="selectCityInfoName"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT 
+			city_info_name as 'cityInfoName'
+		FROM
+			city_info
+		WHERE
+			city_info_name
+		LIKE
+			CONCAT(#{search},'%')					
+	</select>
+	
+	<!-- 도시 이름을 통해서 해당 지역의 명소이름을 조회하는 쿼리 -->
+	<select id="selectLandmarkByCityInfoName"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT 
+			city.city_info_no as 'cityInfoNo',
+			city.city_info_name as 'cityInfoName',
+			land.landmark_info_no as 'landmarkInfoNo',
+			land.landmark_info_name as 'landmarkInfoName'
+		FROM
+			city_info as city
+		INNER JOIN
+			landmark_info as land
+		ON
+			city.city_info_no = land.city_info_no		
+		WHERE
+			city_info_name
+		LIKE CONCAT(#{search},'%')			
+	</select>
+	
+	<!-- 도시 이름을 통해서 해당 지역의 음식점 이름을 조회하는 쿼리 -->
+	<select id="selectEateryByCityInfoName"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT 
+			city.city_info_no as 'cityInfoNo',
+			city.city_info_name as 'cityInfoName',
+			eat.eatery_no as 'eateryNo',
+			eat.eatery_name as 'eateryName'
+		FROM
+			city_info as city
+		INNER JOIN
+			eatery_info as eat
+		ON
+			city.city_info_no = eat.city_info_no		
+		WHERE
+			city_info_name
+		LIKE CONCAT(#{search},'%')			
+	</select>
+	
+	<!-- 도시 이름을 통해서 해당 지역의 행사 이름을 조회하는 쿼리 -->
+	<select id="selectEventByCityInfoName"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT
+			city.city_info_no as 'cityInfoNo',
+			city.city_info_name as 'cityInfoName',
+			eve.event_info_name as 'eventInfoName'
+		FROM
+			city_info as city
+		INNER JOIN
+			event_info as eve
+		ON 			
+			city.city_info_no = eve.city_info_no
+		WHERE
+			city_info_name
+		LIKE CONCAT(#{search},'%')	
+	</select>
+	
+	<!-- 도시 이름을 통해서 해당 지역의 숙소 이름을 조회하는 쿼리 -->
+	<select id="selectStayByCityInfoName"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT
+			city.city_info_no as 'cityInfoNo',
+			city.city_info_name as 'cityInfoName',
+			stay.stay_info_no as 'stayInfoNo',
+			stay.stay_info_name as 'stayInfoName'
+		FROM
+			city_info as city
+		INNER JOIN
+			stay_info as stay
+		ON 			
+			city.city_info_no = stay.city_info_no
+		WHERE
+			city_info_name
+		LIKE CONCAT(#{search},'%')	
+	</select>	
+	
+	<!-- 명소 번호를 통해서 해당 명소의 정보를 전부 조회하는 쿼리 -->
+	<select id="selectLandmarkByLandmarkInfoNo"
+			resultType="com.danim.service.plan.LandmarkInfoDto"
+			parameterType="com.danim.service.search.SearchDto">
+		SELECT
+			landmark_info_no as 'landmarkInfoNo',
+			landmark_info_name as 'landmarkInfoName',
+			city_info_no as 'cityInfoNo',
+			landmark_info_location as 'landmarkInfoLocation',
+			landmark_info_homepage as 'landmarkInfoHomepage',
+			landmark_info_summary as 'landmarkInfoSummary',
+			landmark_info_langitude as 'landmarkInfoLangitude',
+			landmark_info_latitude as 'landmarkInfoLatitude',
+			landmark_info_image as 'landmarkInfoImage',
+			landmark_info_fee as 'landmarkInfoFee'
+		FROM
+			landmark_info
+		WHERE
+			landmark_info_no = #{landmarkInfoNoRma}		
+	</select>
+</mapper>		

@@ -1,4 +1,4 @@
-package com.danim.web;
+	package com.danim.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,13 @@ public class FrontController {
 	
 	@RequestMapping(value = "/")
 	public String indexController() {
-		return "index";
-		
+		logger.info("indexController FrontController.java");
+		return "index";		
+	}
+	
+	@RequestMapping(value = "/search")
+	public String searchController() {
+		logger.info("searchController FrontController.java");
+		return "search/infoSearch";
 	}
 }

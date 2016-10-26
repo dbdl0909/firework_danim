@@ -1,28 +1,29 @@
 package com.danim.service.plan;
 
-public class EateryInfoDto {				//		eatery_info table
-	private String landmarkInfoNo;			//명소번호					landmark_info_no
-	private String landmarkInfoName;		//명소명					landmark_info_name
-	private String cityInfoNo;				//시청번호					city_info_no
-	private String landmarkInfoLocation;	//상세위치					landmark_info_location
-	private String landmarkInfoHomepage;	//홈페이지					landmark_info_homepage
-	private String landmarkInfoSummary;		//설명						landmark_info_summary
-	private float landmarkInfoLangitude;	//경도						landmark_info_langitude
-	private float landmarkInfoLatitude;		//위도						landmark_info_latitude
-	private String landmarkInfoImage;		//이미지경로/도시번호.jpg	landmark_info_image
-	private int landmarkInfoFee;			//입장료					landmark_info_fee
+public class EateryInfoDto {
+	private String eateryNo;		// 음식점 번호
+	private String eateryName;		// 음식점 이름
+	private String eateryCategory;	// 음식점 분류
+	private String cityInfoNo;		// 도시 번호
+	private String eaterySummary;	// 음식점 설명
 	
-	public String getLandmarkInfoNo() {
-		return landmarkInfoNo;
+	public String getEateryNo() {
+		return eateryNo;
 	}
-	public void setLandmarkInfoNo(String landmarkInfoNo) {
-		this.landmarkInfoNo = landmarkInfoNo;
+	public void setEateryNo(String eateryNo) {
+		this.eateryNo = eateryNo;
 	}
-	public String getLandmarkInfoName() {
-		return landmarkInfoName;
+	public String getEateryName() {
+		return eateryName;
 	}
-	public void setLandmarkInfoName(String landmarkInfoName) {
-		this.landmarkInfoName = landmarkInfoName;
+	public void setEateryName(String eateryName) {
+		this.eateryName = eateryName;
+	}
+	public String getEateryCategory() {
+		return eateryCategory;
+	}
+	public void setEateryCategory(String eateryCategory) {
+		this.eateryCategory = eateryCategory;
 	}
 	public String getCityInfoNo() {
 		return cityInfoNo;
@@ -30,55 +31,17 @@ public class EateryInfoDto {				//		eatery_info table
 	public void setCityInfoNo(String cityInfoNo) {
 		this.cityInfoNo = cityInfoNo;
 	}
-	public String getLandmarkInfoLocation() {
-		return landmarkInfoLocation;
+	public String getEaterySummary() {
+		return eaterySummary;
 	}
-	public void setLandmarkInfoLocation(String landmarkInfoLocation) {
-		this.landmarkInfoLocation = landmarkInfoLocation;
-	}
-	public String getLandmarkInfoHomepage() {
-		return landmarkInfoHomepage;
-	}
-	public void setLandmarkInfoHomepage(String landmarkInfoHomepage) {
-		this.landmarkInfoHomepage = landmarkInfoHomepage;
-	}
-	public String getLandmarkInfoSummary() {
-		return landmarkInfoSummary;
-	}
-	public void setLandmarkInfoSummary(String landmarkInfoSummary) {
-		this.landmarkInfoSummary = landmarkInfoSummary;
-	}
-	public float getLandmarkInfoLangitude() {
-		return landmarkInfoLangitude;
-	}
-	public void setLandmarkInfoLangitude(float landmarkInfoLangitude) {
-		this.landmarkInfoLangitude = landmarkInfoLangitude;
-	}
-	public float getLandmarkInfoLatitude() {
-		return landmarkInfoLatitude;
-	}
-	public void setLandmarkInfoLatitude(float landmarkInfoLatitude) {
-		this.landmarkInfoLatitude = landmarkInfoLatitude;
-	}
-	public String getLandmarkInfoImage() {
-		return landmarkInfoImage;
-	}
-	public void setLandmarkInfoImage(String landmarkInfoImage) {
-		this.landmarkInfoImage = landmarkInfoImage;
-	}
-	public int getLandmarkInfoFee() {
-		return landmarkInfoFee;
-	}
-	public void setLandmarkInfoFee(int landmarkInfoFee) {
-		this.landmarkInfoFee = landmarkInfoFee;
+	public void setEaterySummary(String eaterySummary) {
+		this.eaterySummary = eaterySummary;
 	}
 	
 	@Override
 	public String toString() {
-		return "EateryInfoDto [landmarkInfoNo=" + landmarkInfoNo + ", landmarkInfoName=" + landmarkInfoName
-				+ ", cityInfoNo=" + cityInfoNo + ", landmarkInfoLocation=" + landmarkInfoLocation
-				+ ", landmarkInfoHomepage=" + landmarkInfoHomepage + ", landmarkInfoSummary=" + landmarkInfoSummary
-				+ ", landmarkInfoLangitude=" + landmarkInfoLangitude + ", landmarkInfoLatitude=" + landmarkInfoLatitude
-				+ ", landmarkInfoImage=" + landmarkInfoImage + ", landmarkInfoFee=" + landmarkInfoFee + "]";
+		return "EateryInfoDto [eateryNo=" + eateryNo + ", eateryName=" + eateryName + ", eateryCategory="
+				+ eateryCategory + ", cityInfoNo=" + cityInfoNo + ", eaterySummary=" + eaterySummary + "]";
 	}
+	
 }
