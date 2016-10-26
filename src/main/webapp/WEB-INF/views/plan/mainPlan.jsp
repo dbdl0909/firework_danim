@@ -19,9 +19,14 @@
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
 	    <script>
 		    var cityInfoList = new Array();
-		    var markerArray = new Array();
-		    var addButton;
+		    var map;
+		    var marker;
 		    var markerIndex;
+		    var pathArray = new Array();
+		    var markerArray = new Array();
+		    var markerIndexArray = new Array();
+		    var addButton;
+		    var flag;
 		    
 		    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */
 		    <c:forEach var="listCityInfo" items="${listCityInfo}">
@@ -35,13 +40,13 @@
 		    	/* 담은 정보들을 cityInfoList에 담는다. */
 		    	cityInfoList.push(cityInfo);
 		    </c:forEach>
-		    console.log("cityInfoList.length : " + cityInfoList.length);
+		    //console.log("cityInfoList.length : " + cityInfoList.length);
 		    
 		    <%-- 구글 지도 (현재위치 설정) --%>
 			function initMap() {
 				//처음 지도 위치
 				var main = {lat: 36.337, lng: 127.402};
-				var map = new google.maps.Map(document.getElementById('map'), {
+				map = new google.maps.Map(document.getElementById('map'), {
 					zoom: 7,
 					center: main
 				});
@@ -49,7 +54,7 @@
 				//cityInfoList의 length만큼 마커를 찍어준다.
 				for (var i=0; i<cityInfoList.length; i++) {
 					//console.log(i);
-					var marker = new google.maps.Marker({
+					marker = new google.maps.Marker({
 						icon: "../../resources/images/placeholder.png",
 						position: {lat: Number(cityInfoList[i].latitude), lng: Number(cityInfoList[i].langitude)},
 					    				//위도와 경도를 Number 타입으로 바꾼다.
@@ -64,7 +69,7 @@
 				
 				//현재 zoom 을 가져온다.
 				var zoom = map.getZoom();
-				console.log("current zoom : " + zoom);
+				//console.log("current zoom : " + zoom);
 				//광역시는 먼저 보여준다.
 				for(i=73; i<=79; i++) {
 					markerArray[i].setVisible(true);
@@ -127,9 +132,25 @@
 						
 						google.maps.event.addListener(infowindow, 'domready', function() {
 					    	document.getElementById('addButton').addEventListener('click', function(event) {
+					    		markerIndexArray.push(markerIndex);
+					    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
 					    		//alert('click : ' + markerIndex);
 					    		$('#mainPlanDivLeft ul').append("<li class='leftMenuLi'>" + infoNameArray[markerIndex] + "<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" + "</li>");
-					    		lineFunction();
+					    		
+					    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
+								var latitude = Number(cityInfoList[markerIndex].latitude);
+								var langitude = Number(cityInfoList[markerIndex].langitude);
+								console.log(markerIndex + ' : ' + latitude + ', ' + langitude);
+								
+								//pathArray 배열에 클릭한 도시의 좌표를 누적시키기 위해 전역변수로 둔다.
+								pathArray.push({lat: latitude, lng: langitude});
+								//console.log(pathArray);
+					    		
+								//도시를 2개 이상 선택했을때, 이동경로를 찍기 위한 함수를 호출한다.
+								if(pathArray.length >= 2) {
+									flag = true;
+					    			lineFunction(pathArray, flag);
+								}
 					    	});
 						});
 					});
@@ -137,32 +158,84 @@
 			}
 		</script>
 		<script>
-		var lineFunction =  function(){
-			//console.log(markerIndex);
-			//console.log(cityInfoList[markerIndex].latitude);
-			//console.log(cityInfoList[markerIndex].langitude);
-			var pathArray = new Array();
+			var lineArray = new Array();
+		    var pathLine;
+		    
+		    function poly() {
+		    	//polyline 끝을 화살표 모양으로 표시하기 위한 코드
+				var lineSymbol = {
+					path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+				};
+				
+				pathLine = new google.maps.Polyline({
+					path: pathArray,
+					geodesic: true,
+					strokeColor: '#FF0000',
+					strokeOpacity: 1.0,
+					strokeWeight: 2,
+					icons: [{
+						icon: lineSymbol,
+						offset: '100%'
+					}],
+				});
+				pathLine.setMap(map);
+		    }
+		    
+			//이동경로를 찍거나 제거하기 위한 함수
+			function lineFunction(pathArray, flag){
+				console.log('lineFunction on');
+				console.log('pathArray 길이 : ' + pathArray.length);
+				console.log('flag : ' + flag);
+				console.log('removeButtonIndex : ' + removeButtonIndex);
+				
+				if(flag == true) {
+					poly();
+					
+					lineArray.push(pathLine);
+				} else if(flag == false) {
+					//pathFuction(lineArray);
+					
+					for(var i=0; i<lineArray.length; i++) {
+						console.log(lineArray[i]);
+						lineArray[i].setMap(null);
+					}
+					
+				}
+			};
 			
-/*해야할것 클릭한 시만 리스트로 받아와서 경로를 추가해야한다!!
- * 
- *
- *
- */
-			
-			
-			var pathLine = new google.maps.Polyline({
-				path: [{lat: Number(cityInfoList[markerIndex].latitude), lng: Number(cityInfoList[markerIndex].langitude)}]
-			});
-		};
+			//이동경로에서 클릭한 도시를 제거하기 위한 함수
+			function lineRemoveFunction(removeButtonIndex) {
+				console.log('lineRemoveFunction on');
+				//console.log('removeButtonIndex : ' + removeButtonIndex);
+				
+				//pathArray 배열에서 선택한 도시의 좌표를 제거한다.
+				var markerIndexTemp = markerIndexArray[removeButtonIndex];
+				console.log(markerIndexArray + ' 중 제거할 도시번호 : ' + markerIndexTemp);
+				markerIndexArray.splice(removeButtonIndex, 1);
+				
+				var latitude = Number(cityInfoList[markerIndexTemp].latitude);
+				var langitude = Number(cityInfoList[markerIndexTemp].langitude);
+				console.log(markerIndexTemp + ' : ' + latitude + ', ' + langitude);
+				
+				pathArray.pop({lat: latitude, lng: langitude});
+				console.log('pathArray 길이 : ' + pathArray.length);
+				
+				flag = false;
+				lineFunction(pathArray, flag);
+			}
 			
 			$(document).ready(function(){
 				//removeButton 이미지 태그를 클릭했을때 실행할 함수
 				$('body').on('click', '.removeButton', function() {
 					//클릭한 태그의 번호를 가져와서 그 번호에 해당하는 li 태그를 제거한다.
 					var removeButtonIndex = $('.removeButton').index(this);
-					//console.log('removeButtonIndex : ' + removeButtonIndex);
-					$('.leftMenuLi').eq(removeButtonIndex).remove();
+					console.log('removeButtonIndex : ' + removeButtonIndex);
 					
+					//이동 경로에서 removeButton 이미지를 클릭한 도시 제거
+					lineRemoveFunction(removeButtonIndex);
+					
+					//경로 제거후 li 태그 제거
+					$('.leftMenuLi').eq(removeButtonIndex).remove();
 				});
 			});
 		</script>
