@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,18 +36,18 @@ public class CommunityController {
 			@RequestParam(value="page", defaultValue="1") int page) {
 		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo, page);
 		List<CommunityDto> communityNoticeList = communityService.selectCommunityNoticeList(communityCategoryNo);
-		logger.info("totalPage{}",communityService.countCommunityList(communityCategoryNo)/10);
 		//페이징시 마지막 페이지와 총 블럭페이지의 오차를 없애기위한 코드
 		// 마지막 페이지를 강제로 endpage로 치환하여 오차를 없애준다.
-		int totalCount = communityService.countCommunityList(communityCategoryNo);
-		int lastPage = (int) Math.ceil((double)totalCount/10);
-		int endPage = communityService.endPage(communityService.startPage(page));
+		int startPage = communityService.getStartPage(page);
+		int endPage = communityService.getEndPage(startPage);
+		int lastPage = communityService.getLastPage(communityCategoryNo, page);
 		if(lastPage < endPage){
 			endPage = lastPage;			
 		}
+		logger.info("totalPage{}",communityService.getLastPage(communityCategoryNo, page));
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("communityNoticeList", communityNoticeList);
-        model.addAttribute("startPage", communityService.startPage(page));
+        model.addAttribute("startPage", startPage);
         model.addAttribute("page", page);
         model.addAttribute("endPage", endPage);
         model.addAttribute("lastPage", lastPage);

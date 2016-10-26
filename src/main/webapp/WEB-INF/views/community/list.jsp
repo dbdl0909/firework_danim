@@ -109,7 +109,6 @@
 				</div>
 			</div>	
 		</div> --%>
-	</form>
 </div>
 </body>
 <script type="text/javascript">
