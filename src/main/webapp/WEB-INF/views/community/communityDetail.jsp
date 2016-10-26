@@ -19,15 +19,15 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="contents">
 			<div class="title-wrap panel-heading">
-				${detailView.communitySubject}
+				글 제목 : ${detailView.communitySubject}
 			</div>	
 			<div class="panel-body">
-				<div class="recode-wrap">
+				<span class="recode-wrap">
 					작성자 : ${detailView.memberId}				
-				</div>
-				<div class="hit-wrap">
+				</span>
+				<span class="hit-wrap">
 					<span>조회수 : </span>${detailView.communityReadcount}
-				</div>
+				</span>
 				<div class="contents-wrap">
 					${detailView.communityContent}
 				</div>	

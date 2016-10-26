@@ -82,7 +82,7 @@
 			<!-- 게시글 출력 포이치문 -->	
 			<c:forEach varStatus="status" items="${communityList}" var="list">				
 				<tr> 
-					<td>${(totalCount-status.index)-((page - 1)*10)}</td>					
+					<td>${(totalCount-status.index)-((page-1)*10)}</td>					
 					<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a></td>
 					<td>${list.memberId}</td>
 					<td>${list.communityDate}</td>
