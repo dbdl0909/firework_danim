@@ -44,7 +44,9 @@ public class CommunityController {
 		if(lastPage < endPage){
 			endPage = lastPage;			
 		}
-		logger.info("totalPage{}",communityService.getLastPage(communityCategoryNo, page));
+		logger.info("startPage{} CommunityController.java", startPage);
+		logger.info("endPage{} CommunityController.java", endPage);
+		logger.info("totalPage{} CommunityController.java", lastPage);
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("communityNoticeList", communityNoticeList);
         model.addAttribute("startPage", startPage);

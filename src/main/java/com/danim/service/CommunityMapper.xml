@@ -70,7 +70,7 @@
 		WHERE
 			community_category_no = #{communityCategoryNo}
 		ORDER BY communityNo DESC	
-		LIMIT #{pageHelper.startRow} , #{pageHelper.linePerPage};	
+		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};	
 	</select>
 	<!-- 게시글 입력 -->	
 	<insert 

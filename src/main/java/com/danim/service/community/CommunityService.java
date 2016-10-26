@@ -1,14 +1,11 @@
 package com.danim.service.community;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.danim.util.Pagination;
 import com.sun.media.jfxmedia.logging.Logger;
@@ -35,7 +32,7 @@ public class CommunityService {
 
         Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("pageHelper", pageNation);
+        map.put("pageNation", pageNation);
         map.put("communityCategoryNo", communityCategoryNo);
         List<CommunityDto> communityList =  cummunityDao.selectCommunityList(map);
         
@@ -68,7 +65,6 @@ public class CommunityService {
     public int getLastPage(String communityCategoryNo, int page) {
 		int totalCount = countCommunityList(communityCategoryNo);
 		int lastPage = (int) Math.ceil((double)totalCount/LINE_PER_PAGE);
-		return lastPage;
-    	
+		return lastPage;    	
     }
 }
