@@ -37,21 +37,21 @@
 					<th>조회수</th>
 				</tr>
 			</thead>
-			<tbody>	
+			<tbody>				
 			<!-- 공지글만 출력하는 포이치문 -->	
 			<c:forEach items="${communityNoticeList}" var="noticeList">	
 				<tr>
-					<td style="font-weight:bold;">${noticeList.communityNo}</td>
-					<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${noticeList.communityNo}">[공지]${noticeList.communitySubject}</a></td>
+					<td style="font-weight:bold;">[공지]</td>
+					<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${noticeList.communityNo}">${noticeList.communitySubject}</a></td>
 					<td style="font-weight:bold;">${noticeList.memberId}</td>
 					<td style="font-weight:bold;">${noticeList.communityDate}</td>
 					<td style="font-weight:bold;">${noticeList.communityReadcount}</td>	
 				</tr>
 			</c:forEach>
 			<!-- 게시글 출력 포이치문 -->	
-			<c:forEach items="${communityList}" var="list">				
-				<tr> 							
-					<td>${list.communityNo}</td>
+			<c:forEach varStatus="status" items="${communityList}" var="list">				
+				<tr> 
+					<td>${(totalCount-status.index)-((page - 1)*10)}</td>					
 					<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a></td>
 					<td>${list.memberId}</td>
 					<td>${list.communityDate}</td>
@@ -112,13 +112,11 @@
 </div>
 </body>
 <script type="text/javascript">
-
 var onWrite = function(){
 	location.href = '/community/write'; 
 };
 var onList = function(){
 	location.href = location.href;
 };
-
 </script>
 </html>

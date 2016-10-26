@@ -49,6 +49,7 @@ public class CommunityController {
 		logger.info("totalPage{} CommunityController.java", lastPage);
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("communityNoticeList", communityNoticeList);
+		model.addAttribute("totalCount", communityService.countCommunityList(communityCategoryNo));
         model.addAttribute("startPage", startPage);
         model.addAttribute("page", page);
         model.addAttribute("endPage", endPage);
