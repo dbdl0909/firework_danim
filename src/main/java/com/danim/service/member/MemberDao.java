@@ -15,17 +15,14 @@ public class MemberDao {
 	
 	private final String namesPace = "com.danim.service.MemberMapper";
 	
-	public void insertMember(MemberDto memberDto) {
-		logger.info("insertMember() MemberDao.java");
+	public int insertMemberTotal(MemberTotalInsertDto memberTotalInsertDto) {
+		logger.info("insertMemberTotal() MemberDao.java");
+		return sessionTemplate.insert(namesPace + ".insertMemberTotal");
 	}
 	
-/*	public void insertMemberInfo(MemberDao memberDto) {
+	public int insertMemberInfo(MemberInfoDto memberInfoDto) {
 		logger.info("insertMemberInfo() MemberDao.java");
+		return sessionTemplate.insert(namesPace + ".insertMemberInfo");
 	}
-	public void insertMemberTotal(MemberDao memberDto) {
-		logger.info("insertMemberTotal() MemberDao.java");
-		
-		//return sessionTemplate.insert(namesPace+".insertMemberTotal", memberDto);
-	}*/
 	
 }

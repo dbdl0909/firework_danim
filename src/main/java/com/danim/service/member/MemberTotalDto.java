@@ -1,5 +1,8 @@
 package com.danim.service.member;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberTotalDto {
 	private String memberId;
 	private String memberLevel;

@@ -20,15 +20,15 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
+	//입력 폼
 	@RequestMapping(value = "/member/memberJoinForm", method = RequestMethod.GET)
 	public String memberJoin(Model model) {
 		return "member/memberJoinForm";
 	}
-	
+	//입력폼 실행
 	@RequestMapping(value = "/member/memberJoinSubmit", method = RequestMethod.POST)
-	public String mainPlan(Model model, MemberDto memberDto) {
-		logger.info("mainPlan MemberController.java");
+	public String memberInsert(Model model, MemberDto memberDto) {
+		logger.info("memberInsert MemberController.java");
 		logger.info("MemberDto : {}", memberDto);
 		
 		memberService.insertMember(memberDto);
