@@ -56,6 +56,9 @@
 		<c:when test="${param.communityCategoryNo == 'community_category_10'}">
 			<h2 class="sub-header">여행관련</h2>
 		</c:when>
+		<c:otherwise>
+			<h2 class="sub-header">플랜</h2>
+		</c:otherwise>
 	</c:choose>
 	<div class="table-responsive">
 		<table class="table table-striped">

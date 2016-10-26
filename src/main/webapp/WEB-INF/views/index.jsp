@@ -15,14 +15,28 @@
 <script type="text/javascript" src="../../resources/js/option.js"></script>
 </head>
 <body>
-<div class='pageblock' id='fullscreen'>
-	<div>
-		<ul id="">
+<div id="header">
+	<div id="headerNavWrap">
+		<div id="searchWrap">
+			
+		</div>
+		<ul id="headerNav">
 			<li>
-				
+				<a href="/plan/mainPlan">플래너</a>
+			</li>
+			<li>
+				<a href="/community/list">광장</a>
+			</li>
+			<li>
+				<a href="">가이드북</a>
+			</li>
+			<li>
+				<a href="">회원가입</a>
 			</li>
 		</ul>
 	</div>
+</div>	
+<div class='pageblock' id='fullscreen'>
 	<div class='slider'>
 		<div class='slide' id="first">
 			<div class='slidecontent'>

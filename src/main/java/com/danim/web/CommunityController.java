@@ -32,7 +32,7 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/community/list")
 	public String home(Model model,
-			@RequestParam(value="communityCategoryNo") String communityCategoryNo,
+			@RequestParam(value="communityCategoryNo", defaultValue="community_category_01") String communityCategoryNo,
 			@RequestParam(value="page", defaultValue="1") int page) {
 		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo, page);
 		List<CommunityDto> communityNoticeList = communityService.selectCommunityNoticeList(communityCategoryNo);
