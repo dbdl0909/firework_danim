@@ -4,16 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.danim.util.Pagination;
-import com.sun.media.jfxmedia.logging.Logger;
+
 
  
 @Service 
 public class CommunityService {
-	
+	private static final Logger logger = LoggerFactory.getLogger(CommunityService.class);
 	@Autowired
 	CommunityDao cummunityDao;
     private final int LINE_PER_PAGE = 10;//한페이지에 보여줄 글 갯수 공지 제외
@@ -24,18 +26,24 @@ public class CommunityService {
 	public void insertCommunityItem(CommunityDto communityDto){
 		cummunityDao.insertCommunityItem(communityDto);	
 	};
+	public void modifyCommunityItem(CommunityDto communityDto){
+		logger.info("categoryNo {} CommunityController.java", communityDto.getCommunityCategoryNo());
+		logger.info("memberId {} CommunityController.java", communityDto.getMemberId());
+		logger.info("communitySubject {} ", communityDto.getCommunitySubject());
+		logger.info("communityNotice {} CommunityController.java", communityDto.getCommunityNotice());
+		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());	
+		cummunityDao.modifyCommunityItem(communityDto);	
+	};
 	//해당 카테고리 리스트
 	//컨트롤러에서 넘어온 카테고리 넘버와 페이지 값을 
 	//util패키지 내의 pagination클래스에 넣고 
 	//map에 담아 쿼리 호출
 	public List<CommunityDto> selectCommunityList(String communityCategoryNo, int page){
-
         Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("pageNation", pageNation);
         map.put("communityCategoryNo", communityCategoryNo);
-        List<CommunityDto> communityList =  cummunityDao.selectCommunityList(map);
-        
+        List<CommunityDto> communityList =  cummunityDao.selectCommunityList(map);        
 		return communityList;	
 	};
 	//해당 카테고리의 공지글만 출력
@@ -58,8 +66,8 @@ public class CommunityService {
     }
     //마지막 페이지 구하기
     public int getEndPage(int startpage){
-    	endPage = startpage+BLOCK_PER_PAGE-1;
-        return endPage;
+    	this.endPage = startpage+BLOCK_PER_PAGE-1;
+        return this.endPage;
     }
     
     public int getLastPage(String communityCategoryNo, int page) {

@@ -67,8 +67,7 @@ public class CommunityController {
 		logger.info("memberId {} CommunityController.java", communityDto.getMemberId());
 		logger.info("communitySubject {} ", communityDto.getCommunitySubject());
 		logger.info("communityNotice {} CommunityController.java", communityDto.getCommunityNotice());
-		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());
-		
+		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());		
 		communityService.insertCommunityItem(communityDto);
 		return "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
 	}
@@ -79,15 +78,23 @@ public class CommunityController {
 		return "/community/communityDetail";
 	}
 	
-	@RequestMapping(value = "/community/modify", method = RequestMethod.POST)
-	public String modify(Model model, CommunityDto communityDto) {
-		return "community/write";
+	@RequestMapping(value = "/community/communityModify", method = RequestMethod.GET)
+	public String communityModify(Model model, @RequestParam(value="communityNo") int communityNo) {
+		model.addAttribute("detailView", communityService.selectDetailViewByCommunityNo(communityNo));
+		model.addAttribute("communityNo", communityNo);
+		return "community/modify";
 	}
 	
-	@RequestMapping(value = "/community/modifySubmit", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/communityModifySubmit", method = RequestMethod.POST)
 	public String modifySubmit(Model model, CommunityDto communityDto) {
-		
-		return null;
+		logger.info("categoryNo {} CommunityController.java", communityDto.getCommunityCategoryNo());
+		logger.info("memberId {} CommunityController.java", communityDto.getMemberId());
+		logger.info("communitySubject {} ", communityDto.getCommunitySubject());
+		logger.info("communityNotice {} CommunityController.java", communityDto.getCommunityNotice());
+		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());
+		logger.info("communityNo {} CommunityController.java", communityDto.getCommunityNo());
+		communityService.modifyCommunityItem(communityDto);
+		return "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
 	}
 	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)

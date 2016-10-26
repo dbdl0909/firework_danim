@@ -12,15 +12,27 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../../resources/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
+<script>
+	$(document).ready(function(){
+		var communityCategoryNoVal = '${detailView.communityCategoryNo}';
+		$('#communityCategoryNo option').each(function(i){
+			if($('#communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
+				$(this).attr('selected','selected');				
+			}			
+		});
+	});
+</script>
 <body>
 <div class="container">
-	<form id="communityInsertForm" method="post">
+	<form id="communityModifyForm" method="post">
+		<input type="hidden" name="communityNo" value="${communityNo}">
 		<div class="communityTitleWrap">
 			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
-			<select name="communityCategoryNo">
+			<select id="communityCategoryNo" name="communityCategoryNo">
 			<optgroup label=":::::::: 커뮤니티 ::::::::">
-				<option value="community_category_01" selected="selected"> 플랜</option>
+				<option value="community_category_01"> 플랜</option>
 				<option value="community_category_02"> 후기</option>
 				<option value="community_category_03"> 자유게시판</option>
 				<option value="community_category_04"> 동행찾기</option>
@@ -37,19 +49,26 @@
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="memberId"><span>작성자</span></label>		
-			<input type="text" id="memberId" name="memberId" value="id001" readonly="readonly"/>
+			<input type="text" id="memberId" name="memberId" value="${detailView.memberId}" readonly="readonly"/>
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="communitySubject"><span>글 제목</span></label>
-			<input type="text" id="communitySubject" name="communitySubject" />
+			<input type="text" id="communitySubject" name="communitySubject" value="${detailView.communitySubject}" />
 			<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
-			<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>		
+			<c:choose>
+				<c:when test="${detailView.communityNotice == 'T'}">
+					<input type="checkbox" id="communityNotice" name="communityNotice" value="T" checked="checked"/>
+				</c:when>
+				<c:otherwise>
+					<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>
+				</c:otherwise>
+			</c:choose>		
 		</div>
 		<div class="communityContentWrap">
-		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;"></textarea>
+		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;" >${detailView.communityContent}</textarea>
 		</div>
 		<div class="buttonDiv">
-			<button type="button" class="btn btn-primary" onclick="onWrite()">쓰기</button>
+			<button type="button" class="btn btn-primary" onclick="onWrite()">수정</button>
 			<button type="button" class="btn btn-primary" onclick="history.go(-1);"> 취소</button>
 		</div>
 	</form>
@@ -73,8 +92,8 @@ var oEditors = [];
 
 var onWrite = function(){
 	oEditors.getById["communityContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
-	var boardWriteForm = document.getElementById("communityInsertForm");  
-	boardWriteForm.action ="/community/communityInsert";              
+	var boardWriteForm = document.getElementById("communityModifyForm");  
+	boardWriteForm.action ="/community/communityModifySubmit";              
 	boardWriteForm.submit();  
 };
 

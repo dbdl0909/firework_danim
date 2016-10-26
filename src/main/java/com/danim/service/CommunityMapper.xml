@@ -3,6 +3,22 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.danim.service">
+	<update id="modifyCommunityItem"
+			parameterType="com.danim.service.community.CommunityDto">
+		UPDATE
+			community
+		SET
+			community_subject = #{communitySubject},
+			<if test="communityNotice == null">
+				community_notice = 'F',
+			</if>
+			<if test="communityNotice != null">
+				community_notice = #{communityNotice},
+			</if>
+			community_content = #{communityContent}
+		WHERE
+			community_no = #{communityNo};	
+	</update>
 	<!-- 공지사항 출력리스트  -->
 	<select id="selectCommunityNoticeList"
 		parameterType="String"
@@ -41,6 +57,7 @@
 		SELECT
 			community_no as communityNo,
 			community_category_no as communityCategoryNo,
+			community_notice as communityNotice,
 			member_id as memberId,
 			community_subject as communitySubject,
 			community_content as communityContent,
@@ -74,7 +91,8 @@
 	</select>
 	<!-- 게시글 입력 -->	
 	<insert 
-		id="insertCommunityItem" parameterType="com.danim.service.community.CommunityDto">
+		id="insertCommunityItem" 
+		parameterType="com.danim.service.community.CommunityDto">
 		INSERT INTO
 		community(
 			community_no,
@@ -99,6 +117,5 @@
 			SYSDATE(),
 			SYSDATE()
 		);
-	</insert>
-	
+	</insert>	
 </mapper>	
