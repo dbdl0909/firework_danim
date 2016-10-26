@@ -25,7 +25,38 @@
 </head>
 <body>
 <div class="container">
-	<h2 class="sub-header">Section title</h2>
+	<c:choose>
+		<c:when test="${param.communityCategoryNo == 'community_category_01'}">
+			<h2 class="sub-header">플랜</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_02'}">
+			<h2 class="sub-header">후기</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_03'}">
+			<h2 class="sub-header">자유게시판</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_04'}">
+			<h2 class="sub-header">동행찾기</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_05'}">
+			<h2 class="sub-header">숙박시설</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_06'}">
+			<h2 class="sub-header">교통편</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_07'}">
+			<h2 class="sub-header">예약/결제</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_08'}">
+			<h2 class="sub-header">취소/환불/변경</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_09'}">
+			<h2 class="sub-header">회원/로그인</h2>
+		</c:when>
+		<c:when test="${param.communityCategoryNo == 'community_category_10'}">
+			<h2 class="sub-header">여행관련</h2>
+		</c:when>
+	</c:choose>
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
