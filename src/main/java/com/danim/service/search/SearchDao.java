@@ -20,10 +20,10 @@ public class SearchDao {
 	private SqlSessionTemplate sessionTemplate;
 	
     // search 검색어를 통해서 도시의 이름만을 조회하는 메서드
-    public SearchDto selectCityInfoName(String search) {
+    public List<SearchDto> selectCityInfoName(String search) {
     	logger.info("selectCityInfoName() SearchDao.java");
     	
-		return sessionTemplate.selectOne(nameSpace + ".selectCityInfoName", search);
+		return sessionTemplate.selectList(nameSpace + ".selectCityInfoName", search);
     	
     }
     
