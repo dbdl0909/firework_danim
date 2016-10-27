@@ -133,14 +133,13 @@
 						google.maps.event.addListener(infowindow, 'domready', function() {
 					    	document.getElementById('addButton').addEventListener('click', function(event) {
 					    		markerIndexArray.push(markerIndex);
-					    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
-					    		//alert('click : ' + markerIndex);
+					    		//console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
 					    		$('#mainPlanDivLeft ul').append("<li class='leftMenuLi'>" + infoNameArray[markerIndex] + "<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" + "</li>");
 					    		
 					    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
 								var latitude = Number(cityInfoList[markerIndex].latitude);
 								var langitude = Number(cityInfoList[markerIndex].langitude);
-								console.log(markerIndex + ' : ' + latitude + ', ' + langitude);
+								//console.log(markerIndex + ' : ' + latitude + ', ' + langitude);
 								
 								//pathArray 배열에 클릭한 도시의 좌표를 누적시키기 위해 전역변수로 둔다.
 								pathArray.push({lat: latitude, lng: langitude});
@@ -160,8 +159,10 @@
 		<script>
 			var lineArray = new Array();
 		    var pathLine;
+		    var lineRemoveIndex;
 		    
-		    function poly() {
+		    function poly(pathArray) {
+		    	console.log('-------poly on-------');
 		    	//polyline 끝을 화살표 모양으로 표시하기 위한 코드
 				var lineSymbol = {
 					path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
@@ -170,7 +171,7 @@
 				pathLine = new google.maps.Polyline({
 					path: pathArray,
 					geodesic: true,
-					strokeColor: '#FF0000',
+					strokeColor: '#000000',
 					strokeOpacity: 1.0,
 					strokeWeight: 2,
 					icons: [{
@@ -179,46 +180,58 @@
 					}],
 				});
 				pathLine.setMap(map);
+				console.log('getPath : ' + pathLine.getPath().getArray().toString());
 		    }
 		    
 			//이동경로를 찍거나 제거하기 위한 함수
 			function lineFunction(pathArray, flag){
-				console.log('lineFunction on');
-				console.log('pathArray 길이 : ' + pathArray.length);
-				console.log('flag : ' + flag);
-				console.log('removeButtonIndex : ' + removeButtonIndex);
+				console.log('-------lineFunction on-------');
+				//console.log('pathArray 길이 : ' + pathArray.length);
+				//console.log('flag : ' + flag);
 				
 				if(flag == true) {
-					poly();
+					poly(pathArray);
 					
 					lineArray.push(pathLine);
 				} else if(flag == false) {
-					//pathFuction(lineArray);
+					console.log('lineRemoveIndex : ' + lineRemoveIndex);
+					console.log('lineArray 길이 : ' + lineArray.length);
 					
-					for(var i=0; i<lineArray.length; i++) {
-						console.log(lineArray[i]);
-						lineArray[i].setMap(null);
+					if(lineArray.length >= 2) {
+						lineArray[lineRemoveIndex].setMap(null);
+						lineArray[lineRemoveIndex-1].setMap(null);
+						lineArray.splice(lineRemoveIndex, 1);
+						lineArray.splice(lineRemoveIndex-1, 1);
+						poly(pathArray);
+					} else if(lineArray.length == 1) {
+						lineArray[lineRemoveIndex-1].setMap(null);
+						poly(pathArray);
+						lineArray.splice(lineRemoveIndex-1, 1);
 					}
-					
 				}
 			};
 			
 			//이동경로에서 클릭한 도시를 제거하기 위한 함수
 			function lineRemoveFunction(removeButtonIndex) {
-				console.log('lineRemoveFunction on');
+				console.log('-------lineRemoveFunction on-------');
 				//console.log('removeButtonIndex : ' + removeButtonIndex);
+				lineRemoveIndex = removeButtonIndex;
 				
 				//pathArray 배열에서 선택한 도시의 좌표를 제거한다.
 				var markerIndexTemp = markerIndexArray[removeButtonIndex];
 				console.log(markerIndexArray + ' 중 제거할 도시번호 : ' + markerIndexTemp);
 				markerIndexArray.splice(removeButtonIndex, 1);
 				
-				var latitude = Number(cityInfoList[markerIndexTemp].latitude);
-				var langitude = Number(cityInfoList[markerIndexTemp].langitude);
-				console.log(markerIndexTemp + ' : ' + latitude + ', ' + langitude);
+				var removeLatitude = Number(cityInfoList[markerIndexTemp].latitude);
+				var removeLangitude = Number(cityInfoList[markerIndexTemp].langitude);
+				//console.log(markerIndexTemp + ' : ' + removeLatitude + ', ' + removeLangitude);
 				
-				pathArray.pop({lat: latitude, lng: langitude});
-				console.log('pathArray 길이 : ' + pathArray.length);
+				//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
+				pathArray.splice(removeButtonIndex, 1);
+				//console.log('pathArray 길이 : ' + pathArray.length);
+				for(var i=0; i<pathArray.length; i++) {
+					console.log(pathArray[i]);
+				}
 				
 				flag = false;
 				lineFunction(pathArray, flag);
