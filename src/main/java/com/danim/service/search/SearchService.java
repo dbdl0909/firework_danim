@@ -1,6 +1,7 @@
 package com.danim.service.search;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.danim.service.plan.CityInfoService;
+import com.danim.service.plan.LandmarkInfoDto;
 
 @Service
 public class SearchService {
@@ -59,6 +61,15 @@ public class SearchService {
     	List<SearchDto> selectStayInfoList = searchDao.selectStayInfo(search);
     	
 		return selectStayInfoList;
+    	
+    }
+    
+    public Map<String, Object> getSelectLandmarkInfoOne(String landmarkInfoNo) {
+    	logger.info("getSelectLandmarkInfoOne() SearchService.java");
+    	
+    	Map<String, Object> selectLandmarkInfoOne = searchDao.selectLandmarkInfoOne(landmarkInfoNo);
+    	
+		return selectLandmarkInfoOne;
     	
     }
 

@@ -1,6 +1,7 @@
 package com.danim.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.danim.service.plan.LandmarkInfoDto;
 import com.danim.service.search.SearchDto;
 import com.danim.service.search.SearchService;
 
@@ -44,8 +46,9 @@ public class SearchController {
 	public String landmarkInfo(Model model, @RequestParam(value="landmarkInfoNo") String landmarkInfoNo) {
 		// landmarkInfoNo(명소정보번호) : infoSearch(검색화면)에서 검색된 해당 지역 명소의 가이드북을 클릭할 때 넘겨주는 명소번호
 		logger.info("landmarkInfoNo 값 {} 입니다", landmarkInfoNo);
-		List<SearchDto> selectLandmarkInfoOne
-		= searchService. 
+		Map<String, Object> selectLandmarkInfoOne = searchService.getSelectLandmarkInfoOne(landmarkInfoNo);
+		
+		model.addAttribute("selectLandmarkInfoOne", selectLandmarkInfoOne);
 		
 		return "information/landmarkInformation";
 	}

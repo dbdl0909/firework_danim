@@ -13,6 +13,25 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
+		<div class="container">
+			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
+			<p>${selectLandmarkInfoOne.cityInfoNo}</p>
+			<div class="detailInfo">
+				<p>
+					<strong>
+						${selectLandmarkInfoOne.landmarkInfoSummary}
+					</strong>
+				</p>
+				<p>
+					<a href="" role="button" class="btn btn-info">버튼1</a>
+					<a href="" role="button" class="btn btn-info">버튼2</a>
+					<a href="" role="button" class="btn btn-info">버튼3</a>
+				</p>
+			</div>
+			<div class="detailImage">
+				<img src="${selectLandmarkInfoOne.landmarkInfoImage}">
+			</div>
+		</div>
 		
 	</body>
 </html>

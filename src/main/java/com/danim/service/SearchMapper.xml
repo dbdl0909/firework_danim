@@ -97,8 +97,8 @@
 	
 	<!-- 명소 번호를 통해서 해당 명소의 정보를 전부 조회하는 쿼리 -->
 	<select id="selectLandmarkByLandmarkInfoNo"
-			resultType="com.danim.service.plan.LandmarkInfoDto"
-			parameterType="com.danim.service.search.SearchDto">
+			resultType="java.util.Map"
+			parameterType="String">
 		SELECT
 			landmark_info_no as 'landmarkInfoNo',
 			landmark_info_name as 'landmarkInfoName',
@@ -113,6 +113,6 @@
 		FROM
 			landmark_info
 		WHERE
-			landmark_info_no = #{landmarkInfoNoRma}		
+			landmark_info_no = #{landmarkInfoNo}
 	</select>
 </mapper>		
