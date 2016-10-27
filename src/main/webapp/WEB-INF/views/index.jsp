@@ -27,6 +27,9 @@
 <body>
 <div id="header">
 	<div id="headerNavWrap" class="clearFix">
+		<div id="headerLogo">
+			<a href="/"><img src="../../resources/images/logo.png" ></a>
+		</div>
 		<div id="searchWrap">
 			
 		</div>
@@ -65,6 +68,15 @@
 						<dd>페이스북/구글 로그인</dd>			
 					</dl>
 				</div>
+			</li>
+			<li class="hiddenNavWrap">
+				<a href="">여기맛집</a>				
+			</li>
+			<li class="hiddenNavWrap">
+				<a href="">추천숙소</a>				
+			</li>
+			<li class="hiddenNavWrap">
+				<a href="">여행검색</a>				
 			</li>
 		</ul>
 	</div>
