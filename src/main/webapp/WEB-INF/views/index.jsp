@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>다님 플래너</title>
+<link rel="shortcut icon" href="../../resources/images/favicon.ico">
 <link href="../../resources/css/slider.css" rel="stylesheet" type="text/css">
 <link href="../../resources/css/style.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -25,6 +26,7 @@
 </script>
 </head>
 <body>
+<!-- 헤더 -->
 <div id="header">
 	<div id="headerNavWrap" class="clearFix">
 		<div id="headerLogo">
@@ -80,7 +82,8 @@
 			</li>
 		</ul>
 	</div>
-</div>	
+</div>
+<!-- 슬라이더  -->	
 <div class='pageblock' id='fullscreen'>
 	<div class='slider'>
 		<div class='slide' id="first">
@@ -104,5 +107,15 @@
 		location.href = '/plan/mainPlan'
 	}
 </script>
+<!-- 컨텐츠 -->
+<div>
+	
+</div>
+<!-- 풋터 -->
+<div id="footer">
+	<div>
+	
+	</div>
+</div>
 </body>
 </html>
