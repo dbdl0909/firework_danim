@@ -106,6 +106,8 @@ public class CommunityController {
 		String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 		String replaceName = cal.getTimeInMillis() + fileType;		
 		String path = request.getSession().getServletContext().getRealPath("/")+File.separator+"resources/upload";
+		//서버용 path
+		//String path = "http://cynical3121.cafe24.com"+File.separator+"resources/upload";
 		FileUpload.fileUpload(imgfile, path, replaceName);
 		model.addAttribute("path", path);
 		model.addAttribute("filename", replaceName);
