@@ -20,7 +20,7 @@ public class CityInfoDao {
 	    public List<CityInfoDto> selectCityInfoAll() {
 	    	logger.info("selectCityInfo() CityInfoDao.java");
 	    	
-	    	return sessionTemplate.selectList(namesPace + ".selectCityInfo");
+	    	return sessionTemplate.selectList(namesPace + ".insertMember");
 	    }
 	    
 	    /*//클릭한 도에 해당하는 도시들 가져오는 매퍼

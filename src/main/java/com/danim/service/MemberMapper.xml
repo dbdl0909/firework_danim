@@ -3,7 +3,7 @@
 <mapper namespace="com.danim.service.MemberMapper">
 	<!-- MemberTotal 입력(내부, 연동 포함한 모든 회원) -->
 	<insert id="insertMemberTotal"
-			parameterType="com.danim.service.member.MemberTotalDto">
+			parameterType="com.danim.service.member.MemberTotalInsertDto">
 		INSERT INTO
 			member_total(
 				member_id,
@@ -34,7 +34,7 @@
 				member_info_password,
 				member_info_birth,
 				member_info_gender,
-				member_info_email,
+				member_info_email
 			) VALUES (
 				#{memberId},
 				#{memberInfoPassword},

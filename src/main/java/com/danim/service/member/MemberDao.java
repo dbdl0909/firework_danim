@@ -17,12 +17,13 @@ public class MemberDao {
 	
 	public int insertMemberTotal(MemberTotalInsertDto memberTotalInsertDto) {
 		logger.info("insertMemberTotal() MemberDao.java");
-		return sessionTemplate.insert(namesPace + ".insertMemberTotal");
+		logger.info("memberTotalInsertDto :  {}", memberTotalInsertDto);
+		return sessionTemplate.insert(namesPace + ".insertMemberTotal", memberTotalInsertDto);
 	}
 	
 	public int insertMemberInfo(MemberInfoDto memberInfoDto) {
 		logger.info("insertMemberInfo() MemberDao.java");
-		return sessionTemplate.insert(namesPace + ".insertMemberInfo");
+		return sessionTemplate.insert(namesPace + ".insertMemberInfo", memberInfoDto);
 	}
 	
 }
