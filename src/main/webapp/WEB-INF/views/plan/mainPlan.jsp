@@ -143,7 +143,7 @@
 								
 								//pathArray 배열에 클릭한 도시의 좌표를 누적시키기 위해 전역변수로 둔다.
 								pathArray.push({lat: latitude, lng: langitude});
-								//console.log(pathArray);
+								console.log('pathArray 길이 : ' + pathArray.length);
 					    		
 								//도시를 2개 이상 선택했을때, 이동경로를 찍기 위한 함수를 호출한다.
 								if(pathArray.length >= 2) {
@@ -160,6 +160,7 @@
 			var lineArray = new Array();
 		    var pathLine;
 		    var lineRemoveIndex;
+		    var count = 0;
 		    
 		    function poly(pathArray) {
 		    	console.log('-------poly on-------');
@@ -191,21 +192,27 @@
 				
 				if(flag == true) {
 					poly(pathArray);
-					
 					lineArray.push(pathLine);
 				} else if(flag == false) {
 					console.log('lineRemoveIndex : ' + lineRemoveIndex);
 					console.log('lineArray 길이 : ' + lineArray.length);
+					var maxLength = lineArray.length;
 					
-					if(lineArray.length >= 2) {
+					if(maxLength >= 2 || lineRemoveIndex < maxLength) {
 						lineArray[lineRemoveIndex].setMap(null);
-						lineArray[lineRemoveIndex-1].setMap(null);
 						lineArray.splice(lineRemoveIndex, 1);
+						lineArray[lineRemoveIndex-1].setMap(null);
+						lineArray.splice(lineRemoveIndex-1, 1);
+						console.log('lineArray 길이 : ' + lineArray.length);
+						poly(pathArray);
+						lineArray.push(pathLine);
+					} else if(maxLength == 1) {
+						lineArray[lineRemoveIndex-1].setMap(null);
 						lineArray.splice(lineRemoveIndex-1, 1);
 						poly(pathArray);
-					} else if(lineArray.length == 1) {
+						lineArray.push(pathLine);
+					}else if(maxLength == lineRemoveIndex) {
 						lineArray[lineRemoveIndex-1].setMap(null);
-						poly(pathArray);
 						lineArray.splice(lineRemoveIndex-1, 1);
 					}
 				}
@@ -226,15 +233,17 @@
 				var removeLangitude = Number(cityInfoList[markerIndexTemp].langitude);
 				//console.log(markerIndexTemp + ' : ' + removeLatitude + ', ' + removeLangitude);
 				
-				//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
 				pathArray.splice(removeButtonIndex, 1);
+				//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
 				//console.log('pathArray 길이 : ' + pathArray.length);
 				for(var i=0; i<pathArray.length; i++) {
 					console.log(pathArray[i]);
 				}
 				
-				flag = false;
-				lineFunction(pathArray, flag);
+				if(pathArray.length >= 1) {
+					flag = false;
+					lineFunction(pathArray, flag);
+				}
 			}
 			
 			$(document).ready(function(){
@@ -242,7 +251,7 @@
 				$('body').on('click', '.removeButton', function() {
 					//클릭한 태그의 번호를 가져와서 그 번호에 해당하는 li 태그를 제거한다.
 					var removeButtonIndex = $('.removeButton').index(this);
-					console.log('removeButtonIndex : ' + removeButtonIndex);
+					//console.log('removeButtonIndex : ' + removeButtonIndex);
 					
 					//이동 경로에서 removeButton 이미지를 클릭한 도시 제거
 					lineRemoveFunction(removeButtonIndex);
