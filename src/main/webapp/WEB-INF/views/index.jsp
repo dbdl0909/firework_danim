@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="../../resources/css/slider.css" rel="stylesheet" type="text/css">
+<link href="../../resources/css/style.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="../../resources/js/transit.js"></script>
@@ -13,25 +14,57 @@
 <script type="text/javascript" src="../../resources/js/jquery.simpleslider.js"></script>
 <script type="text/javascript" src="../../resources/js/backstretch.js"></script>
 <script type="text/javascript" src="../../resources/js/option.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.hiddenNavWrap').hover(function(){
+			$(this).children('.hiddenNav').fadeIn(300);
+		}, function(){
+			$(this).children('.hiddenNav').hide();
+		})		
+	})
+</script>
 </head>
 <body>
 <div id="header">
-	<div id="headerNavWrap">
+	<div id="headerNavWrap" class="clearFix">
 		<div id="searchWrap">
 			
 		</div>
 		<ul id="headerNav">
-			<li>
-				<a href="/plan/mainPlan">플래너</a>
+			<li class="hiddenNavWrap">
+				<a href="/plan/mainPlan">플래너</a>							
 			</li>
-			<li>
+			<li class="hiddenNavWrap">
 				<a href="/community/list">광장</a>
+				<div class="hiddenNav">
+					<dl>
+						<dt>커뮤니티</dt>
+						<dd>플랜</dd>
+						<dd>후기</dd>
+						<dd>자유게시판</dd>
+						<dd>동행찾기</dd>
+						<dt>Q&A</dt>
+						<dd>숙박시설</dd>
+						<dd>교통편</dd>
+						<dd>예약/결제</dd>
+						<dd>취소/환불/변경</dd>
+						<dd>회원/로그인</dd>
+						<dd>여행관련</dd>
+					</dl>
+				</div>
 			</li>
-			<li>
+			<li class="hiddenNavWrap">
 				<a href="">가이드북</a>
 			</li>
-			<li>
+			<li class="hiddenNavWrap">
 				<a href="">회원가입</a>
+				<div class="hiddenNav">
+					<dl>
+						<dt>회원가입</dt>
+						<dd>일반가입</dd>
+						<dd>페이스북/구글 로그인</dd>			
+					</dl>
+				</div>
 			</li>
 		</ul>
 	</div>
