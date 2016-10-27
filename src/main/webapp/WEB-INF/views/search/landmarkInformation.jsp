@@ -10,14 +10,28 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			#detailInfo ul li{float: left;}
+			.detailInfo li{float: left;}.
+		</style>
 		<title>Insert title here</title>
 	</head>
 	<body>
 		<div class="container">
 			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
-			<p>${selectLandmarkInfoOne.cityInfoNo}</p>
-			<div class="detailInfo">
-				<p>
+			<p>${cityInfoName} > 갈만한곳</p>
+			<div id="detailInfo">
+				<ul>
+					<li>
+						<img src="${selectLandmarkInfoOne.landmarkInfoImage}">
+					</li>
+					<li>
+						<img src="https://maps.googleapis.com/maps/api/staticmap?center=37.57,127&markers=color:blue%7Clabel:%7C37.57,127&zoom=13&size=500x301&key=AIzaSyCvHmVG5i9J5JtWxL6ifRbneHjjEEkF04w">					
+					</li>
+				</ul>
+			</div>
+			<div>	
+				<p id="infoContent">
 					<strong>
 						${selectLandmarkInfoOne.landmarkInfoSummary}
 					</strong>
@@ -28,10 +42,6 @@
 					<a href="" role="button" class="btn btn-info">버튼3</a>
 				</p>
 			</div>
-			<div class="detailImage">
-				<img src="${selectLandmarkInfoOne.landmarkInfoImage}">
-			</div>
-		</div>
-		
+		</div>		
 	</body>
 </html>

@@ -2,18 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.danim.service.SearchMapper">
-	<!-- 검색을 통해 도시이름을 조회하기 위한 쿼리 -->
+	<!-- 검색을 통해 도의 이름과 도시이름 조회하기 위한 쿼리 -->
 	<select id="selectCityInfoName"
 			resultType="com.danim.service.search.SearchDto"
 			parameterType="String">
 		SELECT 
+			city_info_do_name as 'cityInfoDoName',
 			city_info_name as 'cityInfoName'
 		FROM
 			city_info
 		WHERE
 			city_info_name
 		LIKE
-			CONCAT(#{search},'%')					
+			CONCAT(#{search},'%')	
 	</select>
 	
 	<!-- 도시 이름을 통해서 해당 지역의 명소이름을 조회하는 쿼리 -->
@@ -22,6 +23,7 @@
 			parameterType="String">
 		SELECT 
 			city.city_info_no as 'cityInfoNo',
+			city.city_info_do_name as 'cityInfoDoName',
 			city.city_info_name as 'cityInfoName',
 			land.landmark_info_no as 'landmarkInfoNo',
 			land.landmark_info_name as 'landmarkInfoName'
@@ -42,6 +44,7 @@
 			parameterType="String">
 		SELECT 
 			city.city_info_no as 'cityInfoNo',
+			city.city_info_do_name as 'cityInfoDoName',
 			city.city_info_name as 'cityInfoName',
 			eat.eatery_no as 'eateryNo',
 			eat.eatery_name as 'eateryName'
@@ -62,6 +65,7 @@
 			parameterType="String">
 		SELECT
 			city.city_info_no as 'cityInfoNo',
+			city.city_info_do_name as 'cityInfoDoName',
 			city.city_info_name as 'cityInfoName',
 			eve.event_info_name as 'eventInfoName'
 		FROM
@@ -81,6 +85,7 @@
 			parameterType="String">
 		SELECT
 			city.city_info_no as 'cityInfoNo',
+			city.city_info_do_name as 'cityInfoDoName',
 			city.city_info_name as 'cityInfoName',
 			stay.stay_info_no as 'stayInfoNo',
 			stay.stay_info_name as 'stayInfoName'

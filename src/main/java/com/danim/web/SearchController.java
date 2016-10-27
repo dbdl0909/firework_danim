@@ -22,11 +22,11 @@ public class SearchController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	
-	@RequestMapping(value="/infoSearch")
+	@RequestMapping(value="search/infoSearch")
 	public String infoSearch(Model model, String search) {
 		// search : 검색어(도시이름)
 		logger.info("search {} 값 입니다", search);
-		SearchDto selectCityInfoName = searchService.getselectCityInfoName(search);
+		List<SearchDto> selectCityInfoName = searchService.getselectCityInfoName(search);
 		List<SearchDto> selectLandmarkInfo = searchService.getSelectLandmarkInfo(search);
 		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search);
@@ -39,18 +39,20 @@ public class SearchController {
 		model.addAttribute("selectStayInfo", selectStayInfo);
 		
 		
-		return "search/infoSearch";
+		return "/search/infoSearch";
 	}
 	
-	@RequestMapping(value="/landmarkInfo")
-	public String landmarkInfo(Model model, @RequestParam(value="landmarkInfoNo") String landmarkInfoNo) {
+	@RequestMapping(value="search/landmarkInfo")
+	public String landmarkInfo(Model model, @RequestParam(value="landmarkInfoNo") String landmarkInfoNo, @RequestParam(value="cityInfoName") String cityInfoName) {
 		// landmarkInfoNo(명소정보번호) : infoSearch(검색화면)에서 검색된 해당 지역 명소의 가이드북을 클릭할 때 넘겨주는 명소번호
 		logger.info("landmarkInfoNo 값 {} 입니다", landmarkInfoNo);
+		logger.info("cityInfoName 값 {} 입니다", cityInfoName);
 		Map<String, Object> selectLandmarkInfoOne = searchService.getSelectLandmarkInfoOne(landmarkInfoNo);
 		
 		model.addAttribute("selectLandmarkInfoOne", selectLandmarkInfoOne);
+		model.addAttribute("cityInfoName", cityInfoName);
 		
-		return "information/landmarkInformation";
+		return "/search/landmarkInformation";
 	}
 
 }

@@ -12,33 +12,54 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script>
 			$(document).ready(function(){
+				
+				/* 유효성 검사 */
+				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
+				var infoSearchInput = $('#infoSearchInput');
+				
+				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
 				
+				/* '.searchCityNameSpan' 에 마우스를 가져가면 투명해지는 애니메이션 효과 */
 				$(".searchCityNameSpan").mouseover(function(){
 					$('#searchNotice').stop().animate({opacity:'0.3'});
 				});
 				
+				/* '.searchCityNameSpan' 에 마우스가 벗어나면 다시 원래 투명도로 돌아가는 애니메이션 효과 */
 				$(".searchCityNameSpan").mouseout(function(){
 					$('#searchNotice').stop().animate({opacity:'1'});
 				});
 				
+				/* 'searchNotice' 클릭시 해당 글씨를 숨기고 검색바를 화면에 나타나게한 후 포커스 */
 				$('#searchNotice').click(function(){
 					$('#searchNotice').hide();
 					$('#searchForm').show();
+					$('#infoSearchInput').focus();
 				});
 				
+				/* 'closeSearchForm' 클릭시 검색바를 숨기고 다시 원래 글씨를 나타나게 한다 */
 				$('#closeSearchForm').click(function(){
 					$('#searchForm').hide();
 					$('#searchNotice').show();
 				})
 				
+				/* 클릭 이벤트 유효성 검사 위의 항목 참고 */
 				$('#searchButton').click(function(){
-					if($('#infoSearchInput').val() < 2){
-						alert('nope');					
+					if(infoSearchCheck.test(infoSearchInput.val()) != true){
+						alert('도시이름을 제대로 입력해주세요');					
 					}else{
 						$('#infoSearch').submit();
 					}
 				})
+				
+				/* 엔터키 유효성 검사 */
+			    $(infoSearchInput).keydown(function (key) {			    	 
+			        if(key.keyCode == 13 && infoSearchCheck.test(infoSearchInput.val()) != true){ // 엔터키를 누르고 유효성검사를 통과하지 못했을 경우
+			        	alert('도시이름을 제대로 입력해주세요');
+			        	event.returnValue = false;
+			        }			 
+			    });
+				
 			});
 		</script>
 		<style type="text/css">
@@ -50,6 +71,7 @@
 			#eateryInfo{text-decoration: none; float: right;}
 			#eventInfo{text-decoration: none; float: right;}
 			#stayInfo{text-decoration: none; float: right;}
+			#cityName{text-decoration: none;}	
 		</style>
 		<title>Insert title here</title>
 	</head>
@@ -61,7 +83,7 @@
 					알고싶은 도시의 이름을 검색하세요! <span class="glyphicon glyphicon-search"></span>
 				</div>
 				<div id="searchForm">
-					<form id="infoSearch" action="/infoSearch" method="post">						
+					<form id="infoSearch" action="/search/infoSearch" method="post">						
 						<div id="closeSearchForm">X</div>
 						<input id="infoSearchInput" name="search" class="form-control" placeholder="알고싶은 도시의 이름을 검색하세요!" type="text" />
 						<div id="infoSearchButton" >
@@ -75,7 +97,11 @@
 		</div>
 		<div class="container">
 			<div>
-				<h2>${selectCityInfoName.cityInfoName}</h2>
+				<c:forEach var="selectCityInfoName" items="${selectCityInfoName}">
+					<h2>
+						<a id="cityName" href="infoSearch?search=${selectCityInfoName.cityInfoName}">${selectCityInfoName.cityInfoName}</a>
+					</h2>
+				</c:forEach>
 			</div>
 			<div class="table-responsive">
 				<table class="table">
@@ -93,9 +119,9 @@
 						<c:if test="${selectLandmarkInfo != ''}">			
 							<c:forEach var="selectLandmarkInfo" items="${selectLandmarkInfo}">
 								<tr>
-									<td>${selectLandmarkInfo.cityInfoName} > ${selectLandmarkInfo.landmarkInfoName}</td>
-									<td><a id="landmarkInfo" href="/landmarkInfo?landmarkInfoNo=${selectLandmarkInfo.landmarkInfoNo}">가이드북</a></td>
-								</tr>															
+									<td>${selectLandmarkInfo.cityInfoDoName} > ${selectLandmarkInfo.cityInfoName} > ${selectLandmarkInfo.landmarkInfoName}</td>
+									<td><a id="landmarkInfo" href="landmarkInfo?landmarkInfoNo=${selectLandmarkInfo.landmarkInfoNo}&cityInfoName=${selectLandmarkInfo.cityInfoName}">가이드북</a></td>
+								</tr>	
 							</c:forEach>
 						</c:if>
 						<c:if test="${empty selectLandmarkInfo}">
@@ -124,7 +150,7 @@
 						<c:if test="${selectEateryInfo != ''}">			
 							<c:forEach var="selectEateryInfo" items="${selectEateryInfo}">
 								<tr>
-									<td>${selectEateryInfo.cityInfoName} > ${selectEateryInfo.eateryName}</td>
+									<td>${selectEateryInfo.cityInfoDoName} > ${selectEateryInfo.cityInfoName} > ${selectEateryInfo.eateryName}</td>
 									<td><a id="eateryInfo" href="/eateryInfo?eateryInfoNo=${selectEateryInfo.eateryNo}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
@@ -155,7 +181,7 @@
 						<c:if test="${selectEventInfo != ''}">			
 							<c:forEach var="selectEventInfo" items="${selectEventInfo}">
 								<tr>
-									<td>${selectEventInfo.cityInfoName} > ${selectEventInfo.eventInfoName}</td>
+									<td>${selectEventInfo.cityInfoDoName} > ${selectEventInfo.cityInfoName} > ${selectEventInfo.eventInfoName}</td>
 									<td><a id="eventInfo" href="/eventInfo?eventInfoName=${selectEventInfo.eventInfoName}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
@@ -175,7 +201,7 @@
 					<thead>
 						<tr>
 							<th>
-								<h3>잘만한 곳</h3>
+								<h3>머물만한 곳</h3>
 							</th>
 							<th>
 							
@@ -186,7 +212,7 @@
 						<c:if test="${selectStayInfo != ''}">			
 							<c:forEach var="selectStayInfo" items="${selectStayInfo}">
 								<tr>
-									<td>${selectStayInfo.cityInfoName} > ${selectStayInfo.stayInfoName}</td>
+									<td>${selectStayInfo.cityInfoDoName} > ${selectStayInfo.cityInfoName} > ${selectStayInfo.stayInfoName}</td>
 									<td><a id="stayInfo" href="/stayInfo?stayInfoNo=${selectStayInfo.stayInfoNo}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
