@@ -59,7 +59,7 @@
 				</div>
 			</li>
 			<li class="hiddenNavWrap">
-				<a href="/search/infoSearch">가이드북</a>
+				<a href="">가이드북</a>
 			</li>
 			<li class="hiddenNavWrap">
 				<a href="">회원가입</a>

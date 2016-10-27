@@ -49,7 +49,7 @@
 				var reMemberPassword = /^.*(?=.{6,16})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
 				//닉네임 검사
 					//2~10자의 영문, 한글, 숫자만 가능
-				var reMemberName = /[a-zA-Z0-9가-힝]{2,10}$/;
+				var reMemberName = /[a-zA-Z0-9가-힝]{2,10}$/
 				//생년월일 검사
 					//1916~2016
 				var reMemberBirth = /[12][0-9]{3}-[0-9]{2}-[0-9]{2}/;

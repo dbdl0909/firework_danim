@@ -18,10 +18,10 @@ public class SearchService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CityInfoService.class);
 	
-    public List<SearchDto> getselectCityInfoName(String search) {
+    public SearchDto getselectCityInfoName(String search) {
     	logger.info("getSelectLandmarkInfo() SearchService.java");
     	
-    	List<SearchDto> selectCityInfoName = searchDao.selectCityInfoName(search);
+    	SearchDto selectCityInfoName = searchDao.selectCityInfoName(search);
     	
 		return selectCityInfoName;
     	

@@ -2,7 +2,6 @@ package com.danim.service.search;
 
 public class SearchDto {
 	private String cityInfoNo;				//	도시번호
-	private String cityInfoDoName;			//	도 이름
 	private String cityInfoName;			//	도시이름
 	private String landmarkInfoNo;			//	명소번호
 	private String landmarkInfoName;		//	명소이름
@@ -19,12 +18,6 @@ public class SearchDto {
 	}
 	public void setCityInfoNo(String cityInfoNo) {
 		this.cityInfoNo = cityInfoNo;
-	}
-	public String getCityInfoDoName() {
-		return cityInfoDoName;
-	}
-	public void setCityInfoDoName(String cityInfoDoName) {
-		this.cityInfoDoName = cityInfoDoName;
 	}
 	public String getCityInfoName() {
 		return cityInfoName;
@@ -89,11 +82,17 @@ public class SearchDto {
 	
 	@Override
 	public String toString() {
-		return "SearchDto [cityInfoNo=" + cityInfoNo + ", cityInfoDoName=" + cityInfoDoName + ", cityInfoName="
-				+ cityInfoName + ", landmarkInfoNo=" + landmarkInfoNo + ", landmarkInfoName=" + landmarkInfoName
-				+ ", landmarkInfoLangitude=" + landmarkInfoLangitude + ", landmarkInfoLatitude=" + landmarkInfoLatitude
-				+ ", eateryNo=" + eateryNo + ", eateryName=" + eateryName + ", eventInfoName=" + eventInfoName
-				+ ", stayInfoNo=" + stayInfoNo + ", stayInfoName=" + stayInfoName + "]";
+		return "SearchDto [cityInfoNo=" + cityInfoNo + ", cityInfoName=" + cityInfoName + ", landmarkInfoNo="
+				+ landmarkInfoNo + ", landmarkInfoName=" + landmarkInfoName + ", landmarkInfoLangitude="
+				+ landmarkInfoLangitude + ", landmarkInfoLatitude=" + landmarkInfoLatitude + ", eateryNo=" + eateryNo
+				+ ", eateryName=" + eateryName + ", eventInfoName=" + eventInfoName + ", stayInfoNo=" + stayInfoNo
+				+ ", stayInfoName=" + stayInfoName + ", getCityInfoNo()=" + getCityInfoNo() + ", getCityInfoName()="
+				+ getCityInfoName() + ", getLandmarkInfoNo()=" + getLandmarkInfoNo() + ", getLandmarkInfoName()="
+				+ getLandmarkInfoName() + ", getLandmarkInfoLangitude()=" + getLandmarkInfoLangitude()
+				+ ", getLandmarkInfoLatitude()=" + getLandmarkInfoLatitude() + ", getEateryNo()=" + getEateryNo()
+				+ ", getEateryName()=" + getEateryName() + ", getEventInfoName()=" + getEventInfoName()
+				+ ", getStayInfoNo()=" + getStayInfoNo() + ", getStayInfoName()=" + getStayInfoName() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	
+
 }
