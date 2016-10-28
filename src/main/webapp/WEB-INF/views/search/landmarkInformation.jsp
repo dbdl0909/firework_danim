@@ -12,7 +12,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style type="text/css">
 			#infoImage{text-align: center;}
-			#infoContent{list-style-type: none;}
+			/* #infoContent ul, li{list-style-type: none; margin: 0; padding: 0;} */
+			#infoButton{float: right;}
 		</style>
 		<title>Insert title here</title>
 	</head>
@@ -33,14 +34,15 @@
 					</strong>
 				</p>
 				<hr>
-				<p>
-					<ul id ="infoContent">
-						<li></li>
-						<li></li>
-						<li></li>
+				<p id ="infoContent">
+					<ul>
+						<li>장소명 : ${selectLandmarkInfoOne.landmarkInfoName}</li>
+						<li>위치 : ${selectLandmarkInfoOne.landmarkInfoLocation}</li>
+						<li>홈페이지 : ${selectLandmarkInfoOne.landmarkInfoHomepage}</li>
+						<li>이용료 : ${selectLandmarkInfoOne.landmarkInfoFee} 원</li>
 					</ul>
 				</p>
-				<p>
+				<p id="infoButton">
 					<a href="" role="button" class="btn btn-info">버튼1</a>
 					<a href="" role="button" class="btn btn-info">버튼2</a>
 					<a href="" role="button" class="btn btn-info">버튼3</a>
