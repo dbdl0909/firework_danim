@@ -79,9 +79,11 @@
 			#stayInfo{text-decoration: none; float: right;}
 			#cityName{text-decoration: none;}
 			#searchSpan{color: #e35e54;}	
+			#searchForm{height: 116px;}
 		</style>
 		<title>Insert title here</title>
 	</head>
+	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
 			<div class="searchCityNameSpan">
@@ -101,8 +103,6 @@
 					</form>	
 				</div>
 			</div>
-		</div>
-		<div class="container">
 			<div id="searchGuide">
 				<h3>"<span id="searchSpan">${search}</span>" (으)로 검색한 결과입니다</h3>
 				<%-- <c:forEach var="selectCityInfoName" items="${selectCityInfoName}">
@@ -237,4 +237,5 @@
 			</div>									
 		</div>
 	</body>
+	<jsp:include page="../module/footer.jsp"></jsp:include>
 </html>
