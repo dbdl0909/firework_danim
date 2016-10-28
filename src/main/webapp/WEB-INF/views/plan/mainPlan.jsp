@@ -38,7 +38,6 @@
 	<body>
 	    <div id="mainPlanDivRoot">
 	    	<div id="mainPlanDivTop">
-				<h1>DANIM</h1>
 				<div>
 					출발일<input type="date"/>
 				</div>
@@ -71,5 +70,6 @@
 				</div>
 			</div>
 		</div>
+		<jsp:include page="../module/footer.jsp"></jsp:include>
 	</body>
 </html>

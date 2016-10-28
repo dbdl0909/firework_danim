@@ -26,7 +26,6 @@ function initMap() {
 		zoom: 7,
 		center: main
 	});
-
 	
 	//cityInfoList의 length만큼 마커를 찍어준다.
 	for (var i=0; i<cityInfoList.length; i++) {
@@ -45,11 +44,29 @@ function initMap() {
 	}
 	
 	for(var i=0; i<markerArray.length; i++) {
+/*1*/	//클릭한 도시는 over든 out이든 동작하지 않도록 하기!!
 		google.maps.event.addListener(markerArray[i], 'mouseover', function() {
-			markerArray[this.index].setIcon(markerIcon1);
+			var mouseOverIndex = this.index;
+			console.log('mouseover : ' + mouseOverIndex);
+			for(var j=0; j<markerIndexArray.length; j++) {
+				if(mouseOverIndex != markerIndexArray[j]) {
+					console.log(mouseOverIndex + ' <!=> ' + markerIndexArray[j]);
+					markerArray[mouseOverIndex].setIcon(markerIcon1);
+				}
+			}
 		});
 		google.maps.event.addListener(markerArray[i], 'mouseout', function() {
-			markerArray[this.index].setIcon(markerIcon2);
+			var mouseOutIndex = this.index;
+			console.log(mouseOutIndex);
+			for(var k=0; k<markerIndexArray.length; k++) {
+				if(mouseOutIndex != markerIndexArray[k]) {
+					console.log(mouseOutIndex + ' <!=> ' + markerIndexArray[k]);
+					markerArray[mouseOutIndex].setIcon(markerIcon2);
+				} else if(mouseOutIndex == markerIndexArray[k]) {
+					console.log(mouseOutIndex + ' <==> ' + markerIndexArray[k]);
+					markerArray[mouseOutIndex].setIcon(markerIcon1);
+				}
+			}
 		});
 	}
 	
@@ -70,18 +87,18 @@ function initMap() {
 		
 		//zoom이 10일때부터 다른 모든 시들도 보여준다.
 		if(zoom >= 10) {
-			for(var i=0; i<72; i++) {
+			for(var i=0; i<=72; i++) {
 				markerArray[i].setVisible(true);
 			}
-		} else if(zoom == 8) {	//zoom이 8됬을때 다시 광역시만 보여준다. 클릭한 도시는 지우지 않고 그대로 보여준다.
-			console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
+		} else if(zoom <= 8) {	//zoom이 8됬을때 다시 광역시만 보여준다. 클릭한 도시는 지우지 않고 그대로 보여준다.
+/*2*/		/*console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
 			var markerIndexArraySort = new Array();
 			markerIndexArraySort = markerIndexArray;
 			markerIndexArraySort.sort();
 			console.log('클릭한 도시 번호 차례대로 : ' + markerIndexArraySort);
 			
 			for(var j=0; j<markerIndexArraySort.length; j++) {
-				console.log(j + '번째 : ' + markerIndexArraySort[j]);
+				console.log(j + ' : ' + markerIndexArraySort[j]);
 				for(var i=0; i<72; i++) {
 					if(i != markerIndexArraySort[j]) {
 						markerArray[i].setVisible(false);
@@ -90,7 +107,7 @@ function initMap() {
 						markerArray[i].setVisible(true);
 					}
 				}
-			}
+			}*/
 		}
 	});
 	
@@ -137,7 +154,7 @@ function initMap() {
 		    		markerArray[markerIndex].setVisible(true);
 		    		
 		    		markerIndexArray.push(markerIndex);
-		    		//console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
+		    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
 		    		$('#mainPlanUl').append("<li class='leftMenuLi'>" + infoNameArray[markerIndex] + "<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" + "</li>");
 		    		
 		    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
