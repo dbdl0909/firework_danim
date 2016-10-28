@@ -14,6 +14,7 @@ public class CityInfoService {
 	@Autowired
     private CityInfoDao cityInfoDao;
 	
+	//도시리스트 가져오는 메서드
 	public List<CityInfoDto> selectCityInfoAll() {
 		logger.info("selectCityInfoByCityInfoDoName() CityInfoService.java");
 		List<CityInfoDto> listCityInfo = cityInfoDao.selectCityInfoAll();
