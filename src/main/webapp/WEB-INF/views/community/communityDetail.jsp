@@ -20,35 +20,10 @@
 		});		
 	});
 </script>
-<!-- <style>
-#communityContent{width:100%; border-top:1px solid #ccc; background:#fafafa;}
-#communityContent dl{float:left; padding-left:20px}
-#communityContent dl dt,
-#communityContent dl dd{float:left;}
-#communityContent dl dt{color:#8b8b8b; font-size:12px;}
-#communityContent dl dd{color:#3c3c3c; font-size:13px; margin-left:5px;}
-#communityContent #communityContentSubject{width:100%; padding-top:18px;}
-#communityContent .communityContentInfo{margin-right:10px;}
-#communityContent .communityContentInfo dd{}
-#communityContentContain{width:100%; margin:20px auto;}
-#communityContentButtonWrap #communityContentButton li{float:left; list-style: none; padding:0 10px;]}
-#replyWrap{width:100%; margin:20px auto; background:#fafafa; padding:13px 0;}
-#replyWrap .replyTalbe{width:100%; text-align:left;}
-#replyWrap .replyTalbe tr{border-bottom:1px dotted #ccc;}
-#replyWrap .replyTalbe td{float:left; line-height:3em; font-size:12px; color:#3c3c3c;}
-#replyWrap .replyTalbe #replyWriter{padding:0 20px;}
-#replyWrap .replyTalbe #replyDate{float:right; padding-right:20px;}
-.replyinsertTable{width:100%; margin:28px 0; vertical-align:middle;}
-.replyinsertTable #replyAuthor{width:20%; padding-left:20px; font-size:12px;}
-.replyinsertTable #replyAuthor input{width:130px;}
-.replyinsertTable #replyTextArea{width:70%;}
-.replyinsertTable #replyTextArea textarea{width:100%; height:60px;}
-.replyinsertTable #replyFormSubmitArea{float:right; padding-right:20px;}
-#communityContentButtonWrap{width:100%; padding-top:20px;}
-#communityContentButtonWrap #communityContentButton{float:right;}
-</style> -->
 </head>
 <body>
+<!-- 헤더 -->
+<jsp:include page="../module/header.jsp" />
 	<div class="container">
 		<div id="communityContent" class="clearFix">
 			<dl id="communityContentSubject">
@@ -119,6 +94,8 @@
 				</li>
 			</ul>
 		</div>
-	</div>	
+	</div>
+<!-- 헤더 -->
+<jsp:include page="../module/footer.jsp" />		
 </body>
 </html>

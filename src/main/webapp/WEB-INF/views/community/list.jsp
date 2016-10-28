@@ -24,6 +24,8 @@
 </style>
 </head>
 <body>
+<!-- 헤더 -->
+<jsp:include page="../module/header.jsp" />
 <div class="container">
 	<c:choose>
 		<c:when test="${param.communityCategoryNo == 'community_category_01'}">
@@ -144,6 +146,8 @@
 			</div>	
 		</div> --%>
 </div>
+<!-- 헤더 -->
+<jsp:include page="../module/footer.jsp" />
 </body>
 <script type="text/javascript">
 var onWrite = function(){

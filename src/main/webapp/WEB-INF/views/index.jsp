@@ -15,15 +15,6 @@
 <script type="text/javascript" src="../../resources/js/jquery.simpleslider.js"></script>
 <script type="text/javascript" src="../../resources/js/backstretch.js"></script>
 <script type="text/javascript" src="../../resources/js/option.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('.hiddenNavWrap').hover(function(){
-			$(this).children('.hiddenNav').fadeIn(300);
-		}, function(){
-			$(this).children('.hiddenNav').hide();
-		})		
-	})
-</script>
 </head>
 <body>
 <!-- 헤더 -->

@@ -5,6 +5,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>다님 플래너</title>
 <link rel="shortcut icon" href="../../resources/images/favicon.ico">
+<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.hiddenNavWrap').hover(function(){
+			$(this).children('.hiddenNav').fadeIn(300);
+		}, function(){
+			$(this).children('.hiddenNav').hide();
+		})		
+	})
+</script>
 </head>
 <body>
 <!-- 헤더 -->
