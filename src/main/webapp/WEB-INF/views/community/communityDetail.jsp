@@ -35,6 +35,9 @@
 				<span class="hit-wrap">
 					<span>조회수 : </span>${detailView.communityReadcount}
 				</span>
+				<span class="hit-wrap">
+					<span>댓글수 : </span>${detailView.communityReplyCount}
+				</span>
 				<div class="contents-wrap">
 					${detailView.communityContent}
 				</div>	
