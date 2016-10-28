@@ -8,6 +8,7 @@
 <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../../../resources/css/style.css">
 <script>
 	$(document).ready(function(){
 		$('#replyFormSubmit').click(function() {
@@ -19,7 +20,7 @@
 		});		
 	});
 </script>
-<style>
+<!-- <style>
 #communityContent{width:100%; border-top:1px solid #ccc; background:#fafafa;}
 #communityContent dl{float:left; padding-left:20px}
 #communityContent dl dt,
@@ -30,7 +31,6 @@
 #communityContent .communityContentInfo{margin-right:10px;}
 #communityContent .communityContentInfo dd{}
 #communityContentContain{width:100%; margin:20px auto;}
-
 #communityContentButtonWrap #communityContentButton li{float:left; list-style: none; padding:0 10px;]}
 #replyWrap{width:100%; margin:20px auto; background:#fafafa; padding:13px 0;}
 #replyWrap .replyTalbe{width:100%; text-align:left;}
@@ -45,8 +45,8 @@
 .replyinsertTable #replyTextArea textarea{width:100%; height:60px;}
 .replyinsertTable #replyFormSubmitArea{float:right; padding-right:20px;}
 #communityContentButtonWrap{width:100%; padding-top:20px;}
-#communityContentButtonWrap #communityContentButton{float:right; }
-</style>
+#communityContentButtonWrap #communityContentButton{float:right;}
+</style> -->
 </head>
 <body>
 	<div class="container">
@@ -87,36 +87,6 @@
 		<div id="communityContentContain">
 			${detailView.communityContent}			
 		</div>
-		
-		<%-- <table class="communityContentTable">
-			<thead>
-				<tr>
-					<td><span class="communityTitleText">글 제목 : </span>${detailView.communitySubject}</td>
-				</tr>
-				<tr>
-					<td>
-						<span class="communityTitleText">작성자 : </span><span class="communityTitleContent"> ${detailView.memberId} | </span>
-						<span class="communityTitleText">조회수 : </span><span class="communityTitleContent"> ${detailView.communityReadcount} | </span>
-						<span class="communityTitleText">댓글수 : </span><span class="communityTitleContent"> ${detailView.communityReplyCount} </span>
-					</td>
-				</tr>
-			</thead>		
-			<tbody>
-				<tr>
-					<td colspan="5">${detailView.communityContent}</td>
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td>
-						<a href="/community/communityModify?communityNo=${detailView.communityNo}"><span type="button" class="btn btn-primary">수정</span></a>
-					</td>
-					<td>
-						<a href="/community/list?communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
-					</td>
-				</tr>
-			</tfoot>			
-		</table> --%>
 		<div id="replyWrap">
 			<table class="replyTalbe">
 				<c:forEach items="${detailViewReply}" var="replyList">				
