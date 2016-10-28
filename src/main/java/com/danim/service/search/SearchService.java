@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.danim.service.plan.CityInfoService;
-import com.danim.service.plan.LandmarkInfoDto;
 
 @Service
 public class SearchService {
@@ -72,5 +71,31 @@ public class SearchService {
 		return selectLandmarkInfoOne;
     	
     }
+    
+    public Map<String, Object> getSelectEateryInfoOne(String eateryNo) {
+    	logger.info("getSelectEateryInfoOne() SearchService.java");
+    	
+    	Map<String, Object> selectEateryInfoOne = searchDao.selectEateryInfoOne(eateryNo);
+    	
+		return selectEateryInfoOne;
+    	
+    }
+    
+    public Map<String, Object> getSelectEventInfoOne(String eventInfoName) {
+    	logger.info("getSelectEventInfoOne() SearchService.java");
+    	
+    	Map<String, Object> selectEventInfoOne = searchDao.selectEventInfoOne(eventInfoName);
+    	
+		return selectEventInfoOne;
+    	
+    }
+
+	public Map<String, Object> getSelectStayInfoOne(String stayInfoNo) {
+		logger.info("getSelectStayInfoOne() SearchService.java");
+    	
+    	Map<String, Object> selectStayInfoOne = searchDao.selectStayInfoOne(stayInfoNo);
+    	
+		return selectStayInfoOne;
+	}
 
 }

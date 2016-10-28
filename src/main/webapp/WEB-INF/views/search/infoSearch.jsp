@@ -159,7 +159,7 @@
 							<c:forEach var="selectEateryInfo" items="${selectEateryInfo}">
 								<tr>
 									<td>${selectEateryInfo.cityInfoDoName} > ${selectEateryInfo.cityInfoName} > ${selectEateryInfo.eateryName}</td>
-									<td><a id="eateryInfo" href="/eateryInfo?eateryInfoNo=${selectEateryInfo.eateryNo}">가이드북</a></td>
+									<td><a id="eateryInfo" href="eateryInfo?eateryNo=${selectEateryInfo.eateryNo}&cityInfoName=${selectEateryInfo.cityInfoName}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
 						</c:if>
@@ -190,7 +190,7 @@
 							<c:forEach var="selectEventInfo" items="${selectEventInfo}">
 								<tr>
 									<td>${selectEventInfo.cityInfoDoName} > ${selectEventInfo.cityInfoName} > ${selectEventInfo.eventInfoName}</td>
-									<td><a id="eventInfo" href="/eventInfo?eventInfoName=${selectEventInfo.eventInfoName}">가이드북</a></td>
+									<td><a id="eventInfo" href="eventInfo?eventInfoName=${selectEventInfo.eventInfoName}&cityInfoName=${selectEventInfo.cityInfoName}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
 						</c:if>
@@ -221,7 +221,7 @@
 							<c:forEach var="selectStayInfo" items="${selectStayInfo}">
 								<tr>
 									<td>${selectStayInfo.cityInfoDoName} > ${selectStayInfo.cityInfoName} > ${selectStayInfo.stayInfoName}</td>
-									<td><a id="stayInfo" href="/stayInfo?stayInfoNo=${selectStayInfo.stayInfoNo}">가이드북</a></td>
+									<td><a id="stayInfo" href="stayInfo?stayInfoNo=${selectStayInfo.stayInfoNo}&cityInfoName=${selectStayInfo.cityInfoName}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
 						</c:if>

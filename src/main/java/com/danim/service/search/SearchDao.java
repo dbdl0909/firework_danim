@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.danim.service.plan.CityInfoDao;
-import com.danim.service.plan.LandmarkInfoDto;
 
 @Repository
 public class SearchDao {
@@ -68,5 +67,27 @@ public class SearchDao {
     	return sessionTemplate.selectOne(nameSpace + ".selectLandmarkByLandmarkInfoNo", landmarkInfoNo);
     	
     }
+    
+    // eateryNo(음식점번호)를 통해서 해당 번호 음식점의 상세정보를 조회
+    public Map<String, Object> selectEateryInfoOne(String eateryNo) {
+    	logger.info("selectEateryInfoOne() SearchDao.java"); 
+		
+    	return sessionTemplate.selectOne(nameSpace + ".selectEateryByEateryNo", eateryNo);
+    	
+    }
+    
+    // eventInfoName(축제정보이름)을 통해서 해당 번호 축제의 상세정보를 조회
+    public Map<String, Object> selectEventInfoOne(String eventInfoName) {
+    	logger.info("selectEventInfoOne() SearchDao.java"); 
+		
+    	return sessionTemplate.selectOne(nameSpace + ".selectEventByEventInfoName", eventInfoName);
+    	
+    }
+ // stayInfoNo(숙소정보번호)를 통해서 해당 번호 숙소의 상세정보를 조회
+	public Map<String, Object> selectStayInfoOne(String stayInfoNo) {
+    	logger.info("selectStayInfoOne() SearchDao.java"); 
+		
+    	return sessionTemplate.selectOne(nameSpace + ".selectStayByStayInfoNo", stayInfoNo);
+	}
       
 }

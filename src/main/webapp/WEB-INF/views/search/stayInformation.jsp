@@ -11,35 +11,28 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style type="text/css">
-			#infoImage{text-align: center;}
-			/* #infoContent ul, li{list-style-type: none; margin: 0; padding: 0;} */
 			#infoButton{float: right;}
 		</style>
 		<title>Insert title here</title>
 	</head>
 	<body>
 		<div class="container">
-			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
-			<p>${cityInfoName} > 갈만한곳</p>
-			<div id="infoImage">
-				<p>
-					<img src="${selectLandmarkInfoOne.landmarkInfoImage}">						
-					<img src="https://maps.googleapis.com/maps/api/staticmap?center=${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&markers=color:blue%7Clabel:%7C${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&zoom=17&size=500x301&key=AIzaSyCvHmVG5i9J5JtWxL6ifRbneHjjEEkF04w">					
-				</p>
-			</div>
+			<h1>${selectStayInfoOne.stayInfoName}</h1>
+			<p>${cityInfoName} > 머물만한 곳</p>
 			<div>	
 				<p id="infoExplain">
 					<strong>
-						${selectLandmarkInfoOne.landmarkInfoSummary}
+						도저히 채워넣을게 없다
 					</strong>
 				</p>
 				<hr>
 				<p id ="infoContent">
 					<ul>
-						<li>장소명 : ${selectLandmarkInfoOne.landmarkInfoName}</li>
-						<li>위치 : ${selectLandmarkInfoOne.landmarkInfoLocation}</li>
-						<li>홈페이지 : <a href="${selectLandmarkInfoOne.landmarkInfoHomepage}">${selectLandmarkInfoOne.landmarkInfoHomepage}</a></li>
-						<li>이용료 : ${selectLandmarkInfoOne.landmarkInfoFee} 원</li>
+						<li>호텔명 : ${selectStayInfoOne.stayInfoName}</li>
+						<li>홈페이지 : <a href="${selectStayInfoOne.stayInfoHomepage}">${selectStayInfoOne.stayInfoHomepage}</a></li>
+						<li>스탠다드 : ${selectStayInfoOne.stayInfoStandard} 원</li>
+						<li>디럭스 : ${selectStayInfoOne.stayInfoDeluxe} 원</li>
+						<li>스위트 : ${selectStayInfoOne.stayInfoSuite} 원</li>
 					</ul>
 				</p>
 				<p id="infoButton">
@@ -48,6 +41,6 @@
 					<a href="" role="button" class="btn btn-info">버튼3</a>
 				</p>
 			</div>
-		</div>		
+		</div>
 	</body>
 </html>

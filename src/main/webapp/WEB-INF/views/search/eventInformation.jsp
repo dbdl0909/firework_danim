@@ -11,35 +11,31 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style type="text/css">
-			#infoImage{text-align: center;}
-			/* #infoContent ul, li{list-style-type: none; margin: 0; padding: 0;} */
 			#infoButton{float: right;}
 		</style>
 		<title>Insert title here</title>
 	</head>
 	<body>
 		<div class="container">
-			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
-			<p>${cityInfoName} > 갈만한곳</p>
-			<div id="infoImage">
-				<p>
-					<img src="${selectLandmarkInfoOne.landmarkInfoImage}">						
-					<img src="https://maps.googleapis.com/maps/api/staticmap?center=${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&markers=color:blue%7Clabel:%7C${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&zoom=17&size=500x301&key=AIzaSyCvHmVG5i9J5JtWxL6ifRbneHjjEEkF04w">					
-				</p>
-			</div>
+			<h1>${selectEventInfoOne.eventInfoName}</h1>
+			<p>${cityInfoName} > 볼만한 것</p>
 			<div>	
 				<p id="infoExplain">
 					<strong>
-						${selectLandmarkInfoOne.landmarkInfoSummary}
+						${selectEventInfoOne.eventInfoContent}
 					</strong>
 				</p>
 				<hr>
 				<p id ="infoContent">
 					<ul>
-						<li>장소명 : ${selectLandmarkInfoOne.landmarkInfoName}</li>
-						<li>위치 : ${selectLandmarkInfoOne.landmarkInfoLocation}</li>
-						<li>홈페이지 : <a href="${selectLandmarkInfoOne.landmarkInfoHomepage}">${selectLandmarkInfoOne.landmarkInfoHomepage}</a></li>
-						<li>이용료 : ${selectLandmarkInfoOne.landmarkInfoFee} 원</li>
+						<li>축제명 : ${selectEventInfoOne.eventInfoName}</li>
+						<li>개최장소 : ${selectEventInfoOne.eventInfoVenue}</li>
+						<li>축제시작일 : ${selectEventInfoOne.eventInfoStart}</li>
+						<li>축제종료일 : ${selectEventInfoOne.eventInfoEnd}</li>
+						<li>주최기관 : ${selectEventInfoOne.eventInfoOrganizer}</li>
+						<li>전화번호 : ${selectEventInfoOne.eventInfoContact}</li>
+						<li>홈페이지 : <a href="${selectEventInfoOne.eventInfoHomepage}">${selectEventInfoOne.eventInfoHomepage}</a></li>
+						<li>주소지 : ${selectEventInfoOne.eventInfoAddress}</li>
 					</ul>
 				</p>
 				<p id="infoButton">
@@ -48,6 +44,6 @@
 					<a href="" role="button" class="btn btn-info">버튼3</a>
 				</p>
 			</div>
-		</div>		
+		</div>
 	</body>
 </html>

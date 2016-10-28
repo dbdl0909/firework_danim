@@ -120,4 +120,60 @@
 		WHERE
 			landmark_info_no = #{landmarkInfoNo}
 	</select>
+	
+	<!-- 음식점 번호를 통해서 해당 음식점의 정보를 전부 조회하는 쿼리 -->
+	<select id="selectEateryByEateryNo"
+			resultType="java.util.Map"
+			parameterType="String">
+		SELECT
+			eatery_no as 'eateryNo',
+			eatery_name as 'eateryName',
+			eatery_category as 'eateryCategory',
+			city_info_no as 'cityInfoNo',
+			eatery_summary as 'eaterySummary'
+		FROM
+			eatery_info
+		WHERE
+			eatery_no = #{eateryNo}
+	</select>
+	
+	<!-- 축제 이름을 통해서 해당 축제의 정보를 전부 조회하는 쿼리 -->
+	<select id="selectEventByEventInfoName"
+			resultType="java.util.Map"
+			parameterType="String">
+		SELECT
+			event_info_name as eventInfoName,
+			city_info_no as cityInfoNo,
+			event_info_venue as eventInfoVenue,
+			event_info_start as eventInfoStart,
+			event_info_end as eventInfoEnd,
+			event_info_content as eventInfoContent,
+			event_info_organizer as eventInfoOrganizer,
+			event_info_contact as eventInfoContact,
+			event_info_homepage as eventInfoHomepage,
+			event_info_address as eventInfoAddress,
+			event_info_reference_date as eventInfoReferenceDate
+		FROM
+			event_info
+		WHERE
+			event_info_name = #{eventInfoName}
+	</select>
+	
+		<!-- 숙소 번호를 통해서 해당 숙소의 정보를 전부 조회하는 쿼리 -->
+	<select id="selectStayByStayInfoNo"
+			resultType="java.util.Map"
+			parameterType="String">
+		SELECT
+			stay_info_no as stayInfoNo,
+			stay_info_name as stayInfoName,
+			city_info_no as cityInfoNo,
+			stay_info_homepage as stayInfoHomepage,
+			stay_info_standard as stayInfoStandard,
+			stay_info_deluxe as stayInfoDeluxe,
+			stay_info_suite as stayInfoSuite
+		FROM
+			stay_info
+		WHERE
+			stay_info_no = #{stayInfoNo}
+	</select>
 </mapper>		
