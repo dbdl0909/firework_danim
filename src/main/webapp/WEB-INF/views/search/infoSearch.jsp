@@ -14,11 +14,17 @@
 			$(document).ready(function(){
 				
 				/* 유효성 검사 */
+				var search = "<c:out value="${search}" />";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
+				
+				/* 'search'로 검색한 결과입니다 라는 문구를 숨김*/
+				if(search == ''){					
+					$('#searchGuide').hide();
+				}			
 				
 				/* '.searchCityNameSpan' 에 마우스를 가져가면 투명해지는 애니메이션 효과 */
 				$(".searchCityNameSpan").mouseover(function(){
@@ -71,7 +77,8 @@
 			#eateryInfo{text-decoration: none; float: right;}
 			#eventInfo{text-decoration: none; float: right;}
 			#stayInfo{text-decoration: none; float: right;}
-			#cityName{text-decoration: none;}	
+			#cityName{text-decoration: none;}
+			#searchSpan{color: #e35e54;}	
 		</style>
 		<title>Insert title here</title>
 	</head>
@@ -96,12 +103,13 @@
 			</div>
 		</div>
 		<div class="container">
-			<div>
-				<c:forEach var="selectCityInfoName" items="${selectCityInfoName}">
+			<div id="searchGuide">
+				<h3>"<span id="searchSpan">${search}</span>" (으)로 검색한 결과입니다</h3>
+				<%-- <c:forEach var="selectCityInfoName" items="${selectCityInfoName}">
 					<h2>
 						<a id="cityName" href="infoSearch?search=${selectCityInfoName.cityInfoName}">${selectCityInfoName.cityInfoName}</a>
 					</h2>
-				</c:forEach>
+				</c:forEach> --%>
 			</div>
 			<div class="table-responsive">
 				<table class="table">

@@ -11,8 +11,8 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style type="text/css">
-			#detailInfo ul li{float: left;}
-			.detailInfo li{float: left;}.
+			#infoImage{text-align: center;}
+			#infoContent{list-style-type: none;}
 		</style>
 		<title>Insert title here</title>
 	</head>
@@ -20,21 +20,25 @@
 		<div class="container">
 			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
 			<p>${cityInfoName} > 갈만한곳</p>
-			<div id="detailInfo">
-				<ul>
-					<li>
-						<img src="${selectLandmarkInfoOne.landmarkInfoImage}">
-					</li>
-					<li>
-						<img src="https://maps.googleapis.com/maps/api/staticmap?center=37.57,127&markers=color:blue%7Clabel:%7C37.57,127&zoom=13&size=500x301&key=AIzaSyCvHmVG5i9J5JtWxL6ifRbneHjjEEkF04w">					
-					</li>
-				</ul>
+			<div id="infoImage">
+				<p>
+					<img src="${selectLandmarkInfoOne.landmarkInfoImage}">						
+					<img src="https://maps.googleapis.com/maps/api/staticmap?center=${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&markers=color:blue%7Clabel:%7C${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&zoom=17&size=500x301&key=AIzaSyCvHmVG5i9J5JtWxL6ifRbneHjjEEkF04w">					
+				</p>
 			</div>
 			<div>	
-				<p id="infoContent">
+				<p id="infoExplain">
 					<strong>
 						${selectLandmarkInfoOne.landmarkInfoSummary}
 					</strong>
+				</p>
+				<hr>
+				<p>
+					<ul id ="infoContent">
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
 				</p>
 				<p>
 					<a href="" role="button" class="btn btn-info">버튼1</a>
