@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.danim.util.Pagination;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 
  
@@ -87,5 +88,22 @@ public class CommunityService {
 		int totalCount = countCommunityList(communityCategoryNo);
 		int lastPage = (int) Math.ceil((double)totalCount/LINE_PER_PAGE);
 		return lastPage;    	
+    }
+    //해당 게시글 리플 입력
+    public void insertCommunityReply(CommunityReplyDto communityReplyDto) {
+    	CommunityDto communityDto = selectDetailViewByCommunityNo(communityReplyDto.getCommunityNo());
+    	int replyCount = communityDto.getCommunityReplyCount();
+    	logger.info("replyCount prev {} CommunityController.java", replyCount);
+    	replyCount++;
+    	logger.info("replyCount next {} CommunityController.java", replyCount);
+    	communityDto.setCommunityReplyCount(replyCount);
+    	logger.info("communityDto.getCommunityReplyCount() next {} CommunityController.java", communityDto.getCommunityReplyCount());
+    	cummunityDao.updateReplyCount(communityDto);
+    	cummunityDao.insertCommunityReply(communityReplyDto);
+    }
+    //해당 게시글 리플 가져오기
+    public List<CommunityReplyDto> selectDetailViewReplyByCommunityNo(int communityNo) {
+    	List<CommunityReplyDto> communityReplyList = cummunityDao.selectDetailViewReplyByCommunityNo(communityNo);
+		return communityReplyList;
     }
 }

@@ -3,6 +3,54 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.danim.service">
+		<!-- 리플카운트 업데이트 -->
+		<update id="updateReplyCount"
+			parameterType="com.danim.service.community.CommunityDto">
+		UPDATE
+			community
+		SET
+			community_reply_count = #{communityReplyCount}
+		WHERE
+			community_no = #{communityNo};
+	</update>
+	<!-- 리플 입력 -->
+	<insert id="insertCommunityReply" 
+		parameterType="com.danim.service.community.CommunityReplyDto">
+		INSERT INTO
+		reply(
+			community_no,
+			community_category_no,
+			member_id,
+			reply_content,
+			reply_date,
+			reply_update	
+		)VALUES(
+			#{communityNo},
+			#{communityCategoryNo},
+			#{memberId},
+			#{replyContent},	
+			SYSDATE(),
+			SYSDATE()
+		);
+	</insert>
+	<!-- 리플 가져오기 -->
+	<select id="selectDetailViewReplyByCommunityNo"
+			parameterType="Integer"
+			resultType="com.danim.service.community.CommunityReplyDto">
+		SELECT
+			rpl.reply_no as replyNo,
+			rpl.community_category_no as communityCategoryNo,
+			rpl.member_id as memberId,
+			rpl.reply_content as replyContent,
+			rpl.reply_update as replyDate
+		FROM
+			community as com, reply as rpl
+		WHERE
+			com.community_no = rpl.community_no
+		AND
+			rpl.community_no = #{communityNo};	
+	</select>
+
 	<update id="updateReadCount"
 			parameterType="com.danim.service.community.CommunityDto">
 		UPDATE
@@ -39,7 +87,8 @@
 			community_subject as communitySubject,
 			community_readcount as communityReadcount,
 			community_notice as communityNotice,
-			community_date as communityDate			
+			community_update as communityUpdate,
+			community_reply_count as communityReplyCount			
 		FROM
 			community
 		WHERE
@@ -72,7 +121,8 @@
 			community_content as communityContent,
 			community_readcount as communityReadcount,
 			community_rating as communityRating,
-			community_date as communityDate
+			community_update as communityUpdate,
+			community_reply_count as communityReplyCount	
 		FROM
 			community
 		WHERE
@@ -90,7 +140,8 @@
 			community_subject as communitySubject,
 			community_readcount as communityReadcount,
 			community_notice as communityNotice,
-			community_date as communityDate			
+			community_update as communityUpdate,
+			community_reply_count as communityReplyCount			
 		FROM
 			community
 		WHERE

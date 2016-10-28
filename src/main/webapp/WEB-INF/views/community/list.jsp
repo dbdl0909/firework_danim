@@ -76,7 +76,7 @@
 			<c:forEach items="${communityNoticeList}" var="noticeList">	
 				<tr>
 					<td style="font-weight:bold;">[공지]</td>
-					<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${noticeList.communityNo}">${noticeList.communitySubject}</a></td>
+					<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${noticeList.communityNo}">${noticeList.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${noticeList.communityReplyCount}]</span></td>
 					<td style="font-weight:bold;">${noticeList.memberId}</td>
 					<td style="font-weight:bold;">${noticeList.communityDate}</td>
 					<td style="font-weight:bold;">${noticeList.communityReadcount}</td>	
@@ -86,7 +86,7 @@
 			<c:forEach varStatus="status" items="${communityList}" var="list">				
 				<tr> 
 					<td>${(totalCount-status.index)-((page-1)*10)}</td>					
-					<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a></td>
+					<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${list.communityReplyCount}]</span></td>
 					<td>${list.memberId}</td>
 					<td>${list.communityDate}</td>
 					<td>${list.communityReadcount}</td>			

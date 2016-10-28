@@ -37,8 +37,20 @@ public class CommunityDao {
 	}
 	public void modifyCommunityItem(CommunityDto communityDto){
 		sqlSession.update(NS+".modifyCommunityItem", communityDto);		
-	};
+	}
 	public void updateReadCount(CommunityDto communityDto) {		
 		sqlSession.update(NS+".updateReadCount", communityDto);	
+	}
+	
+	public List<CommunityReplyDto> selectDetailViewReplyByCommunityNo(int communityNo) {
+		return sqlSession.selectList(NS+".selectDetailViewReplyByCommunityNo", communityNo);		
+	}
+
+	public void insertCommunityReply(CommunityReplyDto communityReplyDto) {
+		sqlSession.insert(NS+".insertCommunityReply", communityReplyDto);	
+	}
+
+	public void updateReplyCount(CommunityDto communityDto) {		
+		sqlSession.update(NS+".updateReplyCount", communityDto);
 	}
 }

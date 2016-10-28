@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.danim.service.community.CommunityDto;
+import com.danim.service.community.CommunityReplyDto;
 import com.danim.service.community.CommunityService;
 import com.danim.util.FileUpload;
  
@@ -75,6 +76,8 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.GET)
 	public String communityDetailView(Model model, @RequestParam(value="communityNo") int communityNo) {
+		logger.info("communityNo {} CommunityController.java", communityNo);
+		model.addAttribute("detailViewReply", communityService.selectDetailViewReplyByCommunityNo(communityNo));
 		model.addAttribute("detailView", communityService.selectDetailViewByCommunityNo(communityNo));
 		return "/community/communityDetail";
 	}
@@ -97,6 +100,11 @@ public class CommunityController {
 		communityService.modifyCommunityItem(communityDto);
 		return "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
 	}
+	@RequestMapping(value = "/community/communityReply", method = RequestMethod.POST)
+	public String insertCommunityReply(CommunityReplyDto communityReplyDto){
+		communityService.insertCommunityReply(communityReplyDto);
+		return "redirect:/community/communityDetail?communityNo="+communityReplyDto.getCommunityNo();
+	}
 	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
 	public String fileUpload(Model model, MultipartRequest multipartRequest, HttpServletRequest request) throws IOException{
@@ -113,5 +121,6 @@ public class CommunityController {
 		model.addAttribute("filename", replaceName);
 		return "community/file_upload";
 	}
+	
 
 }
