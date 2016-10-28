@@ -1,5 +1,8 @@
 package com.danim.service.member;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,17 +16,23 @@ public class MemberDao {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-	private final String namesPace = "com.danim.service.MemberMapper";
-	
+	private final String nameSpace = "com.danim.service.MemberMapper";
+
+	//모든 회원 리스트 출력
+	public List<MemberDto> selectMemberAll() {
+		logger.info("selectMemberAll() MemberDao.java");
+		return sessionTemplate.selectList(nameSpace+".selectMemberAll");
+	}
+	//회원 total 입력
 	public int insertMemberTotal(MemberTotalInsertDto memberTotalInsertDto) {
 		logger.info("insertMemberTotal() MemberDao.java");
 		logger.info("memberTotalInsertDto :  {}", memberTotalInsertDto);
-		return sessionTemplate.insert(namesPace + ".insertMemberTotal", memberTotalInsertDto);
+		return sessionTemplate.insert(nameSpace + ".insertMemberTotal", memberTotalInsertDto);
 	}
-	
+	//회원 info 입력
 	public int insertMemberInfo(MemberInfoDto memberInfoDto) {
 		logger.info("insertMemberInfo() MemberDao.java");
-		return sessionTemplate.insert(namesPace + ".insertMemberInfo", memberInfoDto);
+		return sessionTemplate.insert(nameSpace + ".insertMemberInfo", memberInfoDto);
 	}
 	
 }

@@ -20,6 +20,22 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	//회원리스트폼
+	@RequestMapping(value="/member/memberListAll", method = RequestMethod.GET)
+	public String memberListAll(Model model) {
+		logger.info("memberListAll MemberController.java");
+		
+		model.addAttribute("selectMemberAll", memberService.selectMemberAll());
+		
+		return "member/memberListAll";
+	}
+	/*
+	//회원리스트 실행
+	@RequestMapping(value="/member/memberListAllView", method = RequestMethod.POST)
+	public String selectMemberAll(Model model, MemberDto memberDto) {
+		return "redirect:/member/memberListAll";
+	}*/
+	
 	//입력 폼
 	@RequestMapping(value = "/member/memberJoinForm", method = RequestMethod.GET)
 	public String memberJoin(Model model) {
@@ -33,6 +49,6 @@ public class MemberController {
 		
 		memberService.insertMember(memberDto);
 		
-		return "redirect:/member/memberJoinForm";
+		return "redirect:/";
 	}
 }
