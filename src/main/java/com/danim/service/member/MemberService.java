@@ -23,6 +23,11 @@ public class MemberService {
 	MemberTotalInsertDto memberTotalInsertDto;
 	@Autowired
 	MemberInfoDto memberInfoDto;
+	//로그인화면
+	public void LoginMember(MemberDto memberDto) {
+		
+	}
+	
 	
 	//회원리스트 출력
 	public List<MemberDto> selectMemberAll() {

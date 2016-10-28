@@ -1,5 +1,8 @@
 package com.danim.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.danim.service.member.MemberDto;
 import com.danim.service.member.MemberInfoDto;
@@ -20,8 +24,23 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	//회원리스트폼
-	@RequestMapping(value="/member/memberListAll", method = RequestMethod.GET)
+	
+	//로그인 처리
+	@RequestMapping(value="/member/memberLogin", method = RequestMethod.POST)
+	public ModelAndView memberLogin(MemberDto memberDto, HttpSession session, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        logger.info("memberLogin MemberController.java");
+        MemberDto memberLogin = memberService.LoginMember(memberDto.getMemberId(), memberDto.getMemberInfoPassword());
+ 
+        if (memberLogin != null) {
+            session.setAttribute("userLoginInfo", memberLogin);
+        }
+        
+	}
+        
+        
+	//회원리스트
+	@RequestMapping(value="/member/memberListAll", method = RequestMethod.POST)
 	public String memberListAll(Model model) {
 		logger.info("memberListAll MemberController.java");
 		
@@ -29,12 +48,6 @@ public class MemberController {
 		
 		return "member/memberListAll";
 	}
-	/*
-	//회원리스트 실행
-	@RequestMapping(value="/member/memberListAllView", method = RequestMethod.POST)
-	public String selectMemberAll(Model model, MemberDto memberDto) {
-		return "redirect:/member/memberListAll";
-	}*/
 	
 	//입력 폼
 	@RequestMapping(value = "/member/memberJoinForm", method = RequestMethod.GET)
