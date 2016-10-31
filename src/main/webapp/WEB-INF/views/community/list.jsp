@@ -107,17 +107,17 @@
 		<ul class="pagination">
 		<li>
 			<c:if test="${page>1}">
-				<a href="/community/list?communityCategoryNo=community_category_01&page=${page-1}">&laquo;</a>
+				<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page-1}">&laquo;</a>
 			</c:if>
 		</li>
 		<c:forEach begin="${startPage}" end="${endPage}" var="i">
 		<li>
 			<c:choose>
 				<c:when test="${page == i}">
-					<a href="/community/list?communityCategoryNo=community_category_01&page=${i}" style="background:#434343; color:#fff;">${i}</a>
+					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}" style="background:#434343; color:#fff;">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="/community/list?communityCategoryNo=community_category_01&page=${i}">${i}</a>
+					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</li>
