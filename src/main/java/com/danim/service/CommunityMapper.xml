@@ -3,8 +3,36 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.danim.service">
-		<!-- 리플카운트 업데이트 -->
-		<update id="updateReplyCount"
+	<!-- 레이팅카운트 업데이트 -->
+	<update id="updateRatingCount"
+			parameterType="com.danim.service.community.CommunityDto">
+		UPDATE
+			community
+		SET
+			community_rating = #{communityRating}
+		WHERE
+			community_no = #{communityNo};
+	</update>
+	<!-- 레이팅 삽입 -->
+	<insert id="insertCommunityVote"
+			parameterType="java.util.Map">
+	INSERT INTO
+		rating(
+		member_id,
+		community_no,
+		community_category_no,
+		rating_score,
+		rating_date
+	)VALUES(
+		#{votedId},
+		#{communityNo},
+		#{communityCategoryNo},
+		1,
+		SYSDATE()
+	)
+	</insert>
+	<!-- 리플카운트 업데이트 -->
+	<update id="updateReplyCount"
 			parameterType="com.danim.service.community.CommunityDto">
 		UPDATE
 			community
@@ -110,7 +138,7 @@
 	</select>	
 	<!-- 해당 게시글 detail -->
 	<select id="selectDetailViewByCommunityNo"
-			parameterType="int"
+			parameterType="Integer"
 			resultType="com.danim.service.community.CommunityDto">
 		SELECT
 			community_no as communityNo,

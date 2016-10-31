@@ -10,7 +10,7 @@
 <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../../resources/css/style.css">
+<link rel="stylesheet" href="../../../resources/css/style.css">
 <script>
 	$(document).ready(function(){
 		$('#replyFormSubmit').click(function() {
@@ -19,7 +19,37 @@
 			}else {
 				$('#replyForm').submit();
 			}
-		});		
+		});
+		
+		$(".votecard em").clone().appendTo(".votecard div");
+		/* increment that by 1 */
+		var node = $(".votecard em:last strong")
+		node.text(parseInt(node.text())+1);
+		
+		
+		function flip(obj) {
+			obj.prev().find("em").animate({
+				top: '-=45'
+			}, 200);
+			obj.toggleClass("voted",true);
+			
+			$.ajax({
+				url:'/community/detailRating?votedId='+'id001'
+					+'&communityNo='+'${detailView.communityNo}'
+					+'&communityCategoryNo='+'${detailView.communityCategoryNo}'
+				
+			});
+		}
+		
+		$('.voteaction').bind({
+		  click: function(event) {
+		    event.preventDefault()
+		  },
+		  mouseup: function() {
+		    flip($(this));
+			$(this).unbind('mouseup');
+		  }
+		});
 	});
 </script>
 </head>
@@ -63,6 +93,16 @@
 		</div>
 		<div id="communityContentContain">
 			${detailView.communityContent}			
+		</div>
+		<div id="voteArea">
+			<div id="voteWrap">
+				<div class="votecard">
+					<div>
+						<em><strong>${detailView.communityRating}</strong><span>추천</span></em>
+					</div>
+				</div>
+				<a class="voteaction" href="">Flippit</a>
+			</div>
 		</div>
 		<div id="replyWrap">
 			<table class="replyTalbe">

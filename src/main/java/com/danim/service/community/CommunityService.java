@@ -106,4 +106,17 @@ public class CommunityService {
     	List<CommunityReplyDto> communityReplyList = cummunityDao.selectDetailViewReplyByCommunityNo(communityNo);
 		return communityReplyList;
     }
+    //게시글 추천
+    public void insertCommunityVote(String votedId, int communityNo, String communityCategoryNo){
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("votedId", votedId);
+    	map.put("communityNo", communityNo);
+    	map.put("communityCategoryNo", communityCategoryNo);
+		CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
+		int ratingCount = communityDto.getCommunityRating();
+		ratingCount++;
+		communityDto.setCommunityRating(ratingCount);
+    	cummunityDao.insertCommunityVote(map);
+    	cummunityDao.updateRatingCount(communityDto);
+    }
 }

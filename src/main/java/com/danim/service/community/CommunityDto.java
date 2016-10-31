@@ -15,7 +15,7 @@ public class CommunityDto{
 	private String communitySubject;
 	private String communityContent;
 	private Integer communityReadcount;
-	private float communityRating;
+	private Integer communityRating;
 	private String communityNotice;
 	private Date communityDate;
 	private Date communityUpdate;
@@ -75,10 +75,10 @@ public class CommunityDto{
 	public void setCommunityReadcount(Integer communityReadcount) {
 		this.communityReadcount = communityReadcount;
 	}
-	public float getCommunityRating() {
+	public Integer getCommunityRating() {
 		return communityRating;
 	}
-	public void setCommunityRating(float communityRating) {
+	public void setCommunityRating(Integer communityRating) {
 		this.communityRating = communityRating;
 	}
 	public String getCommunityNotice() {

@@ -122,5 +122,16 @@ public class CommunityController {
 		return "community/file_upload";
 	}
 	
+	@RequestMapping(value = "/community/detailRating", method = RequestMethod.GET)
+	public void detailRating( @RequestParam(value="votedId") String votedId,
+							  @RequestParam(value="communityNo") int communityNo,							  
+							  @RequestParam(value="communityCategoryNo") String communityCategoryNo){
+		
+		logger.info("votedId {} CommunityController.java", votedId);
+		logger.info("communityNo {} CommunityController.java", communityNo);
+		logger.info("communityCategoryNo {} CommunityController.java", communityCategoryNo);
+		
+		communityService.insertCommunityVote(votedId, communityNo, communityCategoryNo);
+	}
 
 }

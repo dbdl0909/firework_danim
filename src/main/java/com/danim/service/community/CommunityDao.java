@@ -53,4 +53,12 @@ public class CommunityDao {
 	public void updateReplyCount(CommunityDto communityDto) {		
 		sqlSession.update(NS+".updateReplyCount", communityDto);
 	}
+
+	public void insertCommunityVote(Map<String, Object> map) {
+		sqlSession.insert(NS+".insertCommunityVote", map);
+	}
+	
+	public void updateRatingCount(CommunityDto communityDto){		
+		sqlSession.update(NS+".updateRatingCount", communityDto);
+	}
 }
