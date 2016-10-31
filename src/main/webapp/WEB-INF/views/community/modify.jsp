@@ -26,7 +26,7 @@
 </script>
 <body>
 <div class="container">
-	<form id="communityModifyForm" method="post">
+	<form id="communityInsertForm" method="post">
 		<input type="hidden" name="communityNo" value="${communityNo}">
 		<div class="communityTitleWrap">
 			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
@@ -92,7 +92,7 @@ var oEditors = [];
 
 var onWrite = function(){
 	oEditors.getById["communityContent"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됨
-	var boardWriteForm = document.getElementById("communityModifyForm");  
+	var boardWriteForm = document.getElementById("communityInsertForm");  
 	boardWriteForm.action ="/community/communityModifySubmit";              
 	boardWriteForm.submit();  
 };

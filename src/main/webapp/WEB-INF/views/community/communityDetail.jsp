@@ -8,7 +8,7 @@
 <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../../../../resources/css/style.css">
+<link rel="stylesheet" href="../../resources/css/style.css">
 <script>
 	$(document).ready(function(){
 		$('#replyFormSubmit').click(function() {
