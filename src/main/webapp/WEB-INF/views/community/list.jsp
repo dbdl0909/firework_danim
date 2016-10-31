@@ -153,7 +153,7 @@
 </body>
 <script type="text/javascript">
 var onWrite = function(){
-	location.href = '/community/write'; 
+	location.href = '/community/write?communityCategoryNo='+'${param.communityCategoryNo}'; 
 };
 var onList = function(){
 	location.href = location.href;

@@ -59,7 +59,7 @@ public class CommunityController {
 	}
 
 	@RequestMapping(value = "/community/write", method = RequestMethod.GET)
-	public String write(Model model) {
+	public String write(Model model) {		
 		return "community/write";
 	}
 	

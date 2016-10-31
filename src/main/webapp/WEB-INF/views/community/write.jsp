@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../../resources/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		var communityCategoryNoVal = '${param.communityCategoryNo}';
+		$('#communityCategoryNo option').each(function(i){
+			if($('#communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
+				$(this).attr('selected','selected');				
+			}			
+		});
+	});
+</script>
 </head>
 <body>
 <!-- 헤더 -->
@@ -20,7 +31,7 @@
 	<form id="communityInsertForm" method="post">
 		<div class="communityTitleWrap">
 			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
-			<select name="communityCategoryNo">
+			<select  id="communityCategoryNo" name="communityCategoryNo">
 			<optgroup label=":::::::: 커뮤니티 ::::::::">
 				<option value="community_category_01" selected="selected"> 플랜</option>
 				<option value="community_category_02"> 후기</option>

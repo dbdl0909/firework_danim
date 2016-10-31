@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="../../resources/css/style.css">
 <link rel="stylesheet" href="../../resources/css/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-</head>
 <script>
 	$(document).ready(function(){
 		var communityCategoryNoVal = '${detailView.communityCategoryNo}';
@@ -26,6 +25,8 @@
 		});
 	});
 </script>
+</head>
+
 <body>
 <!-- 헤더 -->
 <jsp:include page="../module/header.jsp" />
