@@ -9,11 +9,10 @@
 <body>
 
 <form id="fileform" name="fileform" method="post">
-	<input type="hidden" name="filename" value="${filename }">
-	<input type="hidden" name="path" value="${path }">
+	<input type="hidden" name="filename" value="${filename}">
+	<input type="hidden" name="path" value="${path}">
 </form>
 </body>
-
 <script type="text/javascript">
 	function fileAttach(){ 
 		var form = document.fileform;

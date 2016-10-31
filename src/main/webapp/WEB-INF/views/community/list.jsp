@@ -20,6 +20,7 @@
 	tbody>tr>td:nth-child(3){width:110px; text-align: center;}
 	tbody>tr>td:nth-child(4){width:130px; text-align: center;}
 	tbody>tr>td:nth-child(5){width:70px; text-align: center;}
+	tbody>tr>td:nth-child(6){width:70px; text-align: center;}
 	tbody>tr:HOVER{color:#da8c92;cursor: pointer;}
 	.menu-wrap{text-align: right;}
 	.form-wrap{text-align: center;}
@@ -73,6 +74,7 @@
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
+					<th>추천수</th>
 				</tr>
 			</thead>
 			<tbody>				
@@ -84,6 +86,7 @@
 					<td style="font-weight:bold;">${noticeList.memberId}</td>
 					<td style="font-weight:bold;">${noticeList.communityDate}</td>
 					<td style="font-weight:bold;">${noticeList.communityReadcount}</td>	
+					<td style="font-weight:bold;">${noticeList.communityRating}</td>	
 				</tr>
 			</c:forEach>
 			<!-- 게시글 출력 포이치문 -->	
@@ -93,7 +96,8 @@
 					<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${list.communityReplyCount}]</span></td>
 					<td>${list.memberId}</td>
 					<td>${list.communityDate}</td>
-					<td>${list.communityReadcount}</td>			
+					<td>${list.communityReadcount}</td>	
+					<td>${list.communityRating}</td>		
 				</tr>
 			</c:forEach>				
 			</tbody>

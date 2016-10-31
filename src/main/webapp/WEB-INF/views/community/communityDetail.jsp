@@ -50,18 +50,6 @@
 
 </head>
 <body>
-<c:if test="${param.votedCheck != null}" >
-	<c:if test="${param.votedCheck == 'failed'}">
-		<script>
-			alert('추천은 한 번만 가능합니다.');
-		</script>
-	</c:if>
-	<c:if test="${param.votedCheck == 'voted'}">
-		<script>
-			alert('추천되었습니다.');
-		</script>
-	</c:if>
-</c:if>
 <!-- 헤더 -->
 <jsp:include page="../module/header.jsp" />
 	<div class="container">
@@ -115,6 +103,18 @@
 					<input type="hidden" name="communityCategoryNo" value="${detailView.communityCategoryNo}">
 					<input type="hidden" name="votedId" value="id001">
 				</form>
+				<c:if test="${param.votedCheck != null}" >
+					<c:if test="${param.votedCheck == 'failed'}">
+						<script>
+							alert('추천은 한 번만 가능합니다.');
+						</script>
+					</c:if>
+					<c:if test="${param.votedCheck == 'voted'}">
+						<script>
+							alert('추천되었습니다.');
+						</script>
+					</c:if>
+				</c:if>
 			</div>
 		</div>
 		<div id="replyWrap">

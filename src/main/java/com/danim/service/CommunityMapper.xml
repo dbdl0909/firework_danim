@@ -127,6 +127,7 @@
 			community_subject as communitySubject,
 			community_readcount as communityReadcount,
 			community_notice as communityNotice,
+			community_rating as communityRating,
 			community_update as communityUpdate,
 			community_reply_count as communityReplyCount			
 		FROM
@@ -180,8 +181,9 @@
 			community_subject as communitySubject,
 			community_readcount as communityReadcount,
 			community_notice as communityNotice,
+			community_rating as communityRating,
 			community_update as communityUpdate,
-			community_reply_count as communityReplyCount			
+			community_reply_count as communityReplyCount					
 		FROM
 			community
 		WHERE
