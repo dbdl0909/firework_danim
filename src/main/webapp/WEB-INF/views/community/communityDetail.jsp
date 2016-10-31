@@ -24,24 +24,25 @@
 		$(".votecard em").clone().appendTo(".votecard div");
 		/* increment that by 1 */
 		var node = $(".votecard em:last strong")
-		node.text(parseInt(node.text())+1);
+		node.text(parseInt(node.text())+1);	
 		
-		
-		function flip(obj) {
-			$('#voteForm').submit();
+		function flip(obj) {			
 			obj.prev().find("em").animate({
 				top: '-=45'
 			}, 200);
-			obj.toggleClass("voted",true);			
+			obj.toggleClass("voted",true);
+			
 		}
-		
+
 		$('.voteaction').bind({
 		  click: function(event) {
 		    event.preventDefault()
+		    setTimeout("$('#voteForm').submit()", 140);
 		  },
 		  mouseup: function() {
-		    flip($(this));
+		    var moved = flip($(this));
 			$(this).unbind('mouseup');
+			 
 		  }
 		});
 	});
@@ -52,7 +53,7 @@
 <c:if test="${param.votedCheck != null}" >
 	<c:if test="${param.votedCheck == 'failed'}">
 		<script>
-			alert('추천은 한번만 가능합니다.');
+			alert('추천은 한 번만 가능합니다.');
 		</script>
 	</c:if>
 	<c:if test="${param.votedCheck == 'voted'}">
