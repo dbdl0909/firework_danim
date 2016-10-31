@@ -5,13 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>다님 플래너</title>
+<link rel="shortcut icon" href="../../resources/images/favicon.ico">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<title>Insert title here</title>
+<link rel="stylesheet" href="../../../resources/css/style.css">
 <style type="text/css">
 	thead>tr>th{text-align: center;}
 	tbody>tr>td:nth-child(1){width:80px; text-align: center;}
@@ -101,7 +103,7 @@
 		<button type="button" onclick="onWrite()" class="btn btn-primary">쓰기</button>
 		<button type="button" onclick="onList()" class="btn btn-primary">목록</button>
 	</div>
-	<div >
+	<div id="paginationWrap">
 		<ul class="pagination">
 		<li>
 			<c:if test="${page>1}">

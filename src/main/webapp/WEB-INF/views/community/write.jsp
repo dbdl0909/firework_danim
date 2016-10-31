@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
+<title>다님 플래너</title>
+<link rel="shortcut icon" href="../../resources/images/favicon.ico">
 <script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
 <script type="text/javascript" src="../../resources/se/js/jindo.min.js" charset="utf-8" ></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 <body>
+<!-- 헤더 -->
+<jsp:include page="../module/header.jsp" />		
 <div class="container">
 	<form id="communityInsertForm" method="post">
 		<div class="communityTitleWrap">
@@ -54,6 +56,8 @@
 		</div>
 	</form>
 </div>
+<!-- 헤더 -->
+<jsp:include page="../module/footer.jsp" />
 </body>
 <script type="text/javascript">
 var oEditors = [];

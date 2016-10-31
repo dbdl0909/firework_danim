@@ -340,7 +340,7 @@ p {
 }
 
 /* 헤더 css */
-#header{width:100%; height:auto;}
+#header{width:100%; height:auto; border-bottom:1px solid #ccc;}
 #header #headerNavWrap{width:80%; height:55px; margin:30px auto;}
 #header #headerNavWrap #headerLogo{float:left;}
 #header #headerNavWrap #searchWrap{float:left;}
@@ -355,6 +355,8 @@ display:none; margin-left:-130px; top:80px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav dl dd{float:none; display:block; padding:10px 0;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav dl dt{ width:150px; border-bottom:1px solid #ccc; color:#434343; font-size:14px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav dl dd{margin-left:10%; color:#687074; font-size:12px;}
+.container{margin:30px auto;}
+
 /* 게시판전용 css */
 .container #communityInsertForm{width:100%; margin:30px auto;}
 .container #communityInsertForm .communityTitleWrap{margin:3px 0;}
@@ -364,8 +366,14 @@ display:none; margin-left:-130px; top:80px;}
 .container #communityInsertForm #communitySubject{width:80%;}
 .container #communityInsertForm #communityNoticeLabel{padding-left:20px; padding-right:5px;}
 .container #communityInsertForm .communityContentWrap{width:100%; padding-top:15px;}
+
+/* 리스트 css */
+.container .table-responsive td,
+.container .table-responsive a{color:#434343; font-size:12px;}
+.container #paginationWrap{margin:0 auto; text-align:center;}
+.container #paginationWrap li a{color:#434343; font-size:12px;}
 /* 디테일뷰 */
-#communityContent{width:100%; border-top:1px solid #ccc; background:#fbfbfb; padding-bottom:10px;}
+#communityContent{width:100%; background:#fbfbfb; padding-bottom:10px;}
 #communityContent dl{float:left; padding-left:20px; padding-top:10px; padding-bottom:10px;} 
 #communityContent dl dt,
 #communityContent dl dd{float:left;}

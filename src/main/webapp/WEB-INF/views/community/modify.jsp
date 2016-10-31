@@ -4,13 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="../../resources/images/favicon.ico">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
+<title>다님 플래너</title>
+<link rel="shortcut icon" href="../../resources/images/favicon.ico">
 <script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
 <script type="text/javascript" src="../../resources/se/js/jindo.min.js" charset="utf-8" ></script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../../resources/css/style.css">
 <link rel="stylesheet" href="../../resources/css/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
@@ -25,6 +27,8 @@
 	});
 </script>
 <body>
+<!-- 헤더 -->
+<jsp:include page="../module/header.jsp" />
 <div class="container">
 	<form id="communityInsertForm" method="post">
 		<input type="hidden" name="communityNo" value="${communityNo}">
@@ -73,6 +77,8 @@
 		</div>
 	</form>
 </div>
+<!-- 헤더 -->
+<jsp:include page="../module/footer.jsp" />		
 </body>
 <script type="text/javascript">
 var oEditors = [];
