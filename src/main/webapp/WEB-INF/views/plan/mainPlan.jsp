@@ -37,6 +37,9 @@
 	</head>
 	<body>
 	    <div id="mainPlanDivRoot">
+		    <div>
+				<a href="/"><img src="../../resources/images/logo.png" ></a>
+			</div>
 	    	<div id="mainPlanDivTop">
 				<div>
 					출발일<input type="date"/>

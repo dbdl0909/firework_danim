@@ -43,28 +43,54 @@ function initMap() {
 		markerArray.push(marker);
 	}
 	
-	for(var i=0; i<markerArray.length; i++) {
-/*1*/	//클릭한 도시는 over든 out이든 동작하지 않도록 하기!!
-		google.maps.event.addListener(markerArray[i], 'mouseover', function() {
-			var mouseOverIndex = this.index;
-			console.log('mouseover : ' + mouseOverIndex);
-			for(var j=0; j<markerIndexArray.length; j++) {
-				if(mouseOverIndex != markerIndexArray[j]) {
-					console.log(mouseOverIndex + ' <!=> ' + markerIndexArray[j]);
-					markerArray[mouseOverIndex].setIcon(markerIcon1);
+	//클릭한 도시는 mouseover든 mouseout이든 동작하지 않도록 하기!!
+	for(var h=0; h<markerArray.length; h++) {
+		var mouseOverListener = google.maps.event.addListener(markerArray[h], 'mouseover', function() {
+			var mouseoverIndex = this.index;
+			//console.log(mouseoverIndex + ', 클릭한 도시 개수 : ' + markerIndexArray.length);
+			
+			//클릭한 도시가 없을때
+			if(markerIndexArray.length == 0) {
+				markerArray[mouseoverIndex].setIcon(markerIcon1);
+			} else {	//클릭한 도시가 있을때
+				for(var j=0; j<markerIndexArray.length; j++) {
+					//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같지 않다면
+					//마커 이미지를 빨간색으로 보여준다.
+					if(mouseoverIndex != markerIndexArray[j]) {
+						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
+						markerArray[mouseoverIndex].setIcon(markerIcon1);
+						console.log('working');
+					}
 				}
 			}
 		});
-		google.maps.event.addListener(markerArray[i], 'mouseout', function() {
-			var mouseOutIndex = this.index;
-			console.log(mouseOutIndex);
-			for(var k=0; k<markerIndexArray.length; k++) {
-				if(mouseOutIndex != markerIndexArray[k]) {
-					console.log(mouseOutIndex + ' <!=> ' + markerIndexArray[k]);
-					markerArray[mouseOutIndex].setIcon(markerIcon2);
-				} else if(mouseOutIndex == markerIndexArray[k]) {
-					console.log(mouseOutIndex + ' <==> ' + markerIndexArray[k]);
-					markerArray[mouseOutIndex].setIcon(markerIcon1);
+		var mouseOutListener = google.maps.event.addListener(markerArray[h], 'mouseout', function() {
+			var mouseoutIndex = this.index;
+			//console.log(mouseoutIndex + ', 클릭한 도시 개수 : ' + markerIndexArray.length);
+			
+			//클릭한 도시가 없을때
+			if(markerIndexArray.length == 0) {
+				markerArray[mouseoutIndex].setIcon(markerIcon2);
+			} else {	//클릭한 도시가 있을때
+				var count = 0;
+				for(var j=0; j<markerIndexArray.length; j++) {
+					if(count == 1) {
+						return;
+					}
+					//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같다면
+					//마커 이미지를 빨간색으로 보여준다.
+					if(mouseoutIndex == markerIndexArray[j]) {
+						count++;
+						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
+						markerArray[mouseoutIndex].setIcon(markerIcon1);
+						console.log('mouseout not working');
+					} else if(mouseoutIndex != markerIndexArray[j]) {
+						//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같지 않다면
+						//마커 이미지를 파란색으로 보여준다.
+						console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
+						markerArray[mouseoutIndex].setIcon(markerIcon2);
+						console.log('mouseout working');
+					}
 				}
 			}
 		});
@@ -91,23 +117,25 @@ function initMap() {
 				markerArray[i].setVisible(true);
 			}
 		} else if(zoom <= 8) {	//zoom이 8됬을때 다시 광역시만 보여준다. 클릭한 도시는 지우지 않고 그대로 보여준다.
-/*2*/		/*console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
+			console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
 			var markerIndexArraySort = new Array();
 			markerIndexArraySort = markerIndexArray;
 			markerIndexArraySort.sort();
 			console.log('클릭한 도시 번호 차례대로 : ' + markerIndexArraySort);
 			
+			var zoomCount = 0;
 			for(var j=0; j<markerIndexArraySort.length; j++) {
-				console.log(j + ' : ' + markerIndexArraySort[j]);
-				for(var i=0; i<72; i++) {
+				for(var i=0; i<=72; i++) {
 					if(i != markerIndexArraySort[j]) {
+						console.log(j + ' <!=> ' + markerIndexArraySort[j]);
 						markerArray[i].setVisible(false);
-					} else {
-						console.log('i : ' + i);
+					} else if(i == markerIndexArraySort[j]) {
+						zoomCount++;
+						console.log(j + ' <==> ' + markerIndexArraySort[j]);
 						markerArray[i].setVisible(true);
 					}
 				}
-			}*/
+			}
 		}
 	});
 	
@@ -253,6 +281,7 @@ function lineRemoveFunction(removeButtonIndex) {
 	var markerIndexTemp = markerIndexArray[removeButtonIndex];
 	console.log(markerIndexArray + ' 중 제거할 도시번호 : ' + markerIndexTemp);
 	markerIndexArray.splice(removeButtonIndex, 1);
+	markerArray[markerIndexTemp].setIcon(markerIcon2);
 	
 	var removeLatitude = Number(cityInfoList[markerIndexTemp].latitude);
 	var removeLangitude = Number(cityInfoList[markerIndexTemp].langitude);
@@ -269,8 +298,6 @@ function lineRemoveFunction(removeButtonIndex) {
 		flag = false;
 		lineFunction(pathArray, flag);
 	}
-	
-	markerArray[markerIndex].setIcon(markerIcon2);
 }
 
 $(document).ready(function(){
