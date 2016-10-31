@@ -28,17 +28,11 @@
 		
 		
 		function flip(obj) {
+			$('#voteForm').submit();
 			obj.prev().find("em").animate({
 				top: '-=45'
 			}, 200);
-			obj.toggleClass("voted",true);
-			
-			$.ajax({
-				url:'/community/detailRating?votedId='+'id001'
-					+'&communityNo='+'${detailView.communityNo}'
-					+'&communityCategoryNo='+'${detailView.communityCategoryNo}'
-				
-			});
+			obj.toggleClass("voted",true);			
 		}
 		
 		$('.voteaction').bind({
@@ -52,8 +46,21 @@
 		});
 	});
 </script>
+
 </head>
 <body>
+<c:if test="${param.votedCheck != null}" >
+	<c:if test="${param.votedCheck == 'failed'}">
+		<script>
+			alert('추천은 한번만 가능합니다.');
+		</script>
+	</c:if>
+	<c:if test="${param.votedCheck == 'voted'}">
+		<script>
+			alert('추천되었습니다.');
+		</script>
+	</c:if>
+</c:if>
 <!-- 헤더 -->
 <jsp:include page="../module/header.jsp" />
 	<div class="container">
@@ -100,8 +107,13 @@
 					<div>
 						<em><strong>${detailView.communityRating}</strong><span>추천</span></em>
 					</div>
-				</div>
+				</div>			
 				<a class="voteaction" href="">Flippit</a>
+				<form id="voteForm" action="/community/communityDetail" method="post">
+					<input type="hidden" name="communityNo" value="${detailView.communityNo}">
+					<input type="hidden" name="communityCategoryNo" value="${detailView.communityCategoryNo}">
+					<input type="hidden" name="votedId" value="id001">
+				</form>
 			</div>
 		</div>
 		<div id="replyWrap">

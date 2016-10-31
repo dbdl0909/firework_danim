@@ -107,16 +107,25 @@ public class CommunityService {
 		return communityReplyList;
     }
     //게시글 추천
-    public void insertCommunityVote(String votedId, int communityNo, String communityCategoryNo){
+    public String insertCommunityVote(String votedId, int communityNo, String communityCategoryNo){
+    	String result = null;
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("votedId", votedId);
     	map.put("communityNo", communityNo);
     	map.put("communityCategoryNo", communityCategoryNo);
-		CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
-		int ratingCount = communityDto.getCommunityRating();
-		ratingCount++;
-		communityDto.setCommunityRating(ratingCount);
-    	cummunityDao.insertCommunityVote(map);
-    	cummunityDao.updateRatingCount(communityDto);
+    	int checkVoted = cummunityDao.selectRatingForVotedCheck(map);
+    	logger.info("checkVoted {} CommunityController.java", checkVoted);
+    	if(checkVoted == 0) {
+			CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
+			int ratingCount = communityDto.getCommunityRating();
+			ratingCount++;
+			communityDto.setCommunityRating(ratingCount);
+	    	cummunityDao.insertCommunityVote(map);
+	    	cummunityDao.updateRatingCount(communityDto);
+	    	result = "voted";
+    	}else if(checkVoted == 1){
+    		result = "failed";
+    	}
+    	return result;
     }
 }

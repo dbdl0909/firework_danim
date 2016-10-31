@@ -61,4 +61,7 @@ public class CommunityDao {
 	public void updateRatingCount(CommunityDto communityDto){		
 		sqlSession.update(NS+".updateRatingCount", communityDto);
 	}
+	public int selectRatingForVotedCheck(Map<String, Object> map){		
+		return sqlSession.selectOne(NS+".selectRatingForVotedCheck", map);
+	}
 }

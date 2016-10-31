@@ -13,6 +13,18 @@
 		WHERE
 			community_no = #{communityNo};
 	</update>
+	<select id="selectRatingForVotedCheck"
+			parameterType="java.util.Map"
+			resultType="Integer">
+		SELECT 
+			count(member_id)
+		FROM
+			rating
+		WHERE
+			community_no = #{communityNo}
+		AND	
+			member_id = #{votedId}
+	</select>
 	<!-- 레이팅 삽입 -->
 	<insert id="insertCommunityVote"
 			parameterType="java.util.Map">

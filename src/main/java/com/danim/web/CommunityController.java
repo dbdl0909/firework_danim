@@ -122,16 +122,17 @@ public class CommunityController {
 		return "community/file_upload";
 	}
 	
-	@RequestMapping(value = "/community/detailRating", method = RequestMethod.GET)
-	public void detailRating( @RequestParam(value="votedId") String votedId,
+	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.POST)
+	public String detailRating(Model model, @RequestParam(value="votedId") String votedId,
 							  @RequestParam(value="communityNo") int communityNo,							  
 							  @RequestParam(value="communityCategoryNo") String communityCategoryNo){
-		
+
 		logger.info("votedId {} CommunityController.java", votedId);
 		logger.info("communityNo {} CommunityController.java", communityNo);
-		logger.info("communityCategoryNo {} CommunityController.java", communityCategoryNo);
-		
-		communityService.insertCommunityVote(votedId, communityNo, communityCategoryNo);
+		logger.info("communityCategoryNo {} CommunityController.java", communityCategoryNo);		
+		String votedCheck = communityService.insertCommunityVote(votedId, communityNo, communityCategoryNo);
+		model.addAttribute("votedCheck", votedCheck);
+		return "redirect:/community/communityDetail?communityNo="+communityNo;
 	}
 
 }
