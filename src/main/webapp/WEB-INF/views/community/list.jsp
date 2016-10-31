@@ -114,7 +114,7 @@
 		<li>
 			<c:choose>
 				<c:when test="${page == i}">
-					<a href="/community/list?communityCategoryNo=community_category_01&page=${i}" style="font-weigt:bold;">${i}</a>
+					<a href="/community/list?communityCategoryNo=community_category_01&page=${i}" style="background:#434343; color:#fff;">${i}</a>
 				</c:when>
 				<c:otherwise>
 					<a href="/community/list?communityCategoryNo=community_category_01&page=${i}">${i}</a>
