@@ -51,18 +51,7 @@
 			</li>
 			<li class="hiddenNavWrap">
 				<a href="/search/infoSearch">가이드북</a>
-			</li>
-			<li class="hiddenNavWrap">
-				<a href="">회원가입</a>
-				<div class="hiddenNav">
-					<dl>
-						<dt>회원가입</dt>
-						<dd>일반가입</dd>
-						<dd>페이스북/구글 로그인</dd>
-						<dd>로그인</dd>			
-					</dl>
-				</div>
-			</li>
+			</li>			
 			<li class="hiddenNavWrap">
 				<a href="">여기맛집</a>				
 			</li>
@@ -71,6 +60,12 @@
 			</li>
 			<li class="hiddenNavWrap">
 				<a href="">여행검색</a>				
+			</li>
+		</ul>
+		<ul id="loginNav">
+			<li>
+				<span><a href="">로그인</a></span>
+				<span><a href="">회원가입</a></span>
 			</li>
 		</ul>
 	</div>
