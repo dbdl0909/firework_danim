@@ -372,6 +372,7 @@ display:none; margin-left:-130px; top:80px;}
 .container .table-responsive a{color:#434343; font-size:12px;}
 .container #paginationWrap{margin:0 auto; text-align:center;}
 .container #paginationWrap li a{color:#434343; font-size:12px;}
+
 /* 디테일뷰 */
 #communityContent{width:100%; background:#fbfbfb; padding-bottom:10px;}
 #communityContent dl{float:left; padding-left:20px; padding-top:10px; padding-bottom:10px;} 
@@ -399,6 +400,10 @@ display:none; margin-left:-130px; top:80px;}
 .replyinsertTable #replyFormSubmitArea{float:right; padding-right:20px; padding-top:58px;}
 #communityContentButtonWrap{width:100%; padding-top:20px;}
 #communityContentButtonWrap #communityContentButton{float:right;}
+/* 입력,수정 */
+.container #communityInsertForm label,
+.container #communityInsertForm input{font-size:12px; color:#434343;} 
+.container #communityInsertForm textarea{width:100%;}
 .clearFix{content:""; display:block; clear:both;}
 
 /* 풋터 */
