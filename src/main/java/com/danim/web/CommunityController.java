@@ -98,7 +98,7 @@ public class CommunityController {
 		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());
 		logger.info("communityNo {} CommunityController.java", communityDto.getCommunityNo());
 		communityService.modifyCommunityItem(communityDto);
-		return "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
+		return "redirect:/community/communityDetail?communityNo="+communityDto.getCommunityNo();
 	}
 	@RequestMapping(value = "/community/communityReply", method = RequestMethod.POST)
 	public String insertCommunityReply(CommunityReplyDto communityReplyDto){
