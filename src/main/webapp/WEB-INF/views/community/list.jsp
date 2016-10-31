@@ -124,7 +124,7 @@
 		</c:forEach>
 		<li>
 			<c:if test="${page<lastPage}">
-				<a href="/community/list?communityCategoryNo=community_category_01&page=${page+1}">&raquo;</a>
+				<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page+1}">&raquo;</a>
 			</c:if>
 		</li>
 		</ul>
