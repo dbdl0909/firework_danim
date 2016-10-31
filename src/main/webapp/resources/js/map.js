@@ -183,7 +183,15 @@ function initMap() {
 		    		
 		    		markerIndexArray.push(markerIndex);
 		    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
-		    		$('#mainPlanUl').append("<li class='leftMenuLi'>" + infoNameArray[markerIndex] + "<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" + "</li>");
+		    		$('#mainPlanUl').append("<li class='leftMenuLi'>" +
+		    									infoNameArray[markerIndex] +
+		    									"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" +
+		    									"<div class='cityChooseMenu'>" +
+		    										"<img class='arrowLeft' src='../../resources/images/arrowPointingToLeft.png'/>" +
+		    										"<span class='stayCount'>1</span>일" +
+		    										"<img class='arrowRight' src='../../resources/images/arrowPointingToRight.png'/>" +
+		    									"</div>" +
+		    								"</li>");
 		    		
 		    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
 					var latitude = Number(cityInfoList[markerIndex].latitude);
@@ -300,7 +308,7 @@ function lineRemoveFunction(removeButtonIndex) {
 	}
 }
 
-$(document).ready(function(){
+$(document).ready(function() {	
 	$('.cityInfoLi').click(function() {
     	var cityInfoIndex = $('.cityInfoLi').index(this);
     	//console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
@@ -311,6 +319,28 @@ $(document).ready(function(){
     	map.setZoom(10);
 		map.setCenter(zoomCity);
     });
+	
+	//arrowLeft 이미지 태그를 클릭했을때 실행할 함수
+	$('body').on('click', '.arrowLeft', function() {
+		var liIndex = $('.arrowLeft').index(this);
+		console.log(liIndex);
+		var stayCount = Number($('.stayCount').eq(liIndex).text());
+		if(stayCount > 1) {
+			stayCount-=1;
+			$('.stayCount').eq(liIndex).text(stayCount);
+		} else if(stayCount > 1) {
+			
+		}
+	});
+	$('body').on('click', '.arrowRight', function() {
+		var liIndex = $('.arrowRight').index(this);
+		console.log(liIndex);
+		var stayCount = Number($('.stayCount').eq(liIndex).text());
+		if(stayCount >= 1) {
+			stayCount+=1;
+			$('.stayCount').eq(liIndex).text(stayCount);
+		}
+	});
 	
 	//removeButton 이미지 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.removeButton', function() {

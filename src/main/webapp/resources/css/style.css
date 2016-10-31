@@ -338,6 +338,14 @@ p {
 	padding-top:5px;
 	padding-right:10px;
 }
+.cityChooseMenu {
+	clear:none;
+	text-align:center;
+}
+.stayCount {
+	display:inline-block;
+	width:20px;
+}
 
 /* 헤더 css */
 #header{width:100%; height:auto; border-bottom:1px solid #ccc;}
