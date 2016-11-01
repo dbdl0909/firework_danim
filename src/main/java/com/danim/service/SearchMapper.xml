@@ -41,7 +41,7 @@
 	<!-- 도시 이름을 통해서 해당 지역의 음식점 이름을 조회하는 쿼리 -->
 	<select id="selectEateryByCityInfoName"
 			resultType="com.danim.service.search.SearchDto"
-			parameterType="String">
+			parameterType="hashmap">
 		SELECT 
 			city.city_info_no as 'cityInfoNo',
 			city.city_info_do_name as 'cityInfoDoName',

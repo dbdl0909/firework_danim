@@ -27,7 +27,7 @@ public class SearchController {
 		logger.info("search {} 값 입니다", search);
 		List<SearchDto> selectCityInfoName = searchService.getselectCityInfoName(search);
 		List<SearchDto> selectLandmarkInfo = searchService.getSelectLandmarkInfo(search);
-		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search);
+		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search, moreView);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search);
 		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search);
 		List<String> selectCityAll = searchService.getSelectCityAll();
@@ -57,7 +57,7 @@ public class SearchController {
 		return "/search/landmarkInformation";
 	}
 	
-	@RequestMapping(value="search/eateryInfo")
+/*	@RequestMapping(value="search/eateryInfo")
 	public String eateryInfo(Model model, @RequestParam(value="eateryNo") String eateryNo, @RequestParam(value="cityInfoName") String cityInfoName) {
 		// eateryNo(음식점번호) : infoSearch(검색화면)에서 검색된 해당 지역 음식점의 가이드북을 클릭할 때 넘겨주는 음식점번호
 		logger.info("eateryNo 값 {} 입니다", eateryNo);
@@ -68,7 +68,7 @@ public class SearchController {
 		model.addAttribute("cityInfoName", cityInfoName);
 		
 		return "/search/eateryInformation";
-	}
+	}*/
 	
 	@RequestMapping(value="search/eventInfo")
 	public String eventInfo(Model model, @RequestParam(value="eventInfoName") String eventInfoName, @RequestParam(value="cityInfoName") String cityInfoName) {

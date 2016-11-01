@@ -19,9 +19,9 @@
 				var search = "<c:out value="${search}" />";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
-				var moreView = 5;
+				var moreView = "<c:out value="${moreView}" />" + 5;
 				
-				
+				alert(moreView);
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
 				
@@ -84,7 +84,7 @@
 				    $.ajax({      
 				        type:"POST",  
 				        url:"/search/infoSearch",      
-				        data: {search: search, moreView: moreView}      
+				        data: {search: search, moreView: moreView},     
 				        success:function(msg){
 				        	alert('성공');
 				        }

@@ -16,8 +16,6 @@
 			$(this).children('.hiddenNav').hide();
 		});
 		
-		$('#searchHeader').hide();
-		
 		/* '.searchCityNameSpan' 에 마우스를 가져가면 투명해지는 애니메이션 효과 */
 		$(".searchCityNameSpan").mouseover(function(){
 			$('.searchCityNameSpan').stop().animate({opacity:'0.3'});
@@ -48,22 +46,28 @@
 #header .searchCityNameSpan{cursor: pointer;}
 #infoSearchInput{border: 0px; width: 1100px; height: 115px; font-size: 24px;}
 #infoSearch{margin: 0px auto; text-align: center; height: 116px; float: left;}
-#searchHeader{width:100%; height:116px; border-bottom:1px solid #ccc;}
+#searchHeader{width:100%; height:116px; border-bottom:1px solid #ccc; display: none;}
 #searchGlyphicon{font-size: 25px; float:left; margin-right: 20px; margin-top: 44px;}
 #closeSearchForm{cursor: pointer; font-size: 38px;  padding: 30px; float: right;}
 .searchInner{margin: 0 auto; width: 1200px; height: 116px;}
 #searchLi{float: left; padding: 0px;}
+#searchWrap{color: #687074; float:right; font-size: 26px; margin-top: 6px;}
 </style>
 </head>
 <body>
 <!-- 헤더 -->
 <div id="header">
 	<div id="headerNavWrap" class="clearFix">
+		<div id="searchWrap">
+			<div class="hiddenNavWrap">
+				<span class="glyphicon glyphicon-search"></span>
+				<span class="searchCityNameSpan"> 
+					Search City!
+				</span> 
+			</div>	
+		</div>
 		<div id="headerLogo">
 			<a href="/"><img src="../../resources/images/logo.png" ></a>
-		</div>
-		<div id="searchWrap">
-			
 		</div>
 		<ul id="headerNav">
 			<li class="hiddenNavWrap">
@@ -94,18 +98,20 @@
 			<li class="hiddenNavWrap">
 				<a href="/search/infoSearch">추천여행</a>
 			</li>
+		</ul>	
+		<!-- <ul>	
 			<li class="hiddenNavWrap">
 				<a style="text-decoration: none; color: black; float:right;" class="searchCityNameSpan"> 
 					알고싶은 도시의 이름을 검색 해보세요
 				</a> 
 			</li>
-			<!-- <li class="hiddenNavWrap">
+			<li class="hiddenNavWrap">
 				<span class="searchCityNameSpan"> 
 					알고싶은 도시의 이름을 검색하세요!
 					<span class="glyphicon glyphicon-search"></span>
 				</span> 
-			</li> -->
-		</ul>
+			</li>
+		</ul> -->
 		<ul id="loginNav">
 			<li>
 				<span><a href="">로그인</a></span>

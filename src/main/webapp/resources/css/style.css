@@ -360,9 +360,9 @@ p {
 /* 헤더 css */
 #header{width:100%; height:auto; border-bottom:1px solid #ccc;}
 #header #headerNavWrap{width:80%; height:55px; margin:30px auto;}
-#header #headerNavWrap #headerLogo{float:left;}
+#header #headerNavWrap #headerLogo{float:left; margin-left: 200px;}
 #header #headerNavWrap #searchWrap{float:left;}
-#header #headerNavWrap #headerNav{float:left; margin-top:8px;}
+#header #headerNavWrap #headerNav{float:right; margin-top:8px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap{float:left; padding:0 30px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap a{font-size:16px; color:#687074; font-weight: 400; line-height:3em;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav{width:290px; background:#fff; position:absolute; z-index:99999;

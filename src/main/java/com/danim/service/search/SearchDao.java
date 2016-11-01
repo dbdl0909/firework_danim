@@ -1,5 +1,6 @@
 package com.danim.service.search;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,10 +38,10 @@ public class SearchDao {
     }
        
     // search(도시이름) 검색어를 통해서 해당 지역의 음식점을 검색
-    public List<SearchDto> selectEateryInfo(String search) {
+    public List<SearchDto> selectEateryInfo(HashMap<String, Object> map) {
     	logger.info("selectEateryInfo() SearchDao.java");
     	
-		return sessionTemplate.selectList(nameSpace + ".selectEateryByCityInfoName", search);
+		return sessionTemplate.selectList(nameSpace + ".selectEateryByCityInfoName", map);
     	
     }
     

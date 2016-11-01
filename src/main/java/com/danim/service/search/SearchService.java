@@ -1,5 +1,6 @@
 package com.danim.service.search;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,10 +37,13 @@ public class SearchService {
     	
     }
     
-    public List<SearchDto> getSelectEateryInfo(String search) {
+    public List<SearchDto> getSelectEateryInfo(String search, int moreView) {
     	logger.info("getSelectEateryInfo() SearchService.java");
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+    	map.put("search", search);
+    	map.put("moreView", moreView);
     	
-    	List<SearchDto> selectEateryInfoList = searchDao.selectEateryInfo(search);
+    	List<SearchDto> selectEateryInfoList = searchDao.selectEateryInfo(map);
     	
 		return selectEateryInfoList;
     	
@@ -72,14 +76,14 @@ public class SearchService {
     	
     }
     
-    public Map<String, Object> getSelectEateryInfoOne(String eateryNo, int moreView) {
+    /*public Map<String, Object> getSelectEateryInfoOne(String eateryNo) {
     	logger.info("getSelectEateryInfoOne() SearchService.java");
     	
     	Map<String, Object> selectEateryInfoOne = searchDao.selectEateryInfoOne(eateryNo);
     	
 		return selectEateryInfoOne;
     	
-    }
+    }*/
     
     public Map<String, Object> getSelectEventInfoOne(String eventInfoName) {
     	logger.info("getSelectEventInfoOne() SearchService.java");
