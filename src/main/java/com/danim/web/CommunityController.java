@@ -37,6 +37,7 @@ public class CommunityController {
 			@RequestParam(value="page", defaultValue="1") int page,
 			@RequestParam(value="searchOption", defaultValue="") String searchOption,
 			@RequestParam(value="searchInput", defaultValue="") String searchInput) {
+		
 		logger.info("searchOption{} CommunityController.java", searchOption);
 		logger.info("searchInput{} CommunityController.java", searchInput);
 		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo, page, searchOption, searchInput);

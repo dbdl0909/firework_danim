@@ -194,7 +194,8 @@ var onList = function(){
 	location.href = '/community/list?communityCategoryNo='+'${param.communityCategoryNo}';
 };
 var onSearch = function(){
-	location.href= '/community/list?searchOption='+document.getElementById('searchOption').value
+	location.href= '/community/list?communityCategoryNo='+'${param.communityCategoryNo}'
+			+'&searchOption='+document.getElementById('searchOption').value
 			+'&searchInput='+document.getElementById('searchInput').value;
 }
 </script>
