@@ -70,10 +70,14 @@
 					<ul id="mainPlanUl">
 					</ul>
 				</div>
+				<div id="leftMenuLandmarkList">
+					<ul id="mainPlanlandmarkUl">
+					</ul>
+				</div>
 			</div>
 			
 			<div id="mainPlanDivContent">
-				<!-- Modal -->
+				<!-- Modal
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-sm">
 						<div class="modal-content">
@@ -89,7 +93,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div id="map">
 				</div>
 			</div>
