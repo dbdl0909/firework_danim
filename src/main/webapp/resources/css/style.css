@@ -305,15 +305,25 @@ p {
 	overflow-y:scroll;
 }
 #leftMenuCityList ul li{
+	cursor:pointer;
 	padding:10px;
 	list-style:none;
+}
+#leftMenuCityList ul li:hover{
+	background:#434343;
+	color:#fff;
 }
 #leftMenuRouteList ul li{
 	height:100px;
 	list-style:none;
 }
-.leftMenuLi {
+.leftMenuLi  {
 	margin-left:5px;
+}
+.leftMenuLi .cityName:hover {
+	cursor:pointer;
+	background:#434343;
+	color:#fff;
 }
 #mainPlanDivLeft2 {
 	width:12%;

@@ -191,7 +191,7 @@ function initMap() {
 			    		markerIndexArray.push(markerIndex);
 			    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
 			    		$('#mainPlanUl').append("<li class='leftMenuLi'>" +
-			    									infoNameArray[markerIndex] +
+			    									"<span class='cityName'>" + infoNameArray[markerIndex] + "</span>" +
 			    									"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" +
 			    									"<div class='cityChooseMenu'>" +
 			    										"<img class='arrowLeft' src='../../resources/images/arrowPointingToLeft.png'/>" +
