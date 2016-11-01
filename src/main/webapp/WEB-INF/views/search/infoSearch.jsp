@@ -21,9 +21,9 @@
 				var search = "<c:out value="${search}" />";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
-				var moreView = "<c:out value="${moreView}" />" + 5;
+				var moreView = <c:out value="${moreView}" /> + <c:out value="${moreView}" />;
 				
-				alert(moreView);
+				alert('초기 리스트 : ' + moreView);
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
@@ -74,7 +74,7 @@
 				        url:"/search/infoSearch",      
 				        data: {search: search, moreView: moreView},     
 				        success:function(msg){
-				        	alert(moreView);
+				        	alert('더보기 리스트 : ' + moreView);
 				        }
 				    }); 
 				});
