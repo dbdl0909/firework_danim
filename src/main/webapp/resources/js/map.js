@@ -2,11 +2,11 @@ var map;
 var marker;
 var markerIndex;
 //클릭한 도시들의 좌표값을 담을 배열
-var pathArray = new Array();
+var pathArray = [];
 //클릭한 도시들의 마커를 담을 배열
-var markerArray = new Array();
+var markerArray = [];
 //클릭한 도시들의 마커들의 index 값을 담을 배열
-var markerIndexArray = new Array();
+var markerIndexArray = [];
 var addButton;
 //polyline을 생성하거나 제거할 때 구분하기 위한 변수(생성 : true, 제거 : false) 
 var flag;
@@ -61,7 +61,7 @@ function initMap() {
 					if(mouseoverIndex != markerIndexArray[j]) {
 						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
 						markerArray[mouseoverIndex].setIcon(markerIcon1);
-						console.log('working');
+						//console.log('working');
 					}
 				}
 			}
@@ -85,13 +85,13 @@ function initMap() {
 						count++;
 						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
 						markerArray[mouseoutIndex].setIcon(markerIcon1);
-						console.log('mouseout not working');
+						//console.log('mouseout not working');
 					} else if(mouseoutIndex != markerIndexArray[j]) {
 						//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같지 않다면
 						//마커 이미지를 파란색으로 보여준다.
-						console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
+						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
 						markerArray[mouseoutIndex].setIcon(markerIcon2);
-						console.log('mouseout working');
+						//console.log('mouseout working');
 					}
 				}
 			}
@@ -120,7 +120,7 @@ function initMap() {
 			}
 		} else if(zoom <= 8) {	//zoom이 8됬을때 다시 광역시만 보여준다. 클릭한 도시는 지우지 않고 그대로 보여준다.
 			console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
-			var markerIndexArraySort = new Array();
+			var markerIndexArraySort = [];
 			markerIndexArraySort = markerIndexArray;
 			markerIndexArraySort.sort();
 			console.log('클릭한 도시 번호 차례대로 : ' + markerIndexArraySort);
@@ -141,9 +141,9 @@ function initMap() {
 		}
 	});
 	
-    var infoNameArray = new Array();
-	var infoSummaryArray = new Array();
-	var infoImageArray = new Array();
+    var infoNameArray = [];
+	var infoSummaryArray = [];
+	var infoImageArray = [];
 	var prevInfowindow = false;
 	for(var i = 0; i < markerArray.length; i++) {
 		//infoArray 배열에 차례대로 각 도시의 name, summary, image들을 담는다.
@@ -230,8 +230,7 @@ function initMap() {
 		});
 	}	
 }
-var lineArray = new Array();
-var pathLine;
+var lineArray = [];
 var lineRemoveIndex;
 var count = 0;
 
@@ -242,7 +241,7 @@ function poly(pathArray) {
 		path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
 	};
 	
-	pathLine = new google.maps.Polyline({
+	var pathLine = new google.maps.Polyline({
 		path: pathArray,
 		geodesic: true,
 		strokeColor: '#ff0000',
@@ -254,6 +253,7 @@ function poly(pathArray) {
 		}],
 	});
 	pathLine.setMap(map);
+	lineArray.push(pathLine);
 	console.log('getPath : ' + pathLine.getPath().getArray().toString());
 }
 
@@ -265,40 +265,41 @@ function lineFunction(pathArray, flag){
 	
 	if(flag == true) {
 		poly(pathArray);
-		lineArray.push(pathLine);
+		
 	} else if(flag == false) {
 		console.log('lineRemoveIndex : ' + lineRemoveIndex);
+		pathArray.splice(lineRemoveIndex, 1);
 		console.log('lineArray 길이 : ' + lineArray.length);
 		var maxLength = lineArray.length;
 		
 		if(lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2) {
-			//선택한 도시 중 처음과 끝 제외한 중간 제거
+			//선택한 도시가 2개 이상일때 처음과 끝 제외한 모든 중간 요소 제거
 			console.log('lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2');
 			lineArray[lineRemoveIndex].setMap(null);
 			lineArray.splice(lineRemoveIndex, 1);
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
-			//console.log('lineArray 길이 : ' + lineArray.length);
 			poly(pathArray);
-			lineArray.push(pathLine);
-		} else if(maxLength == 1) {
-			//선택한 도시 하나일때 제거
-			console.log('maxLength == 1');
+		}/* else if(lineRemoveIndex == 1 && maxLength == 1) {
+			//선택한 도시가 2개 일때 두번째 요소 제거(마지막요소)
+			console.log('lineRemoveIndex > 0 && maxLength == 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
 			poly(pathArray);
-			lineArray.push(pathLine);
-		} else if(maxLength == lineRemoveIndex) {
-			//선택한 도시 중 마지막 제거
-			console.log('maxLength == lineRemoveIndex');
+		}*/ else if(maxLength == lineRemoveIndex && maxLength >= 1) {
+			//선택한 도시가 1개 이상일때 마지막 요소 제거
+			console.log('maxLength == lineRemoveIndex && maxLength >= 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
-		} else if(lineRemoveIndex == 0 && maxLength >= 2) {
-			//선택한 도시 중 첫번째 제거
-			console.log('lineRemoveIndex == 0 && maxLength >= 2');
+		} else if(lineRemoveIndex == 0 && maxLength >= 1) {
+			//선택한 도시 1개 이상일때 첫번째 요소 제거
+			console.log('lineRemoveIndex == 0 && maxLength >= 1');
 			lineArray[lineRemoveIndex].setMap(null);
 			lineArray.splice(lineRemoveIndex, 1);
-			poly(pathArray);
+		} else if(lineRemoveIndex == 0 && maxLength < 1) {
+			//선택한 도시 하나일때 그 요소 제거
+			console.log('lineRemoveIndex == 0 && maxLength < 1');
+			lineArray.splice(lineRemoveIndex, 1);
 		}
 	}
 };
@@ -319,7 +320,6 @@ function lineRemoveFunction(removeButtonIndex) {
 	var removeLangitude = Number(cityInfoList[markerIndexTemp].langitude);
 	//console.log(markerIndexTemp + ' : ' + removeLatitude + ', ' + removeLangitude);
 	
-	pathArray.splice(removeButtonIndex, 1);
 	//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
 	//console.log('pathArray 길이 : ' + pathArray.length);
 	for(var i=0; i<pathArray.length; i++) {
