@@ -49,12 +49,10 @@
 <div id="header">
 	<div id="headerWrap" class="clearFix">
 		<div id="searchWrap">
-			<div class="hiddenNavWrap">
-				<span class="glyphicon glyphicon-search"></span>
-				<span class="searchCityNameSpan"> 
-					가고싶은 도시를 검색해주세요!
-				</span> 
-			</div>	
+			<span class="glyphicon glyphicon-search"></span>
+			<span class="searchCityNameSpan"> 
+				가고싶은 도시를 검색해주세요!
+			</span> 
 		</div>
 		<div id="headerLogo">
 			<a href="/"><img src="../../resources/images/logo.png" ></a>
