@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<html>
+<html> 
 	<head>
 		<title>다님 플래너</title>
 		<link rel="shortcut icon" href="../../resources/images/favicon.ico">
