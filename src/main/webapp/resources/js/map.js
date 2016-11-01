@@ -1,24 +1,32 @@
-var map;
-var marker;
-var markerIndex;
-//클릭한 도시들의 좌표값을 담을 배열
-var pathArray = [];
+//polyline을 생성하거나 제거할 때 구분하기 위한 변수(생성 : true, 제거 : false) 
+var flag = false;
+
 //클릭한 도시들의 마커를 담을 배열
 var markerArray = [];
 //클릭한 도시들의 마커들의 index 값을 담을 배열
 var markerIndexArray = [];
+//클릭한 도시들의 좌표값을 담을 배열
+var pathArray = [];
+//클릭한 도시들의 pathLine(폴리라인을 그을 좌표값)을 담을 배열
+var lineArray = [];
+
+var map;
+var marker;
+var markerIndex;
 var addButton;
-//polyline을 생성하거나 제거할 때 구분하기 위한 변수(생성 : true, 제거 : false) 
-var flag;
+
+var lineRemoveIndex = 0;
+var count = 0;
+
 //map에서 가리킬 좌표를 담는 변수
 var zoomLocation;
 //map에서 가리킬 좌표의 zoom 값을 담는 변수
 var zoomSize;
 
-var $stayDay;
-
 var markerIcon1 = "../../resources/images/placeholder.png";
 var markerIcon2 = "../../resources/images/placeholder2.png";
+
+var $stayDay;
 
 //구글 지도 (현재위치 설정)
 function initMap() {
@@ -45,106 +53,22 @@ function initMap() {
 		markerArray.push(marker);
 	}
 	
-	//클릭한 도시는 mouseover든 mouseout이든 동작하지 않도록 하기!!
-	for(var h=0; h<markerArray.length; h++) {
-		var mouseOverListener = google.maps.event.addListener(markerArray[h], 'mouseover', function() {
-			var mouseoverIndex = this.index;
-			//console.log(mouseoverIndex + ', 클릭한 도시 개수 : ' + markerIndexArray.length);
-			
-			//클릭한 도시가 없을때
-			if(markerIndexArray.length == 0) {
-				markerArray[mouseoverIndex].setIcon(markerIcon1);
-			} else {	//클릭한 도시가 있을때
-				for(var j=0; j<markerIndexArray.length; j++) {
-					//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같지 않다면
-					//마커 이미지를 빨간색으로 보여준다.
-					if(mouseoverIndex != markerIndexArray[j]) {
-						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
-						markerArray[mouseoverIndex].setIcon(markerIcon1);
-						//console.log('working');
-					}
-				}
-			}
-		});
-		var mouseOutListener = google.maps.event.addListener(markerArray[h], 'mouseout', function() {
-			var mouseoutIndex = this.index;
-			//console.log(mouseoutIndex + ', 클릭한 도시 개수 : ' + markerIndexArray.length);
-			
-			//클릭한 도시가 없을때
-			if(markerIndexArray.length == 0) {
-				markerArray[mouseoutIndex].setIcon(markerIcon2);
-			} else {	//클릭한 도시가 있을때
-				var count = 0;
-				for(var j=0; j<markerIndexArray.length; j++) {
-					if(count == 1) {
-						return;
-					}
-					//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같다면
-					//마커 이미지를 빨간색으로 보여준다.
-					if(mouseoutIndex == markerIndexArray[j]) {
-						count++;
-						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
-						markerArray[mouseoutIndex].setIcon(markerIcon1);
-						//console.log('mouseout not working');
-					} else if(mouseoutIndex != markerIndexArray[j]) {
-						//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같지 않다면
-						//마커 이미지를 파란색으로 보여준다.
-						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
-						markerArray[mouseoutIndex].setIcon(markerIcon2);
-						//console.log('mouseout working');
-					}
-				}
-			}
-		});
-	}
+	/* marker mouseover, mouseout function */
+	markerMouseEvent();
 	
-	//현재 zoom 을 가져온다.
-	var zoom = map.getZoom();
-	//console.log("current zoom : " + zoom);
-	//광역시는 먼저 보여준다.
-	for(var i=73; i<=79; i++) {
-		markerArray[i].setVisible(true);
-	}
-	
-    //광역시는 zoom 8 (city_no_74 ~ city_no_80)
-    //그 외는 zoom 9 (city_no_01 ~ city_no_73)
-	google.maps.event.addListener(map, 'zoom_changed', function() {
-		//zoom이 몇인지 담는다.
-		zoom = map.getZoom();
-		console.log(zoom);
-		
-		//zoom이 10일때부터 다른 모든 시들도 보여준다.
-		if(zoom >= 10) {
-			for(var i=0; i<=72; i++) {
-				markerArray[i].setVisible(true);
-			}
-		} else if(zoom <= 8) {	//zoom이 8됬을때 다시 광역시만 보여준다. 클릭한 도시는 지우지 않고 그대로 보여준다.
-			console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
-			var markerIndexArraySort = [];
-			markerIndexArraySort = markerIndexArray;
-			markerIndexArraySort.sort();
-			console.log('클릭한 도시 번호 차례대로 : ' + markerIndexArraySort);
-			
-			var zoomCount = 0;
-			for(var j=0; j<markerIndexArraySort.length; j++) {
-				for(var i=0; i<=72; i++) {
-					if(i != markerIndexArraySort[j]) {
-						console.log(j + ' <!=> ' + markerIndexArraySort[j]);
-						markerArray[i].setVisible(false);
-					} else if(i == markerIndexArraySort[j]) {
-						zoomCount++;
-						console.log(j + ' <==> ' + markerIndexArraySort[j]);
-						markerArray[i].setVisible(true);
-					}
-				}
-			}
-		}
-	});
-	
+	/* zoom_changed function */
+	zoomEvent();
+
+	/* infoWindow function */
+	infoWindowEvent();
+}
+
+function infoWindowEvent() {
     var infoNameArray = [];
 	var infoSummaryArray = [];
 	var infoImageArray = [];
 	var prevInfowindow = false;
+	
 	for(var i = 0; i < markerArray.length; i++) {
 		//infoArray 배열에 차례대로 각 도시의 name, summary, image들을 담는다.
 		infoNameArray.push(cityInfoList[i].name);
@@ -228,12 +152,113 @@ function initMap() {
 		    	});
 			});
 		});
-	}	
+	}
 }
-var lineArray = [];
-var lineRemoveIndex;
-var count = 0;
 
+function zoomEvent() {
+	//현재 zoom 을 가져온다.
+	var zoom = map.getZoom();
+	//console.log("current zoom : " + zoom);
+	//광역시는 먼저 보여준다.
+	for(var i=73; i<=79; i++) {
+		markerArray[i].setVisible(true);
+	}
+	
+	//광역시는 zoom 8 (city_no_74 ~ city_no_80)
+	//그 외는 zoom 9 (city_no_01 ~ city_no_73)
+	google.maps.event.addListener(map, 'zoom_changed', function() {
+		//zoom이 몇인지 담는다.
+		zoom = map.getZoom();
+		console.log(zoom);
+		
+		//zoom이 10일때부터 다른 모든 시들도 보여준다.
+		if(zoom >= 10) {
+			for(var i=0; i<=72; i++) {
+				markerArray[i].setVisible(true);
+			}
+		} else if(zoom <= 8) {	//zoom이 8됬을때 다시 광역시만 보여준다. 클릭한 도시는 지우지 않고 그대로 보여준다.
+			console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
+			var markerIndexArraySort = [];
+			markerIndexArraySort = markerIndexArray;
+			markerIndexArraySort.sort();
+			//console.log('클릭한 도시 번호 차례대로 : ' + markerIndexArraySort);
+			
+			for(var i=0; i<=72; i++) {
+				markerArray[i].setVisible(false);
+			}
+			
+			/*var zoomCount = 0;
+			for(var j=0; j<markerIndexArraySort.length; j++) {
+				for(var i=0; i<=72; i++) {
+					if(i != markerIndexArraySort[j]) {
+						console.log(j + ' <!=> ' + markerIndexArraySort[j]);
+						markerArray[i].setVisible(false);
+					} else if(i == markerIndexArraySort[j]) {
+						zoomCount++;
+						console.log(j + ' <==> ' + markerIndexArraySort[j]);
+						markerArray[i].setVisible(true);
+					}
+				}
+			}*/
+		}
+	});
+}
+
+function markerMouseEvent() {
+	//클릭한 도시는 mouseover든 mouseout이든 동작하지 않도록 하기!!
+	for(var h=0; h<markerArray.length; h++) {
+		var mouseOverListener = google.maps.event.addListener(markerArray[h], 'mouseover', function() {
+			var mouseoverIndex = this.index;
+			//console.log(mouseoverIndex + ', 클릭한 도시 개수 : ' + markerIndexArray.length);
+			
+			//클릭한 도시가 없을때
+			if(markerIndexArray.length == 0) {
+				markerArray[mouseoverIndex].setIcon(markerIcon1);
+			} else {	//클릭한 도시가 있을때
+				for(var j=0; j<markerIndexArray.length; j++) {
+					//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같지 않다면
+					//마커 이미지를 빨간색으로 보여준다.
+					if(mouseoverIndex != markerIndexArray[j]) {
+						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
+						markerArray[mouseoverIndex].setIcon(markerIcon1);
+						//console.log('working');
+					}
+				}
+			}
+		});
+		var mouseOutListener = google.maps.event.addListener(markerArray[h], 'mouseout', function() {
+			var mouseoutIndex = this.index;
+			//console.log(mouseoutIndex + ', 클릭한 도시 개수 : ' + markerIndexArray.length);
+			
+			//클릭한 도시가 없을때
+			if(markerIndexArray.length == 0) {
+				markerArray[mouseoutIndex].setIcon(markerIcon2);
+			} else {	//클릭한 도시가 있을때
+				var count = 0;
+				for(var j=0; j<markerIndexArray.length; j++) {
+					if(count == 1) {
+						return;
+					}
+					//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같다면
+					//마커 이미지를 빨간색으로 보여준다.
+					if(mouseoutIndex == markerIndexArray[j]) {
+						count++;
+						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
+						markerArray[mouseoutIndex].setIcon(markerIcon1);
+						//console.log('mouseout not working');
+					} else if(mouseoutIndex != markerIndexArray[j]) {
+						//만약 클릭한 도시의 번호와 마우스가 올려져있는 마커의 도시 번호가 같지 않다면
+						//마커 이미지를 파란색으로 보여준다.
+						//console.log('클릭한 도시 번호 : ' + markerIndexArray[j]);
+						markerArray[mouseoutIndex].setIcon(markerIcon2);
+						//console.log('mouseout working');
+					}
+				}
+			}
+		});
+	}
+}
+	
 function poly(pathArray) {
 	console.log('-------poly on-------');
 	//polyline 끝을 화살표 모양으로 표시하기 위한 코드
@@ -334,6 +359,7 @@ function lineRemoveFunction(removeButtonIndex) {
 
 $(document).ready(function() {
 	var $stayCount = 0;
+	
 	$('.cityInfoLi').click(function() {
     	var cityInfoIndex = $('.cityInfoLi').index(this);
     	//console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
@@ -389,5 +415,15 @@ $(document).ready(function() {
 		}
 		$stayDay += 1;
 		$('#stayDay').val($stayDay);
+	});
+	
+	$('#leftMenuLandmarkList').hide();
+	
+	//cityName li 태그를 클릭했을때 실행할 함수
+	$('body').on('click', '.cityName', function() {
+		var cityClickIndex = $('.cityName').index(this);
+		var cityClickName = $('.cityName').eq(cityClickIndex).text();
+		console.log(cityClickIndex + '번째 도시 : ' + cityClickName);
+		$('#leftMenuLandmarkList').show();
 	});
 });
