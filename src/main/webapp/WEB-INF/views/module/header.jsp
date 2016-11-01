@@ -10,6 +10,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
+		var infoSearchInput = $('#infoSearchInput');
+		
 		$('.hiddenNavWrap').hover(function(){
 			$(this).children('.hiddenNav').fadeIn(300);
 		}, function(){
@@ -40,6 +43,14 @@
 			$('#searchHeader').hide();
 			$('#header').show();
 		});
+		
+		/* 엔터키 유효성 검사 */
+	    $(infoSearchInput).keydown(function (key) {			    	 
+	        if(key.keyCode == 13 && infoSearchCheck.test(infoSearchInput.val()) != true){ // 엔터키를 누르고 유효성검사를 통과하지 못했을 경우
+	        	alert('도시이름을 제대로 입력해주세요');
+	        	event.returnValue = false;
+	        }			 
+	    });		
 		
 	})
 </script>

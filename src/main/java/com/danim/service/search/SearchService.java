@@ -37,11 +37,11 @@ public class SearchService {
     	
     }
     
-    public List<SearchDto> getSelectEateryInfo(String search, int moreView) {
+    public List<SearchDto> getSelectEateryInfo(String search) {
     	logger.info("getSelectEateryInfo() SearchService.java");
     	HashMap<String, Object> map = new HashMap<String, Object>();
     	map.put("search", search);
-    	map.put("moreView", moreView);
+    	//map.put("moreView", moreView);
     	
     	List<SearchDto> selectEateryInfoList = searchDao.selectEateryInfo(map);
     	

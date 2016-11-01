@@ -12,6 +12,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!-- 자동완성 기능 이용을 위해 필요한 jqueryUI -->
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- 자체 css -->
+		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">
 		<script>
 			$(document).ready(function(){
 				
@@ -22,6 +24,7 @@
 				var moreView = "<c:out value="${moreView}" />" + 5;
 				
 				alert(moreView);
+				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
 				
@@ -53,22 +56,7 @@
 					$('#searchNotice').show();
 				});
 				
-				/* 클릭 이벤트 유효성 검사 위의 항목 참고 */
-				$('#searchButton').click(function(){
-					if(infoSearchCheck.test(infoSearchInput.val()) != true){
-						alert('도시이름을 제대로 입력해주세요');					
-					}else{
-						$('#infoSearch').submit();
-					}
-				})
-				
-				/* 엔터키 유효성 검사 */
-			    $(infoSearchInput).keydown(function (key) {			    	 
-			        if(key.keyCode == 13 && infoSearchCheck.test(infoSearchInput.val()) != true){ // 엔터키를 누르고 유효성검사를 통과하지 못했을 경우
-			        	alert('도시이름을 제대로 입력해주세요');
-			        	event.returnValue = false;
-			        }			 
-			    });
+
 				
 				$(function(){
 					var autoComplete = new Array();
@@ -86,7 +74,7 @@
 				        url:"/search/infoSearch",      
 				        data: {search: search, moreView: moreView},     
 				        success:function(msg){
-				        	alert('성공');
+				        	alert(moreView);
 				        }
 				    }); 
 				});
@@ -174,7 +162,7 @@
 							<th>
 								<h3>먹을만한 곳</h3>
 							</th>
-							<th style="text-align: right;">
+							<th style="text-align: right;" id="moreView">
 								더보기
 							</th>
 						</tr>

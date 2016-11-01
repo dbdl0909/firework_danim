@@ -22,12 +22,13 @@ public class SearchController {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	
 	@RequestMapping(value="search/infoSearch")
-	public String infoSearch(Model model, String search, @RequestParam(value="moreView", defaultValue="5;") int moreView) {
+	public String infoSearch(Model model, String search, @RequestParam(value="moreView") int moreView) {
 		// search : 검색어(도시이름)
 		logger.info("search {} 값 입니다", search);
+		logger.info("search {} 값 입니다", moreView);
 		List<SearchDto> selectCityInfoName = searchService.getselectCityInfoName(search);
 		List<SearchDto> selectLandmarkInfo = searchService.getSelectLandmarkInfo(search);
-		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search, moreView);
+		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search);
 		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search);
 		List<String> selectCityAll = searchService.getSelectCityAll();
