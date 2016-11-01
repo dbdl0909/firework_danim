@@ -95,12 +95,16 @@
 				<a href="/search/infoSearch">추천여행</a>
 			</li>
 			<li class="hiddenNavWrap">
+				<a style="text-decoration: none; color: black; float:right;" class="searchCityNameSpan"> 
+					알고싶은 도시의 이름을 검색 해보세요
+				</a> 
+			</li>
+			<!-- <li class="hiddenNavWrap">
 				<span class="searchCityNameSpan"> 
 					알고싶은 도시의 이름을 검색하세요!
-					<span class="glyphicon glyphicon-search">
-					</span>
+					<span class="glyphicon glyphicon-search"></span>
 				</span> 
-			</li>
+			</li> -->
 		</ul>
 		<ul id="loginNav">
 			<li>
