@@ -105,7 +105,7 @@
 	</div>	
 	<div class="menu-wrap">
 		<button type="button" onclick="onWrite()" class="btn btn-primary">쓰기</button>
-		<button type="button" onclick="onList()" class="btn btn-primary">목록</button>
+		<button type="button" onclick="onList()" class="btn btn-primary">전체목록</button>
 	</div>
 	<c:if test="${param.searchOption != null and param.searchInput != null}">
 		<div id="paginationWrap">
@@ -191,7 +191,7 @@ var onWrite = function(){
 	location.href = '/community/write?communityCategoryNo='+'${param.communityCategoryNo}'; 
 };
 var onList = function(){
-	location.href = location.href;
+	location.href = '/community/list?communityCategoryNo='+'${param.communityCategoryNo}';
 };
 var onSearch = function(){
 	location.href= '/community/list?searchOption='+document.getElementById('searchOption').value
