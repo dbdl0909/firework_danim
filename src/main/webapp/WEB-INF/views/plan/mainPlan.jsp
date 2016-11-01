@@ -45,8 +45,8 @@
 			</div>
 	    	<div id="mainPlanDivTop">
 				<div>
-					출발일<input type="date"/>
-					숙박일<input type="text"/>
+					출발일<input type="date" id="startDate"/>
+					숙박일<input type="text" id="stayDay"/>
 				</div>
 			</div>
 			
@@ -73,7 +73,7 @@
 			</div>
 			
 			<div id="mainPlanDivContent">
-				<!-- Modal  <inputy data-toggle='modal' data-target='#myModal'/>
+				<!-- Modal -->
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-sm">
 						<div class="modal-content">
@@ -89,7 +89,7 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 				<div id="map">
 				</div>
 			</div>

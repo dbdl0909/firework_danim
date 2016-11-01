@@ -15,6 +15,8 @@ var zoomLocation;
 //map에서 가리킬 좌표의 zoom 값을 담는 변수
 var zoomSize;
 
+var $stayDay;
+
 var markerIcon1 = "../../resources/images/placeholder.png";
 var markerIcon2 = "../../resources/images/placeholder2.png";
 
@@ -177,42 +179,52 @@ function initMap() {
 			
 			google.maps.event.addListener(infowindow, 'domready', function() {
 		    	document.getElementById('addButton').addEventListener('click', function(event) {
-		    		console.log(markerIndex);
-		    		markerArray[markerIndex].setIcon(markerIcon1);
-		    		markerArray[markerIndex].setVisible(true);
-		    		
-		    		markerIndexArray.push(markerIndex);
-		    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
-		    		$('#mainPlanUl').append("<li class='leftMenuLi'>" +
-		    									infoNameArray[markerIndex] +
-		    									"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" +
-		    									"<div class='cityChooseMenu'>" +
-		    										"<img class='arrowLeft' src='../../resources/images/arrowPointingToLeft.png'/>" +
-		    										"<span class='stayCount'>1</span>일" +
-		    										"<img class='arrowRight' src='../../resources/images/arrowPointingToRight.png'/>" +
-		    									"</div>" +
-		    								"</li>");
-		    		
-		    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
-					var latitude = Number(cityInfoList[markerIndex].latitude);
-					var langitude = Number(cityInfoList[markerIndex].langitude);
-					//console.log(markerIndex + ' : ' + latitude + ', ' + langitude);
-					
-					//pathArray 배열에 클릭한 도시의 좌표를 누적시키기 위해 전역변수로 둔다.
-					pathArray.push({lat: latitude, lng: langitude});
-					console.log('pathArray 길이 : ' + pathArray.length);
-		    		
-					//도시를 2개 이상 선택했을때, 이동경로를 찍기 위한 함수를 호출한다.
-					if(pathArray.length >= 2) {
-						flag = true;
-		    			lineFunction(pathArray, flag);
+		    		var startDate = document.getElementById('startDate').value;
+					//console.log('startDate : ' + startDate);
+					if(startDate == '') {
+						alert('출발일을 입력해주세요!');
+					} else {
+			    		console.log(markerIndex);
+			    		markerArray[markerIndex].setIcon(markerIcon1);
+			    		markerArray[markerIndex].setVisible(true);
+			    		
+			    		markerIndexArray.push(markerIndex);
+			    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
+			    		$('#mainPlanUl').append("<li class='leftMenuLi'>" +
+			    									infoNameArray[markerIndex] +
+			    									"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" +
+			    									"<div class='cityChooseMenu'>" +
+			    										"<img class='arrowLeft' src='../../resources/images/arrowPointingToLeft.png'/>" +
+			    										"<span class='stayCount'>1</span>일" +
+			    										"<img class='arrowRight' src='../../resources/images/arrowPointingToRight.png'/>" +
+			    									"</div>" +
+			    								"</li>");
+			    		
+			    		$stayDay = Number(document.getElementById('stayDay').value);
+			    		$stayDay += 1;
+			    		document.getElementById('stayDay').value = Number($stayDay);
+			    		
+			    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
+						var latitude = Number(cityInfoList[markerIndex].latitude);
+						var langitude = Number(cityInfoList[markerIndex].langitude);
+						//console.log(markerIndex + ' : ' + latitude + ', ' + langitude);
+						
+						//pathArray 배열에 클릭한 도시의 좌표를 누적시키기 위해 전역변수로 둔다.
+						pathArray.push({lat: latitude, lng: langitude});
+						console.log('pathArray 길이 : ' + pathArray.length);
+			    		
+						//도시를 2개 이상 선택했을때, 이동경로를 찍기 위한 함수를 호출한다.
+						if(pathArray.length >= 2) {
+							flag = true;
+			    			lineFunction(pathArray, flag);
+						}
+						//prevInfowindow 변수를 사용해서 이전의 infowindow를 닫는다.
+						if(prevInfowindow) {
+							prevInfowindow.close();
+						}
+					    //prevInfowindow 변수에 infowindow를 담는다.
+						prevInfowindow = infowindow;
 					}
-					//prevInfowindow 변수를 사용해서 이전의 infowindow를 닫는다.
-					if(prevInfowindow) {
-						prevInfowindow.close();
-					}
-				    //prevInfowindow 변수에 infowindow를 담는다.
-					prevInfowindow = infowindow;
 		    	});
 			});
 		});
@@ -259,22 +271,34 @@ function lineFunction(pathArray, flag){
 		console.log('lineArray 길이 : ' + lineArray.length);
 		var maxLength = lineArray.length;
 		
-		if(maxLength >= 2 || lineRemoveIndex < maxLength) {
+		if(lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2) {
+			//선택한 도시 중 처음과 끝 제외한 중간 제거
+			console.log('lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2');
 			lineArray[lineRemoveIndex].setMap(null);
 			lineArray.splice(lineRemoveIndex, 1);
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
-			console.log('lineArray 길이 : ' + lineArray.length);
+			//console.log('lineArray 길이 : ' + lineArray.length);
 			poly(pathArray);
 			lineArray.push(pathLine);
 		} else if(maxLength == 1) {
+			//선택한 도시 하나일때 제거
+			console.log('maxLength == 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
 			poly(pathArray);
 			lineArray.push(pathLine);
-		}else if(maxLength == lineRemoveIndex) {
+		} else if(maxLength == lineRemoveIndex) {
+			//선택한 도시 중 마지막 제거
+			console.log('maxLength == lineRemoveIndex');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
+		} else if(lineRemoveIndex == 0 && maxLength >= 2) {
+			//선택한 도시 중 첫번째 제거
+			console.log('lineRemoveIndex == 0 && maxLength >= 2');
+			lineArray[lineRemoveIndex].setMap(null);
+			lineArray.splice(lineRemoveIndex, 1);
+			poly(pathArray);
 		}
 	}
 };
@@ -308,7 +332,8 @@ function lineRemoveFunction(removeButtonIndex) {
 	}
 }
 
-$(document).ready(function() {	
+$(document).ready(function() {
+	var $stayCount = 0;
 	$('.cityInfoLi').click(function() {
     	var cityInfoIndex = $('.cityInfoLi').index(this);
     	//console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
@@ -320,28 +345,6 @@ $(document).ready(function() {
 		map.setCenter(zoomCity);
     });
 	
-	//arrowLeft 이미지 태그를 클릭했을때 실행할 함수
-	$('body').on('click', '.arrowLeft', function() {
-		var liIndex = $('.arrowLeft').index(this);
-		console.log(liIndex);
-		var stayCount = Number($('.stayCount').eq(liIndex).text());
-		if(stayCount > 1) {
-			stayCount-=1;
-			$('.stayCount').eq(liIndex).text(stayCount);
-		} else if(stayCount > 1) {
-			
-		}
-	});
-	$('body').on('click', '.arrowRight', function() {
-		var liIndex = $('.arrowRight').index(this);
-		console.log(liIndex);
-		var stayCount = Number($('.stayCount').eq(liIndex).text());
-		if(stayCount >= 1) {
-			stayCount+=1;
-			$('.stayCount').eq(liIndex).text(stayCount);
-		}
-	});
-	
 	//removeButton 이미지 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.removeButton', function() {
 		//클릭한 태그의 번호를 가져와서 그 번호에 해당하는 li 태그를 제거한다.
@@ -351,7 +354,40 @@ $(document).ready(function() {
 		//이동 경로에서 removeButton 이미지를 클릭한 도시 제거
 		lineRemoveFunction(removeButtonIndex);
 		
+		console.log(Number($('.stayCount').eq(removeButtonIndex).text()));
+		$stayDay -= Number($('.stayCount').eq(removeButtonIndex).text());
+		$('#stayDay').val($stayDay);
+		
 		//경로 제거후 li 태그 제거
 		$('.leftMenuLi').eq(removeButtonIndex).remove();
+	});
+	
+	//arrowLeft 이미지 태그를 클릭했을때 실행할 함수
+	$('body').on('click', '.arrowLeft', function() {
+		//클릭할때마다 일 수를 1씩 뺀다.
+		var liIndex = $('.arrowLeft').index(this);
+		console.log(liIndex);
+		$stayCount = Number($('.stayCount').eq(liIndex).text());
+		if($stayCount > 1) {
+			$stayCount-=1;
+			$('.stayCount').eq(liIndex).text($stayCount);
+		}
+		if($stayDay > 1) {
+			$stayDay -= 1;
+			$('#stayDay').val($stayDay);
+		}
+	});
+	//arrowRight 이미지 태그를 클릭했을때 실행할 함수
+	$('body').on('click', '.arrowRight', function() {
+		//클릭할때마다 일 수를 1씩 더한다.
+		var liIndex = $('.arrowRight').index(this);
+		console.log(liIndex);
+		$stayCount = Number($('.stayCount').eq(liIndex).text());
+		if($stayCount >= 1) {
+			$stayCount+=1;
+			$('.stayCount').eq(liIndex).text($stayCount);
+		}
+		$stayDay += 1;
+		$('#stayDay').val($stayDay);
 	});
 });
