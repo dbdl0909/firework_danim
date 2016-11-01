@@ -3,52 +3,56 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <html>
-<head>
-<title>다님 플래너</title>
-<link rel="shortcut icon" href="../../resources/images/favicon.ico">
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../../../resources/css/style.css">
-<script>
-	$(document).ready(function(){
-		$('#replyFormSubmit').click(function() {
-			if($('#memberId').val() == '' || $('#replyContent').val() == '' ){
-				alert('작성자, 내용은 필수 입력사항입니다.');
-			}else {
-				$('#replyForm').submit();
-			}
-		});
+	<head>
+		<title>다님 플래너</title>
+		<link rel="shortcut icon" href="../../resources/images/favicon.ico">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
+		<script type="text/javascript" src="../../resources/se/js/jindo.min.js" charset="utf-8" ></script>
+		<!-- google chrome CDN Jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../../../resources/css/style.css">
+		<script>
+			$(document).ready(function(){
+				$('#replyFormSubmit').click(function() {
+					if($('#memberId').val() == '' || $('#replyContent').val() == '' ){
+						alert('작성자, 내용은 필수 입력사항입니다.');
+					}else {
+						$('#replyForm').submit();
+					}
+				});
+				
+				$(".votecard em").clone().appendTo(".votecard div");
+				/* increment that by 1 */
+				var node = $(".votecard em:last strong")
+				node.text(parseInt(node.text())+1);	
+				
+				function flip(obj) {			
+					obj.prev().find("em").animate({
+						top: '-=45'
+					}, 200);
+					obj.toggleClass("voted",true);
+					
+				}
 		
-		$(".votecard em").clone().appendTo(".votecard div");
-		/* increment that by 1 */
-		var node = $(".votecard em:last strong")
-		node.text(parseInt(node.text())+1);	
-		
-		function flip(obj) {			
-			obj.prev().find("em").animate({
-				top: '-=45'
-			}, 200);
-			obj.toggleClass("voted",true);
-			
-		}
-
-		$('.voteaction').bind({
-		  click: function(event) {
-		    event.preventDefault()
-		    setTimeout("$('#voteForm').submit()", 140);
-		  },
-		  mouseup: function() {
-		    var moved = flip($(this));
-			$(this).unbind('mouseup');
-			 
-		  }
-		});
-	});
-</script>
-
-</head>
+				$('.voteaction').bind({
+				  click: function(event) {
+				    event.preventDefault()
+				    setTimeout("$('#voteForm').submit()", 140);
+				  },
+				  mouseup: function() {
+				    var moved = flip($(this));
+					$(this).unbind('mouseup');
+					 
+				  }
+				});
+			});
+		</script>
+	</head>
 <body>
 <!-- 헤더 -->
 <jsp:include page="../module/header.jsp" />

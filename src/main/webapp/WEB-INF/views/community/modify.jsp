@@ -4,29 +4,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="../../resources/images/favicon.ico">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>다님 플래너</title>
-<link rel="shortcut icon" href="../../resources/images/favicon.ico">
-<script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
-<script type="text/javascript" src="../../resources/se/js/jindo.min.js" charset="utf-8" ></script>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../../resources/css/style.css">
-<link rel="stylesheet" href="../../resources/css/style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script>
-	$(document).ready(function(){
-		var communityCategoryNoVal = '${detailView.communityCategoryNo}';
-		$('#communityCategoryNo option').each(function(i){
-			if($('#communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
-				$(this).attr('selected','selected');				
-			}			
-		});
-	});
-</script>
-</head>
-
+	<head>
+		<title>다님 플래너</title>
+		<link rel="shortcut icon" href="../../resources/images/favicon.ico">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8" ></script>
+		<script type="text/javascript" src="../../resources/se/js/jindo.min.js" charset="utf-8" ></script>
+		<!-- google chrome CDN Jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../../../resources/css/style.css">
+		<script>
+			$(document).ready(function(){
+				var communityCategoryNoVal = '${param.communityCategoryNo}';
+				$('#communityCategoryNo option').each(function(i){
+					if($('#communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
+						$(this).attr('selected','selected');				
+					}			
+				});
+			});
+		</script>
+	</head>
 <body>
 <!-- 헤더 -->
 <jsp:include page="../module/header.jsp" />
