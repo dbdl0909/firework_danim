@@ -72,7 +72,7 @@ public class SearchService {
     	
     }
     
-    public Map<String, Object> getSelectEateryInfoOne(String eateryNo) {
+    public Map<String, Object> getSelectEateryInfoOne(String eateryNo, int moreView) {
     	logger.info("getSelectEateryInfoOne() SearchService.java");
     	
     	Map<String, Object> selectEateryInfoOne = searchDao.selectEateryInfoOne(eateryNo);

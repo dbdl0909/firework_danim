@@ -22,7 +22,7 @@ public class SearchController {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 	
 	@RequestMapping(value="search/infoSearch")
-	public String infoSearch(Model model, String search) {
+	public String infoSearch(Model model, String search, @RequestParam(value="moreView", defaultValue="5;") int moreView) {
 		// search : 검색어(도시이름)
 		logger.info("search {} 값 입니다", search);
 		List<SearchDto> selectCityInfoName = searchService.getselectCityInfoName(search);

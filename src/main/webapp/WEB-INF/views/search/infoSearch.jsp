@@ -19,6 +19,7 @@
 				var search = "<c:out value="${search}" />";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
+				var moreView = 5;
 				
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
@@ -77,6 +78,17 @@
 					$('#infoSearchInput').autocomplete({
 						source: autoComplete
 					});
+				});
+				
+				$('#moreView').click(function(){
+				    $.ajax({      
+				        type:"POST",  
+				        url:"/search/infoSearch",      
+				        data: {search: search, moreView: moreView}      
+				        success:function(msg){
+				        	alert('성공');
+				        }
+				    }); 
 				});
 				
 			});
@@ -162,14 +174,14 @@
 							<th>
 								<h3>먹을만한 곳</h3>
 							</th>
-							<th>
-							
+							<th style="text-align: right;">
+								더보기
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:if test="${selectEateryInfo != ''}">			
-							<c:forEach var="selectEateryInfo" items="${selectEateryInfo}">
+							<c:forEach var="selectEateryInfo" end="9" items="${selectEateryInfo}">
 								<tr>
 									<td>${selectEateryInfo.cityInfoDoName} > ${selectEateryInfo.cityInfoName} > ${selectEateryInfo.eateryName}</td>
 									<td><a id="eateryInfo" href="eateryInfo?eateryNo=${selectEateryInfo.eateryNo}&cityInfoName=${selectEateryInfo.cityInfoName}">가이드북</a></td>

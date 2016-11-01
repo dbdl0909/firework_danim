@@ -56,7 +56,8 @@
 			city.city_info_no = eat.city_info_no		
 		WHERE
 			city_info_name
-		LIKE CONCAT(#{search},'%')			
+		LIKE CONCAT(#{search},'%')
+		LIMIT #{moreView}		
 	</select>
 	
 	<!-- 도시 이름을 통해서 해당 지역의 행사 이름을 조회하는 쿼리 -->
