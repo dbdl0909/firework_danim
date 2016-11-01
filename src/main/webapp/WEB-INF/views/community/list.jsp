@@ -107,7 +107,7 @@
 		<button type="button" onclick="onWrite()" class="btn btn-primary">쓰기</button>
 		<button type="button" onclick="onList()" class="btn btn-primary">목록</button>
 	</div>
-	<c:if test="${param.searchOption != '' and param.searchInput !='' }">
+	<c:if test="${param.searchOption != null and param.searchInput != null}">
 		<div id="paginationWrap">
 			<ul class="pagination">
 			<li>
@@ -135,7 +135,7 @@
 			</ul>
 		</div>
 	</c:if>
-	<c:if test="${param.searchOption == '' and param.searchInput == '' }">
+	<c:if test="${param.searchOption == null and param.searchInput == null }">
 		<div id="paginationWrap">
 			<ul class="pagination">
 			<li>
