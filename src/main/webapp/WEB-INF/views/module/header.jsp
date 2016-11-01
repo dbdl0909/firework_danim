@@ -46,7 +46,7 @@
 <style type="text/css">
 #header #headerNavWrap #headerNav .hiddenNavWrap span{font-size:16px; color:black; font-weight: 400; line-height:3em;}
 #header .searchCityNameSpan{cursor: pointer;}
-#infoSearchInput{border: 0px; width: 1100px; height: 116px; font-size: 24px;}
+#infoSearchInput{border: 0px; width: 1100px; height: 115px; font-size: 24px;}
 #infoSearch{margin: 0px auto; text-align: center; height: 116px; float: left;}
 #searchHeader{width:100%; height:116px; border-bottom:1px solid #ccc;}
 #searchGlyphicon{font-size: 25px; float:left; margin-right: 20px; margin-top: 44px;}
