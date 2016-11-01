@@ -163,22 +163,24 @@
 			</ul>
 		</div>
 	</c:if>
-	<div class="search">
-		<div class="col-lg-4">
-			<div class="input-group">
-				<span class="input-group-btn">
-				<select id="searchOption" name="searchOption" class="searchOption btn btn-default ">
-					<option value="title">제목</option>
-					<option value="contents">내용</option>
-					<option value="author">작성자</option>
-				</select>
-				</span>
-				<input type="text" id="searchInput" name="searchInput" class="form-control" value="${param.searchInput}" />
-				<span class="input-group-btn">
-					<button type="button" onclick="onSearch()" class="btn btn-"><span class="glyphicon glyphicon-search"></span> 검색</button>
-				</span>
-			</div>
-		</div>	
+	<div id="searchWrap" class="clearfix">
+		<div class="search clearfix">
+			<div class="col-lg-4">
+				<div class="input-group">
+					<span class="input-group-btn">
+					<select id="searchOption" name="searchOption" class="searchOption btn btn-default ">
+						<option value="title">제목</option>
+						<option value="contents">내용</option>
+						<option value="author">작성자</option>
+					</select>
+					</span>
+					<input type="text" id="searchInput" name="searchInput" class="form-control" value="${param.searchInput}" />
+					<span class="input-group-btn">
+						<button type="button" onclick="onSearch()" class="btn btn-"><span class="glyphicon glyphicon-search"></span> 검색</button>
+					</span>
+				</div>
+			</div>	
+		</div>
 	</div>
 </div>
 <!-- 헤더 -->
