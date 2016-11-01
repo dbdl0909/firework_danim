@@ -116,7 +116,7 @@ public class CommunityDto{
 		this.communityReplyCount = communityReplyCount;
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return "CommunityDto [communityNo=" + communityNo + ", communityBan=" + communityBan + ", communityBanReason="
 				+ communityBanReason + ", communityCategoryNo=" + communityCategoryNo + ", planNo=" + planNo
@@ -125,6 +125,6 @@ public class CommunityDto{
 				+ communityRating + ", communityNotice=" + communityNotice + ", communityDate=" + communityDate
 				+ ", communityUpdate=" + communityUpdate + ", communityReportCount=" + communityReportCount
 				+ ", communityReplyCount=" + communityReplyCount + "]";
-	}
+	}*/
 	
 }

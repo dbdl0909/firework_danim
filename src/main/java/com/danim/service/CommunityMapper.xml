@@ -140,14 +140,38 @@
 	</select>
 	<!-- 해당 카테고리 내의 총 게시글 -->
 	<select id="countCommunityList" 
-		parameterType="String"
+		parameterType="java.util.Map"
 		resultType="Integer" >
-	SELECT 
-		COUNT(*) 
-	FROM 
-		community
-	WHERE 
-		community_category_no = #{communityCategoryNo};
+	<choose>
+		<when test="searchInput ==''">	
+			SELECT 
+				COUNT(*) 
+			FROM 
+				community
+			WHERE 
+				community_category_no = #{communityCategoryNo};
+		</when>
+		<when test="searchInput !=''">
+			SELECT 
+				COUNT(*) 
+			FROM 
+				community
+			WHERE 
+				community_category_no = #{communityCategoryNo}
+			AND
+			<choose>
+				<when test="searchOption == 'title'">
+					community_subject LIKE CONCAT('%',#{searchInput},'%')
+				</when>
+				<when test="searchOption == 'contents'">
+					community_content LIKE CONCAT('%',#{searchInput},'%')
+				</when>
+				<when test="searchOption == 'author'">
+					member_id LIKE CONCAT('%',#{searchInput},'%')
+				</when>
+			</choose>	
+		</when>	
+	</choose>	
 	</select>	
 	<!-- 해당 게시글 detail -->
 	<select id="selectDetailViewByCommunityNo"
@@ -174,22 +198,58 @@
 	<select id="selectCommunityList"
 			parameterType="java.util.Map"
 			resultType="com.danim.service.community.CommunityDto">
-		SELECT 
-			community_no as communityNo,
-			member_id as memberId,
-			community_category_no as communityCategoryNo,
-			community_subject as communitySubject,
-			community_readcount as communityReadcount,
-			community_notice as communityNotice,
-			community_rating as communityRating,
-			community_update as communityUpdate,
-			community_reply_count as communityReplyCount					
-		FROM
-			community
-		WHERE
-			community_category_no = #{communityCategoryNo}
-		ORDER BY communityNo DESC	
-		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};	
+		<choose>	
+			<when test="searchInput == ''">
+				SELECT 
+					community_no as communityNo,
+					member_id as memberId,
+					community_category_no as communityCategoryNo,
+					community_subject as communitySubject,
+					community_readcount as communityReadcount,
+					community_notice as communityNotice,
+					community_rating as communityRating,
+					community_update as communityUpdate,
+					community_content as communityContent,
+					community_reply_count as communityReplyCount					
+				FROM
+					community
+				WHERE
+					community_category_no = #{communityCategoryNo}
+				ORDER BY communityNo DESC	
+				LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
+			</when>
+			<when test="searchInput != ''">
+				SELECT 
+					community_no as communityNo,
+					member_id as memberId,
+					community_category_no as communityCategoryNo,
+					community_subject as communitySubject,
+					community_readcount as communityReadcount,
+					community_notice as communityNotice,
+					community_rating as communityRating,
+					community_update as communityUpdate,
+					community_content as communityContent,
+					community_reply_count as communityReplyCount									
+				FROM
+					community
+				WHERE
+					community_category_no = #{communityCategoryNo}
+				AND
+				<choose>
+					<when test="searchOption == 'title'">
+						community_subject LIKE CONCAT('%',#{searchInput},'%')
+					</when>
+					<when test="searchOption == 'contents'">
+						community_content LIKE CONCAT('%',#{searchInput},'%')
+					</when>
+					<when test="searchOption == 'author'">
+						member_id LIKE CONCAT('%',#{searchInput},'%')
+					</when>
+				</choose>
+				ORDER BY communityNo DESC	
+				LIMIT #{pageNation.startRow} , #{pageNation.linePerPage}
+			</when>
+		</choose>	
 	</select>
 	<!-- 게시글 입력 -->	
 	<insert 

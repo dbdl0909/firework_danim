@@ -32,8 +32,8 @@ public class CommunityDao {
 		return sqlSession.selectOne(NS+".selectDetailViewByCommunityNo", communityNo);		
 	}
 	
-	public int countCommunityList(String communityCategoryNo){		
-		return sqlSession.selectOne(NS+".countCommunityList", communityCategoryNo);
+	public int countCommunityList(Map<String, Object> map){		
+		return sqlSession.selectOne(NS+".countCommunityList", map);
 	}
 	public void modifyCommunityItem(CommunityDto communityDto){
 		sqlSession.update(NS+".modifyCommunityItem", communityDto);		

@@ -31,17 +31,21 @@ public class CommunityController {
 	@Autowired
 	private CommunityService communityService;
 	
-	@RequestMapping(value = "/community/list")
-	public String home(Model model,
+	@RequestMapping(value = "/community/list", method = RequestMethod.GET)
+	public String communityList(Model model,
 			@RequestParam(value="communityCategoryNo", defaultValue="community_category_01") String communityCategoryNo,
-			@RequestParam(value="page", defaultValue="1") int page) {
-		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo, page);
+			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(value="searchOption", defaultValue="") String searchOption,
+			@RequestParam(value="searchInput", defaultValue="") String searchInput) {
+		logger.info("searchOption{} CommunityController.java", searchOption);
+		logger.info("searchInput{} CommunityController.java", searchInput);
+		List<CommunityDto> communityList = communityService.selectCommunityList(communityCategoryNo, page, searchOption, searchInput);
 		List<CommunityDto> communityNoticeList = communityService.selectCommunityNoticeList(communityCategoryNo);
 		//페이징시 마지막 페이지와 총 블럭페이지의 오차를 없애기위한 코드
 		// 마지막 페이지를 강제로 endpage로 치환하여 오차를 없애준다.
 		int startPage = communityService.getStartPage(page);
 		int endPage = communityService.getEndPage(startPage);
-		int lastPage = communityService.getLastPage(communityCategoryNo, page);
+		int lastPage = communityService.getLastPage(communityCategoryNo, page, searchOption, searchInput);
 		if(lastPage < endPage){
 			endPage = lastPage;			
 		}
@@ -50,7 +54,7 @@ public class CommunityController {
 		logger.info("totalPage{} CommunityController.java", lastPage);
 		model.addAttribute("communityList", communityList);
 		model.addAttribute("communityNoticeList", communityNoticeList);
-		model.addAttribute("totalCount", communityService.countCommunityList(communityCategoryNo));
+		model.addAttribute("totalCount", communityService.countCommunityList(communityCategoryNo, searchOption, searchInput));
         model.addAttribute("startPage", startPage);
         model.addAttribute("page", page);
         model.addAttribute("endPage", endPage);

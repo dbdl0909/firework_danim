@@ -45,11 +45,16 @@ public class CommunityService {
 	//컨트롤러에서 넘어온 카테고리 넘버와 페이지 값을 
 	//util패키지 내의 pagination클래스에 넣고 
 	//map에 담아 쿼리 호출
-	public List<CommunityDto> selectCommunityList(String communityCategoryNo, int page){
+	public List<CommunityDto> selectCommunityList(String communityCategoryNo, int page, 
+												  String searchOption, String searchInput){
         Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("pageNation", pageNation);
         map.put("communityCategoryNo", communityCategoryNo);
+        map.put("searchOption", searchOption);
+        map.put("searchInput", searchInput);
+        logger.info("searchOption {} ", map.get("searchOption"));
+        logger.info("searchInput {} ", map.get("searchInput"));
         List<CommunityDto> communityList =  cummunityDao.selectCommunityList(map);        
 		return communityList;	
 	}
@@ -70,8 +75,12 @@ public class CommunityService {
 		return communityDto;		
 	}
 	//해당 카테고리의 총 게시글 수
-	public int countCommunityList(String communityCategoryNo){		
-		return cummunityDao.countCommunityList(communityCategoryNo);
+	public int countCommunityList(String communityCategoryNo, String searchOption, String searchInput ){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("communityCategoryNo", communityCategoryNo);
+		map.put("searchOption", searchOption);
+		map.put("searchInput", searchInput);
+		return cummunityDao.countCommunityList(map);
 	}
 	//시작페이지를 정하기 위한 메소드
     public int getStartPage(int page){
@@ -84,8 +93,8 @@ public class CommunityService {
         return this.endPage;
     }
     
-    public int getLastPage(String communityCategoryNo, int page) {
-		int totalCount = countCommunityList(communityCategoryNo);
+    public int getLastPage(String communityCategoryNo, int page, String searchOption, String searchInput ) {
+		int totalCount = countCommunityList(communityCategoryNo, searchOption, searchInput);
 		int lastPage = (int) Math.ceil((double)totalCount/LINE_PER_PAGE);
 		return lastPage;    	
     }

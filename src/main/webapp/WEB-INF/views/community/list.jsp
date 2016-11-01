@@ -84,7 +84,7 @@
 					<td style="font-weight:bold;">[공지]</td>
 					<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${noticeList.communityNo}">${noticeList.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${noticeList.communityReplyCount}]</span></td>
 					<td style="font-weight:bold;">${noticeList.memberId}</td>
-					<td style="font-weight:bold;">${noticeList.communityDate}</td>
+					<td style="font-weight:bold;">${noticeList.communityUpdate}</td>
 					<td style="font-weight:bold;">${noticeList.communityReadcount}</td>	
 					<td style="font-weight:bold;">${noticeList.communityRating}</td>	
 				</tr>
@@ -95,7 +95,7 @@
 					<td>${(totalCount-status.index)-((page-1)*10)}</td>					
 					<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${list.communityReplyCount}]</span></td>
 					<td>${list.memberId}</td>
-					<td>${list.communityDate}</td>
+					<td>${list.communityUpdate}</td>
 					<td>${list.communityReadcount}</td>	
 					<td>${list.communityRating}</td>		
 				</tr>
@@ -107,50 +107,79 @@
 		<button type="button" onclick="onWrite()" class="btn btn-primary">쓰기</button>
 		<button type="button" onclick="onList()" class="btn btn-primary">목록</button>
 	</div>
-	<div id="paginationWrap">
-		<ul class="pagination">
-		<li>
-			<c:if test="${page>1}">
-				<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page-1}">&laquo;</a>
-			</c:if>
-		</li>
-		<c:forEach begin="${startPage}" end="${endPage}" var="i">
-		<li>
-			<c:choose>
-				<c:when test="${page == i}">
-					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}" style="background:#434343; color:#fff;">${i}</a>
-				</c:when>
-				<c:otherwise>
-					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}">${i}</a>
-				</c:otherwise>
-			</c:choose>
-		</li>
-		</c:forEach>
-		<li>
-			<c:if test="${page<lastPage}">
-				<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page+1}">&raquo;</a>
-			</c:if>
-		</li>
-		</ul>
+	<c:if test="${param.searchOption != '' and param.searchInput !='' }">
+		<div id="paginationWrap">
+			<ul class="pagination">
+			<li>
+				<c:if test="${page>1}">
+					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page-1}&searchOption=${param.searchOption}&searchInput=${param.searchInput}">&laquo;</a>
+				</c:if>
+			</li>
+			<c:forEach begin="${startPage}" end="${endPage}" var="i">
+			<li>
+				<c:choose>
+					<c:when test="${page == i}">
+						<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}&searchOption=${param.searchOption}&searchInput=${param.searchInput}" style="background:#434343; color:#fff;">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}&searchOption=${param.searchOption}&searchInput=${param.searchInput}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</li>
+			</c:forEach>
+			<li>
+				<c:if test="${page<lastPage}">
+					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page+1}&searchOption=${param.searchOption}&searchInput=${param.searchInput}">&raquo;</a>
+				</c:if>
+			</li>
+			</ul>
+		</div>
+	</c:if>
+	<c:if test="${param.searchOption == '' and param.searchInput == '' }">
+		<div id="paginationWrap">
+			<ul class="pagination">
+			<li>
+				<c:if test="${page>1}">
+					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page-1}">&laquo;</a>
+				</c:if>
+			</li>
+			<c:forEach begin="${startPage}" end="${endPage}" var="i">
+			<li>
+				<c:choose>
+					<c:when test="${page == i}">
+						<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}" style="background:#434343; color:#fff;">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</li>
+			</c:forEach>
+			<li>
+				<c:if test="${page<lastPage}">
+					<a href="/community/list?communityCategoryNo=${param.communityCategoryNo}&page=${page+1}">&raquo;</a>
+				</c:if>
+			</li>
+			</ul>
+		</div>
+	</c:if>
+	<div class="search">
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-btn">
+				<select id="searchOption" name="searchOption" class="searchOption btn btn-default ">
+					<option value="title">제목</option>
+					<option value="contents">내용</option>
+					<option value="author">작성자</option>
+				</select>
+				</span>
+				<input type="text" id="searchInput" name="searchInput" class="form-control" value="${param.searchInput}" />
+				<span class="input-group-btn">
+					<button type="button" onclick="onSearch()" class="btn btn-"><span class="glyphicon glyphicon-search"></span> 검색</button>
+				</span>
+			</div>
+		</div>	
 	</div>
-		<%-- <div class="search">
-			<div class="col-lg-4">
-				<div class="input-group">
-					<span class="input-group-btn">
-					<select name="searchOption" class="searchOption btn btn-default ">
-						<option value="title">제목</option>
-						<option value="contents">내용</option>
-						<option value="author">작성자</option>
-					</select>
-					</span>
-					<input type="hidden" class="searchOptionVal" value="${CommunityDto.searchOption}" />
-					<input type="text" name="searchInput" class="form-control" value="${CommunityDto.searchInput}" />
-					 <span class="input-group-btn">
-						<button type="button" onclick="onSearch()" class="btn btn-"><span class="glyphicon glyphicon-search"></span> 검색</button>
-					</span>
-				</div>
-			</div>	
-		</div> --%>
 </div>
 <!-- 헤더 -->
 <jsp:include page="../module/footer.jsp" />
@@ -162,5 +191,9 @@ var onWrite = function(){
 var onList = function(){
 	location.href = location.href;
 };
+var onSearch = function(){
+	location.href= '/community/list?searchOption='+document.getElementById('searchOption').value
+			+'&searchInput='+document.getElementById('searchInput').value;
+}
 </script>
 </html>
