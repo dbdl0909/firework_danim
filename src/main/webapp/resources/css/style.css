@@ -360,9 +360,9 @@ p {
 /* 헤더 css */
 #header{width:100%; height:auto; border-bottom:1px solid #ccc;}
 #header #headerNavWrap{width:80%; height:55px; margin:30px auto;}
-#header #headerNavWrap #headerLogo{float:left; margin-left: 200px;}
-#header #headerNavWrap #searchWrap{float:left;}
-#header #headerNavWrap #headerNav{float:right; margin-top:8px;}
+#header #headerNavWrap #headerLogo{float:left; margin-left: 110px;}
+#header #headerNavWrap #searchWrap{float:left; width: 403px;}
+#header #headerNavWrap #headerNav{float:left; margin-top:8px; margin-left: 60px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap{float:left; padding:0 30px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap a{font-size:16px; color:#687074; font-weight: 400; line-height:3em;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav{width:290px; background:#fff; position:absolute; z-index:99999;
@@ -373,8 +373,8 @@ display:none; margin-left:-130px; top:80px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav dl dd{float:none; display:block; padding:10px 0;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav dl dt{ width:150px; border-bottom:1px solid #ccc; color:#434343; font-size:14px;}
 #header #headerNavWrap #headerNav .hiddenNavWrap .hiddenNav dl dd a{margin-left:10%; color:#687074; font-size:12px;}
-#header #loginNav{float:right;  padding-top:22px;}
-#header #loginNav span a{ color:#687074; font-size:12px;}
+/* #header #loginNav{float:right;  padding-top:22px;}
+#header #loginNav span a{ color:#687074; font-size:16px;} */
 .container{margin:30px auto;}
 
 /* 게시판전용 css */

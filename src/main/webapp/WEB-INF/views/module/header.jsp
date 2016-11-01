@@ -18,12 +18,14 @@
 		
 		/* '.searchCityNameSpan' 에 마우스를 가져가면 투명해지는 애니메이션 효과 */
 		$(".searchCityNameSpan").mouseover(function(){
-			$('.searchCityNameSpan').stop().animate({opacity:'0.3'});
+			$('.searchCityNameSpan').stop().animate({opacity:'0.3', marginLeft:'5px'});
+			/* $('.searchCityNameSpan').stop().animate({marginLeft:'5px'}); */
 		});
 		
 		/* '.searchCityNameSpan' 에 마우스가 벗어나면 다시 원래 투명도로 돌아가는 애니메이션 효과 */
 		$(".searchCityNameSpan").mouseout(function(){
-			$('.searchCityNameSpan').stop().animate({opacity:'1'});
+			$('.searchCityNameSpan').stop().animate({opacity:'0.8', marginLeft:'10px'});
+			/* $('.searchCityNameSpan').stop().animate({marginLeft:'10px'}); */
 		});
 		
 		/* 'searchCityNameSpan' 클릭시 해당 글씨를 숨기고 검색바를 화면에 나타나게한 후 포커스 */
@@ -43,7 +45,7 @@
 </script>
 <style type="text/css">
 #header #headerNavWrap #headerNav .hiddenNavWrap span{font-size:16px; color:black; font-weight: 400; line-height:3em;}
-#header .searchCityNameSpan{cursor: pointer;}
+#header .searchCityNameSpan{cursor: pointer; margin-left: 10px; opacity: 0.8; font-size: 26px;}
 #infoSearchInput{border: 0px; width: 1100px; height: 115px; font-size: 24px;}
 #infoSearch{margin: 0px auto; text-align: center; height: 116px; float: left;}
 #searchHeader{width:100%; height:116px; border-bottom:1px solid #ccc; display: none;}
@@ -51,7 +53,8 @@
 #closeSearchForm{cursor: pointer; font-size: 38px;  padding: 30px; float: right;}
 .searchInner{margin: 0 auto; width: 1200px; height: 116px;}
 #searchLi{float: left; padding: 0px;}
-#searchWrap{color: #687074; float:right; font-size: 26px; margin-top: 6px;}
+#searchWrap{color: #687074; float:right; margin-top: 6px;}
+.glyphicon{font-size: 18px;}
 </style>
 </head>
 <body>
@@ -62,7 +65,7 @@
 			<div class="hiddenNavWrap">
 				<span class="glyphicon glyphicon-search"></span>
 				<span class="searchCityNameSpan"> 
-					Search City!
+					가고싶은 도시를 검색해주세요!
 				</span> 
 			</div>	
 		</div>
@@ -93,10 +96,10 @@
 				</div>
 			</li>
 			<li class="hiddenNavWrap">
-				<a href="/search/infoSearch">가이드북</a>
+				<a href="/search/infoSearch">추천여행</a>
 			</li>
 			<li class="hiddenNavWrap">
-				<a href="/search/infoSearch">추천여행</a>
+				<a href="">로그인</a>
 			</li>
 		</ul>	
 		<!-- <ul>	
@@ -112,12 +115,6 @@
 				</span> 
 			</li>
 		</ul> -->
-		<ul id="loginNav">
-			<li>
-				<span><a href="">로그인</a></span>
-				<span><a href="">회원가입</a></span>
-			</li>
-		</ul>
 	</div>
 </div>
 <div id ="searchHeader">	
