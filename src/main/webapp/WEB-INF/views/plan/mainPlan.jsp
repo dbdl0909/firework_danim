@@ -50,29 +50,36 @@
 				</div>
 			</div>
 			
-			<div id="mainPlanDivLeft">
-				<div id="mainPlanDivLeftCityList">
-					<label>도시 목록</label>
+			<div id="mainPlanWrap">
+				<div id="mainPlanDivLeft">
+					<div id="mainPlanDivLeftCityList">
+						<label>도시 목록</label>
+					</div>
+					<div id="leftMenuCityList">
+						<ul id="mainPlanCityUl">
+							<c:forEach var="listCityInfo" items="${listCityInfo}">
+						    	<li class="cityInfoLi">${listCityInfo.cityInfoName}</li>
+						    </c:forEach>
+						</ul>
+					</div>
 				</div>
-				<div id="leftMenuCityList">
-					<ul id="mainPlanCityUl">
-						<c:forEach var="listCityInfo" items="${listCityInfo}">
-					    	<li class="cityInfoLi">${listCityInfo.cityInfoName}</li>
-					    </c:forEach>
-					</ul>
+				<div id="mainPlanDivLeft2">
+					<div id="mainPlanDivLeftLabel">
+						<label>도시 루트</label>
+					</div>
+					<div id="leftMenuRouteList">
+						<ul id="mainPlanUl">
+						</ul>
+					</div>
 				</div>
-			</div>
-			<div id="mainPlanDivLeft2">
-				<div id="mainPlanDivLeftLabel">
-					<label>도시 루트</label>
-				</div>
-				<div id="leftMenuRouteList">
-					<ul id="mainPlanUl">
-					</ul>
-				</div>
-				<div id="leftMenuLandmarkList">
-					<ul id="mainPlanlandmarkUl">
-					</ul>
+				<div id="mainPlanDivLeft3">
+					<div id="mainPlanDivLeftLabel2">
+						<label>명소</label>
+					</div>
+					<div id="leftMenuLandmarkList">
+						<ul id="mainPlanlandmarkUl">
+						</ul>
+					</div>
 				</div>
 			</div>
 			

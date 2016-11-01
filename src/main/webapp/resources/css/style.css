@@ -276,34 +276,60 @@ p {
 	text-align:center;
 }
 
+#mainPlanWrap {
+	width:500px;
+	float:left;
+}
 #mainPlanDivLeft {
-	width:8%;
+	width:25%;
 	height:650px;
 	float:left;
 	text-align:left;
 }
+#mainPlanDivLeft2 {
+	width:35%;
+	height:650px;
+	float:left;
+	text-align:left;
+}
+#mainPlanDivLeft3 {
+	width:40%;
+	height:650px;
+	float:left;
+	text-align:left;
+}
+
 #mainPlanDivLeftCityList{
 	text-align:center;
 	color:#ffffff;
-	background-color:#34547F;
-	padding-top:5px;
-	padding-bottom:5px;
-}
-#mainPlanDivLeftLabel {
-	text-align:center;
-	color:#ffffff;
-	background-color:#5288F2;
+	background-color:#093B78;
 	padding-top:5px;
 	padding-bottom:5px;
 }
 #leftMenuCityList {
-	height:624px;
+	height:615px;
 	overflow-y:scroll;
 }
+#mainPlanDivLeftLabel {
+	text-align:center;
+	color:#ffffff;
+	background-color:#115DBF;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+#mainPlanDivLeftLabel2 {
+	text-align:center;
+	color:#ffffff;
+	background-color:#17A0FF;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
 #leftMenuRouteList {
-	height:624px;
+	height:615px;
 	overflow-y:scroll;
 }
+
 #leftMenuCityList ul li{
 	cursor:pointer;
 	padding:10px;
@@ -325,17 +351,10 @@ p {
 	background:#434343;
 	color:#fff;
 }
-#mainPlanDivLeft2 {
-	width:12%;
-	height:650px;
-	float:left;
-	text-align:left;
-}
 
 #mainPlanDivContent {
-	width:80%;
+	width:100%;
 	height:650px;
-	float:left;
 }
 
 #mainPlanAddButton {
