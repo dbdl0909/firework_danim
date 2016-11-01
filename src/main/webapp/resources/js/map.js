@@ -417,13 +417,13 @@ $(document).ready(function() {
 		$('#stayDay').val($stayDay);
 	});
 	
-	//$('#leftMenuLandmarkList').hide();
+	$('#mainPlanDivLeft3').hide();
 	
 	//cityName li 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.cityName', function() {
 		var cityClickIndex = $('.cityName').index(this);
 		var cityClickName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + cityClickName);
-		//$('#leftMenuLandmarkList').show();
+		$('#mainPlanDivLeft3').animate({left: '300px'});
 	});
 });
