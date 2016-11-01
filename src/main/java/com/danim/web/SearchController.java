@@ -30,6 +30,7 @@ public class SearchController {
 		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search);
 		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search);
+		List<String> selectCityAll = searchService.getSelectCityAll();
 		
 		model.addAttribute("search", search);
 		model.addAttribute("selectCityInfoName", selectCityInfoName);
@@ -37,6 +38,7 @@ public class SearchController {
 		model.addAttribute("selectEateryInfo", selectEateryInfo);
 		model.addAttribute("selectEventInfo", selectEventInfo);
 		model.addAttribute("selectStayInfo", selectStayInfo);
+		model.addAttribute("selectCityAll", selectCityAll);
 		
 		
 		return "/search/infoSearch";

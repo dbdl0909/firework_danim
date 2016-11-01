@@ -83,11 +83,18 @@ public class SearchDao {
     	return sessionTemplate.selectOne(nameSpace + ".selectEventByEventInfoName", eventInfoName);
     	
     }
- // stayInfoNo(숙소정보번호)를 통해서 해당 번호 숙소의 상세정보를 조회
+    // stayInfoNo(숙소정보번호)를 통해서 해당 번호 숙소의 상세정보를 조회
 	public Map<String, Object> selectStayInfoOne(String stayInfoNo) {
     	logger.info("selectStayInfoOne() SearchDao.java"); 
 		
     	return sessionTemplate.selectOne(nameSpace + ".selectStayByStayInfoNo", stayInfoNo);
+	}
+	
+	// 모든 도시를 조회
+	public List<String> selectCityAll() {
+		logger.info("selectCityAll() SearchDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectCityAll");
 	}
       
 }

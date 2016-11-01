@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- 자동완성 기능 이용을 위해 필요한 jqueryUI -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script>
 			$(document).ready(function(){
 				
@@ -17,6 +19,7 @@
 				var search = "<c:out value="${search}" />";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
+				
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
@@ -47,7 +50,7 @@
 				$('#closeSearchForm').click(function(){
 					$('#searchForm').hide();
 					$('#searchNotice').show();
-				})
+				});
 				
 				/* 클릭 이벤트 유효성 검사 위의 항목 참고 */
 				$('#searchButton').click(function(){
@@ -65,6 +68,16 @@
 			        	event.returnValue = false;
 			        }			 
 			    });
+				
+				$(function(){
+					var autoComplete = new Array();
+					<c:forEach var="selectCityAll" items="${selectCityAll}">
+					autoComplete.push("${selectCityAll}");
+					</c:forEach>
+					$('#infoSearchInput').autocomplete({
+						source: autoComplete
+					});
+				});
 				
 			});
 		</script>
@@ -86,7 +99,7 @@
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
-			<div class="searchCityNameSpan">
+			<!-- <div class="searchCityNameSpan">
 				<br>
 				<div id="searchNotice">
 					알고싶은 도시의 이름을 검색하세요! <span class="glyphicon glyphicon-search"></span>
@@ -102,7 +115,7 @@
 					    </div>
 					</form>	
 				</div>
-			</div>
+			</div> -->
 			<div id="searchGuide">
 				<h3>"<span id="searchSpan">${search}</span>" (으)로 검색한 결과입니다</h3>
 				<%-- <c:forEach var="selectCityInfoName" items="${selectCityInfoName}">
