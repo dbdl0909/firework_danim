@@ -80,10 +80,10 @@
 				</div>
 				
 				<div id="mainPlanDivLeftTab">
-					<div><img src="../../resources/images/planIcon/landmarkIcon.png"/></div>	<!-- 명소 -->
-					<div><img src="../../resources/images/planIcon/eateryIcon.png"/></div>		<!-- 식당 -->
-					<div><img src="../../resources/images/planIcon/stayIcon.png"/></div>		<!-- 숙소 -->
-					<div><img src="../../resources/images/planIcon/eventIcon.png"/></div>		<!-- 축제 -->
+					<div><img id="mainPlanlandmarkIcon" src="../../resources/images/planIcon/landmarkIcon.png"/></div>	<!-- 명소 -->
+					<div><img id="mainPlanEateryIcon" src="../../resources/images/planIcon/eateryIcon.png"/></div>		<!-- 식당 -->
+					<div><img id="mainPlanStayIcon" src="../../resources/images/planIcon/stayIcon.png"/></div>			<!-- 숙소 -->
+					<div><img id="mainPlanEventIcon" src="../../resources/images/planIcon/eventIcon.png"/></div>		<!-- 축제 -->
 				</div>
 				<div id="mainPlanDivLeftTabMenu">
 					<div id="leftMenuLandmarkList" style="clear:none;">
