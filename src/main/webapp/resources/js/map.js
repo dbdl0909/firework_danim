@@ -417,13 +417,17 @@ $(document).ready(function() {
 		$('#stayDay').val($stayDay);
 	});
 	
-	$('#mainPlanDivLeft3').hide();
+	//$('#mainPlanDivLeft3').hide();
 	
 	//cityName li 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.cityName', function() {
 		var cityClickIndex = $('.cityName').index(this);
 		var cityClickName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + cityClickName);
-		$('#mainPlanDivLeft3').animate({left: '300px'});
+		/*$('#mainPlanDivLeft3').show().animate({"z-index": "2", "opacity":"1", "left":"300px"}, 3000);*/
+		var hiddenChk = $('#mainPlanDivLeft3').is(':hidden');
+		if(hiddenChk) {			
+			$('#mainPlanDivLeft3').show("slide", {direction:"left"}, 1000);
+		}
 	});
 });

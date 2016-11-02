@@ -71,15 +71,15 @@
 						<ul id="mainPlanUl">
 						</ul>
 					</div>
+				</div>				
+			</div>
+			<div id="mainPlanDivLeft3">
+				<div id="mainPlanDivLeftLabel2">
+					<label>명소</label>
 				</div>
-				<div id="mainPlanDivLeft3">
-					<div id="mainPlanDivLeftLabel2">
-						<label>명소</label>
-					</div>
-					<div id="leftMenuLandmarkList">
-						<ul id="mainPlanlandmarkUl">
-						</ul>
-					</div>
+				<div id="leftMenuLandmarkList">
+					<ul id="mainPlanlandmarkUl">
+					</ul>
 				</div>
 			</div>
 			

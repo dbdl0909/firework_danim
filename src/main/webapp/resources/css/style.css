@@ -293,13 +293,14 @@ p {
 	text-align:left;
 }
 #mainPlanDivLeft3 {
+	opacity:0;
+	display:none;
+	left:100px;
 	position:absolute;
 	width:200px;
 	height:650px;
 	float:left;
 	text-align:left;
-	left:300px;
-	z-index:2;
 	background:#fff;
 }
 
