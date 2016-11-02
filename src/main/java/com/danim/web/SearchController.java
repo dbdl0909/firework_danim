@@ -28,7 +28,7 @@ public class SearchController {
 		logger.info("moreView {} 값 입니다", moreView);
 		List<SearchDto> selectCityInfoName = searchService.getselectCityInfoName(search);
 		List<SearchDto> selectLandmarkInfo = searchService.getSelectLandmarkInfo(search);
-		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search);
+		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search, moreView);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search);
 		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search);
 		List<String> selectCityAll = searchService.getSelectCityAll();

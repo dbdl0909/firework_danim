@@ -17,6 +17,7 @@
 		</style>
 		<title>Insert title here</title>
 	</head>
+	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
 			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
@@ -50,4 +51,5 @@
 			</div>
 		</div>		
 	</body>
+	<jsp:include page="../module/footer.jsp"></jsp:include>
 </html>

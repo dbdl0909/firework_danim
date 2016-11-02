@@ -9,14 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.danim.service.plan.CityInfoService;
-
 @Service
 public class SearchService {
 	@Autowired
 	private SearchDao searchDao;
 	
-	private static final Logger logger = LoggerFactory.getLogger(CityInfoService.class);
+	private static final Logger logger = LoggerFactory.getLogger(SearchService.class);
 	
     public List<SearchDto> getselectCityInfoName(String search) {
     	logger.info("getSelectLandmarkInfo() SearchService.java");
@@ -37,11 +35,11 @@ public class SearchService {
     	
     }
     
-    public List<SearchDto> getSelectEateryInfo(String search) {
+    public List<SearchDto> getSelectEateryInfo(String search, int moreView) {
     	logger.info("getSelectEateryInfo() SearchService.java");
     	HashMap<String, Object> map = new HashMap<String, Object>();
     	map.put("search", search);
-    	//map.put("moreView", moreView);
+    	map.put("moreView", moreView);
     	
     	List<SearchDto> selectEateryInfoList = searchDao.selectEateryInfo(map);
     	
