@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.danim.service.TotalInfoMapper">
+	<select id="selectCityInfo"
+			resultType="com.danim.service.plan.CityInfoDto">
+		SELECT
+			city_info_no  as 'cityInfoNo',
+			city_info_do_name as 'cityInfoDoName',
+			city_info_name as 'cityInfoName',
+			city_info_langitude as 'cityInfoLangitude',
+			city_info_latitude as 'cityInfoLatitude',
+			city_info_summary as 'cityInfoSummary',
+			city_info_image as 'cityInfoImage'
+		FROM
+			city_info
+	</select>
+
+	<select id="selectLandmarkInfoByCityName"
+			resultType="com.danim.service.plan.LandmarkInfoDto"
+			parameterType="String">
+		SELECT
+			landmark_info_no as 'landmarkInfoNo',
+			landmark_info_name as 'landmarkInfoName',
+			city_info_no as 'cityInfoNo',
+			landmark_info_location as 'landmarkInfoLocation',
+			landmark_info_homepage as 'landmarkInfoHomepage',
+			landmark_info_summary as 'landmarkInfoSummary',
+			landmark_info_langitude as 'landmarkInfoLangitude',
+			landmark_info_latitude as 'landmarkInfoLatitude',
+			landmark_info_image as 'landmarkInfoImage',
+			landmark_info_fee as 'landmarkInfoFee'
+		FROM
+			landmark_info
+		WHERE
+			city_info_no = (
+				SELECT
+					city_info_no
+				FROM
+					city_info
+				WHERE
+					city_info_name=#{clickCityName}
+			);
+	</select>
+</mapper>

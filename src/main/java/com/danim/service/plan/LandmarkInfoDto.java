@@ -1,15 +1,15 @@
 package com.danim.service.plan;
 
-public class LandmarkInfoDto {				//						landmark_info table
+public class LandmarkInfoDto {				//			landmark_info table
 	private String landmarkInfoNo;			//명소번호					landmark_info_no
 	private String landmarkInfoName;		//명소명					landmark_info_name
 	private String cityInfoNo;				//시청번호					city_info_no
 	private String landmarkInfoLocation;	//상세위치					landmark_info_location
 	private String landmarkInfoHomepage;	//홈페이지					landmark_info_homepage
-	private String landmarkInfoSummary;		//설명					landmark_info_summary
-	private float landmarkInfoLangitude;	//경도					landmark_info_langitude
-	private float landmarkInfoLatitude;		//위도					landmark_info_latitude
-	private String landmarkInfoImage;		//이미지경로/도시번호.jpg		landmark_info_image
+	private String landmarkInfoSummary;		//설명						landmark_info_summary
+	private float landmarkInfoLangitude;	//경도						landmark_info_langitude
+	private float landmarkInfoLatitude;		//위도						landmark_info_latitude
+	private String landmarkInfoImage;		//이미지경로/도시번호.jpg	landmark_info_image
 	private int landmarkInfoFee;			//입장료					landmark_info_fee
 	
 	public String getLandmarkInfoNo() {
@@ -72,10 +72,9 @@ public class LandmarkInfoDto {				//						landmark_info table
 	public void setLandmarkInfoFee(int landmarkInfoFee) {
 		this.landmarkInfoFee = landmarkInfoFee;
 	}
-	
 	@Override
 	public String toString() {
-		return "EateryInfoDto [landmarkInfoNo=" + landmarkInfoNo + ", landmarkInfoName=" + landmarkInfoName
+		return "LandmarkInfoDto [landmarkInfoNo=" + landmarkInfoNo + ", landmarkInfoName=" + landmarkInfoName
 				+ ", cityInfoNo=" + cityInfoNo + ", landmarkInfoLocation=" + landmarkInfoLocation
 				+ ", landmarkInfoHomepage=" + landmarkInfoHomepage + ", landmarkInfoSummary=" + landmarkInfoSummary
 				+ ", landmarkInfoLangitude=" + landmarkInfoLangitude + ", landmarkInfoLatitude=" + landmarkInfoLatitude
