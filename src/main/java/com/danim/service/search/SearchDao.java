@@ -14,7 +14,7 @@ import com.danim.service.plan.CityInfoDao;
 
 @Repository
 public class SearchDao {
-	private static final Logger logger = LoggerFactory.getLogger(CityInfoDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(SearchDao.class);
 	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;

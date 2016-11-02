@@ -13,6 +13,7 @@ public class FrontController {
 	@RequestMapping(value = "/")
 	public String indexController() {
 		logger.info("indexController FrontController.java");
+		
 		return "index";		
 	}
 	
