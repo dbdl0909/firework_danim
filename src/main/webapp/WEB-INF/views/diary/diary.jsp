@@ -7,7 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$().click(function() {
+	$().hide();// div 숨기기.
+	$().show();//보이기
+	$().focus();//초점.
+	
+});
 
+</script>
 
 </head>
 <body class="container">
@@ -16,7 +25,7 @@
         ${dayYear}년 ${dayMonth+1}월
         <small><a href="/diary?dayYear=${dayYear}&dayMonth=${dayMonth}&dayPage=next">[NEXT]</a></small> 
     </h1>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="table-layout:fixed" width="200" height="500">
         <thead>
             <tr>
                 <th>일</th>
@@ -80,5 +89,6 @@
             </tr>    
         </tbody>
     </table>
+    <div>sdfsf</div>
 </body>
 </html>
