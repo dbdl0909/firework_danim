@@ -21,7 +21,7 @@
 	    </style><!-- 구글에 등록된 기본 맵 스타일 -->
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
 	    <script>
-	    	var cityInfoList = new Array();
+	    	var cityInfoList = [];
 		    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */
 		    <c:forEach var="listCityInfo" items="${listCityInfo}">
 		    	var cityInfo = new Object();
@@ -79,8 +79,8 @@
 					<img id="mainPlanDivLeft3Close" src="../../resources/images/closeArrow.png" style="cursor:pointer;float:right;margin-right:10px;margin-top:1px"/>
 				</div>
 				<div id="leftMenuLandmarkList">
-					<ul id="mainPlanlandmarkUl">
-					</ul>
+					<!-- <ul id="mainPlanlandmarkUl">
+					</ul> -->
 				</div>
 			</div>
 			

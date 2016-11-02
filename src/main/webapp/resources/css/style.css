@@ -300,14 +300,14 @@ p {
 	display:none;
 	left:100px;
 	position:absolute;
-	width:200px;
+	width:320px;
 	height:650px;
 	float:left;
 	text-align:left;
 	background:#fff;
 }
 
-#mainPlanDivLeftCityList{
+#mainPlanDivLeftCityList {
 	text-align:center;
 	color:#ffffff;
 	background-color:#093B78;
@@ -338,16 +338,16 @@ p {
 	overflow-y:scroll;
 }
 
-#leftMenuCityList ul li{
+#leftMenuCityList ul li {
 	cursor:pointer;
 	padding:10px;
 	list-style:none;
 }
-#leftMenuCityList ul li:hover{
+#leftMenuCityList ul li:hover {
 	background:#434343;
 	color:#fff;
 }
-#leftMenuRouteList ul li{
+#leftMenuRouteList ul li {
 	height:100px;
 	list-style:none;
 }
@@ -358,6 +358,17 @@ p {
 	cursor:pointer;
 	background:#434343;
 	color:#fff;
+}
+
+#leftMenuLandmarkList ul li{
+	cursor:pointer;
+	padding:10px;
+	list-style:none;
+}
+
+#leftMenuLandmarkList .landmarkInfoImage {
+	width:100px;
+	height:70px;
 }
 
 #mainPlanDivContent {

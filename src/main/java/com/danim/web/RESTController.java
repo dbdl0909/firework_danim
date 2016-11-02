@@ -1,8 +1,8 @@
 package com.danim.web;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,17 +25,17 @@ public class RESTController {
 	Model model;
 	
 	@RequestMapping(value = "/plan/RESTLandmarkInfo")
-	public Map<String, Object> landmarkInfo(Model model, @RequestParam(value="clickCityName") String clickCityName) {
+	public String landmarkInfo(Model model, @RequestParam(value="clickCityName") String clickCityName) {
 		logger.info("landmarkInfo() RESTController.java");
 		logger.info("clickCityName : {} landmarkInfo() RESTController.java", clickCityName);
 		
 		List<LandmarkInfoDto> listLandmarkInfo = totalInfoService.selectLandmarkInfoByCityName(clickCityName);
 		logger.info("listLandmarkInfo : {} landmarkInfo() RESTController.java", listLandmarkInfo);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("listLandmarkInfo", listLandmarkInfo);
-		//model.addAttribute("listLandmarkInfo", listLandmarkInfo);
+		/*Map<String, Object> map = new HashMap<String, Object>();
+		map.put("listLandmarkInfo", listLandmarkInfo);*/
+		model.addAttribute("listLandmarkInfo", listLandmarkInfo);
 		
-		return map;
+		return "/plan/landmarkInfo";
 	}
 	
 }

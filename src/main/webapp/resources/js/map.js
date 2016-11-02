@@ -423,32 +423,14 @@ $(document).ready(function() {
 		var clickCityName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + clickCityName);
 		
-		var landmarkList = [];
-		
 		$.ajax({
 			url:'/plan/RESTLandmarkInfo',
 			data:{clickCityName:clickCityName},
 			type:'GET',
 			success:function(data){
-				if(data.code == "OK") {
-					landmarkList = data.listLandmarkInfo;
-					
-					$.each(landmarkList, function(index, value) {
-						console.log(index + " : " + landmarkList.landmarkInfoNo);
-						console.log(index + " : " + landmarkList.landmarkInfoName);
-						console.log(index + " : " + landmarkList.cityInfoNo);
-						console.log(index + " : " + landmarkList.landmarkInfoLocation);
-						console.log(index + " : " + landmarkList.landmarkInfoHomepage);
-						console.log(index + " : " + landmarkList.landmarkInfoSummary);
-						console.log(index + " : " + landmarkList.landmarkInfoLangitude);
-						console.log(index + " : " + landmarkList.landmarkInfoLatitude);
-						console.log(index + " : " + landmarkList.landmarkInfoImage);
-						console.log(index + " : " + landmarkList.landmarkInfoFee);
-					});
-					
-				} else {
-					//$('#mainPlanlandmarkUl').append("<li class='landmarkList'>데이터가 없습니다.</li>");
-				}
+				$('#leftMenuLandmarkList').append(data);
+
+				//$('#mainPlanlandmarkUl').append("<li class='landmarkList'>데이터가 없습니다.</li>");
 			}
 		})
 		
