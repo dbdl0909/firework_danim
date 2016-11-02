@@ -428,8 +428,8 @@ $(document).ready(function() {
 			data:{clickCityName:clickCityName},
 			type:'GET',
 			success:function(data){
-				$('#leftMenuLandmarkList').append(data);
-
+				$('#leftMenuLandmarkList').html(data);
+				
 				//$('#mainPlanlandmarkUl').append("<li class='landmarkList'>데이터가 없습니다.</li>");
 			}
 		})
@@ -438,6 +438,6 @@ $(document).ready(function() {
 	});
 	
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {
-		$('#mainPlanDivLeft3').animate({"left":"100px"});
+		$('#mainPlanDivLeft3').animate({"left":"0px"});
 	});
 });

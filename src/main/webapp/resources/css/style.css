@@ -281,7 +281,7 @@ p {
 	left:0;
 	z-index:2;
 	background:#ffffff;
-	width:300px;
+	width:320px;
 }
 #mainPlanDivLeft {
 	width:40%;
@@ -298,7 +298,6 @@ p {
 #mainPlanDivLeft3 {
 	z-index:1;
 	display:none;
-	left:100px;
 	position:absolute;
 	width:320px;
 	height:650px;
