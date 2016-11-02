@@ -277,8 +277,11 @@ p {
 }
 
 #mainPlanWrap {
+	position:absolute;
+	left:0;
+	z-index:2;
+	background:#ffffff;
 	width:300px;
-	float:left;
 }
 #mainPlanDivLeft {
 	width:40%;
@@ -294,6 +297,7 @@ p {
 }
 #mainPlanDivLeft3 {
 	opacity:0;
+	z-index:1;
 	display:none;
 	left:100px;
 	position:absolute;

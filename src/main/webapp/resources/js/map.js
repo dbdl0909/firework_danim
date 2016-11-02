@@ -424,10 +424,6 @@ $(document).ready(function() {
 		var cityClickIndex = $('.cityName').index(this);
 		var cityClickName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + cityClickName);
-		/*$('#mainPlanDivLeft3').show().animate({"z-index": "2", "opacity":"1", "left":"300px"}, 3000);*/
-		var hiddenChk = $('#mainPlanDivLeft3').is(':hidden');
-		if(hiddenChk) {			
-			$('#mainPlanDivLeft3').show("slide", {direction:"left"}, 1000);
-		}
+		$('#mainPlanDivLeft3').show().animate({"opacity":"1", "left":"300px"});
 	});
 });
