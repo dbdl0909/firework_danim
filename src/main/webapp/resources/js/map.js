@@ -424,6 +424,10 @@ $(document).ready(function() {
 		var cityClickIndex = $('.cityName').index(this);
 		var cityClickName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + cityClickName);
-		$('#mainPlanDivLeft3').show().animate({"opacity":"1", "left":"300px"});
+		$('#mainPlanDivLeft3').show().animate({"left":"300px"});
+	});
+	
+	$('body').on('click', '#mainPlanDivLeft3Close', function() {
+		$('#mainPlanDivLeft3').animate({"left":"100px"});
 	});
 });

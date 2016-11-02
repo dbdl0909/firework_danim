@@ -76,6 +76,7 @@
 			<div id="mainPlanDivLeft3">
 				<div id="mainPlanDivLeftLabel2">
 					<label>명소</label>
+					<img id="mainPlanDivLeft3Close" src="../../resources/images/closeArrow.png" style="cursor:pointer;float:right;margin-right:10px;margin-top:1px"/>
 				</div>
 				<div id="leftMenuLandmarkList">
 					<ul id="mainPlanlandmarkUl">
