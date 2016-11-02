@@ -2,8 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="com.danim.service">
-	<select id="selectCityRouteByCityRouteNo"
+<mapper namespace="com.danim.service.DiaryMapper">
+<select id="selectCityRouteDepartureCityByCityRouteDate" 
+            resultType="com.danim.service.diary.CityRouteDto"
+            parameterType="String">
+            SELECT
+                city_route_departure_city as 'cityRouteDepartureCity'
+            FROM
+                city_route
+            WHERE
+            	city_route_date = #{cityRouteDate}
+            ORDER BY plan_no
+    </select><!-- 도시날짜를 입력받아서 도시이름을 갖고옴 -->
+
+<select id="selectCityRoute"
+			resultType="com.danim.service.diary.CityRouteDto"
+			>
+		SELECT 
+			city_route_no as 'cityRouteNo',
+			plan_no as 'planNo',
+			city_route_date as 'cityRouteDate',
+			city_route_departure_city as 'cityRouteDepartureCity',
+			city_route_arrival_city as 'cityRouteArrivalCity',
+			city_route_departure_time as 'cityRouteDepartureTime',
+			city_route_arrival_time as 'cityRouteArrivalTime'			
+		FROM
+			city_route
+	</select><!-- 도시플랜 전체 리스트 출력 -->
+
+	<select id="selectCityRouteByCityRouteDepartureCity"
 			resultType="com.danim.service.diary.CityRouteDto"
 			parameterType="String">
 		SELECT 
@@ -17,6 +44,31 @@
 		FROM
 			city_route
 		WHERE
+			city_route_departure_city = #{cityRouteDepartureCity};
+	</select><!-- 도시검색해서 도시리스트 출력 -->
+	
+	<select id="selectcityRouteDepartureTimeBycityRouteNo"
+		resultType="com.danim.service.diary.CityRouteDto"
+		parameterType="int">
+	SELECT
+		city_route_departure_time as 'cityRouteDepartureTime'
+	FROM
+		city_route
+	WHERE
+		city_route_no = #{cityRouteNo};
+	</select><!-- 도시넘버로 출발시간출력 -->
+	
+	
+	<update id="updateCityRouteDepartureTime">
+	
+		UPDATE
+			city_route
+		SET
+			city_route_departure_time = #{cityRouteDepartureTime}
+		WHERE
 			city_route_no = #{cityRouteNo};
-	</select>
+	</update><!-- 도시넘버의 출발시간 변경 -->
+	<!-- 
+	SELECT c.plan_no, c.city_route_no, p.plan_headcount
+FROM city_route c INNER JOIN plan p ON c.plan_no=p.plan_no 조인문 만들때 쓸 것-->
 </mapper>
