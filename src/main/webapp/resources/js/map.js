@@ -422,6 +422,7 @@ $(document).ready(function() {
 		var cityClickIndex = $('.cityName').index(this);
 		var clickCityName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + clickCityName);
+		$('#clickCityName').text(clickCityName);
 		
 		$.ajax({
 			url:'/plan/RESTLandmarkInfo',
@@ -434,7 +435,7 @@ $(document).ready(function() {
 			}
 		})
 		
-		$('#mainPlanDivLeft3').show().animate({"left":"300px"});
+		$('#mainPlanDivLeft3').show().animate({"left":"320px"});
 	});
 	
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {

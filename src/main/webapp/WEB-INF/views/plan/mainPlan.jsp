@@ -75,12 +75,19 @@
 			</div>
 			<div id="mainPlanDivLeft3">
 				<div id="mainPlanDivLeftLabel2">
-					<label>명소</label>
-					<img id="mainPlanDivLeft3Close" src="../../resources/images/closeArrow.png" style="cursor:pointer;float:right;margin-right:10px;margin-top:1px"/>
+					<label id="clickCityName"></label>
+					<img id="mainPlanDivLeft3Close" src="../../resources/images/closeArrow.png"/>
 				</div>
-				<div id="leftMenuLandmarkList">
-					<!-- <ul id="mainPlanlandmarkUl">
-					</ul> -->
+				
+				<div id="mainPlanDivLeftTab">
+					<div><img src="../../resources/images/planIcon/landmarkIcon.png"/></div>	<!-- 명소 -->
+					<div><img src="../../resources/images/planIcon/eateryIcon.png"/></div>		<!-- 식당 -->
+					<div><img src="../../resources/images/planIcon/stayIcon.png"/></div>		<!-- 숙소 -->
+					<div><img src="../../resources/images/planIcon/eventIcon.png"/></div>		<!-- 축제 -->
+				</div>
+				<div id="mainPlanDivLeftTabMenu">
+					<div id="leftMenuLandmarkList" style="clear:none;">
+					</div>
 				</div>
 			</div>
 			

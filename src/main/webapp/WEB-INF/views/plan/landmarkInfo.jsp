@@ -7,6 +7,7 @@
 		<title>Landmark List</title>
 	</head>
 	<body>
+		
 		<ul id="mainPlanlandmarkUl">
 			<c:forEach var="listLandmark" items="${listLandmarkInfo}">
 				<li>
