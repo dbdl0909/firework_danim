@@ -11,7 +11,10 @@
 		
 		<ul id="mainPlanlandmarkUl">
 			<c:forEach var="listLandmarkInfo" items="${listLandmarkInfo}" varStatus="status">
-				<li><img class="landmarkInfoImage" src="${listLandmarkInfo.landmarkInfoImage}"/></li>
+				<li>
+					<img class="landmarkInfoImage" src="${listLandmarkInfo.landmarkInfoImage}"/>
+					${listLandmarkInfo.landmarkInfoName}
+				</li>
 			</c:forEach>
 		</ul>
 	</body>

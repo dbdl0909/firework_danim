@@ -457,6 +457,10 @@ p {
 	list-style:none;
 }
 
+#leftMenuList {
+	height:615px;
+	overflow-y:scroll;
+}
 #leftMenuList .landmarkInfoImage {
 	width:100px;
 	height:70px;

@@ -26,7 +26,7 @@ public class RESTController {
 	
 	Model model;
 	
-	@RequestMapping(value = "/plan/RESTLandmarkInfo")
+	@RequestMapping(value = "/plan/RESTTotalInfo")
 	public String totalInfo(Model model,
 							@RequestParam(value="clickCityName") String clickCityName,
 							@RequestParam(value="clickIcon") String clickIconName) {
@@ -38,7 +38,7 @@ public class RESTController {
 		//logger.info("model : {} landmarkInfo() RESTController.java", model);
 		
 		//클릭한 탭이 무엇인지(명소, 식당, 숙소, 축제 중 하나) 가져와서 이동시킬 페이지를 분기시킨다.
-		String infoPage = "/plan/landmarkInfo";
+		String infoPage = null;
 		if(clickIconName.equals("명소")) {
 			infoPage = "/plan/landmarkInfo";
 		} else if(clickIconName.equals("식당")) {

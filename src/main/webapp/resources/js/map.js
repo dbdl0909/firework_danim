@@ -424,7 +424,7 @@ $(document).ready(function() {
 	var clickIcon;
 	function test() {
 		$.ajax({
-			url:'/plan/RESTLandmarkInfo',
+			url:'/plan/RESTTotalInfo',
 			data:{clickCityName:clickCityName, clickIcon:clickIcon},
 			type:'GET',
 			success:function(data){
