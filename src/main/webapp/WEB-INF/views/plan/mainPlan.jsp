@@ -82,19 +82,23 @@
 				<div id="mainPlanDivLeftTab">
 					<div>
 						<!-- <label>명소</label> -->
-						<img id="mainPlanlandmarkIcon" src="../../resources/images/planIcon/landmarkIcon.png"/>
+						<p id="mainPlanlandmarkIcon" class="iconImg onIcon"></p>
+						<!-- <img id="mainPlanlandmarkIcon" class="iconImg" src="../../resources/images/planIcon/landmarkIcon.png"/> -->
 					</div>
 					<div>
 						<!-- <label>식당</label> -->
-						<img id="mainPlanEateryIcon" src="../../resources/images/planIcon/eateryIcon.png"/>
+						<p id="mainPlanEateryIcon" class="iconImg"></p>
+						<!-- <img id="mainPlanEateryIcon" class="iconImg" src="../../resources/images/planIcon/eateryIcon.png"/> -->
 					</div>
 					<div>
+						<p id="mainPlanStayIcon" class="iconImg"></p>
 						<!-- <label>숙소</label> -->
-						<img id="mainPlanStayIcon" src="../../resources/images/planIcon/stayIcon.png"/>
+						<!-- <img id="mainPlanStayIcon" class="iconImg" src="../../resources/images/planIcon/stayIcon.png"/> -->
 					</div>
 					<div>
+						<p id="mainPlanEventIcon" class="iconImg"></p>
 						<!-- <label>축제</label> -->
-						<img id="mainPlanEventIcon" src="../../resources/images/planIcon/eventIcon.png"/>
+						<!-- <img id="mainPlanEventIcon" class="iconImg" src="../../resources/images/planIcon/eventIcon.png"/> -->
 					</div>
 				</div>
 				<div id="mainPlanDivLeftTabMenu">

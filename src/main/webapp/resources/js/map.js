@@ -436,7 +436,7 @@ $(document).ready(function() {
 		})
 		
 		$('#mainPlanDivLeft3').show().animate({"left":"320px"});
-		$('#mainPlanlandmarkIcon').attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
+		//$('#mainPlanlandmarkIcon').attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
 	});
 	
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {
@@ -444,56 +444,11 @@ $(document).ready(function() {
 	});
 	
 	var $src;
-	
-	//명소
-	$('#mainPlanlandmarkIcon').click(function() {
-		console.log('mainPlanlandmarkIcon click');
-		$(this).attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
-		$src = $(this).attr('src');
-		console.log($src);
-		
-		if($src == '../../resources/images/planIcon/landmarkIconClick.png') {
-			console.log('mainPlanlandmarkIcon click 되있어');
-			$('#mainPlanlandmarkIcon').off('hover');
-		} else {
-			$('#mainPlanlandmarkIcon').hover(function() {
-				$(this).attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
-			}, function() {
-				$(this).attr('src', '../../resources/images/planIcon/landmarkIcon.png');
-			});
-		}
-	});
-	
-	//식당
-	$('#mainPlanEateryIcon').click(function() {
-		console.log('mainPlanEateryIcon click');
-		$(this).attr('src', '../../resources/images/planIcon/eateryIconClick.png');
-		$src = $(this).attr('src');
-		console.log($src);
-		
-		if($src == '../../resources/images/planIcon/eateryIconClick.png') {
-			console.log('mainPlanEateryIcon click 되있어');
-			$('#mainPlanEateryIcon').off('hover');
-		} else {
-			$('#mainPlanEateryIcon').hover(function() {
-				$(this).attr('src', '../../resources/images/planIcon/eateryIconClick.png');
-			}, function() {
-				$(this).attr('src', '../../resources/images/planIcon/eateryIcon.png');
-			});
-		}
+	$('.iconImg').click(function(){
+		$('.iconImg').removeClass('onIcon');
+		if(!($(this).hasClass('onIcon'))){
+			$(this).addClass('onIcon');
+		}	
 	});
 
-	//숙소
-	$('#mainPlanStayIcon').hover(function() {
-		$(this).attr('src', '../../resources/images/planIcon/stayIconClick.png');
-	}, function() {
-		$(this).attr('src', '../../resources/images/planIcon/stayIcon.png');
-	});
-	//축제
-	$('#mainPlanEventIcon').hover(function() {
-		$(this).attr('src', '../../resources/images/planIcon/eventIconClick.png');
-	}, function() {
-		$(this).attr('src', '../../resources/images/planIcon/eventIcon.png');
-	});
-	
 });

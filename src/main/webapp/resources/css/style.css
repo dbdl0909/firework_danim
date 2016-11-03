@@ -368,6 +368,77 @@ p {
 #mainPlanDivLeftTab {
 	width:100%;
 }
+#mainPlanDivLeftTab #mainPlanlandmarkIcon{
+	width:60px;
+	height:60px;
+	cursor:pointer;
+	margin:5px 10px 5px 10px;	
+	background-image: url(../images/planIcon/landmarkIcon.png);
+	background-size:cover;	
+}
+#mainPlanDivLeftTab #mainPlanlandmarkIcon:hover{
+	background-image: url(../images/planIcon/landmarkIconClick.png);	
+}
+#mainPlanDivLeftTab #mainPlanlandmarkIcon.onIcon{
+	width:60px;
+	height:60px;	
+	background-image: url(../images/planIcon/landmarkIconClick.png);
+	background-size:cover;	
+}
+#mainPlanDivLeftTab #mainPlanEateryIcon{
+	width:60px;
+	height:60px;
+	cursor:pointer;
+	margin:5px 10px 5px 10px;		
+	background-image: url(../images/planIcon/eateryIcon.png);
+	background-size:cover;	
+}
+#mainPlanDivLeftTab #mainPlanEateryIcon:hover{
+	background-image: url(../images/planIcon/eateryIconClick.png);
+}
+#mainPlanDivLeftTab #mainPlanEateryIcon.onIcon{
+	width:60px;
+	height:60px;	
+	background-image: url(../images/planIcon/eateryIconClick.png);
+	background-size:cover;	
+}
+#mainPlanDivLeftTab #mainPlanStayIcon{
+	width:60px;
+	height:60px;
+	cursor:pointer;
+	margin:5px 10px 5px 10px;		
+	background-image: url(../images/planIcon/stayIcon.png);
+	background-size:cover;	
+}
+#mainPlanDivLeftTab #mainPlanStayIcon{
+	background-image: url(../images/planIcon/stayIcon.png);
+}
+#mainPlanDivLeftTab #mainPlanStayIcon:hover{
+	background-image: url(../images/planIcon/stayIconClick.png);
+}
+#mainPlanDivLeftTab #mainPlanStayIcon.onIcon{
+	width:60px;
+	height:60px;	
+	background-image: url(../images/planIcon/stayIconClick.png);
+	background-size:cover;	
+}
+#mainPlanDivLeftTab #mainPlanEventIcon{
+	width:60px;
+	height:60px;
+	cursor:pointer;
+	margin:5px 10px 5px 10px;		
+	background-image: url(../images/planIcon/eventIcon.png);
+	background-size:cover;	
+}
+#mainPlanDivLeftTab #mainPlanEventIcon:hover{
+	background-image: url(../images/planIcon/eventIconClick.png);	
+}
+#mainPlanDivLeftTab #mainPlanEventIcon.onIcon{
+	width:60px;
+	height:60px;	
+	background-image: url(../images/planIcon/eventIconClick.png);
+	background-size:cover;	
+}
 #mainPlanDivLeftTab div {
 	float:left;
 }
