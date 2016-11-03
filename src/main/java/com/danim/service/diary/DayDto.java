@@ -8,7 +8,14 @@ public class DayDto {
 	    private int day;
 	    private int week;
 	    private List<CityRouteDto> cityRouteList;
+	    private List<PlanAllDto> PlanAllDto;
 	    
+		public List<PlanAllDto> getPlanAllDto() {
+			return PlanAllDto;
+		}
+		public void setPlanAllDto(List<PlanAllDto> planAllDto) {
+			PlanAllDto = planAllDto;
+		}
 		public int getYear() {
 			return year;
 		}

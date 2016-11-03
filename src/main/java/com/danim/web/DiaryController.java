@@ -38,6 +38,22 @@ public class DiaryController {
 
 	        return "/diary/diary";
 	    }
+	
+	@RequestMapping(value="/diary1")//다이어리
+    public String diary1(Model model
+                            ,@RequestParam(value="dayYear",defaultValue="0") int dayYear
+                            ,@RequestParam(value="dayMonth",defaultValue="0") int dayMonth
+                            ,@RequestParam(value="dayPage",defaultValue="default") String dayPage
+                            ) {
+      Map<String, Object> map = diaryService.getDayAllList(dayYear, dayMonth, dayPage);
+        model.addAttribute("map", map);
+        model.addAttribute("dayList", map.get("dayList"));
+        model.addAttribute("dayYear", map.get("dayYear"));
+        model.addAttribute("dayMonth", map.get("dayMonth"));
+        model.addAttribute("dayPage", map.get("dayPage"));
+
+        return "/diary/diaryList";
+    }
 	@RequestMapping(value="/diaryList")
 	public String diaryList(Model model
             ,@RequestParam(value="cityRouteDate",defaultValue="0") String cityRouteDate){
@@ -72,8 +88,15 @@ public class DiaryController {
 		//시간을 갖고와 폼에 뿌려주기
 		return "diary/updateForm";
 	}
-@RequestMapping(value="/search/update")
-	public String update(){
+
+	@RequestMapping(value = "/search/update")
+	public String update() {
 		return "diary/update";
+	}
+	@RequestMapping(value="/test")
+	private String test(Model model) {
+		Map<String, Object> map =(Map<String, Object>) diaryService.test();
+		map.put("map", map);
+		return "/diary/diaryList";
 	}
 }

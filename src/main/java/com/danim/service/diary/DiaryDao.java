@@ -10,15 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 @Repository
 public class DiaryDao {
+	
 	    private static final Logger logger = LoggerFactory.getLogger(DiaryDao.class);
 	    @Autowired
 	    private SqlSessionTemplate sessionTemplate;
 	    private final String namespace = "com.danim.service.DiaryMapper";
 	    //다이어리 데이터 출력
 	    public List<CityRouteDto> selectCityRouteDepartureCityByCityRouteDate(String cityRouteDate){
-	    	sessionTemplate.selectList(namespace+".selectCityRouteDepartureCityByCityRouteDate",cityRouteDate);
+	    	sessionTemplate.selectList(namespace+".selectPlanAllByCityRouteDate",cityRouteDate);
 	    	logger.info("씨티 날짜.{}",cityRouteDate);
-	    	return sessionTemplate.selectList(namespace+".selectCityRouteDepartureCityByCityRouteDate",cityRouteDate);
+	    	return sessionTemplate.selectList(namespace+".selectPlanAllByCityRouteDate",cityRouteDate);
+	    }
+	    //날짜를 입력받아 그 날짜의 플랜 정보를 출력
+	    public List<PlanAllDto> selectPlanAllByCityRouteDate(String cityRouteDate){
+	    	sessionTemplate.selectList(namespace+".selectPlanAllByCityRouteDate",cityRouteDate);
+	    	logger.info("씨티 날짜.{}",cityRouteDate);
+	    	return sessionTemplate.selectList(namespace+".selectPlanAllByCityRouteDate",cityRouteDate);
 	    }
 	    
 	    public List<CityRouteDto> selectCityRouteByCityRouteDepartureCity(String cityRouteDepartureCity){
