@@ -81,6 +81,71 @@
 			</c:forEach>		
 		</ul>
 	</div>
+	<div class="mainGallery">
+		<ul class="galleryList">
+			<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+		 		<c:choose>
+					<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_72'}">
+							<li>
+								<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+							</li>							
+					</c:when>
+				</c:choose>
+			</c:forEach>		
+		</ul>
+	</div>
+	<div class="mainGallery">
+		<ul class="galleryList">
+			<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+		 		<c:choose>
+					<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_73'}">
+							<li>
+								<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+							</li>							
+					</c:when>
+				</c:choose>
+			</c:forEach>		
+		</ul>
+	</div>
+	<div class="mainGallery">
+		<ul class="galleryList">
+			<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+		 		<c:choose>
+					<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_74'}">
+							<li>
+								<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+							</li>							
+					</c:when>
+				</c:choose>
+			</c:forEach>		
+		</ul>
+	</div>
+	<div class="mainGallery">
+		<ul class="galleryList">
+			<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+		 		<c:choose>
+					<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_75'}">
+							<li>
+								<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+							</li>							
+					</c:when>
+				</c:choose>
+			</c:forEach>		
+		</ul>
+	</div>
+	<div class="mainGallery">
+		<ul class="galleryList">
+			<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+		 		<c:choose>
+					<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_76'}">
+							<li>
+								<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+							</li>							
+					</c:when>
+				</c:choose>
+			</c:forEach>		
+		</ul>
+	</div>				
 </div>
 <!-- 풋터 -->
 <jsp:include page="./module/footer.jsp" />
