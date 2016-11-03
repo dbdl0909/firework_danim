@@ -618,8 +618,7 @@ a.voted:hover {
 .galleryList{}
 .galleryList > li {float:left; display:none;}
 .galleryList .galleryTitleImage{display:block;}
-.galleryList > li img { width:220px; margin:10px; cursor:pointer;}
-
+.galleryList > li img {width:260px; cursor:pointer;}
 .picshade {
   position: fixed;
   left: 0;
@@ -707,7 +706,15 @@ a.voted:hover {
   filter: alpha(opacity=100);
   opacity: 1;
 }
+#owl-demo .item{
+  margin: 3px;
+}
 
+#owl-demo .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
 /* 입력,수정 */
 .container #communityInsertForm label,
 .container #communityInsertForm input{font-size:12px; color:#434343;} 
