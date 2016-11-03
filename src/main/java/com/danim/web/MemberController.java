@@ -1,5 +1,8 @@
 package com.danim.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,12 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.member.MemberDto;
-import com.danim.service.member.MemberInfoDto;
 import com.danim.service.member.MemberService;
-import com.danim.service.member.MemberTotalDto;
 
 @Controller
 public class MemberController {
@@ -25,20 +26,29 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	//로그인 처리
-	@RequestMapping(value="/member/memberLogin", method = RequestMethod.POST)
-	public ModelAndView memberLogin(MemberDto memberDto, HttpSession session, HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView();
-        logger.info("memberLogin MemberController.java");
-        MemberDto memberLogin = memberService.LoginMember(memberDto.getMemberId(), memberDto.getMemberInfoPassword());
- 
-        if (memberLogin != null) {
-            session.setAttribute("userLoginInfo", memberLogin);
-        }
-        
+	//로그인
+	@RequestMapping(value="/member/memberLoginSubmit", method = RequestMethod.POST)
+	public String MemberLogin(HttpServletRequest request,
+			@RequestParam(value="memberLoginId") String memberId,
+			@RequestParam(value="memberLoginPassword") String memberInfoPassword) {
+		logger.info("memberId : {} MemberController.java", memberId);
+		logger.info("memberInfoPassword : {} MemberController.java", memberInfoPassword);
+
+		int memberCheckIndex = memberService.selectMemberCheck(memberId, memberInfoPassword);
+		
+		if(memberCheckIndex == 1) {
+			HttpSession session  = request.getSession(true);
+			session.setAttribute("memberId", memberId);
+		}
+		
+		return "redirect:/";
 	}
-        
-        
+	//로그인폼 실행
+	@RequestMapping(value="/member/memberLoginForm", method = RequestMethod.GET)
+	public String memberLogin(Model model) {
+		logger.info("memberLogin MemberController.java");
+		return "/member/memberLoginForm";
+	}
 	//회원리스트
 	@RequestMapping(value="/member/memberListAll", method = RequestMethod.POST)
 	public String memberListAll(Model model) {
@@ -48,7 +58,6 @@ public class MemberController {
 		
 		return "member/memberListAll";
 	}
-	
 	//입력 폼
 	@RequestMapping(value = "/member/memberJoinForm", method = RequestMethod.GET)
 	public String memberJoin(Model model) {

@@ -96,7 +96,7 @@
 					<a href="/search/infoSearch">추천여행</a>
 				</li>
 				<li class="hiddenNavWrap">
-					<a href="">로그인</a>
+					<a href="/member/memberLoginForm">로그인</a>
 				</li>
 			</ul>
 		</div>	

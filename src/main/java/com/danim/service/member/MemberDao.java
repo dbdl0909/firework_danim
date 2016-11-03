@@ -1,5 +1,6 @@
 package com.danim.service.member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,19 @@ public class MemberDao {
 	
 	private final String nameSpace = "com.danim.service.MemberMapper";
 
+	//로그인 체크
+	public int memberCheck(String memberId, String memberInfoPassword) {
+		logger.info("memberCheck() MemberDao.java");
+		logger.info("memberId : {}", memberId);
+		logger.info("memberInfoPassword : {}", memberInfoPassword);
+		
+		Map map = new HashMap();
+		map.put("memberId", memberId);
+		map.put("memberInfoPassword", memberInfoPassword);
+		
+		return sessionTemplate.selectOne(nameSpace+".memberCheck", map);
+	}
+	
 	//모든 회원 리스트 출력
 	public List<MemberDto> selectMemberAll() {
 		logger.info("selectMemberAll() MemberDao.java");
