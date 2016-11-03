@@ -80,10 +80,22 @@
 				</div>
 				
 				<div id="mainPlanDivLeftTab">
-					<div><img id="mainPlanlandmarkIcon" src="../../resources/images/planIcon/landmarkIcon.png"/></div>	<!-- 명소 -->
-					<div><img id="mainPlanEateryIcon" src="../../resources/images/planIcon/eateryIcon.png"/></div>		<!-- 식당 -->
-					<div><img id="mainPlanStayIcon" src="../../resources/images/planIcon/stayIcon.png"/></div>			<!-- 숙소 -->
-					<div><img id="mainPlanEventIcon" src="../../resources/images/planIcon/eventIcon.png"/></div>		<!-- 축제 -->
+					<div>
+						<!-- <label>명소</label> -->
+						<img id="mainPlanlandmarkIcon" src="../../resources/images/planIcon/landmarkIcon.png"/>
+					</div>
+					<div>
+						<!-- <label>식당</label> -->
+						<img id="mainPlanEateryIcon" src="../../resources/images/planIcon/eateryIcon.png"/>
+					</div>
+					<div>
+						<!-- <label>숙소</label> -->
+						<img id="mainPlanStayIcon" src="../../resources/images/planIcon/stayIcon.png"/>
+					</div>
+					<div>
+						<!-- <label>축제</label> -->
+						<img id="mainPlanEventIcon" src="../../resources/images/planIcon/eventIcon.png"/>
+					</div>
 				</div>
 				<div id="mainPlanDivLeftTabMenu">
 					<div id="leftMenuLandmarkList" style="clear:none;">

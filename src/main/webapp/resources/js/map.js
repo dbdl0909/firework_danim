@@ -436,24 +436,53 @@ $(document).ready(function() {
 		})
 		
 		$('#mainPlanDivLeft3').show().animate({"left":"320px"});
+		$('#mainPlanlandmarkIcon').attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
 	});
 	
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {
 		$('#mainPlanDivLeft3').animate({"left":"0px"});
 	});
 	
+	var $src;
+	
 	//명소
-	$('#mainPlanlandmarkIcon').hover(function() {
+	$('#mainPlanlandmarkIcon').click(function() {
+		console.log('mainPlanlandmarkIcon click');
 		$(this).attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
-	}, function() {
-		$(this).attr('src', '../../resources/images/planIcon/landmarkIcon.png');
+		$src = $(this).attr('src');
+		console.log($src);
+		
+		if($src == '../../resources/images/planIcon/landmarkIconClick.png') {
+			console.log('mainPlanlandmarkIcon click 되있어');
+			$('#mainPlanlandmarkIcon').off('hover');
+		} else {
+			$('#mainPlanlandmarkIcon').hover(function() {
+				$(this).attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
+			}, function() {
+				$(this).attr('src', '../../resources/images/planIcon/landmarkIcon.png');
+			});
+		}
 	});
+	
 	//식당
-	$('#mainPlanEateryIcon').hover(function() {
+	$('#mainPlanEateryIcon').click(function() {
+		console.log('mainPlanEateryIcon click');
 		$(this).attr('src', '../../resources/images/planIcon/eateryIconClick.png');
-	}, function() {
-		$(this).attr('src', '../../resources/images/planIcon/eateryIcon.png');
+		$src = $(this).attr('src');
+		console.log($src);
+		
+		if($src == '../../resources/images/planIcon/eateryIconClick.png') {
+			console.log('mainPlanEateryIcon click 되있어');
+			$('#mainPlanEateryIcon').off('hover');
+		} else {
+			$('#mainPlanEateryIcon').hover(function() {
+				$(this).attr('src', '../../resources/images/planIcon/eateryIconClick.png');
+			}, function() {
+				$(this).attr('src', '../../resources/images/planIcon/eateryIcon.png');
+			});
+		}
 	});
+
 	//숙소
 	$('#mainPlanStayIcon').hover(function() {
 		$(this).attr('src', '../../resources/images/planIcon/stayIconClick.png');
