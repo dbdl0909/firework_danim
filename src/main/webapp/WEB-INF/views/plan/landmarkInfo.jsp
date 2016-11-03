@@ -6,22 +6,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Landmark List</title>
 	</head>
-	<body>
+	<body>		
+		<c:set var="listLandmarkInfo" value="${totalInfo.listLandmarkInfo}" />
 		
 		<ul id="mainPlanlandmarkUl">
-			<c:forEach var="listLandmark" items="${listLandmarkInfo}">
-				<li>
-					<img class="landmarkInfoImage" src="${listLandmark.landmarkInfoImage}"/>
-					<span>${listLandmark.landmarkInfoName}</span>
-				</li>
-				<%-- <li>${listLandmark.landmarkInfoNo}</li>
-				<li>${listLandmark.landmarkInfoLocation}</li>
-				<li>${listLandmark.landmarkInfoHomepage}</li>
-				<li>${listLandmark.landmarkInfoSummary}</li>
-				<li>${listLandmark.landmarkInfoLangitude}</li>
-				<li>${listLandmark.landmarkInfoLatitude}</li>
-				<li>${listLandmark.landmarkInfoFee}</li>
-				<li>---------------------------------</li> --%>
+			<c:forEach var="listLandmarkInfo" items="${listLandmarkInfo}" varStatus="status">
+					<li><img class="landmarkInfoImage" src="${listLandmarkInfo.landmarkInfoImage}"/></li>
 			</c:forEach>
 		</ul>
 	</body>

@@ -1,6 +1,8 @@
 package com.danim.service.plan;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,7 @@ public class TotalInfoService {
 		return listCityInfo;
 	}
 	
-	//클릭한 도시에 해당하는 명소리스트 가져오는 메서드
+	/*//클릭한 도시에 해당하는 명소리스트 가져오는 메서드
 	public List<LandmarkInfoDto> selectLandmarkInfoByCityName(String clickCityName) {
 		logger.info("clickCityName(도시 이름) : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", clickCityName);
 		
@@ -32,6 +34,24 @@ public class TotalInfoService {
 		logger.info("listLandmarkInfoByCityName : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", listLandmarkInfoByCityName);
 		
 		return listLandmarkInfoByCityName;
-    }
+    }*/
+	
+	//클릭한 도시에 해당하는 명소, 식당, 숙소, 축제 리스트 가져오는 메서드
+	public Map<String, Object> selectTotalInfoByCityName(String clickCityName) {
+		logger.info("clickCityName(도시 이름) : {} <-- selectTotalInfoByCityName() TotalInfoService.java", clickCityName);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<LandmarkInfoDto> listLandmarkInfoByCityName = totalInfoDao.selectLandmarkInfoByCityName(clickCityName);
+		//logger.info("listLandmarkInfoByCityName : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", listLandmarkInfoByCityName);
+		
+		List<EateryInfoDto> listEateryInfoByCityName = totalInfoDao.selectEateryInfoByCityName(clickCityName);
+		//logger.info("listEateryInfoByCityName : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", listEateryInfoByCityName);
+		
+		map.put("listLandmarkInfo", listLandmarkInfoByCityName);
+		map.put("listEateryInfo", listEateryInfoByCityName);
+		
+		return map;
+	}
 
 };

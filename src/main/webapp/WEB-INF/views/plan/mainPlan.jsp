@@ -104,6 +104,12 @@
 				<div id="mainPlanDivLeftTabMenu">
 					<div id="leftMenuLandmarkList" style="clear:none;">
 					</div>
+					<div id="leftMenuEateryList" style="clear:none;">
+					</div>
+					<div id="leftMenuStayList" style="clear:none;">
+					</div>
+					<div id="leftMenuEventList" style="clear:none;">
+					</div>
 				</div>
 			</div>
 			

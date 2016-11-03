@@ -23,15 +23,31 @@
 			landmark_info_no as 'landmarkInfoNo',
 			landmark_info_name as 'landmarkInfoName',
 			city_info_no as 'cityInfoNo',
-			landmark_info_location as 'landmarkInfoLocation',
-			landmark_info_homepage as 'landmarkInfoHomepage',
-			landmark_info_summary as 'landmarkInfoSummary',
 			landmark_info_langitude as 'landmarkInfoLangitude',
 			landmark_info_latitude as 'landmarkInfoLatitude',
-			landmark_info_image as 'landmarkInfoImage',
-			landmark_info_fee as 'landmarkInfoFee'
+			landmark_info_image as 'landmarkInfoImage'
 		FROM
 			landmark_info
+		WHERE
+			city_info_no = (
+				SELECT
+					city_info_no
+				FROM
+					city_info
+				WHERE
+					city_info_name=#{clickCityName}
+			);
+	</select>
+	
+	<select id="selectEateryInfoByCityName"
+			resultType="com.danim.service.plan.EateryInfoDto"
+			parameterType="String">
+		SELECT
+			eatery_no as 'eateryNo',
+			eatery_name as 'eateryName',
+			city_info_no as 'cityInfoNo'
+		FROM
+			eatery_info
 		WHERE
 			city_info_no = (
 				SELECT
