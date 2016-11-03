@@ -36,6 +36,7 @@ public class RESTController {
 
 		model.addAttribute("totalInfo", totalInfoService.selectTotalInfoByCityName(clickCityName));
 		//logger.info("model : {} landmarkInfo() RESTController.java", model);
+		logger.info("정상");
 		
 		//클릭한 탭이 무엇인지(명소, 식당, 숙소, 축제 중 하나) 가져와서 이동시킬 페이지를 분기시킨다.
 		String infoPage = null;

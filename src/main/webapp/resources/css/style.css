@@ -459,6 +459,10 @@ p {
 
 #leftMenuList {
 	height:615px;
+	
+}
+#mainPlanEateryUl{
+	height:615px;
 	overflow-y:scroll;
 }
 #leftMenuList .landmarkInfoImage {

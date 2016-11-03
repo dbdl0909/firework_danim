@@ -102,7 +102,8 @@
 					</div>
 				</div>
 				<div id="mainPlanDivLeftTabMenu">
-					<div id="leftMenuList" style="clear:none;">
+					<div id="leftMenuList" style="">
+					
 					</div>
 				</div>
 			</div>
