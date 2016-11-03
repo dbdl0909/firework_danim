@@ -6,12 +6,18 @@
 	<!-- 레이팅카운트 업데이트 -->
 	<update id="updateRatingCount"
 			parameterType="com.danim.service.community.CommunityDto">
-		UPDATE
+		<!-- UPDATE
 			community
 		SET
 			community_rating = #{communityRating}
 		WHERE
-			community_no = #{communityNo};
+			community_no = #{communityNo}; -->
+		UPDATE
+			community
+		SET
+			community_rating = (SELECT * FROM(SELECT max(community_rating)+1 FROM  community cd WHERE community_no = #{communityNo}) as cd)
+		WHERE
+			community_no = #{communityNo}
 	</update>
 	<select id="selectRatingForVotedCheck"
 			parameterType="java.util.Map"

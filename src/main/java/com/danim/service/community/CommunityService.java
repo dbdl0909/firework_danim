@@ -126,9 +126,9 @@ public class CommunityService {
     	logger.info("checkVoted {} CommunityController.java", checkVoted);
     	if(checkVoted == 0) {
 			CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
-			int ratingCount = communityDto.getCommunityRating();
-			ratingCount++;
-			communityDto.setCommunityRating(ratingCount);
+			/*int ratingCount = communityDto.getCommunityRating();
+			ratingCount++;*/
+			//communityDto.setCommunityRating(communityNo);
 	    	cummunityDao.insertCommunityVote(map);
 	    	cummunityDao.updateRatingCount(communityDto);
 	    	result = "voted";
