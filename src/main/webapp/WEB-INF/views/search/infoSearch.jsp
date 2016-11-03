@@ -75,7 +75,7 @@
 				        data:{search: search, moreView: moreView},     
 				        success:function(data){
 				        	alert(moreView);
-				        	$('#eateryTbody').append(data);
+				        	$('#eateryTbody').append(data)
 				        }
 				    }); 
 				});

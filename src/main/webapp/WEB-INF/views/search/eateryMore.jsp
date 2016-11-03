@@ -15,7 +15,6 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-	<div class="table-responsive">
 		<table class="table">
 			<c:forEach var="searchMore" items="${searchMore}" varStatus="status">
 				<tr>
@@ -24,6 +23,5 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</div>
 	</body>
 </html>
