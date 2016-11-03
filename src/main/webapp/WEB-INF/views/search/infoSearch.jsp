@@ -21,9 +21,8 @@
 				var search = "<c:out value="${search}" />";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
-				var moreView = <c:out value="${moreView}" />
-				
-				alert('초기 리스트 : ' + moreView);
+				var moreView = 10;
+				alert(moreView);
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
@@ -68,33 +67,21 @@
 					});
 				});
 				
-				$('#moreView').click(function(){
+				$('.moreView').click(function(){
+					alert('click!');
 				    $.ajax({      
 				        type:"POST",  
-				        url:"/search/infoSearch",    
+				        url:"/search/searchMore",    
 				        data:{search: search, moreView: moreView},     
 				        success:function(data){
-				        	alert('더보기 리스트 : ' + moreView);
-				        	$('table').append(data);
+				        	alert(moreView);
+				        	$('#eateryTbody').append(data);
 				        }
 				    }); 
 				});
 				
 			});
 		</script>
-		<style type="text/css">
-			#infoSearchInput{float:left; width:100%;}
-			#closeSearchForm{float:right; color:black; font-size:20px; font-weight:bold; cursor:pointer;}
-			#infoSearchButton{float:right;}
-			#searchNotice{text-align:center; font-size: 32px; cursor: pointer;}
-			#landmarkInfo{text-decoration: none; float: right;}
-			#eateryInfo{text-decoration: none; float: right;}
-			#eventInfo{text-decoration: none; float: right;}
-			#stayInfo{text-decoration: none; float: right;}
-			#cityName{text-decoration: none;}
-			#searchSpan{color: #e35e54;}	
-			#searchForm{height: 116px;}
-		</style>
 		<title>Insert title here</title>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
@@ -142,7 +129,7 @@
 							<c:forEach var="selectLandmarkInfo" items="${selectLandmarkInfo}">
 								<tr>
 									<td>${selectLandmarkInfo.cityInfoDoName} > ${selectLandmarkInfo.cityInfoName} > ${selectLandmarkInfo.landmarkInfoName}</td>
-									<td><a id="landmarkInfo" href="landmarkInfo?landmarkInfoNo=${selectLandmarkInfo.landmarkInfoNo}&cityInfoName=${selectLandmarkInfo.cityInfoName}">가이드북</a></td>
+									<td><a class="landmarkInfo" href="landmarkInfo?landmarkInfoNo=${selectLandmarkInfo.landmarkInfoNo}&cityInfoName=${selectLandmarkInfo.cityInfoName}">가이드북</a></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -163,17 +150,17 @@
 							<th>
 								<h3>먹을만한 곳</h3>
 							</th>
-							<th style="text-align: right;" id="moreView">
+							<th class="moreView" style="text-align: right;">
 								더보기
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="eateryTbody">
 						<c:if test="${selectEateryInfo != ''}">			
-							<c:forEach var="selectEateryInfo" end="9" items="${selectEateryInfo}">
+							<c:forEach var="selectEateryInfo" items="${selectEateryInfo}">
 								<tr>
 									<td>${selectEateryInfo.cityInfoDoName} > ${selectEateryInfo.cityInfoName} > ${selectEateryInfo.eateryName}</td>
-									<td><a id="eateryInfo" href="eateryInfo?eateryNo=${selectEateryInfo.eateryNo}&cityInfoName=${selectEateryInfo.cityInfoName}">가이드북</a></td>
+									<td><a class="eateryInfo" href="eateryInfo?eateryNo=${selectEateryInfo.eateryNo}&cityInfoName=${selectEateryInfo.cityInfoName}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
 						</c:if>
@@ -204,7 +191,7 @@
 							<c:forEach var="selectEventInfo" items="${selectEventInfo}">
 								<tr>
 									<td>${selectEventInfo.cityInfoDoName} > ${selectEventInfo.cityInfoName} > ${selectEventInfo.eventInfoName}</td>
-									<td><a id="eventInfo" href="eventInfo?eventInfoName=${selectEventInfo.eventInfoName}&cityInfoName=${selectEventInfo.cityInfoName}">가이드북</a></td>
+									<td><a class="eventInfo" href="eventInfo?eventInfoName=${selectEventInfo.eventInfoName}&cityInfoName=${selectEventInfo.cityInfoName}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
 						</c:if>
@@ -235,7 +222,7 @@
 							<c:forEach var="selectStayInfo" items="${selectStayInfo}">
 								<tr>
 									<td>${selectStayInfo.cityInfoDoName} > ${selectStayInfo.cityInfoName} > ${selectStayInfo.stayInfoName}</td>
-									<td><a id="stayInfo" href="stayInfo?stayInfoNo=${selectStayInfo.stayInfoNo}&cityInfoName=${selectStayInfo.cityInfoName}">가이드북</a></td>
+									<td><a class="stayInfo" href="stayInfo?stayInfoNo=${selectStayInfo.stayInfoNo}&cityInfoName=${selectStayInfo.cityInfoName}">가이드북</a></td>
 								</tr>															
 							</c:forEach>
 						</c:if>

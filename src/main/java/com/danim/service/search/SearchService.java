@@ -74,14 +74,14 @@ public class SearchService {
     	
     }
     
-    /*public Map<String, Object> getSelectEateryInfoOne(String eateryNo) {
+    public Map<String, Object> getSelectEateryInfoOne(String eateryNo) {
     	logger.info("getSelectEateryInfoOne() SearchService.java");
     	
     	Map<String, Object> selectEateryInfoOne = searchDao.selectEateryInfoOne(eateryNo);
     	
 		return selectEateryInfoOne;
     	
-    }*/
+    }
     
     public Map<String, Object> getSelectEventInfoOne(String eventInfoName) {
     	logger.info("getSelectEventInfoOne() SearchService.java");

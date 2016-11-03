@@ -28,7 +28,7 @@
 				</p>
 				<hr>
 				<p id ="infoContent">
-					<ul>
+					<ul id="eateryUl">
 						<li>음식점명 : ${selectEateryInfoOne.eateryName}</li>
 						<li>분류 : ${selectEateryInfoOne.eateryCategory}</li>
 					</ul>

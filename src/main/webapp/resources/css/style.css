@@ -729,3 +729,11 @@ a.voted:hover {
 #footer #footContent ul li{font-size:14px; font-weight:400; padding:10px 0; color:#434343;}
 #footer #footContent ul li span{color:#e55d53; font-size:12px;}
 
+/* 검색결과화면 */
+.container #searchGuide #searchSpan{color: #e35e54;}
+.container .table-responsive .table .landmarkInfo{text-decoration: none; float: right;}
+.container .table-responsive .table .eateryInfo{text-decoration: none; float: right;}
+.container .table-responsive .table .eventInfo{text-decoration: none; float: right;}
+.container .table-responsive .table .stayInfo{text-decoration: none; float: right;}
+.container .table .moreView{cursor: pointer;}
+.table .eateryInfo{text-decoration: none; float: right;}
