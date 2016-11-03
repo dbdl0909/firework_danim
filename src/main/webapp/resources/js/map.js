@@ -417,14 +417,15 @@ $(document).ready(function() {
 		$('#stayDay').val($stayDay);
 	});
 	
+	var clickCityName;
 	//cityName li 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.cityName', function() {
 		var cityClickIndex = $('.cityName').index(this);
-		var clickCityName = $('.cityName').eq(cityClickIndex).text();
+		clickCityName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + clickCityName);
 		$('#clickCityName').text(clickCityName);
 		
-		$.ajax({
+		/*$.ajax({
 			url:'/plan/RESTLandmarkInfo',
 			data:{clickCityName:clickCityName},
 			type:'GET',
@@ -433,7 +434,7 @@ $(document).ready(function() {
 				
 				//$('#mainPlanlandmarkUl').append("<li class='landmarkList'>데이터가 없습니다.</li>");
 			}
-		})
+		})*/
 		
 		$('#mainPlanDivLeft3').show().animate({"left":"320px"});
 		//$('#mainPlanlandmarkIcon').attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
@@ -443,12 +444,38 @@ $(document).ready(function() {
 		$('#mainPlanDivLeft3').animate({"left":"0px"});
 	});
 	
+	var clickIcon;
+	
+	function test() {
+		$.ajax({
+			url:'/plan/RESTLandmarkInfo',
+			data:{clickCityName:clickCityName, clickIcon:clickIcon},
+			type:'GET',
+			success:function(data){
+				$('#leftMenuList').html(data);
+			}
+		})
+	}
+	
 	var $src;
 	$('.iconImg').click(function(){
 		$('.iconImg').removeClass('onIcon');
 		if(!($(this).hasClass('onIcon'))){
 			$(this).addClass('onIcon');
-		}	
+			
+			var tabIconIndex = $('.iconImg').index(this);
+			console.log(tabIconIndex);
+			
+			if(tabIconIndex == 0) {
+				clickIcon = '명소';
+			} else if(tabIconIndex == 1) {
+				clickIcon = '식당';
+			} else if(tabIconIndex == 2) {
+				clickIcon = '숙소';
+			} else if(tabIconIndex == 3) {
+				clickIcon = '축제';
+			} 
+			test();
+		}
 	});
-
 });

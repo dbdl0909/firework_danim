@@ -80,35 +80,29 @@
 				</div>
 				
 				<div id="mainPlanDivLeftTab">
-					<div>
+					<div style="background-color:#E9F5FF;">
 						<!-- <label>명소</label> -->
 						<p id="mainPlanlandmarkIcon" class="iconImg onIcon"></p>
 						<!-- <img id="mainPlanlandmarkIcon" class="iconImg" src="../../resources/images/planIcon/landmarkIcon.png"/> -->
 					</div>
-					<div>
+					<div style="background-color:#E9F5FF;">
 						<!-- <label>식당</label> -->
 						<p id="mainPlanEateryIcon" class="iconImg"></p>
 						<!-- <img id="mainPlanEateryIcon" class="iconImg" src="../../resources/images/planIcon/eateryIcon.png"/> -->
 					</div>
-					<div>
+					<div style="background-color:#E9F5FF;">
 						<p id="mainPlanStayIcon" class="iconImg"></p>
 						<!-- <label>숙소</label> -->
 						<!-- <img id="mainPlanStayIcon" class="iconImg" src="../../resources/images/planIcon/stayIcon.png"/> -->
 					</div>
-					<div>
+					<div style="background-color:#E9F5FF;">
 						<p id="mainPlanEventIcon" class="iconImg"></p>
 						<!-- <label>축제</label> -->
 						<!-- <img id="mainPlanEventIcon" class="iconImg" src="../../resources/images/planIcon/eventIcon.png"/> -->
 					</div>
 				</div>
 				<div id="mainPlanDivLeftTabMenu">
-					<div id="leftMenuLandmarkList" style="clear:none;">
-					</div>
-					<div id="leftMenuEateryList" style="clear:none;">
-					</div>
-					<div id="leftMenuStayList" style="clear:none;">
-					</div>
-					<div id="leftMenuEventList" style="clear:none;">
+					<div id="leftMenuList" style="clear:none;">
 					</div>
 				</div>
 			</div>

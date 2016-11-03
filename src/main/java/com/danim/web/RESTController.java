@@ -20,15 +20,29 @@ public class RESTController {
 	Model model;
 	
 	@RequestMapping(value = "/plan/RESTLandmarkInfo")
-	public String landmarkInfo(Model model, @RequestParam(value="clickCityName") String clickCityName) {
-		logger.info("landmarkInfo() RESTController.java");
-		logger.info("clickCityName : {} landmarkInfo() RESTController.java", clickCityName);
+	public String totalInfo(Model model,
+							   @RequestParam(value="clickCityName") String clickCityName,
+							   @RequestParam(value="clickIcon") String clickIconName) {
+		logger.info("totalInfo() RESTController.java");
+		logger.info("clickCityName : {} totalInfo() RESTController.java", clickCityName);
+		logger.info("clickIconName : {} totalInfo() RESTController.java", clickIconName);
 
 		model.addAttribute("totalInfo", totalInfoService.selectTotalInfoByCityName(clickCityName));
-		//logger.info("listLandmarkInfo : {} landmarkInfo() RESTController.java", totalInfoService.selectTotalInfoByCityName(clickCityName));
 		//logger.info("model : {} landmarkInfo() RESTController.java", model);
 		
-		return "/plan/landmarkInfo";
+		//클릭한 탭이 무엇인지(명소, 식당, 숙소, 축제 중 하나) 가져와서 이동시킬 페이지를 분기시킨다.
+		String infoPage = "/plan/landmarkInfo";		
+		if(clickIconName.equals("명소")) {
+			infoPage = "/plan/landmarkInfo";
+		} else if(clickIconName.equals("식당")) {
+			infoPage = "/plan/EateryInfo";
+		} else if(clickIconName.equals("숙소")) {
+			infoPage = "/plan/StayInfo";
+		} else if(clickIconName.equals("축제")) {
+			infoPage = "/plan/EventInfo";
+		}
+		
+		return infoPage;
 	}
 	
 }

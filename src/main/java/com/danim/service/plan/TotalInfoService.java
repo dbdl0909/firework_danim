@@ -43,10 +43,10 @@ public class TotalInfoService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<LandmarkInfoDto> listLandmarkInfoByCityName = totalInfoDao.selectLandmarkInfoByCityName(clickCityName);
-		//logger.info("listLandmarkInfoByCityName : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", listLandmarkInfoByCityName);
+		logger.info("listLandmarkInfoByCityName : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", listLandmarkInfoByCityName);
 		
 		List<EateryInfoDto> listEateryInfoByCityName = totalInfoDao.selectEateryInfoByCityName(clickCityName);
-		//logger.info("listEateryInfoByCityName : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", listEateryInfoByCityName);
+		logger.info("listEateryInfoByCityName : {} <-- selectLandmarkInfoByCityName() TotalInfoService.java", listEateryInfoByCityName);
 		
 		map.put("listLandmarkInfo", listLandmarkInfoByCityName);
 		map.put("listEateryInfo", listEateryInfoByCityName);
