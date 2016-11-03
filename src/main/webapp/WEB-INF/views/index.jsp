@@ -56,18 +56,83 @@
 <!-- 컨텐츠 -->
 <div class="container clearfix">
 	<div class="mainGallery">
-		<ul class="galleryList clearfix">
-			<li class="galleryTitleImage"><img src="https://unsplash.it/600/400?image=984"/></li>
-			<li><img src="https://unsplash.it/600/400?image=983"/></li>
-			<li><img src="https://unsplash.it/600/400?image=982"/></li>
-			<li><img src="https://unsplash.it/600/400?image=981"/></li>
-			<li><img src="https://unsplash.it/600/400?image=980"/></li>
-			<li><img src="https://unsplash.it/600/400?image=979"/></li>
-			<li><img src="https://unsplash.it/600/400?image=978"/></li>
-			<li><img src="https://unsplash.it/600/400?image=977"/></li>
-			<li><img src="https://unsplash.it/600/400?image=975"/></li>
-			<li><img src="https://unsplash.it/600/400?image=974"/></li>
-		</ul>
+	<ul>
+		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+	 		<c:choose>
+				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_29'}">
+						<li>
+							<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+						</li>							
+				</c:when>
+			</c:choose>
+		</c:forEach>		
+	</ul>
+	<ul>
+		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+	 		<c:choose>
+				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_49'}">		
+					<li>
+						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+					</li>								
+				</c:when>
+			</c:choose>
+		</c:forEach>		
+	</ul>
+	<ul>
+		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+	 		<c:choose>
+				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_72'}">		
+					<li>
+						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+					</li>								
+				</c:when>
+			</c:choose>
+		</c:forEach>		
+	</ul>
+	<ul>
+		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+	 		<c:choose>
+				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_73'}">		
+					<li>
+						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+					</li>									
+				</c:when>
+			</c:choose>
+		</c:forEach>		
+	</ul>
+	<ul>
+		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+	 		<c:choose>
+				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_74'}">		
+					<li>
+						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+					</li>									
+				</c:when>
+			</c:choose>
+		</c:forEach>		
+	</ul>
+	<ul>
+		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+	 		<c:choose>
+				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_75'}">		
+					<li>
+						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+					</li>								
+				</c:when>
+			</c:choose>
+		</c:forEach>		
+	</ul>
+	<ul>
+		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+	 		<c:choose>
+				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_76'}">		
+					<li>
+						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+					</li>								
+				</c:when>
+			</c:choose>
+		</c:forEach>		
+	</ul>
 	</div>	
 </div>
 <!-- 풋터 -->

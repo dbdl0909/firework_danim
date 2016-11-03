@@ -71,8 +71,8 @@
 				$('#moreView').click(function(){
 				    $.ajax({      
 				        type:"POST",  
-				        url:"/search/infoSearch",      
-				        data: {search: search, moreView: moreView},     
+				        url:"/search/infoSearch",    
+				        data:{search: search, moreView: moreView},     
 				        success:function(data){
 				        	alert('더보기 리스트 : ' + moreView);
 				        	$('table').append(data);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.danim.service.IndexMapper">
+	<select id="selectLandmarkInfoImageForIndex"
+			resultType="com.danim.service.index.IndexLandmarkImageDto">
+		SELECT 
+			city_info_no as 'CityInfoNo', landmark_info_image as 'LandmarkInfoImage'
+		FROM
+			landmark_info
+		WHERE
+			city_info_no 
+		IN
+			(SELECT city_info_no FROM landmark_info
+		GROUP BY 
+			city_info_no
+		HAVING 
+			COUNT(city_info_no) > 2)
+		ORDER BY
+			city_info_no
+	</select>
+</mapper>

@@ -17,6 +17,8 @@ public class SearchDao {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
+	private final String nameSpace = "com.danim.service.SearchMapper";
+	
     // search 검색어를 통해서 도시의 이름만을 조회하는 메서드
     public List<SearchDto> selectCityInfoName(String search) {
     	logger.info("selectCityInfoName() SearchDao.java");
@@ -24,9 +26,7 @@ public class SearchDao {
 		return sessionTemplate.selectList(nameSpace + ".selectCityInfoName", search);
     	
     }
-    
-    private final String nameSpace = "com.danim.service.SearchMapper";
-    
+        
     // search(도시이름) 검색어를 통해서 해당 지역의 명소를 검색
     public List<SearchDto> selectLandmarkInfo(String search) {
     	logger.info("selectLandmarkInfo() SearchDao.java");
