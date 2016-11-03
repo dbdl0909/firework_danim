@@ -614,11 +614,13 @@ a.voted:hover {
 }
 
 /* 메인갤러리  */
-.mainGallery{float:left;}
-.galleryList{}
-.galleryList > li {float:left; display:none;}
-.galleryList .galleryTitleImage{display:block;}
-.galleryList > li img {width:260px; cursor:pointer;}
+#mainGallerySilderWrap{width:100%; height:auto; text-align:center; margin:30px auto;}
+#mainGallerySilderWrap h2{font-size:28px; color:#687074; font-weight:400; padding-bottom:18px;}
+#mainGallerySilderWrap .mainGallery{float:left;}
+#mainGallerySilderWrap .galleryList{}
+#mainGallerySilderWrap .galleryList > li {float:left; display:none;}
+#mainGallerySilderWrap .galleryList .galleryTitleImage{display:block;}
+#mainGallerySilderWrap .galleryList > li img {width:260px; cursor:pointer;}
 .picshade {
   position: fixed;
   left: 0;
