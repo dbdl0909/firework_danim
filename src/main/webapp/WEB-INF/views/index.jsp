@@ -19,7 +19,7 @@
 </head>
 <script>
 	$(document).ready(function(){
-		
+		$('.galleryList li:first-child').addClass('galleryTitleImage');
 		$('.goPlan').click(function(){
 			location.href = '/plan/mainPlan'			
 		})
@@ -56,84 +56,31 @@
 <!-- 컨텐츠 -->
 <div class="container clearfix">
 	<div class="mainGallery">
-	<ul>
-		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
-	 		<c:choose>
-				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_29'}">
-						<li>
-							<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
-						</li>							
-				</c:when>
-			</c:choose>
-		</c:forEach>		
-	</ul>
-	<ul>
-		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
-	 		<c:choose>
-				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_49'}">		
-					<li>
-						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
-					</li>								
-				</c:when>
-			</c:choose>
-		</c:forEach>		
-	</ul>
-	<ul>
-		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
-	 		<c:choose>
-				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_72'}">		
-					<li>
-						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
-					</li>								
-				</c:when>
-			</c:choose>
-		</c:forEach>		
-	</ul>
-	<ul>
-		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
-	 		<c:choose>
-				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_73'}">		
-					<li>
-						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
-					</li>									
-				</c:when>
-			</c:choose>
-		</c:forEach>		
-	</ul>
-	<ul>
-		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
-	 		<c:choose>
-				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_74'}">		
-					<li>
-						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
-					</li>									
-				</c:when>
-			</c:choose>
-		</c:forEach>		
-	</ul>
-	<ul>
-		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
-	 		<c:choose>
-				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_75'}">		
-					<li>
-						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
-					</li>								
-				</c:when>
-			</c:choose>
-		</c:forEach>		
-	</ul>
-	<ul>
-		<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
-	 		<c:choose>
-				<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_76'}">		
-					<li>
-						<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
-					</li>								
-				</c:when>
-			</c:choose>
-		</c:forEach>		
-	</ul>
-	</div>	
+		<ul class="galleryList">
+			<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+		 		<c:choose>
+					<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_29'}">
+							<li>
+								<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+							</li>							
+					</c:when>
+				</c:choose>
+			</c:forEach>		
+		</ul>
+	</div>		
+	<div class="mainGallery">
+		<ul class="galleryList">
+			<c:forEach var="selectLandmarkImageForIndex" items="${selectLandmarkImageForIndex}" varStatus="index">
+		 		<c:choose>
+					<c:when test="${selectLandmarkImageForIndex.cityInfoNo eq 'city_no_49'}">
+							<li>
+								<img src="${selectLandmarkImageForIndex.landmarkInfoImage}">
+							</li>							
+					</c:when>
+				</c:choose>
+			</c:forEach>		
+		</ul>
+	</div>
 </div>
 <!-- 풋터 -->
 <jsp:include page="./module/footer.jsp" />
