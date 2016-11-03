@@ -23,8 +23,8 @@ var zoomLocation;
 //map에서 가리킬 좌표의 zoom 값을 담는 변수
 var zoomSize;
 
-var markerIcon1 = "../../resources/images/placeholder.png";
-var markerIcon2 = "../../resources/images/placeholder2.png";
+var markerIcon1 = "../../resources/images/planIcon/placeholder.png";
+var markerIcon2 = "../../resources/images/planIcon/placeholder2.png";
 
 var $stayDay;
 
@@ -85,7 +85,7 @@ function infoWindowEvent() {
 				content: "<img id='mainPlanCityInfoImage' src=" + infoImageArray[markerIndex] + "/>" +
 						 "<span id='mainPlanCityInfo'>" + infoSummaryArray[markerIndex] + "</span>" +
 						 "<div id='mainPlanAddButton'>" +
-						 	"<img id='addButton' src='../../resources/images/addButton.png'/>" +
+						 	"<img id='addButton' src='../../resources/images/planIcon/addButton.png'/>" +
 						 "</div>"
 			});
 			//console.log(this.index);
@@ -116,11 +116,11 @@ function infoWindowEvent() {
 			    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
 			    		$('#mainPlanUl').append("<li class='leftMenuLi'>" +
 			    									"<span class='cityName'>" + infoNameArray[markerIndex] + "</span>" +
-			    									"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/removeButton.png'/>" +
+			    									"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/planIcon/removeButton.png'/>" +
 			    									"<div class='cityChooseMenu'>" +
-			    										"<img class='arrowLeft' src='../../resources/images/arrowPointingToLeft.png'/>" +
+			    										"<img class='arrowLeft' src='../../resources/images/planIcon/arrowPointingToLeft.png'/>" +
 			    										"<span class='stayCount'>1</span>일" +
-			    										"<img class='arrowRight' src='../../resources/images/arrowPointingToRight.png'/>" +
+			    										"<img class='arrowRight' src='../../resources/images/planIcon/arrowPointingToRight.png'/>" +
 			    									"</div>" +
 			    								"</li>");
 			    		
@@ -441,4 +441,30 @@ $(document).ready(function() {
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {
 		$('#mainPlanDivLeft3').animate({"left":"0px"});
 	});
+	
+	//명소
+	$('#mainPlanlandmarkIcon').hover(function() {
+		$(this).attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
+	}, function() {
+		$(this).attr('src', '../../resources/images/planIcon/landmarkIcon.png');
+	});
+	//식당
+	$('#mainPlanEateryIcon').hover(function() {
+		$(this).attr('src', '../../resources/images/planIcon/eateryIconClick.png');
+	}, function() {
+		$(this).attr('src', '../../resources/images/planIcon/eateryIcon.png');
+	});
+	//숙소
+	$('#mainPlanStayIcon').hover(function() {
+		$(this).attr('src', '../../resources/images/planIcon/stayIconClick.png');
+	}, function() {
+		$(this).attr('src', '../../resources/images/planIcon/stayIcon.png');
+	});
+	//축제
+	$('#mainPlanEventIcon').hover(function() {
+		$(this).attr('src', '../../resources/images/planIcon/eventIconClick.png');
+	}, function() {
+		$(this).attr('src', '../../resources/images/planIcon/eventIcon.png');
+	});
+	
 });

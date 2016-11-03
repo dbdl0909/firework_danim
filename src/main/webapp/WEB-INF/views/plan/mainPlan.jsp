@@ -76,7 +76,7 @@
 			<div id="mainPlanDivLeft3">
 				<div id="mainPlanDivLeftLabel2">
 					<label id="clickCityName"></label>
-					<img id="mainPlanDivLeft3Close" src="../../resources/images/closeArrow.png"/>
+					<img id="mainPlanDivLeft3Close" src="../../resources/images/planIcon/closeArrow.png"/>
 				</div>
 				
 				<div id="mainPlanDivLeftTab">
