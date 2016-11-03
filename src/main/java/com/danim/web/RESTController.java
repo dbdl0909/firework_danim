@@ -31,15 +31,15 @@ public class RESTController {
 		//logger.info("model : {} landmarkInfo() RESTController.java", model);
 		
 		//클릭한 탭이 무엇인지(명소, 식당, 숙소, 축제 중 하나) 가져와서 이동시킬 페이지를 분기시킨다.
-		String infoPage = "/plan/landmarkInfo";		
+		String infoPage = "/plan/landmarkInfo";
 		if(clickIconName.equals("명소")) {
 			infoPage = "/plan/landmarkInfo";
 		} else if(clickIconName.equals("식당")) {
-			infoPage = "/plan/EateryInfo";
+			infoPage = "/plan/eateryInfo";
 		} else if(clickIconName.equals("숙소")) {
-			infoPage = "/plan/StayInfo";
+			infoPage = "/plan/stayInfo";
 		} else if(clickIconName.equals("축제")) {
-			infoPage = "/plan/EventInfo";
+			infoPage = "/plan/eventInfo";
 		}
 		
 		return infoPage;

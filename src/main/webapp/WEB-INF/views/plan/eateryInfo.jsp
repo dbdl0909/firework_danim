@@ -7,11 +7,11 @@
 		<title>Landmark List</title>
 	</head>
 	<body>		
-		<c:set var="listLandmarkInfo" value="${totalInfo.listLandmarkInfo}" />
+		<c:set var="listEateryInfo" value="${totalInfo.listEateryInfo}" />
 		
-		<ul id="mainPlanlandmarkUl">
-			<c:forEach var="listLandmarkInfo" items="${listLandmarkInfo}" varStatus="status">
-				<li><img class="landmarkInfoImage" src="${listLandmarkInfo.landmarkInfoImage}"/></li>
+		<ul id="mainPlanEateryUl">
+			<c:forEach var="listEateryInfo" items="${listEateryInfo}" varStatus="status">
+				<li>${listEateryInfo.eateryName}</li>
 			</c:forEach>
 		</ul>
 	</body>

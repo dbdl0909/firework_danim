@@ -417,35 +417,11 @@ $(document).ready(function() {
 		$('#stayDay').val($stayDay);
 	});
 	
-	var clickCityName;
-	//cityName li 태그를 클릭했을때 실행할 함수
-	$('body').on('click', '.cityName', function() {
-		var cityClickIndex = $('.cityName').index(this);
-		clickCityName = $('.cityName').eq(cityClickIndex).text();
-		console.log(cityClickIndex + '번째 도시 : ' + clickCityName);
-		$('#clickCityName').text(clickCityName);
-		
-		/*$.ajax({
-			url:'/plan/RESTLandmarkInfo',
-			data:{clickCityName:clickCityName},
-			type:'GET',
-			success:function(data){
-				$('#leftMenuLandmarkList').html(data);
-				
-				//$('#mainPlanlandmarkUl').append("<li class='landmarkList'>데이터가 없습니다.</li>");
-			}
-		})*/
-		
-		$('#mainPlanDivLeft3').show().animate({"left":"320px"});
-		//$('#mainPlanlandmarkIcon').attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
-	});
-	
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {
 		$('#mainPlanDivLeft3').animate({"left":"0px"});
 	});
 	
 	var clickIcon;
-	
 	function test() {
 		$.ajax({
 			url:'/plan/RESTLandmarkInfo',
@@ -456,6 +432,21 @@ $(document).ready(function() {
 			}
 		})
 	}
+	
+	var clickCityName;
+	//cityName li 태그를 클릭했을때 실행할 함수
+	$('body').on('click', '.cityName', function() {
+		var cityClickIndex = $('.cityName').index(this);
+		clickCityName = $('.cityName').eq(cityClickIndex).text();
+		console.log(cityClickIndex + '번째 도시 : ' + clickCityName);
+		$('#clickCityName').text(clickCityName);
+		
+		clickIcon = "명소";
+		test();
+		
+		$('#mainPlanDivLeft3').show().animate({"left":"320px"});
+		//$('#mainPlanlandmarkIcon').attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
+	});
 	
 	var $src;
 	$('.iconImg').click(function(){
