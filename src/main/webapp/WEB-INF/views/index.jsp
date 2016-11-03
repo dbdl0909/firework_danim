@@ -15,37 +15,60 @@
 <script type="text/javascript" src="../../resources/js/jquery.simpleslider.js"></script>
 <script type="text/javascript" src="../../resources/js/backstretch.js"></script>
 <script type="text/javascript" src="../../resources/js/option.js"></script>
+	<script src="../../resources/js/jquery.picEyes.js"></script>
 </head>
+<script>
+	$(document).ready(function(){
+		
+		$('.goPlan').click(function(){
+			location.href = '/plan/mainPlan'			
+		})
+		
+		$(function(){
+			$('.galleryTitleImage').click(function(){
+				$(this).parents('ul').find('li').picEyes();
+			});
+		});
+	});
+</script>
 <body>
 <!-- 헤더 -->
 <jsp:include page="./module/header.jsp" />
 <!-- 슬라이더  -->	
-<div class='pageblock' id='fullscreen'>
+<div class='pageblock clearfix' id='fullscreen'>
 	<div class='slider'>
 		<div class='slide' id="first">
 			<div class='slidecontent'>
 				<span class="headersur">전라북도 전주</span>
 				<h1>한옥마을 한복체험!</h1>
-				<div class="button" onclick="movePlan()">플래너 시작하기</div>
+				<div class="button goPlan">플래너 시작하기</div>
 			</div>
 		</div>	
 		<div class='slide' id="sec">
 			<div class='slidecontent'>
 				<span class="headersur">전라남도 담양</span>
 				<h1>담양 죽림원</h1>
-				<div class="button" onclick="movePlan()">플래너 시작하기</div>
+				<div class="button goPlan">플래너 시작하기</div>
 			</div>
 		</div>	
 	</div>
 </div>
-<script>
-	var movePlan = function(){
-		location.href = '/plan/mainPlan'
-	}
-</script>
 <!-- 컨텐츠 -->
-<div>
-	
+<div class="container clearfix">
+	<div class="mainGallery">
+		<ul class="galleryList clearfix">
+			<li class="galleryTitleImage"><img src="https://unsplash.it/600/400?image=984"/></li>
+			<li><img src="https://unsplash.it/600/400?image=983"/></li>
+			<li><img src="https://unsplash.it/600/400?image=982"/></li>
+			<li><img src="https://unsplash.it/600/400?image=981"/></li>
+			<li><img src="https://unsplash.it/600/400?image=980"/></li>
+			<li><img src="https://unsplash.it/600/400?image=979"/></li>
+			<li><img src="https://unsplash.it/600/400?image=978"/></li>
+			<li><img src="https://unsplash.it/600/400?image=977"/></li>
+			<li><img src="https://unsplash.it/600/400?image=975"/></li>
+			<li><img src="https://unsplash.it/600/400?image=974"/></li>
+		</ul>
+	</div>	
 </div>
 <!-- 풋터 -->
 <jsp:include page="./module/footer.jsp" />
