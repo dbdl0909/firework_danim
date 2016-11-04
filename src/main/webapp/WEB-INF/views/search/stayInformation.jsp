@@ -10,15 +10,20 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<style type="text/css">
-			#infoButton{float: right;}
-		</style>
+		<!-- 자체 css -->
+		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">		
 		<title>Insert title here</title>
 	</head>
+	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
 			<h1>${selectStayInfoOne.stayInfoName}</h1>
 			<p>${cityInfoName} > 머물만한 곳</p>
+			<div class="infoImage">
+				<p>
+					<!-- <img src=""> --> 이미지 준비중입니다						
+				</p>
+			</div>				
 			<div>	
 				<p id="infoExplain">
 					<strong>
@@ -35,7 +40,7 @@
 						<li>스위트 : ${selectStayInfoOne.stayInfoSuite} 원</li>
 					</ul>
 				</p>
-				<p id="infoButton">
+				<p class="infoButton">
 					<a href="/" role="button" class="btn btn-info">홈으로</a>
 					<a href="" role="button" class="btn btn-info">버튼2</a>
 					<a href="" role="button" class="btn btn-info">버튼3</a>
@@ -43,4 +48,5 @@
 			</div>
 		</div>
 	</body>
+	<jsp:include page="../module/footer.jsp"></jsp:include>
 </html>

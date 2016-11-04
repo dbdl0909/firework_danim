@@ -1174,6 +1174,7 @@ a.voted:hover {
 		box-sizing: border-box;
 	}
 }
+
 /* 검색결과화면 */
 .container #searchGuide #searchSpan{color: #e35e54;}
 .container .table-responsive .table .landmarkInfo{text-decoration: none; float: right;}
@@ -1182,3 +1183,12 @@ a.voted:hover {
 .container .table-responsive .table .stayInfo{text-decoration: none; float: right;}
 .container .table .moreView{cursor: pointer;}
 .table .eateryInfo{text-decoration: none; float: right;}
+
+/* 검색상세정보화면 */
+.container .infoImage{text-align: center;} 
+.container .infoButton{float: right;}
+
+/* 자동완성 */
+#ui-id-1{width:980px; z-index:22222; border:1px solid #ccc; background:#fff;}
+#ui-id-1 li{line-height:3em; font-size:18px; padding-left:20px; cursor: pointer; color: #687074;}
+#ui-id-1 li:hover{background: #687074; color: #FFF;}

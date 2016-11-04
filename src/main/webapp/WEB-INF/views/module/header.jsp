@@ -8,6 +8,8 @@
 <link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- 자동완성 기능 이용을 위해 필요한 jqueryUI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
@@ -50,7 +52,18 @@
 	        	alert('도시이름을 제대로 입력해주세요');
 	        	event.returnValue = false;
 	        }			 
-	    });		
+	    });	
+		
+		/* 자동완성 코드 진행중*/
+		$(function(){
+			var autoComplete = new Array();
+			'<c:forEach var="selectCityAll" items="${selectCityAll}">'
+			autoComplete.push("${selectCityAll}");
+			'</c:forEach>'
+			$('#infoSearchInput').autocomplete({
+				source: autoComplete
+			});
+		});
 		
 	})
 </script>
@@ -119,7 +132,7 @@
 	<div class="searchInner">
 	 	<span id="searchGlyphicon" class="glyphicon glyphicon-search"></span>
 		<form id="infoSearch" action="/search/infoSearch" method="post">			
-			<input id="infoSearchInput" name="search" placeholder="알고싶은 도시의 이름을 검색하세요!" type="text">
+			<input id="infoSearchInput" name="search" placeholder="알고싶은 도시의 이름을 검색하세요!" type="text" style="z-index:9999;" />
 		</form>
 		<span id="closeSearchForm">X</span>
 	</div>	

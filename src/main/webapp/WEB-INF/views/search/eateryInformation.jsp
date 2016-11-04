@@ -10,19 +10,23 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- 자체 css -->
+		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">		
 		<title>Insert title here</title>
-		<style type="text/css">
-			#infoButton{float: right;}
-		</style>		
 	</head>
+	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
 			<h1>${selectEateryInfoOne.eateryName}</h1>
 			<p>${cityInfoName} > 먹을만한 곳</p>
+			<div class="infoImage">
+				<p>
+					<!-- <img src=""> --> 이미지 준비중입니다						
+				</p>
+			</div>			
 			<div>	
 				<p id="infoExplain">
 					<strong>
-						//<img src="https://maps.googleapis.com/maps/api/staticmap?center=${selectEateryInfoOne.eateryName}&zoom=17&size=500x301&key=AIzaSyCvHmVG5i9J5JtWxL6ifRbneHjjEEkF04w">
 						${selectEateryInfoOne.eaterySummary}
 					</strong>
 				</p>
@@ -33,7 +37,7 @@
 						<li>분류 : ${selectEateryInfoOne.eateryCategory}</li>
 					</ul>
 				</p>
-				<p id="infoButton">
+				<p class="infoButton">
 					<a href="/" role="button" class="btn btn-info">홈으로</a>
 					<a href="" role="button" class="btn btn-info">버튼2</a>
 					<a href="" role="button" class="btn btn-info">버튼3</a>
@@ -41,4 +45,5 @@
 			</div>
 		</div>
 	</body>
+	<jsp:include page="../module/footer.jsp"></jsp:include>
 </html>

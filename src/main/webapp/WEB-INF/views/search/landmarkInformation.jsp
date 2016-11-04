@@ -10,11 +10,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<style type="text/css">
-			#infoImage{text-align: center;}
-			/* #infoContent ul, li{list-style-type: none; margin: 0; padding: 0;} */
-			#infoButton{float: right;}
-		</style>
+		<!-- 자체 css -->
+		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">		
 		<title>Insert title here</title>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
@@ -22,7 +19,7 @@
 		<div class="container">
 			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
 			<p>${cityInfoName} > 갈만한곳</p>
-			<div id="infoImage">
+			<div class="infoImage">
 				<p>
 					<img src="${selectLandmarkInfoOne.landmarkInfoImage}">						
 					<img src="https://maps.googleapis.com/maps/api/staticmap?center=${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&markers=color:blue%7Clabel:%7C${selectLandmarkInfoOne.landmarkInfoLatitude},${selectLandmarkInfoOne.landmarkInfoLangitude}&zoom=17&size=500x301&key=AIzaSyCvHmVG5i9J5JtWxL6ifRbneHjjEEkF04w">					
@@ -43,7 +40,7 @@
 						<li>이용료 : ${selectLandmarkInfoOne.landmarkInfoFee} 원</li>
 					</ul>
 				</p>
-				<p id="infoButton">
+				<p class="infoButton">
 					<a href="/" role="button" class="btn btn-info">홈으로</a>
 					<a href="" role="button" class="btn btn-info">버튼2</a>
 					<a href="" role="button" class="btn btn-info">버튼3</a>

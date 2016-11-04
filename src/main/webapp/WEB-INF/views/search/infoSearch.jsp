@@ -19,8 +19,6 @@
 				
 				/* 유효성 검사 */
 				var search = "<c:out value="${search}"/>";
-				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
-				var infoSearchInput = $('#infoSearchInput');
 				
 				// 더보기에 사용되는 변수
 				var moreView = 10; 			// 더보기 눌렀을 때 한 페이지에서 보여줄 리스트 수
@@ -60,20 +58,7 @@
 				$('#closeSearchForm').click(function(){
 					$('#searchForm').hide();
 					$('#searchNotice').show();
-				});
-				
-
-				
-				$(function(){
-					var autoComplete = new Array();
-					<c:forEach var="selectCityAll" items="${selectCityAll}">
-					autoComplete.push("${selectCityAll}");
-					</c:forEach>
-					$('#infoSearchInput').autocomplete({
-						source: autoComplete
-					});
-				});
-				
+				});				
 				
 				// 더보기 버튼을 눌렀을 때 조건 검사 후 실행되는 ajax 코드
 				function moreViewAjax(){
