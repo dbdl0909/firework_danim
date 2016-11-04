@@ -53,13 +53,24 @@ public class RESTController {
 	
 	// 검색결과 하면 더보기 버튼 클릭시
 	@RequestMapping(value = "/search/searchMore")
-	public String searchMore(Model model, @RequestParam(value="search") String search, @RequestParam(value="moreView") int moreView) {
+	public String searchMore(Model model,
+							@RequestParam(value="search") String search,
+							@RequestParam(value="moreView") int moreView,
+							@RequestParam(value="clickMoreView") int clickMoreView) {
 		logger.info("searchMore() RESTController.java");
 		logger.info("search {} 값 입니다", search);
 		logger.info("MoreView {} 값 입니다", moreView);
+		logger.info("clickMoreView {} 값 입니다", clickMoreView);
+		
+		String searchMore = null;
+		if(clickMoreView == 1) {
+			searchMore = "/search/eateryMore";
+		}else if(clickMoreView == 3) {
+			searchMore = "/search/stayMore";
+		}
 		
 		model.addAttribute("searchMore", searchMoreService.searchMore(search, moreView));
 	
-		return "/search/eateryMore";
+		return searchMore;
 	}
 }

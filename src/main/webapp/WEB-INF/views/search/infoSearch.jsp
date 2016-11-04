@@ -21,7 +21,15 @@
 				var search = "<c:out value="${search}"/>";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
-				var moreView = 10;
+				
+				// 더보기에 사용되는 변수
+				var moreView = 10; 			// 더보기 눌렀을 때 한 페이지에서 보여줄 리스트 수
+				var beforeMoreView = -1;	// 내가 이전에 눌렀던 더보기의 인덱스 (0:명소, 1:음식점, 2:축제, 3:숙소)
+				var clickMoreView = -1;		// 내가 현재 클릭한 더보기의 인덱스 (0:명소, 1:음식점, 2:축제, 3:숙소)
+				var saveEatery = 10;		// 음식점 더보기 이외의 버튼을 누르기 전까지 보여주던 음식점 페이지의 리스트 수
+				var saveStay = 10;			// 숙소 더보기 이외의 버튼을 누르기 전까지 보여주던 숙소 페이지의 리스트 수
+				console.log(saveEatery);
+				console.log(saveStay);
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
@@ -66,16 +74,55 @@
 					});
 				});
 				
+				
+				// 더보기 버튼을 눌렀을 때 조건 검사 후 실행되는 ajax 코드
+				function moreViewAjax(){
+					$.ajax({
+						type:"POST",  
+						url:"/search/searchMore",    
+						data:{search: search, moreView: moreView, clickMoreView: clickMoreView},     
+						success:function(data){
+							if(clickMoreView == '1') {
+								$('#eateryTbody').append(data)
+							}else if(clickMoreView == '3') {
+								$('#stayTbody').append(data)
+							}
+							moreView += 10;	        		
+						 }														
+					});
+				}
+				
+				// 더보기 버튼을 눌렀을 때 분기문
 				$('.moreView').click(function(){
-				    $.ajax({      
-				        type:"POST",  
-				        url:"/search/searchMore",    
-				        data:{search: search, moreView: moreView},     
-				        success:function(data){
-							moreView += 10;
-				        	$('#eateryTbody').append(data)
-				        }
-				    }); 
+					clickMoreView = $('.moreView').index(this);	// 현재 누른 더보기 버튼의 인덱스를 clickMoreview에 할당해준다 (0:명소, 1:음식점, 2:축제, 3:숙소)
+					console.log(clickMoreView);
+					
+					if(beforeMoreView != clickMoreView) {	// 이전에 누른 더보기 버튼의 인덱스와 현재 누른 더보기 버튼의 인덱스가 같지 않을 때 (다른 더보기 버튼을 눌렀을 때)
+						if(beforeMoreView == '1') {
+							saveEatery = moreView;
+							console.log('saveEatery : ' + saveEatery);
+							
+						}else if(beforeMoreView == '3') {
+							saveStay = moreView;
+							console.log('saveStay : ' + saveStay);
+						}
+						
+						if(clickMoreView == '1') {
+							moreView = saveEatery;
+							
+						}else if(clickMoreView == '3') {
+							moreView = saveStay;
+						}
+						
+						beforeMoreView = clickMoreView;
+						
+						console.log('clickMoreView : ' + clickMoreView);
+						
+						moreViewAjax();
+						
+					}else if(beforeMoreView == clickMoreView) {						
+						moreViewAjax();						
+					}			    
 				});
 				
 			});
@@ -120,8 +167,8 @@
 							<th>
 								<h3>갈만한 곳</h3>
 							</th>
-							<th>
-								
+							<th class="moreView">
+								더보기
 							</th>
 						</tr>
 					</thead>
@@ -182,8 +229,8 @@
 							<th>
 								<h3>볼만한 것</h3>
 							</th>
-							<th>
-							
+							<th class="moreView">
+								더보기
 							</th>
 						</tr>
 					</thead>
@@ -218,7 +265,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="stayTbody">
 						<c:if test="${selectStayInfo != ''}">			
 							<c:forEach var="selectStayInfo" items="${selectStayInfo}">
 								<tr>

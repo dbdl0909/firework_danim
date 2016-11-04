@@ -33,4 +33,22 @@ public class SearchMoreService {
 		return resultMap;
     	
     }
+    
+    /*public List<String, Object> searchMore(String search, int stayMoreView) {
+    	logger.info("searchMore() SearchMoreService.java");
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+    	HashMap<String, Object> resultMap = new HashMap<String, Object>();
+    	map.put("search", search);
+    	map.put("moreView", moreView);
+    	map.put("stayMoreView", stayMoreView);
+    	
+    	List<SearchDto> selectEateryInfoList = searchMoreDao.selectEateryInfo(map);
+    	List<SearchDto> selectStayInfoList = searchMoreDao.selectStayInfo(map);
+    	
+    	resultMap.put("selectEateryInfoList", selectEateryInfoList);
+    	resultMap.put("selectStayInfoList", selectStayInfoList);
+    	
+		return resultMap;
+    	
+    }*/
 }
