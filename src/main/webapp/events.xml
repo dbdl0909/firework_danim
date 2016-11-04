@@ -1,24 +1,30 @@
 <?xml version="1.0"?>
 <monthly>
-	<event>
-		<id>7</id>
-		<name>부산 국제시장 여행</name>
-		<startdate>2016-11-26</startdate>
-		<enddate>2016-11-26</enddate>
-		<starttime>13:00</starttime>
-		<endtime>14:00</endtime>
-		<color>#7d8b25</color>
-		<url></url>
-	</event>
-	<event>
-		<id>8</id>
-		<name>부산 해운대 탐방</name>
-		<startdate>2016-11-26</startdate>
-		<enddate>2016-11-26</enddate>
-		<starttime>14:30</starttime>
-		<endtime>16:00</endtime>
-		<color>#7d8b25</color>
-		<url></url>
-	</event>
-
+	<plan>
+		<number>1</number>
+		<planid>id001</planid>
+		<events>
+			<event>
+				<id>7</id>
+				<name>부산 국제시장 여행</name>
+				<startdate>2016-11-26</startdate>
+				<enddate>2016-11-26</enddate>
+				<starttime>13:00</starttime>
+				<endtime>14:00</endtime>
+				<color>#7d8b25</color>
+				<memo></memo>
+				<url></url>
+			</event>
+			<event>
+				<id>8</id>
+				<name>부산 해운대 탐방</name>
+				<startdate>2016-11-26</startdate>
+				<enddate>2016-11-26</enddate>
+				<starttime>14:30</starttime>
+				<endtime>16:00</endtime>
+				<color>#7d8b25</color>
+				<url></url>
+			</event>
+		</events>
+	</plan>
 </monthly>

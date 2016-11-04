@@ -745,6 +745,7 @@ a.voted:hover {
 	-ms-user-select: none;
 	user-select: none;
 	position: relative;
+	z-index:2;
 }
 
 /* Contains title & nav */
@@ -834,6 +835,7 @@ a.voted:hover {
 	align-content:stretch;
 	width:100%;
 	overflow: hidden;
+	z-index:3;
 }
 
 /* Calendar Days */
@@ -1040,7 +1042,7 @@ a.voted:hover {
 	display: none;
 	transition:.25s;
 	transform:scale(0);
-	z-index:-1;
+	z-index:1;
 }
 
 /* Days in Events List */
@@ -1079,7 +1081,10 @@ a.voted:hover {
 .item-has-event {
 	display: block;
 }
-
+.item-has-event span{
+	float:right;
+	cursor:pointer;	
+}
 .item-has-event:after{
     display:none!important;
 }

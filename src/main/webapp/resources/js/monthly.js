@@ -151,31 +151,32 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			if (options.mode == 'event') {
 				// Remove previous events
 				// Add Events
-				$.get(''+options.xmlUrl+'', function(d){
-					$(d).find('event').each(function(){
+				$.get(''+options.xmlUrl+'', function(plan){
+					$(plan).find('plan').each(function(){
 						// Year [0]   Month [1]   Day [2]
-						var fullstartDate = $(this).find('startdate').text(),
-							startArr = fullstartDate.split("-"),
-							startYear = startArr[0],
-							startMonth = parseInt(startArr[1], 10),
-							startDay = parseInt(startArr[2], 10),
-							fullendDate = $(this).find('enddate').text(),
-							endArr = fullendDate.split("-"),
-							endYear = endArr[0],
-							endMonth = parseInt(endArr[1], 10),
-							endDay = parseInt(endArr[2], 10),
-							eventURL = $(this).find('url').text(),
-							eventTitle = $(this).find('name').text(),
-							eventColor = $(this).find('color').text(),
-							eventId = $(this).find('id').text(),
-							startTime = $(this).find('starttime').text(),
-							startSplit = startTime.split(":");
-							startPeriod = 'AM',
-							endTime = $(this).find('endtime').text(),
-							endSplit = endTime.split(":");
-							endPeriod = 'AM',
-							eventLink = '';
-
+						var memberId = $(this).find('planid').text();
+						$(plan).find('event').each(function(){
+							var fullstartDate = $(this).find('startdate').text(),
+								startArr = fullstartDate.split("-"),
+								startYear = startArr[0],
+								startMonth = parseInt(startArr[1], 10),
+								startDay = parseInt(startArr[2], 10),
+								fullendDate = $(this).find('enddate').text(),
+								endArr = fullendDate.split("-"),
+								endYear = endArr[0],
+								endMonth = parseInt(endArr[1], 10),
+								endDay = parseInt(endArr[2], 10),
+								eventURL = $(this).find('url').text(),
+								eventTitle = $(this).find('name').text(),
+								eventColor = $(this).find('color').text(),
+								eventId = $(this).find('id').text(),
+								startTime = $(this).find('starttime').text(),
+								startSplit = startTime.split(":");
+								startPeriod = 'AM',
+								endTime = $(this).find('endtime').text(),
+								endSplit = endTime.split(":");
+								endPeriod = 'AM',
+								eventLink = '';
 						/* Convert times to 12 hour & determine AM or PM */
 						if(parseInt(startSplit[0]) >= 12) {
 							var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
@@ -261,7 +262,9 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 							}
 
 						}
+						});
 					});
+					
 				});
 
 			}
@@ -372,7 +375,11 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				e.preventDefault();
 			}
 		});
-
+		$(document).ready(function(){			
+			$('#listMemo').click(function(){
+				alert('ddd');
+			});
+		});
 		}
 	});
 })(jQuery);
