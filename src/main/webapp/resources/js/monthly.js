@@ -155,7 +155,8 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 					$(plan).find('plan').each(function(){
 						// Year [0]   Month [1]   Day [2]
 						var memberId = $(this).find('planid').text();
-						$(plan).find('event').each(function(){
+						if(memberId == 'id001'){
+						$(this).find('event').each(function(){
 							var fullstartDate = $(this).find('startdate').text(),
 								startArr = fullstartDate.split("-"),
 								startYear = startArr[0],
@@ -263,6 +264,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 						}
 						});
+						}
 					});
 					
 				});
