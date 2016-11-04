@@ -24,10 +24,14 @@ public class SearchMoreService {
     	map.put("search", search);
     	map.put("moreView", moreView);
     	
+    	List<SearchDto> selectLandmarkInfoList = searchMoreDao.selectLandmarkInfo(map);
     	List<SearchDto> selectEateryInfoList = searchMoreDao.selectEateryInfo(map);
+    	List<SearchDto> selectEventInfoList = searchMoreDao.selectEventInfo(map);
     	List<SearchDto> selectStayInfoList = searchMoreDao.selectStayInfo(map);
     	
+    	resultMap.put("selectLandmarkInfoList", selectLandmarkInfoList);
     	resultMap.put("selectEateryInfoList", selectEateryInfoList);
+    	resultMap.put("selectEventInfoList", selectEventInfoList);
     	resultMap.put("selectStayInfoList", selectStayInfoList);
     	
 		return resultMap;

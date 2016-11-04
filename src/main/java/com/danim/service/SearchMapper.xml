@@ -20,7 +20,7 @@
 	<!-- 도시 이름을 통해서 해당 지역의 명소이름을 조회하는 쿼리 -->
 	<select id="selectLandmarkByCityInfoName"
 			resultType="com.danim.service.search.SearchDto"
-			parameterType="String">
+			parameterType="hashmap">
 		SELECT 
 			city.city_info_no as 'cityInfoNo',
 			city.city_info_do_name as 'cityInfoDoName',
@@ -35,7 +35,9 @@
 			city.city_info_no = land.city_info_no		
 		WHERE
 			city_info_name
-		LIKE CONCAT(#{search},'%')			
+		LIKE CONCAT(#{search},'%')
+		LIMIT
+			#{moreView}, 10					
 	</select>
 	
 	<!-- 도시 이름을 통해서 해당 지역의 음식점 이름을 조회하는 쿼리 -->
@@ -64,7 +66,7 @@
 	<!-- 도시 이름을 통해서 해당 지역의 행사 이름을 조회하는 쿼리 -->
 	<select id="selectEventByCityInfoName"
 			resultType="com.danim.service.search.SearchDto"
-			parameterType="String">
+			parameterType="hashmap">
 		SELECT
 			city.city_info_no as 'cityInfoNo',
 			city.city_info_do_name as 'cityInfoDoName',
@@ -78,7 +80,9 @@
 			city.city_info_no = eve.city_info_no
 		WHERE
 			city_info_name
-		LIKE CONCAT(#{search},'%')	
+		LIKE CONCAT(#{search},'%')
+		LIMIT
+			#{moreView}, 10			
 	</select>
 	
 	<!-- 도시 이름을 통해서 해당 지역의 숙소 이름을 조회하는 쿼리 -->

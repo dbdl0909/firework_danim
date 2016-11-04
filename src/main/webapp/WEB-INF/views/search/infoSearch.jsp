@@ -26,10 +26,10 @@
 				var moreView = 10; 			// 더보기 눌렀을 때 한 페이지에서 보여줄 리스트 수
 				var beforeMoreView = -1;	// 내가 이전에 눌렀던 더보기의 인덱스 (0:명소, 1:음식점, 2:축제, 3:숙소)
 				var clickMoreView = -1;		// 내가 현재 클릭한 더보기의 인덱스 (0:명소, 1:음식점, 2:축제, 3:숙소)
+				var saveLandmark = 10;		// 음식점 더보기 이외의 버튼을 누르기 전까지 보여주던 명소 페이지의 리스트 수
 				var saveEatery = 10;		// 음식점 더보기 이외의 버튼을 누르기 전까지 보여주던 음식점 페이지의 리스트 수
+				var saveEvent = 10;			// 음식점 더보기 이외의 버튼을 누르기 전까지 보여주던 축제 페이지의 리스트 수
 				var saveStay = 10;			// 숙소 더보기 이외의 버튼을 누르기 전까지 보여주던 숙소 페이지의 리스트 수
-				console.log(saveEatery);
-				console.log(saveStay);
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
@@ -82,8 +82,12 @@
 						url:"/search/searchMore",    
 						data:{search: search, moreView: moreView, clickMoreView: clickMoreView},     
 						success:function(data){
-							if(clickMoreView == '1') {
+							if(clickMoreView == '0') {
+								$('#landmarkTbody').append(data)
+							}else if(clickMoreView == '1') {
 								$('#eateryTbody').append(data)
+							}else if(clickMoreView == '2') {
+								$('#eventTbody').append(data)
 							}else if(clickMoreView == '3') {
 								$('#stayTbody').append(data)
 							}
@@ -97,30 +101,38 @@
 					clickMoreView = $('.moreView').index(this);	// 현재 누른 더보기 버튼의 인덱스를 clickMoreview에 할당해준다 (0:명소, 1:음식점, 2:축제, 3:숙소)
 					console.log(clickMoreView);
 					
-					if(beforeMoreView != clickMoreView) {	// 이전에 누른 더보기 버튼의 인덱스와 현재 누른 더보기 버튼의 인덱스가 같지 않을 때 (다른 더보기 버튼을 눌렀을 때)
-						if(beforeMoreView == '1') {
+					if(beforeMoreView != clickMoreView) {		// 이전에 누른 더보기 버튼의 인덱스와 현재 누른 더보기 버튼의 인덱스가 같지 않을 때 (다른 더보기 버튼을 눌렀을 때)
+						if(beforeMoreView == '0') {				// 그 전에 눌렀던 더보기에 해당하는 인덱스의 moreView를 각각의 변수에 저장해준다
+							saveLandmark = moreView;
+							console.log('saveLandmark : ' + saveLandmark);
+						}else if(beforeMoreView == '1') {
 							saveEatery = moreView;
-							console.log('saveEatery : ' + saveEatery);
-							
+							console.log('saveEatery : ' + saveEatery);						
+						}else if(beforeMoreView == '2') {
+							saveEvent = moreView;
+							console.log('saveEvent : ' + saveEvent);
 						}else if(beforeMoreView == '3') {
 							saveStay = moreView;
 							console.log('saveStay : ' + saveStay);
 						}
 						
-						if(clickMoreView == '1') {
-							moreView = saveEatery;
-							
+						if(clickMoreView == '0') {				// 현재 누른 더보기 버튼의 인덱스에 해당하는 값에 따라 위에서 저장해뒀던 이전까지 보고 있던 페이지의 moreView를 불러와서 현재 moreView에 할당해준다
+							moreView = saveLandmark;
+						}else if(clickMoreView == '1') {
+							moreView = saveEatery;							
+						}else if(clickMoreView == '2') {
+							moreView = saveEvent;
 						}else if(clickMoreView == '3') {
 							moreView = saveStay;
 						}
 						
-						beforeMoreView = clickMoreView;
+						beforeMoreView = clickMoreView;			// 현재 누른 더보기 버튼의 인덱스를 직전까지 누르고 있던 더보기 버튼의 인덱스에 할당해준다
 						
 						console.log('clickMoreView : ' + clickMoreView);
 						
-						moreViewAjax();
+						moreViewAjax();							//	ajax 실행
 						
-					}else if(beforeMoreView == clickMoreView) {						
+					}else if(beforeMoreView == clickMoreView) {	//	이전에 누른 더보기 버튼의 인덱스와 현재 누른 더보기 버튼의 인덱스가 같다면 (하나의 더보기 버튼을 연속해서 눌렀을 때) 바로 ajax 실행					
 						moreViewAjax();						
 					}			    
 				});
@@ -172,7 +184,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>	
+					<tbody id="landmarkTbody">	
 						<c:if test="${selectLandmarkInfo != ''}">			
 							<c:forEach var="selectLandmarkInfo" items="${selectLandmarkInfo}">
 								<tr>
@@ -234,7 +246,7 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="eventTbody">
 						<c:if test="${selectEventInfo != ''}">			
 							<c:forEach var="selectEventInfo" items="${selectEventInfo}">
 								<tr>

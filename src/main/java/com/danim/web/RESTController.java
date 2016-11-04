@@ -63,8 +63,12 @@ public class RESTController {
 		logger.info("clickMoreView {} 값 입니다", clickMoreView);
 		
 		String searchMore = null;
-		if(clickMoreView == 1) {
+		if(clickMoreView == 0) {
+			searchMore = "/search/landmarkMore";
+		}else if(clickMoreView == 1) {
 			searchMore = "/search/eateryMore";
+		}else if(clickMoreView == 2) {
+			searchMore = "/search/eventMore";
 		}else if(clickMoreView == 3) {
 			searchMore = "/search/stayMore";
 		}

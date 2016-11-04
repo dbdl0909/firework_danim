@@ -28,10 +28,10 @@ public class SearchDao {
     }
         
     // search(도시이름) 검색어를 통해서 해당 지역의 명소를 검색
-    public List<SearchDto> selectLandmarkInfo(String search) {
+    public List<SearchDto> selectLandmarkInfo(HashMap<String, Object> map) {
     	logger.info("selectLandmarkInfo() SearchDao.java");
     	
-		return sessionTemplate.selectList(nameSpace + ".selectLandmarkByCityInfoName", search);
+		return sessionTemplate.selectList(nameSpace + ".selectLandmarkByCityInfoName", map);
     	
     }
        
@@ -44,10 +44,10 @@ public class SearchDao {
     }
     
     // search(도시이름) 검색어를 통해서 해당 지역의 축제를 검색
-    public List<SearchDto> selectEventInfo(String search) {
+    public List<SearchDto> selectEventInfo(HashMap<String, Object> map) {
     	logger.info("selectEventInfo() SearchDao.java");
     	
-		return sessionTemplate.selectList(nameSpace + ".selectEventByCityInfoName", search);
+		return sessionTemplate.selectList(nameSpace + ".selectEventByCityInfoName", map);
     	
     }
     

@@ -26,15 +26,19 @@ public class SearchService {
     }
 	
 	// search(도시이름) 매개변수를 통해서 랜드마크 정보를 조회하는 메서드 호출
-    public List<SearchDto> getSelectLandmarkInfo(String search) {
+    public List<SearchDto> getSelectLandmarkInfo(String search, int moreView) {
     	logger.info("getSelectLandmarkInfo() SearchService.java");
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+    	map.put("search", search);
+    	map.put("moreView", moreView);
     	
-    	List<SearchDto> selectLandmarkInfoList = searchDao.selectLandmarkInfo(search);
+    	List<SearchDto> selectLandmarkInfoList = searchDao.selectLandmarkInfo(map);
     	
 		return selectLandmarkInfoList;
     	
     }
     
+ // search(도시이름) 매개변수를 통해서 음식점 정보를 조회하는 메서드 호출
     public List<SearchDto> getSelectEateryInfo(String search, int moreView) {
     	logger.info("getSelectEateryInfo() SearchService.java");
     	HashMap<String, Object> map = new HashMap<String, Object>();
@@ -47,15 +51,20 @@ public class SearchService {
     	
     }
     
-    public List<SearchDto> getSelectEventInfo(String search) {
+    // search(도시이름) 매개변수를 통해서 행사 정보를 조회하는 메서드 호출
+    public List<SearchDto> getSelectEventInfo(String search, int moreView) {
     	logger.info("getSelectEventInfo() SearchService.java");
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+    	map.put("search", search);
+    	map.put("moreView", moreView);
     	
-    	List<SearchDto> selectEventInfoList = searchDao.selectEventInfo(search);
+    	List<SearchDto> selectEventInfoList = searchDao.selectEventInfo(map);
     	
 		return selectEventInfoList;
     	
     }
     
+    // search(도시이름) 매개변수를 통해서 숙소 정보를 조회하는 메서드 호출
     public List<SearchDto> getSelectStayInfo(String search, int moreView) {
     	logger.info("getSelectStayInfo() SearchService.java");
     	HashMap<String, Object> map = new HashMap<String, Object>();
