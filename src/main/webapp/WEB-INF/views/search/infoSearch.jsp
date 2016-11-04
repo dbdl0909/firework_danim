@@ -67,7 +67,6 @@
 				});
 				
 				$('.moreView').click(function(){
-					alert('click!');
 				    $.ajax({      
 				        type:"POST",  
 				        url:"/search/searchMore",    
