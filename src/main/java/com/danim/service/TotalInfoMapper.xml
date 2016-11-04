@@ -41,7 +41,7 @@
 	
 	<select id="selectEateryInfoByCityName"
 			resultType="com.danim.service.plan.EateryInfoDto"
-			parameterType="String">
+			parameterType="HashMap">
 		SELECT
 			eatery_no as 'eateryNo',
 			eatery_name as 'eateryName',
@@ -56,12 +56,14 @@
 					city_info
 				WHERE
 					city_info_name=#{clickCityName}
-			);
+			)
+		LIMIT
+			#{infoMoreView};
 	</select>
 	
 	<select id="selectStayInfoByCityName"
 			resultType="com.danim.service.plan.StayInfoDto"
-			parameterType="String">
+			parameterType="HashMap">
 		SELECT
 			stay_info_no as 'stayInfoNo',
 			stay_info_name as 'stayInfoName',
@@ -76,12 +78,14 @@
 					city_info
 				WHERE
 					city_info_name=#{clickCityName}
-			);
+			)
+		LIMIT
+			#{infoMoreView};
 	</select>
 	
 	<select id="selectEventInfoByCityName"
 			resultType="com.danim.service.plan.EventInfoDto"
-			parameterType="String">
+			parameterType="HashMap">
 		SELECT
 			event_info_name as 'eventInfoName',
 			city_info_no as 'cityInfoNo'
@@ -95,6 +99,8 @@
 					city_info
 				WHERE
 					city_info_name=#{clickCityName}
-			);
+			)
+		LIMIT
+			#{infoMoreView};
 	</select>
 </mapper>

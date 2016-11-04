@@ -26,12 +26,13 @@ public class RESTController {
 	@RequestMapping(value = "/plan/RESTTotalInfo")
 	public String totalInfo(Model model,
 							@RequestParam(value="clickCityName") String clickCityName,
-							@RequestParam(value="clickIcon") String clickIconName) {
+							@RequestParam(value="clickIcon") String clickIconName,
+							@RequestParam(value="infoMoreView") int infoMoreView) {
 		logger.info("totalInfo() RESTController.java");
 		logger.info("clickCityName : {} totalInfo() RESTController.java", clickCityName);
 		logger.info("clickIconName : {} totalInfo() RESTController.java", clickIconName);
 
-		model.addAttribute("totalInfo", totalInfoService.selectTotalInfoByCityName(clickCityName));
+		model.addAttribute("totalInfo", totalInfoService.selectTotalInfoByCityName(clickCityName, infoMoreView));
 		//logger.info("model : {} landmarkInfo() RESTController.java", model);
 		logger.info("정상");
 		

@@ -103,7 +103,7 @@
 				</div>
 				<div id="mainPlanDivLeftTabMenu">
 					<div id="leftMenuList">
-						<ul id="mainPlanTotalInfoUl">
+						<ul id="mainPlanTotalInfoUl" style="margin-bottom: 0px;">
 						</ul>
 					</div>
 				</div>

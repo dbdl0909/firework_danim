@@ -421,12 +421,26 @@ $(document).ready(function() {
 		$('#mainPlanDivLeft3').animate({"left":"0px"});
 	});
 	
+	//어떤 이미지를 클릭했는지 담을 변수(명소, 식당, 숙소, 축제)
 	var clickIcon;
-	var infoMoreView = 13;
+	//얼만큼 보여줄 것인지 index를 담을 변수
+	var totalMoreView = 0;
+	var eateryMoreView = 0;
+	var stayMoreView = 0;
 	function test() {
+		console.log('totalMoreView : ' + totalMoreView);
+		
+		if(clickIcon == '식당') {
+			eateryMoreView += 13;
+			totalMoreView = eateryMoreView;
+		} else if(clickIcon == '숙소') {
+			stayMoreView += 13;
+			totalMoreView = stayMoreView;
+		}
+		
 		$.ajax({
 			url:'/plan/RESTTotalInfo',
-			data:{clickCityName:clickCityName, clickIcon:clickIcon, infoMoreView:infoMoreView},
+			data:{clickCityName:clickCityName, clickIcon:clickIcon, infoMoreView:totalMoreView},
 			type:'GET',
 			success:function(data){
 				$('#mainPlanTotalInfoUl').html(data);
@@ -466,13 +480,26 @@ $(document).ready(function() {
 				clickIcon = '숙소';
 			} else if(tabIconIndex == 3) {
 				clickIcon = '축제';
-			} 
+			}
+			
 			test();
+			$('#mainPlanTotalInfoUl').scrollTop(0);
 		}
 	});
 	
+	var index = 1;
+	var count = 1;
 	$('#mainPlanTotalInfoUl').scroll(function () {
-		var height = $('#mainPlanTotalInfoUl').scrollTop();
-		console.log(height);
+		var scrollHeight = $('#mainPlanTotalInfoUl').scrollTop();
+		//console.log(scrollHeight);
+		
+		if(scrollHeight >= index) {
+			//console.log('DB 다시 실행');
+			index = ($('#mainPlanTotalInfoUl').height() * count);
+			//console.log('index : ' + index);
+			count++;
+			
+			test();
+		}
 	});
 });

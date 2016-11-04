@@ -4,5 +4,5 @@
 <c:set var="listEventInfo" value="${totalInfo.listEventInfo}" />
 
 <c:forEach var="listEventInfo" items="${listEventInfo}" varStatus="status">
-	<li>${listEventInfo.eventInfoName}</li>
+	<li style="line-height: 3em; margin-left:15px;">${listEventInfo.eventInfoName}</li>
 </c:forEach>

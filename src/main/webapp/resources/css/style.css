@@ -350,6 +350,14 @@ p {
 	height:100px;
 	list-style:none;
 }
+
+#mainPlanTotalInfoUl .clickLandmark:hover {
+	cursor:pointer;
+	list-style:none;
+	color:#ff8040;
+	font-weight:bold;
+}
+
 .leftMenuLi  {
 	margin-left:5px;
 }

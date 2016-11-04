@@ -37,29 +37,32 @@ public class TotalInfoService {
     }*/
 	
 	//클릭한 도시에 해당하는 명소, 식당, 숙소, 축제 리스트 가져오는 메서드
-	public Map<String, Object> selectTotalInfoByCityName(String clickCityName) {
+	public Map<String, Object> selectTotalInfoByCityName(String clickCityName, int infoMoreView) {
 		logger.info("clickCityName(도시 이름) : {} <-- selectTotalInfoByCityName() TotalInfoService.java", clickCityName);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("clickCityName", clickCityName);
+		map.put("infoMoreView", infoMoreView);
 		
 		List<LandmarkInfoDto> listLandmarkInfoByCityName = totalInfoDao.selectLandmarkInfoByCityName(clickCityName);
 		logger.info("listLandmarkInfoByCityName : {} <-- selectTotalInfoByCityName() TotalInfoService.java", listLandmarkInfoByCityName);
 		
-		List<EateryInfoDto> listEateryInfoByCityName = totalInfoDao.selectEateryInfoByCityName(clickCityName);
+		List<EateryInfoDto> listEateryInfoByCityName = totalInfoDao.selectEateryInfoByCityName(map);
 		logger.info("listEateryInfoByCityName : {} <-- selectTotalInfoByCityName() TotalInfoService.java", listEateryInfoByCityName);
 		
-		List<StayInfoDto> listStayInfoByCityName = totalInfoDao.selectStayInfoByCityName(clickCityName);
+		List<StayInfoDto> listStayInfoByCityName = totalInfoDao.selectStayInfoByCityName(map);
 		logger.info("listStayInfoByCityName : {} <-- selectTotalInfoByCityName() TotalInfoService.java", listStayInfoByCityName);
 		
-		List<EventInfoDto> listEventInfoByCityName = totalInfoDao.selectEventInfoByCityName(clickCityName);
+		List<EventInfoDto> listEventInfoByCityName = totalInfoDao.selectEventInfoByCityName(map);
 		logger.info("listEventInfoByCityName : {} <-- selectTotalInfoByCityName() TotalInfoService.java", listEventInfoByCityName);
 		
-		map.put("listLandmarkInfo", listLandmarkInfoByCityName);
-		map.put("listEateryInfo", listEateryInfoByCityName);
-		map.put("listStayInfo", listStayInfoByCityName);
-		map.put("listEventInfo", listEventInfoByCityName);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("listLandmarkInfo", listLandmarkInfoByCityName);
+		resultMap.put("listEateryInfo", listEateryInfoByCityName);
+		resultMap.put("listStayInfo", listStayInfoByCityName);
+		resultMap.put("listEventInfo", listEventInfoByCityName);
 		
-		return map;
+		return resultMap;
 	}
 
 };

@@ -4,7 +4,7 @@
 <c:set var="listLandmarkInfo" value="${totalInfo.listLandmarkInfo}" />
 
 <c:forEach var="listLandmarkInfo" items="${listLandmarkInfo}" varStatus="status">
-	<li>
+	<li class="clickLandmark">
 		<img class="landmarkInfoImage" src="${listLandmarkInfo.landmarkInfoImage}"/>
 		${listLandmarkInfo.landmarkInfoName}
 	</li>

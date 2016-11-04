@@ -1,6 +1,7 @@
 package com.danim.service.plan;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -32,22 +33,22 @@ public class TotalInfoDao {
 	    }
 	    
 	    //클릭한 도시에 해당하는 식당리스트 가져오는 매퍼 호출
-	    public List<EateryInfoDto> selectEateryInfoByCityName(String clickCityName) {
-	    	logger.info("clickCityName(도시 이름) : {} <-- selectEateryInfoByCityName() TotalInfoDao.java", clickCityName);
+	    public List<EateryInfoDto> selectEateryInfoByCityName(Map<String, Object> map) {
+	    	logger.info("clickCityName(도시 이름) : {} <-- selectEateryInfoByCityName() TotalInfoDao.java", map);
 	    	
-	    	return sessionTemplate.selectList(namesPace + ".selectEateryInfoByCityName", clickCityName);
+	    	return sessionTemplate.selectList(namesPace + ".selectEateryInfoByCityName", map);
 	    }
 	    
 	    //클릭한 도시에 해당하는 숙소리스트 가져오는 매퍼 호출
-		public List<StayInfoDto> selectStayInfoByCityName(String clickCityName) {
-			logger.info("clickCityName(도시 이름) : {} <-- selectStayInfoByCityName() TotalInfoDao.java", clickCityName);
+		public List<StayInfoDto> selectStayInfoByCityName(Map<String, Object> map) {
+			logger.info("clickCityName(도시 이름) : {} <-- selectStayInfoByCityName() TotalInfoDao.java", map);
 			
-			return sessionTemplate.selectList(namesPace + ".selectStayInfoByCityName", clickCityName);
+			return sessionTemplate.selectList(namesPace + ".selectStayInfoByCityName", map);
 		}
 
-		public List<EventInfoDto> selectEventInfoByCityName(String clickCityName) {
-			logger.info("clickCityName(도시 이름) : {} <-- selectEventInfoByCityName() TotalInfoDao.java", clickCityName);
+		public List<EventInfoDto> selectEventInfoByCityName(Map<String, Object> map) {
+			logger.info("clickCityName(도시 이름) : {} <-- selectEventInfoByCityName() TotalInfoDao.java", map);
 			
-			return sessionTemplate.selectList(namesPace + ".selectEventInfoByCityName", clickCityName);
+			return sessionTemplate.selectList(namesPace + ".selectEventInfoByCityName", map);
 		}
 }
