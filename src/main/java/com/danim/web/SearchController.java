@@ -30,7 +30,7 @@ public class SearchController {
 		List<SearchDto> selectLandmarkInfo = searchService.getSelectLandmarkInfo(search);
 		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search, moreView);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search);
-		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search);
+		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search, moreView);
 		List<String> selectCityAll = searchService.getSelectCityAll();
 		
 		model.addAttribute("search", search);

@@ -2,6 +2,7 @@ package com.danim.service.search;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,15 +17,20 @@ public class SearchMoreService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SearchMoreService.class);
 	
-    public List<SearchDto> getSelectEateryInfo(String search, int moreView) {
-    	logger.info("getSelectEateryInfo() SearchMoreService.java");
+    public Map<String, Object> searchMore(String search, int moreView) {
+    	logger.info("searchMore() SearchMoreService.java");
     	HashMap<String, Object> map = new HashMap<String, Object>();
+    	HashMap<String, Object> resultMap = new HashMap<String, Object>();
     	map.put("search", search);
     	map.put("moreView", moreView);
     	
     	List<SearchDto> selectEateryInfoList = searchMoreDao.selectEateryInfo(map);
+    	List<SearchDto> selectStayInfoList = searchMoreDao.selectStayInfo(map);
     	
-		return selectEateryInfoList;
+    	resultMap.put("selectEateryInfoList", selectEateryInfoList);
+    	resultMap.put("selectStayInfoList", selectStayInfoList);
+    	
+		return resultMap;
     	
     }
 }

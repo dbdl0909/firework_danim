@@ -1,7 +1,5 @@
 package com.danim.web;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.plan.TotalInfoService;
-import com.danim.service.search.SearchDto;
 import com.danim.service.search.SearchMoreService;
 
 @Controller
@@ -53,15 +50,14 @@ public class RESTController {
 		return infoPage;
 	}
 	
+	// 검색결과 하면 더보기 버튼 클릭시
 	@RequestMapping(value = "/search/searchMore")
 	public String searchMore(Model model, @RequestParam(value="search") String search, @RequestParam(value="moreView") int moreView) {
 		logger.info("searchMore() RESTController.java");
 		logger.info("search {} 값 입니다", search);
 		logger.info("MoreView {} 값 입니다", moreView);
 		
-		List<SearchDto> selectEateryInfoList = searchMoreService.getSelectEateryInfo(search, moreView);
-		
-		model.addAttribute("searchMore", selectEateryInfoList);
+		model.addAttribute("searchMore", searchMoreService.searchMore(search, moreView));
 	
 		return "/search/eateryMore";
 	}

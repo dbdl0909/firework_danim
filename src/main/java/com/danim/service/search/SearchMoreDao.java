@@ -24,5 +24,12 @@ public class SearchMoreDao {
 		return sessionTemplate.selectList(nameSpace + ".selectEateryByCityInfoName", map);
     	
     }
-		
+    
+    public List<SearchDto> selectStayInfo(HashMap<String, Object> map) {
+    	logger.info("selectStayInfo() SearchMoreDao.java");
+    	
+		return sessionTemplate.selectList(nameSpace + ".selectStayByCityInfoName", map);
+    	
+    }   
+    	
 }

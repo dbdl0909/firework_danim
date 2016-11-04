@@ -52,10 +52,10 @@ public class SearchDao {
     }
     
     // search(도시이름) 검색어를 통해서 해당 지역의 숙소를 검색
-    public List<SearchDto> selectStayInfo(String search) {
+    public List<SearchDto> selectStayInfo(HashMap<String, Object> map) {
     	logger.info("selectStayInfo() SearchDao.java");
     	
-		return sessionTemplate.selectList(nameSpace + ".selectStayByCityInfoName", search);
+		return sessionTemplate.selectList(nameSpace + ".selectStayByCityInfoName", map);
     	
     }
     

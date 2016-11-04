@@ -56,10 +56,13 @@ public class SearchService {
     	
     }
     
-    public List<SearchDto> getSelectStayInfo(String search) {
+    public List<SearchDto> getSelectStayInfo(String search, int moreView) {
     	logger.info("getSelectStayInfo() SearchService.java");
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+    	map.put("search", search);
+    	map.put("moreView", moreView);
     	
-    	List<SearchDto> selectStayInfoList = searchDao.selectStayInfo(search);
+    	List<SearchDto> selectStayInfoList = searchDao.selectStayInfo(map);
     	
 		return selectStayInfoList;
     	

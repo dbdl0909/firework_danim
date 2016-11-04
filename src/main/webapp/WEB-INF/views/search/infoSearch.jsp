@@ -81,6 +81,9 @@
 			});
 		</script>
 		<title>Insert title here</title>
+		<style type="text/css">
+		.container .table-responsive .table .moreView{text-align: right;}
+		</style>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
@@ -148,7 +151,7 @@
 							<th>
 								<h3>먹을만한 곳</h3>
 							</th>
-							<th class="moreView" style="text-align: right;">
+							<th class="moreView">
 								더보기
 							</th>
 						</tr>
@@ -210,8 +213,8 @@
 							<th>
 								<h3>머물만한 곳</h3>
 							</th>
-							<th>
-							
+							<th class="moreView">
+								더보기
 							</th>
 						</tr>
 					</thead>
