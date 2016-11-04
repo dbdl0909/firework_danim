@@ -122,6 +122,13 @@ function infoWindowEvent() {
 			    										"<span class='stayCount'>1</span>일" +
 			    										"<img class='arrowRight' src='../../resources/images/planIcon/arrowPointingToRight.png'/>" +
 			    									"</div>" +
+			    									"<div class='landmarkListDiv' style='cursor:pointer;background-color:#CBC7C7'>" +
+			    										"<span class='landmarkListSpan'>명소 루트</span>" +
+			    									"</div>" +
+			    									"<div class='css_test' style='display:none;border-radius:5px;border:2px solid #CBC7C7;background-color:#fff;position:absolute;z-index:10000;width:53%'>" +
+			    										"<ul class='landmarkRouteUl'>" +
+			    										"</ul>" +
+													"</div>"+
 			    								"</li>");
 			    		
 			    		$stayDay = Number(document.getElementById('stayDay').value);
@@ -169,7 +176,7 @@ function zoomEvent() {
 	google.maps.event.addListener(map, 'zoom_changed', function() {
 		//zoom이 몇인지 담는다.
 		zoom = map.getZoom();
-		console.log(zoom);
+		//console.log(zoom);
 		
 		//zoom이 10일때부터 다른 모든 시들도 보여준다.
 		if(zoom >= 10) {
@@ -359,16 +366,15 @@ function lineRemoveFunction(removeButtonIndex) {
 
 $(document).ready(function() {
 	var $stayCount = 0;
-	
 	$('.cityInfoLi').click(function() {
-    	var cityInfoIndex = $('.cityInfoLi').index(this);
-    	//console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
+		cityInfoIndex = $('.cityInfoLi').index(this);
+    	console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
     	var zoomLatitude = Number(cityInfoList[cityInfoIndex].latitude);
     	var zoomLangitude = Number(cityInfoList[cityInfoIndex].langitude);
     	
     	var zoomCity = {lat: zoomLatitude, lng: zoomLangitude};
+    	map.setCenter(zoomCity);
     	map.setZoom(10);
-		map.setCenter(zoomCity);
     });
 	
 	//removeButton 이미지 태그를 클릭했을때 실행할 함수
@@ -427,8 +433,21 @@ $(document).ready(function() {
 	var totalMoreView = 0;
 	var eateryMoreView = 0;
 	var stayMoreView = 0;
-	function test() {
-		console.log('totalMoreView : ' + totalMoreView);
+	var eventMoreView = 0;
+	
+	//landmark의 좌표를 찍을 배열
+	var landmarkMarker = [];
+	var landmarkMarkerArray = [];
+	var landmarkPosition = [];
+	var landmarkName = [];
+	var landmarkNo = [];
+	var landmarkCount = 0;
+	
+	var cityClickIndex = 0;
+	var clickCityName;
+	
+	function totalInfoList() {
+		//console.log('totalMoreView : ' + totalMoreView);
 		
 		if(clickIcon == '식당') {
 			eateryMoreView += 13;
@@ -436,6 +455,9 @@ $(document).ready(function() {
 		} else if(clickIcon == '숙소') {
 			stayMoreView += 13;
 			totalMoreView = stayMoreView;
+		} else if(clickIcon == '축제') {
+			eventMoreView += 13;
+			totalMoreView = eventMoreView;
 		}
 		
 		$.ajax({
@@ -444,20 +466,68 @@ $(document).ready(function() {
 			type:'GET',
 			success:function(data){
 				$('#mainPlanTotalInfoUl').html(data);
+				
+				landmarkCount = $('#listLandmarkCount').val();
+				console.log('landmarkCount : ' + landmarkCount);
+				
+				for (var i=0; i<landmarkCount; i++) {
+					console.log('i : ' + i);
+					landmarkPosition.push({lat: Number($('.landmarkInfoLatitude').eq(i).val()), lng: Number($('.landmarkInfoLangitude').eq(i).val())});
+					landmarkName.push($('.landmarkInfoName').eq(i).text());
+					landmarkNo.push($('.landmarkInfoNo').eq(i).val());
+				}
+				
+				//landmarkInfoList의 length만큼 마커를 찍어준다.
+				for (var i=0; i<landmarkCount; i++) {
+					console.log('landmarkInfoList : ' + i);
+					landmarkMarker = new google.maps.Marker({
+						icon: '../../resources/images/planIcon/landmarkPin.png',
+						position: landmarkPosition[i],
+						map: map,
+						title: landmarkName[i],
+						//zIndex: cityInfoList[i][3],
+						index:i
+					});
+					landmarkMarker.setVisible(true);
+					landmarkMarkerArray.push(landmarkMarker);
+				}
+//값이 겹친다..				
+				$('.clickLandmark').click(function() {
+					var clickLandmarkIndex = $('.clickLandmark').index(this);
+					console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
+					
+					var  result = confirm(landmarkName[clickLandmarkIndex] + '를 추가하시겠습니까?');
+					if (result == true) {
+						$('.landmarkRouteUl').eq(clickLandmarkIndex).append(
+							"<li class='landmarkLi'>" +
+								"<span class='cityName'>" + landmarkName[clickLandmarkIndex] + "</span>" +
+							"</li>"
+						);
+					} else {
+						
+					}
+					
+					console.log($('.landmarkInfoLangitude').eq(clickLandmarkIndex).val());
+					console.log($('.landmarkInfoLatitude').eq(clickLandmarkIndex).val());
+				});
+				
 			}
 		})
 	}
 	
-	var clickCityName;
 	//cityName li 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.cityName', function() {
-		var cityClickIndex = $('.cityName').index(this);
+		cityClickIndex = $('.cityName').index(this);
+		
 		clickCityName = $('.cityName').eq(cityClickIndex).text();
 		console.log(cityClickIndex + '번째 도시 : ' + clickCityName);
 		$('#clickCityName').text(clickCityName);
 		
+		map.setCenter(markerArray[markerIndex].getPosition());
+		map.setZoom(12);
+		
 		clickIcon = "명소";
-		test();
+		totalInfoList();
 		
 		$('#mainPlanDivLeft3').show().animate({"left":"320px"});
 		//$('#mainPlanlandmarkIcon').attr('src', '../../resources/images/planIcon/landmarkIconClick.png');
@@ -482,7 +552,7 @@ $(document).ready(function() {
 				clickIcon = '축제';
 			}
 			
-			test();
+			totalInfoList();
 			$('#mainPlanTotalInfoUl').scrollTop(0);
 		}
 	});
@@ -495,11 +565,27 @@ $(document).ready(function() {
 		
 		if(scrollHeight >= index) {
 			//console.log('DB 다시 실행');
-			index = ($('#mainPlanTotalInfoUl').height() * count);
 			//console.log('index : ' + index);
+			index = ($('#mainPlanTotalInfoUl').height() * count);
 			count++;
 			
-			test();
+			totalInfoList();
+		}
+	});
+	
+	var slideOnOff = false;
+	$('body').on('click', '.landmarkListDiv', function() {
+		var landmarkListDivIndex = $('.landmarkListDiv').index(this);
+		if(slideOnOff == false) {
+			$(".css_test").eq(landmarkListDivIndex).slideDown("slow", function() {
+				slideOnOff = true;
+				//console.log('명소 루트 열기');
+			});
+		} else {
+			$(".css_test").eq(landmarkListDivIndex).slideUp("slow", function() {
+				slideOnOff = false;
+				//console.log('명소 루트 닫기');
+			});
 		}
 	});
 });

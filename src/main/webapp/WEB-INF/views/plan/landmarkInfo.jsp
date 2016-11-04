@@ -6,6 +6,11 @@
 <c:forEach var="listLandmarkInfo" items="${listLandmarkInfo}" varStatus="status">
 	<li class="clickLandmark">
 		<img class="landmarkInfoImage" src="${listLandmarkInfo.landmarkInfoImage}"/>
-		${listLandmarkInfo.landmarkInfoName}
+		<span class="landmarkInfoName">${listLandmarkInfo.landmarkInfoName}</span>
+		<input class="landmarkInfoNo" type="hidden" value="${listLandmarkInfo.landmarkInfoNo}"/>
+		<input class="landmarkInfoLangitude" type="hidden" value="${listLandmarkInfo.landmarkInfoLangitude}"/>
+		<input class="landmarkInfoLatitude" type="hidden" value="${listLandmarkInfo.landmarkInfoLatitude}"/>
 	</li>
+	<c:set var="listLandmarkCount" value="${status.count}" />
 </c:forEach>
+<input id="listLandmarkCount" type="hidden" value="${listLandmarkCount}"/>
