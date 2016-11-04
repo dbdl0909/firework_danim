@@ -5,7 +5,7 @@
 		<planid>id001</planid>
 		<events>
 			<event>
-				<id>7</id>
+				<id>1</id>
 				<name>부산 국제시장 여행</name>
 				<startdate>2016-11-26</startdate>
 				<enddate>2016-11-26</enddate>
@@ -16,10 +16,78 @@
 				<url></url>
 			</event>
 			<event>
-				<id>8</id>
+				<id>2</id>
 				<name>부산 해운대 탐방</name>
 				<startdate>2016-11-26</startdate>
 				<enddate>2016-11-26</enddate>
+				<starttime>14:30</starttime>
+				<endtime>16:00</endtime>
+				<color>#7d8b25</color>
+				<url></url>
+			</event>
+		</events>
+	</plan>
+	<plan>
+		<number>2</number>
+		<planid>id002</planid>
+		<events>
+			<event>
+				<id>1</id>
+				<name>전주</name>
+				<startdate>2016-11-05</startdate>
+				<enddate>2016-11-05</enddate>
+				<starttime>13:00</starttime>
+				<endtime>14:00</endtime>
+				<color>#7d8b25</color>
+				<memo>되나?</memo>
+				<url></url>
+			</event>
+			<event>
+				<id>2</id>
+				<name>전주</name>
+				<startdate>2016-11-05</startdate>
+				<enddate>2016-11-05</enddate>
+				<starttime>14:30</starttime>
+				<endtime>15:30</endtime>
+				<color>#7d8b25</color>
+				<memo></memo>
+				<url></url>
+			</event>
+			<event>
+				<id>3</id>
+				<name>전주</name>
+				<startdate>2016-11-06</startdate>
+				<enddate>2016-11-06</enddate>
+				<starttime>09:00</starttime>
+				<color>#7d8b25</color>
+				<memo></memo>
+				<url></url>
+			</event>
+			<event>
+				<id>4</id>
+				<name>부산 해운대 탐방</name>
+				<startdate>2016-11-06</startdate>
+				<enddate>2016-11-06</enddate>
+				<starttime>14:30</starttime>
+				<endtime>16:00</endtime>
+				<color>#7d8b25</color>
+				<url></url>
+			</event>
+			<event>
+				<id>5</id>
+				<name>부산 해운대 탐방</name>
+				<startdate>2016-11-06</startdate>
+				<enddate>2016-11-06</enddate>
+				<starttime>14:30</starttime>
+				<endtime>16:00</endtime>
+				<color>#7d8b25</color>
+				<url></url>
+			</event>
+			<event>
+				<id>6</id>
+				<name>부산 해운대 탐방</name>
+				<startdate>2016-11-06</startdate>
+				<enddate>2016-11-06</enddate>
 				<starttime>14:30</starttime>
 				<endtime>16:00</endtime>
 				<color>#7d8b25</color>

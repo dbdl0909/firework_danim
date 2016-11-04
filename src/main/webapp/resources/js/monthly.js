@@ -146,16 +146,17 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 					$('#' + uniqueId + ' .monthly-day-wrap').append('<div class="monthly-day-blank"><div class="monthly-day-number"></div></div>');
 				}
 			}
-
+			
 			// Events
 			if (options.mode == 'event') {
 				// Remove previous events
 				// Add Events
 				$.get(''+options.xmlUrl+'', function(plan){
-					$(plan).find('plan').each(function(){
+					$(plan).find('plan').each(function(i){
 						// Year [0]   Month [1]   Day [2]
 						var memberId = $(this).find('planid').text();
-						if(memberId == 'id001'){
+						//alert(memberId);    
+						if(memberId == 'id002'){
 						$(this).find('event').each(function(){
 							var fullstartDate = $(this).find('startdate').text(),
 								startArr = fullstartDate.split("-"),
@@ -177,7 +178,10 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 								endTime = $(this).find('endtime').text(),
 								endSplit = endTime.split(":");
 								endPeriod = 'AM',
-								eventLink = '';
+								eventLink = '',
+								//insertPlanMemo = $(this).find('memo').text("asd");
+								planMemo = $(this).find('memo').text();
+								//alert(planMemo);
 						/* Convert times to 12 hour & determine AM or PM */
 						if(parseInt(startSplit[0]) >= 12) {
 							var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
@@ -376,12 +380,33 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			if(!href) {
 				e.preventDefault();
 			}
-		});
-		$(document).ready(function(){			
-			$('#listMemo').click(function(){
-				alert('ddd');
-			});
-		});
+			var idx = $(this).index();
+			var thisId = $(this).attr('data-eventid');
+			//alert(thisId);
+			var memo = null;
+			$('#memoWrap').show();
+			$('#submitMemo').click(function(){
+				memo = $('textarea').val();
+				alert(memo);
+				$.get(''+options.xmlUrl+'', function(plan){
+					$(plan).find('plan').each(function(i){
+						// Year [0]   Month [1]   Day [2]
+						var memberId = $(this).find('planid').text();
+						//alert(memberId);    
+						if(memberId == 'id002'){
+							$(this).find('event').each(function(i){
+								var eventId = $(this).find('id').text(),
+									insertPlanMemo = $(this).find('memo').text(memo);
+									planMemo = $(this).find('memo').text();
+									if(thisId==eventId) {									
+										alert(planMemo);
+									}
+							});
+						}
+					});
+				});
+			});			
+		});		
 		}
 	});
 })(jQuery);

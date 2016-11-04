@@ -41,6 +41,12 @@
 					<div class="monthly" id="mycalendar"></div>
 				</div>				
 			</div>
+			<div id="memoWrap">
+				<textarea width="300px"></textarea>
+				<button id="submitMemo">
+					입력
+				</button>
+			</div>
 		</div>
 		<jsp:include page="../module/footer.jsp" />
 	</body>
