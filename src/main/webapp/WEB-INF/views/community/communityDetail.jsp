@@ -112,11 +112,13 @@
 						<script>
 							alert('추천은 한 번만 가능합니다.');
 						</script>
+						<c:set var="votedCheck" />
 					</c:if>
 					<c:if test="${param.votedCheck == 'voted'}">
 						<script>
 							alert('추천되었습니다.');
 						</script>
+						<c:set var="votedCheck" />
 					</c:if>
 				</c:if>
 			</div>
