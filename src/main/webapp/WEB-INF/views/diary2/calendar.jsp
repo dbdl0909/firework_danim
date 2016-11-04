@@ -15,21 +15,20 @@
 		<link rel="stylesheet" href="../../resources/css/style.css">
 		<script src="../../resources/js/monthly.js"></script>
 		<script type="text/javascript">
-			$(document).ready(function() {
-		
+			$(document).ready(function() {		
 				$('#mycalendar').monthly({
 					mode: 'event',
 					xmlUrl: '/events.xml'
 				});
 			
-			switch(window.location.protocol) {
-			case 'http:':
-			case 'https:':
-			// running on a server, should be good.
-			break;
-			case 'file:':
-			alert('Just a heads-up, events will not work when run locally.');
-			}
+				switch(window.location.protocol) {
+				case 'http:':
+				case 'https:':
+				// running on a server, should be good.
+				break;
+				case 'file:':
+				alert('Just a heads-up, events will not work when run locally.');
+				}
 		
 			});
 		</script>
@@ -38,12 +37,9 @@
 		<jsp:include page="../module/header.jsp" />
 		<div class="container">
 			<div id="myPlanWrap">
-				<div id="myPlanCalendar" style="width:60%; float:left;">
+				<div id="myPlanCalendar" style="width:51%; float:left; z-index:2; postion:absolute;">
 					<div class="monthly" id="mycalendar"></div>
-				</div>
-				<div id="myPlanDayMemo" style="float:right; border:1px solid #ccc; width:38%; padding-left:1%">
-					123123
-				</div>
+				</div>				
 			</div>
 		</div>
 		<jsp:include page="../module/footer.jsp" />

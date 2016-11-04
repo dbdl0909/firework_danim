@@ -1034,12 +1034,13 @@ a.voted:hover {
 	background: rgba(233, 235, 236, 0.9);
 	overflow: auto;
 	position: absolute;
-	top: 42px;
+	top: 55px;
 	width: 100%;
-	height: calc(100% - 42px);
+	height: calc(100% - 55px);
 	display: none;
 	transition:.25s;
 	transform:scale(0);
+	z-index:-1;
 }
 
 /* Days in Events List */

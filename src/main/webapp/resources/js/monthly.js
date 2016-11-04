@@ -333,11 +333,10 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			// If events, show events list
 			if(options.mode == 'event' && options.eventList == true) {
 				var whichDay = $(this).data('number');
-				$('#' + uniqueId+' .monthly-event-list').show();
+				$('#' + uniqueId+' .monthly-event-list').show().animate({"left":"600px"},150);
 				$('#' + uniqueId+' .monthly-event-list').css('transform');
 				$('#' + uniqueId+' .monthly-event-list').css('transform','scale(1)');
 				$('#'+uniqueId+' .monthly-list-item[data-number="'+whichDay+'"]').show();
-
 				var myElement = document.getElementById(uniqueId+'day'+whichDay);
 				var topPos = myElement.offsetTop;
 				//document.getElementByClassname('scrolling_div').scrollTop = topPos;
