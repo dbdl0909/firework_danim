@@ -422,13 +422,14 @@ $(document).ready(function() {
 	});
 	
 	var clickIcon;
+	var infoMoreView = 13;
 	function test() {
 		$.ajax({
 			url:'/plan/RESTTotalInfo',
-			data:{clickCityName:clickCityName, clickIcon:clickIcon},
+			data:{clickCityName:clickCityName, clickIcon:clickIcon, infoMoreView:infoMoreView},
 			type:'GET',
 			success:function(data){
-				$('#leftMenuList').html(data);
+				$('#mainPlanTotalInfoUl').html(data);
 			}
 		})
 	}
@@ -468,5 +469,10 @@ $(document).ready(function() {
 			} 
 			test();
 		}
+	});
+	
+	$('#mainPlanTotalInfoUl').scroll(function () {
+		var height = $('#mainPlanTotalInfoUl').scrollTop();
+		console.log(height);
 	});
 });

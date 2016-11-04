@@ -37,4 +37,17 @@ public class TotalInfoDao {
 	    	
 	    	return sessionTemplate.selectList(namesPace + ".selectEateryInfoByCityName", clickCityName);
 	    }
+	    
+	    //클릭한 도시에 해당하는 숙소리스트 가져오는 매퍼 호출
+		public List<StayInfoDto> selectStayInfoByCityName(String clickCityName) {
+			logger.info("clickCityName(도시 이름) : {} <-- selectStayInfoByCityName() TotalInfoDao.java", clickCityName);
+			
+			return sessionTemplate.selectList(namesPace + ".selectStayInfoByCityName", clickCityName);
+		}
+
+		public List<EventInfoDto> selectEventInfoByCityName(String clickCityName) {
+			logger.info("clickCityName(도시 이름) : {} <-- selectEventInfoByCityName() TotalInfoDao.java", clickCityName);
+			
+			return sessionTemplate.selectList(namesPace + ".selectEventInfoByCityName", clickCityName);
+		}
 }

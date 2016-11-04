@@ -58,4 +58,43 @@
 					city_info_name=#{clickCityName}
 			);
 	</select>
+	
+	<select id="selectStayInfoByCityName"
+			resultType="com.danim.service.plan.StayInfoDto"
+			parameterType="String">
+		SELECT
+			stay_info_no as 'stayInfoNo',
+			stay_info_name as 'stayInfoName',
+			city_info_no as 'cityInfoNo'
+		FROM
+			stay_info
+		WHERE
+			city_info_no = (
+				SELECT
+					city_info_no
+				FROM
+					city_info
+				WHERE
+					city_info_name=#{clickCityName}
+			);
+	</select>
+	
+	<select id="selectEventInfoByCityName"
+			resultType="com.danim.service.plan.EventInfoDto"
+			parameterType="String">
+		SELECT
+			event_info_name as 'eventInfoName',
+			city_info_no as 'cityInfoNo'
+		FROM
+			event_info
+		WHERE
+			city_info_no = (
+				SELECT
+					city_info_no
+				FROM
+					city_info
+				WHERE
+					city_info_name=#{clickCityName}
+			);
+	</select>
 </mapper>

@@ -457,14 +457,14 @@ p {
 	list-style:none;
 }
 
-#leftMenuList {
-	height:615px;
-	
+#mainPlanTotalInfoUl {
+	position: absolute;
+    overflow-y: scroll;
+    height: 545px;
+    top: 105px;
+    width: 320px;
 }
-#mainPlanEateryUl{
-	height:615px;
-	overflow-y:scroll;
-}
+
 #leftMenuList .landmarkInfoImage {
 	width:100px;
 	height:70px;
