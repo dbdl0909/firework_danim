@@ -35,10 +35,17 @@
 		</script>
 	</head>
 	<body>
+		<jsp:include page="../module/header.jsp" />
 		<div class="container">
-			<div style="width:100%; max-width:600px; display:inline-block;">
-				<div class="monthly" id="mycalendar"></div>
+			<div id="myPlanWrap">
+				<div id="myPlanCalendar" style="width:60%; float:left;">
+					<div class="monthly" id="mycalendar"></div>
+				</div>
+				<div id="myPlanDayMemo" style="float:right; border:1px solid #ccc; width:38%; padding-left:1%">
+					123123
+				</div>
 			</div>
 		</div>
+		<jsp:include page="../module/footer.jsp" />
 	</body>
 </html>
