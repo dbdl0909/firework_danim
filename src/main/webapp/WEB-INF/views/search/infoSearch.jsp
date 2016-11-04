@@ -18,11 +18,10 @@
 			$(document).ready(function(){
 				
 				/* 유효성 검사 */
-				var search = "<c:out value="${search}" />";
+				var search = "<c:out value="${search}"/>";
 				var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 				var infoSearchInput = $('#infoSearchInput');
 				var moreView = 10;
-				alert(moreView);
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
 				$('#searchForm').hide();
@@ -74,7 +73,7 @@
 				        url:"/search/searchMore",    
 				        data:{search: search, moreView: moreView},     
 				        success:function(data){
-				        	alert(moreView);
+							moreView += 10;
 				        	$('#eateryTbody').append(data)
 				        }
 				    }); 
