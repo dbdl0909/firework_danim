@@ -18,6 +18,8 @@
 				margin: 0;
 				padding: 0;
 			}
+			#planTabList{padding-top:10px;}
+			#planTabList li{width:150px; float:left; line-height:2em; cursor:pointer; list-style:none;}
 	    </style><!-- 구글에 등록된 기본 맵 스타일 -->
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
 	    <script>
@@ -44,7 +46,13 @@
 				<a href="/"><img src="../../resources/images/logo.png" ></a>
 			</div>
 	    	<div id="mainPlanDivTop">
-				<div>
+	    		<div style="float:left;">
+		    		<ul id="planTabList">
+		    			<li>도시루트</li>
+		    			<li id="planTabDiary">일정표</li>
+		    		</ul>
+	    		</div>
+				<div style="float:left;">
 					출발일<input type="date" id="startDate"/>
 					숙박일<input type="text" id="stayDay"/>
 				</div>
@@ -110,23 +118,6 @@
 			</div>
 			
 			<div id="mainPlanDivContent">
-				<!-- Modal
-				<div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Modal Header</h4>
-							</div>
-							<div class="modal-body">
-								<p>This is a small modal.</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div> -->
 				<div id="map">
 				</div>
 			</div>
