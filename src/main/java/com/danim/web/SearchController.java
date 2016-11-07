@@ -31,7 +31,7 @@ public class SearchController {
 		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search, moreView);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search, moreView);
 		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search, moreView);
-		List<String> selectCityAll = searchService.getSelectCityAll();
+		
 		
 		model.addAttribute("search", search);
 		model.addAttribute("moreView", moreView);
@@ -39,9 +39,7 @@ public class SearchController {
 		model.addAttribute("selectLandmarkInfo", selectLandmarkInfo);
 		model.addAttribute("selectEateryInfo", selectEateryInfo);
 		model.addAttribute("selectEventInfo", selectEventInfo);
-		model.addAttribute("selectStayInfo", selectStayInfo);
-		model.addAttribute("selectCityAll", selectCityAll);
-		
+		model.addAttribute("selectStayInfo", selectStayInfo);	
 		
 		return "/search/infoSearch";
 	}

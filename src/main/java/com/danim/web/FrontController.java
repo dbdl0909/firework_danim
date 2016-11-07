@@ -24,8 +24,10 @@ public class FrontController {
 	public String indexController(Model model) {
 		logger.info("indexController FrontController.java");
 		List<IndexLandmarkImageDto> selectLandmarkImageForIndex = indexService.selectLandmarkImageForIndex();
+		List<String> selectCityAll = indexService.getSelectCityAll();
 		
 		model.addAttribute("selectLandmarkImageForIndex", selectLandmarkImageForIndex);
+		model.addAttribute("selectCityAll", selectCityAll);
 		
 		return "index";		
 	}

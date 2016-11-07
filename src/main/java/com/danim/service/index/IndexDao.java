@@ -23,5 +23,12 @@ public class IndexDao {
 		
 		return sessionTemplate.selectList(nameSpace + ".selectLandmarkInfoImageForIndex");
 	}
+	
+	// 모든 도시를 조회
+	public List<String> selectCityAll() {
+		logger.info("selectCityAll() IndexDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectCityAll");
+	}	
 
 }

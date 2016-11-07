@@ -22,4 +22,12 @@ public class IndexService {
 		return selectLandmarkImageForIndex;		
 	}
 	
+	public List<String> getSelectCityAll() {
+		logger.info("getSelectCityAll() SearchService.java");
+    	
+    	List<String> selectCityAll = indexDao.selectCityAll();
+    	
+		return selectCityAll;
+	}	
+	
 }

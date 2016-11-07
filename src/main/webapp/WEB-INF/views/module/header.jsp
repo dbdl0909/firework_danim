@@ -57,13 +57,13 @@
 		/* 자동완성 코드 진행중*/
 		$(function(){
 			var autoComplete = new Array();
-			'<c:forEach var="selectCityAll" items="${selectCityAll}">'
+			<c:forEach var="selectCityAll" items="${selectCityAll}">
 			autoComplete.push("${selectCityAll}");
-			'</c:forEach>'
+			</c:forEach>
 			$('#infoSearchInput').autocomplete({
 				source: autoComplete
 			});
-		});
+		}); 
 		
 	})
 </script>

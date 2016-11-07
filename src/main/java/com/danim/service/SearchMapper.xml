@@ -184,13 +184,4 @@
 		WHERE
 			stay_info_no = #{stayInfoNo}
 	</select>
-	
-	<!-- 자동완성 기능을 사용하기 위한 모든 도시를 출력하는 쿼리 -->
-	<select id="selectCityAll"
-			resultType="String">
-		SELECT
-			city_info_name
-		FROM
-			city_info	
-	</select>
 </mapper>		
