@@ -1181,7 +1181,7 @@ a.voted:hover {
 .container .table-responsive .table .eateryInfo{text-decoration: none; float: right;}
 .container .table-responsive .table .eventInfo{text-decoration: none; float: right;}
 .container .table-responsive .table .stayInfo{text-decoration: none; float: right;}
-.container .table .moreView{cursor: pointer;}
+.container .table-responsive .table .moreView{text-align: right; cursor: pointer;}
 .table .eateryInfo{text-decoration: none; float: right;}
 
 /* 검색상세정보화면 */

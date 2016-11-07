@@ -17,16 +17,16 @@
 		<script>
 			$(document).ready(function(){
 				
-				/* 유효성 검사 */
+				/* 검색어 확인  */
 				var search = "<c:out value="${search}"/>";
 				
 				// 더보기에 사용되는 변수
 				var moreView = 10; 			// 더보기 눌렀을 때 한 페이지에서 보여줄 리스트 수
 				var beforeMoreView = -1;	// 내가 이전에 눌렀던 더보기의 인덱스 (0:명소, 1:음식점, 2:축제, 3:숙소)
 				var clickMoreView = -1;		// 내가 현재 클릭한 더보기의 인덱스 (0:명소, 1:음식점, 2:축제, 3:숙소)
-				var saveLandmark = 10;		// 음식점 더보기 이외의 버튼을 누르기 전까지 보여주던 명소 페이지의 리스트 수
+				var saveLandmark = 10;		// 명소 더보기 이외의 버튼을 누르기 전까지 보여주던 명소 페이지의 리스트 수
 				var saveEatery = 10;		// 음식점 더보기 이외의 버튼을 누르기 전까지 보여주던 음식점 페이지의 리스트 수
-				var saveEvent = 10;			// 음식점 더보기 이외의 버튼을 누르기 전까지 보여주던 축제 페이지의 리스트 수
+				var saveEvent = 10;			// 축제 더보기 이외의 버튼을 누르기 전까지 보여주던 축제 페이지의 리스트 수
 				var saveStay = 10;			// 숙소 더보기 이외의 버튼을 누르기 전까지 보여주던 숙소 페이지의 리스트 수
 				
 				/* 페이지가 로딩되고 나면 검색바를 숨김 */
@@ -125,9 +125,6 @@
 			});
 		</script>
 		<title>Insert title here</title>
-		<style type="text/css">
-		.container .table-responsive .table .moreView{text-align: right;}
-		</style>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
