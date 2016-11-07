@@ -114,7 +114,7 @@
 						<a href="/member/memberLoginForm">로그인</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.memberId}">
-						<a href="/member/memberLogout">${memberId} ▼</a>
+						<a href="">${memberId} ▼</a>
 						<div class="hiddenNav">
 						<dl>
 							<!-- <dt>설정</dt> -->
