@@ -25,9 +25,16 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+
+	//회원정보수정
+	@RequestMapping(value="/member/memberUpdate", method = RequestMethod.GET)
+	public String memberUpdate(Model model) {
+		logger.info("memberUpdate MemberController.java");
+		return "/member/memberUpdate";		
+	}	
 	//로그아웃
 	@RequestMapping(value="/member/memberLogout", method = RequestMethod.GET)
-	public String MemberLogout(HttpSession session) {
+	public String memberLogout(HttpSession session) {	//MemberLogout -> memberLogout 변경함
 		String logoutTime = new SimpleDateFormat("yyyy/mm/dd/hh:mm").format(new Date());
 		logger.info("logoutTime : {}", logoutTime);
 		session.invalidate();	//세션 종료(데이터 전부 삭제)
@@ -35,7 +42,7 @@ public class MemberController {
 	}
 	//로그인
 	@RequestMapping(value="/member/memberLoginSubmit", method = RequestMethod.POST)
-	public String MemberLogin(HttpServletRequest request,
+	public String memberLogin(HttpServletRequest request,	//MemberLogin -> memberLogin변경함
 			@RequestParam(value="memberLoginId") String memberId,
 			@RequestParam(value="memberLoginPassword") String memberInfoPassword) {
 		logger.info("memberId : {} MemberController.java", memberId);
@@ -56,7 +63,7 @@ public class MemberController {
 		return "/member/memberLoginForm";
 	}
 	//회원리스트
-	@RequestMapping(value="/member/memberListAll", method = RequestMethod.POST)
+	@RequestMapping(value="/member/memberListAll", method = RequestMethod.GET)
 	public String memberListAll(Model model) {
 		logger.info("memberListAll MemberController.java");
 		model.addAttribute("selectMemberAll", memberService.selectMemberAll());

@@ -16,9 +16,14 @@ public class MemberDao {
 	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
-	
 	private final String nameSpace = "com.danim.service.MemberMapper";
-
+	//회원정보보기
+	public int memberUpdate(String memberId) {
+		logger.info("memberUpdate() MemberDao.java");
+		logger.info("memberId : {}", memberId);
+		return sessionTemplate.selectOne(nameSpace+".memberUpdate");
+	}
+	
 	//로그인 체크
 	public int memberCheck(String memberId, String memberInfoPassword) {
 		logger.info("memberCheck() MemberDao.java");

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.danim.service.community.CommunityDto;
+
 @Service
 @Transactional
 public class MemberService {
@@ -21,6 +23,17 @@ public class MemberService {
 	@Autowired
 	MemberInfoDto memberInfoDto;
 	
+	//회원정보조회
+	/*public int selectmemberUpdate(String memberId) {
+		logger.info("selectmemberUpdate() MemberService.java");
+		MamberDto memberDto = memberDao.memberUpdate(memberId);
+		memberDto
+		
+		communityDto.setCommunityReadcount(readCount);
+		logger.info("readCount {} CommunityController.java", communityDto.getCommunityReadcount());
+		cummunityDao.updateReadCount(communityDto);
+		return communityDto;
+	}*/
 	//로그인 아이디 체크
 	public int selectMemberCheck(String memberId, String memberInfoPassword) {
 		logger.info("selectMemberCheck() MemberService.java");

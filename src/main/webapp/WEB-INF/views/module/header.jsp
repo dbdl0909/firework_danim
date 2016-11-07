@@ -110,7 +110,21 @@
 					<a href="/search/infoSearch">추천여행</a>
 				</li>
 				<li class="hiddenNavWrap">
-					<a href="/member/memberLoginForm">로그인</a>
+					<c:if test="${empty sessionScope.memberId}">
+						<a href="/member/memberLoginForm">로그인</a>
+					</c:if>
+					<c:if test="${not empty sessionScope.memberId}">
+						<a href="/member/memberLogout">${memberId} ▼</a>
+						<div class="hiddenNav">
+						<dl>
+							<!-- <dt>설정</dt> -->
+							<dd><a href="/community/list?communityCategoryNo=community_category_01">내 정보</a></dd>
+							<dd><a href="">내 여행</a></dd>
+							<dd><a href="">Q&A</a></dd>
+							<dd><a href="/member/memberLogout">로그아웃</a></dd>
+						</dl>
+					</div>
+					</c:if>					
 				</li>
 			</ul>
 		</div>	
