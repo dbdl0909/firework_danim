@@ -89,4 +89,11 @@ public class SearchDao {
     	return sessionTemplate.selectOne(nameSpace + ".selectStayByStayInfoNo", stayInfoNo);
 	}
 	
+	// 모든 도시를 조회
+	public List<String> selectCityAll() {
+		logger.info("selectCityAll() SearchDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectCityAll");
+	}	
+	
 }

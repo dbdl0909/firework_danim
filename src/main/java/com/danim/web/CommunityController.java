@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.danim.service.community.CommunityDto;
 import com.danim.service.community.CommunityReplyDto;
 import com.danim.service.community.CommunityService;
+import com.danim.service.community.QnaDto;
 import com.danim.util.FileUpload;
  
 @Controller
@@ -61,6 +62,39 @@ public class CommunityController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("lastPage", lastPage);
 		return "/community/list";
+	}
+	
+	// 나의 QNA 리스트 조회
+	@RequestMapping(value="/community/myQnaList", method = RequestMethod.GET)
+	public String myQnaList(Model model,
+			@RequestParam(value="communityCategoryNo", defaultValue="community_category_05") String communityCategoryNo,
+			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(value="memberId") String memberId,
+			@RequestParam(value="searchOption", defaultValue="") String searchOption,
+			@RequestParam(value="searchInput", defaultValue="") String searchInput) {
+		
+		logger.info("memberId{} CommunityController.java", memberId);
+		List<QnaDto> myQnaList = communityService.selectQnaByMemberId(communityCategoryNo, page, memberId, searchOption, searchInput);
+
+		//페이징시 마지막 페이지와 총 블럭페이지의 오차를 없애기위한 코드
+		// 마지막 페이지를 강제로 endpage로 치환하여 오차를 없애준다.
+		int startPage = communityService.getStartPage(page);
+		int endPage = communityService.getEndPage(startPage);
+		int lastPage = communityService.getLastPage(communityCategoryNo, page, searchOption, searchInput);
+		if(lastPage < endPage){
+			endPage = lastPage;			
+		}
+		logger.info("startPage{} CommunityController.java", startPage);
+		logger.info("endPage{} CommunityController.java", endPage);
+		logger.info("totalPage{} CommunityController.java", lastPage);				
+		model.addAttribute("myQnaList", myQnaList);
+		model.addAttribute("totalCount", communityService.countCommunityList(communityCategoryNo, searchOption, searchInput));
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("page", page);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("lastPage", lastPage);
+		
+		return "/community/qnaList";
 	}
 
 	@RequestMapping(value = "/community/write", method = RequestMethod.GET)

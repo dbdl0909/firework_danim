@@ -64,4 +64,9 @@ public class CommunityDao {
 	public int selectRatingForVotedCheck(Map<String, Object> map){		
 		return sqlSession.selectOne(NS+".selectRatingForVotedCheck", map);
 	}
+	
+	//나의 QNA 리스트 조회
+	public List<QnaDto> selectQnaByMemberId(Map<String, Object> map) {
+		return sqlSession.selectList(NS+".selectQnaByMemberId", map);
+	}
 }

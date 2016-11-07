@@ -285,5 +285,27 @@
 			SYSDATE(),
 			SYSDATE()
 		);
-	</insert>	
+	</insert>
+	<!-- 나의 QNA 리스트 조회 -->
+	<select
+		id="selectQnaByMemberId"
+		parameterType="String"
+		resultType="com.danim.service.community.QnaDto">
+		SELECT
+			community_no as 'communityNo',
+			community_category_no as 'communityCategoryNo',
+			plan_no as 'planNo',
+			member_id as 'memberId',
+			community_subject as 'communitySubject',
+			community_content as 'communityContent',
+			community_readcount as 'communityReadcount',
+			community_date as 'communityDate',
+			community_update as 'communityUpdate',
+			community_reply_count as 'communityReplyCount'
+		FROM
+			community
+		WHERE
+			member_id = #{memberId}	
+		AND community_category_no = #{communityCategoryNo}		
+	</select>
 </mapper>	

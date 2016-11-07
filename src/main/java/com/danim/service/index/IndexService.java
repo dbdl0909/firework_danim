@@ -23,7 +23,7 @@ public class IndexService {
 	}
 	
 	public List<String> getSelectCityAll() {
-		logger.info("getSelectCityAll() SearchService.java");
+		logger.info("getSelectCityAll() IndexService.java");
     	
     	List<String> selectCityAll = indexDao.selectCityAll();
     	

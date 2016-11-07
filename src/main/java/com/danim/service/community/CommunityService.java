@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.danim.util.Pagination;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 
  
@@ -18,18 +17,19 @@ import com.sun.org.apache.bcel.internal.generic.RETURN;
 public class CommunityService {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityService.class);
 	@Autowired
-	CommunityDao cummunityDao;
+	CommunityDao communityDao;
+	
     private final int LINE_PER_PAGE = 10;//한페이지에 보여줄 글 갯수 공지 제외
     private final int BLOCK_PER_PAGE = 5;//하단 페이징 블록의 갯수
     int startPage;
     int endPage;
 	//게시글 입력 
 	public void insertCommunityItem(CommunityDto communityDto){
-		cummunityDao.insertCommunityItem(communityDto);	
+		communityDao.insertCommunityItem(communityDto);	
 	}
 	//수정을 위한 수정화면출력
 	public CommunityDto modifyCommunityItemView(int communityNo){
-		CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
+		CommunityDto communityDto= communityDao.selectDetailViewByCommunityNo(communityNo);
 		return communityDto;		
 	}
 	//수정된 값 처리
@@ -39,7 +39,7 @@ public class CommunityService {
 		logger.info("communitySubject {} ", communityDto.getCommunitySubject());
 		logger.info("communityNotice {} CommunityController.java", communityDto.getCommunityNotice());
 		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());	
-		cummunityDao.modifyCommunityItem(communityDto);	
+		communityDao.modifyCommunityItem(communityDto);	
 	};
 	//해당 카테고리 리스트
 	//컨트롤러에서 넘어온 카테고리 넘버와 페이지 값을 
@@ -55,23 +55,23 @@ public class CommunityService {
         map.put("searchInput", searchInput);
         logger.info("searchOption {} ", map.get("searchOption"));
         logger.info("searchInput {} ", map.get("searchInput"));
-        List<CommunityDto> communityList =  cummunityDao.selectCommunityList(map);        
+        List<CommunityDto> communityList =  communityDao.selectCommunityList(map);        
 		return communityList;	
 	}
 	//해당 카테고리의 공지글만 출력
 	public List<CommunityDto> selectCommunityNoticeList(String communityCategoryNo){
-		List<CommunityDto> communityNoticeList = cummunityDao.selectCommunityNoticeList(communityCategoryNo);
+		List<CommunityDto> communityNoticeList = communityDao.selectCommunityNoticeList(communityCategoryNo);
 		return communityNoticeList;	
 	}
 	//해당 게시글의 디테일 뷰
 	//디테일 뷰 출력 시 readcount에 1씩 증가
 	public CommunityDto selectDetailViewByCommunityNo(int communityNo){
-		CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
+		CommunityDto communityDto= communityDao.selectDetailViewByCommunityNo(communityNo);
 		int readCount = communityDto.getCommunityReadcount();
 		readCount++;
 		communityDto.setCommunityReadcount(readCount);
 		logger.info("readCount {} CommunityController.java", communityDto.getCommunityReadcount());
-		cummunityDao.updateReadCount(communityDto);
+		communityDao.updateReadCount(communityDto);
 		return communityDto;		
 	}
 	//해당 카테고리의 총 게시글 수
@@ -80,7 +80,7 @@ public class CommunityService {
 		map.put("communityCategoryNo", communityCategoryNo);
 		map.put("searchOption", searchOption);
 		map.put("searchInput", searchInput);
-		return cummunityDao.countCommunityList(map);
+		return communityDao.countCommunityList(map);
 	}
 	//시작페이지를 정하기 위한 메소드
     public int getStartPage(int page){
@@ -107,12 +107,12 @@ public class CommunityService {
     	logger.info("replyCount next {} CommunityController.java", replyCount);
     	communityDto.setCommunityReplyCount(replyCount);
     	logger.info("communityDto.getCommunityReplyCount() next {} CommunityController.java", communityDto.getCommunityReplyCount());
-    	cummunityDao.updateReplyCount(communityDto);
-    	cummunityDao.insertCommunityReply(communityReplyDto);
+    	communityDao.updateReplyCount(communityDto);
+    	communityDao.insertCommunityReply(communityReplyDto);
     }
     //해당 게시글 리플 가져오기
     public List<CommunityReplyDto> selectDetailViewReplyByCommunityNo(int communityNo) {
-    	List<CommunityReplyDto> communityReplyList = cummunityDao.selectDetailViewReplyByCommunityNo(communityNo);
+    	List<CommunityReplyDto> communityReplyList = communityDao.selectDetailViewReplyByCommunityNo(communityNo);
 		return communityReplyList;
     }
     //게시글 추천
@@ -122,19 +122,37 @@ public class CommunityService {
     	map.put("votedId", votedId);
     	map.put("communityNo", communityNo);
     	map.put("communityCategoryNo", communityCategoryNo);
-    	int checkVoted = cummunityDao.selectRatingForVotedCheck(map);
+    	int checkVoted = communityDao.selectRatingForVotedCheck(map);
     	logger.info("checkVoted {} CommunityController.java", checkVoted);
     	if(checkVoted == 0) {
-			CommunityDto communityDto= cummunityDao.selectDetailViewByCommunityNo(communityNo);
+			CommunityDto communityDto= communityDao.selectDetailViewByCommunityNo(communityNo);
 			/*int ratingCount = communityDto.getCommunityRating();
 			ratingCount++;*/
 			//communityDto.setCommunityRating(communityNo);
-	    	cummunityDao.insertCommunityVote(map);
-	    	cummunityDao.updateRatingCount(communityDto);
+	    	communityDao.insertCommunityVote(map);
+	    	communityDao.updateRatingCount(communityDto);
 	    	result = "voted";
     	}else if(checkVoted == 1){
     		result = "failed";
     	}
     	return result;
     }
+    
+    //나의 QNA 리스트 조회
+    public List<QnaDto> selectQnaByMemberId(String communityCategoryNo, int page, String memberId, String searchOption, String searchInput) {
+        Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("pageNation", pageNation);
+        map.put("communityCategoryNo", communityCategoryNo);
+        map.put("memberId", memberId);
+        map.put("searchOption", searchOption);
+        map.put("searchInput", searchInput);
+        logger.info("searchOption {} ", map.get("searchOption"));
+        logger.info("searchInput {} ", map.get("searchInput"));
+        logger.info("memberId {} ", map.get("memberId"));
+        List<QnaDto> selectQnaByMemberId = communityDao.selectQnaByMemberId(map);
+    	
+    	return selectQnaByMemberId;
+    }
+    
 }

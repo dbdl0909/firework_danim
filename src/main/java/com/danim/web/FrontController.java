@@ -29,12 +29,13 @@ public class FrontController {
 		model.addAttribute("selectLandmarkImageForIndex", selectLandmarkImageForIndex);
 		model.addAttribute("selectCityAll", selectCityAll);
 		
-		return "index";		
+		return "index";
 	}
 	
 	@RequestMapping(value = "/search")
 	public String searchController() {
 		logger.info("searchController FrontController.java");
+		
 		return "search/infoSearch";
 	}
 }

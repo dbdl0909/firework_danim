@@ -26,12 +26,12 @@ public class SearchController {
 		// search : 검색어(도시이름)
 		logger.info("search {} 값 입니다", search);
 		logger.info("moreView {} 값 입니다", moreView);
+		List<String> selectCityAll = searchService.getSelectCityAll();
 		List<SearchDto> selectCityInfoName = searchService.getselectCityInfoName(search);
 		List<SearchDto> selectLandmarkInfo = searchService.getSelectLandmarkInfo(search, moreView);
 		List<SearchDto> selectEateryInfo = searchService.getSelectEateryInfo(search, moreView);
 		List<SearchDto> selectEventInfo = searchService.getSelectEventInfo(search, moreView);
 		List<SearchDto> selectStayInfo = searchService.getSelectStayInfo(search, moreView);
-		
 		
 		model.addAttribute("search", search);
 		model.addAttribute("moreView", moreView);
@@ -39,7 +39,8 @@ public class SearchController {
 		model.addAttribute("selectLandmarkInfo", selectLandmarkInfo);
 		model.addAttribute("selectEateryInfo", selectEateryInfo);
 		model.addAttribute("selectEventInfo", selectEventInfo);
-		model.addAttribute("selectStayInfo", selectStayInfo);	
+		model.addAttribute("selectStayInfo", selectStayInfo);
+		model.addAttribute("selectCityAll", selectCityAll);
 		
 		return "/search/infoSearch";
 	}

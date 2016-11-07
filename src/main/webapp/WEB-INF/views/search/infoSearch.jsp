@@ -29,37 +29,6 @@
 				var saveEvent = 10;			// 축제 더보기 이외의 버튼을 누르기 전까지 보여주던 축제 페이지의 리스트 수
 				var saveStay = 10;			// 숙소 더보기 이외의 버튼을 누르기 전까지 보여주던 숙소 페이지의 리스트 수
 				
-				/* 페이지가 로딩되고 나면 검색바를 숨김 */
-				$('#searchForm').hide();
-				
-				/* 'search'로 검색한 결과입니다 라는 문구를 숨김*/
-				if(search == ''){					
-					$('#searchGuide').hide();
-				}			
-				
-				/* '.searchCityNameSpan' 에 마우스를 가져가면 투명해지는 애니메이션 효과 */
-				$(".searchCityNameSpan").mouseover(function(){
-					$('#searchNotice').stop().animate({opacity:'0.3'});
-				});
-				
-				/* '.searchCityNameSpan' 에 마우스가 벗어나면 다시 원래 투명도로 돌아가는 애니메이션 효과 */
-				$(".searchCityNameSpan").mouseout(function(){
-					$('#searchNotice').stop().animate({opacity:'1'});
-				});
-				
-				/* 'searchNotice' 클릭시 해당 글씨를 숨기고 검색바를 화면에 나타나게한 후 포커스 */
-				$('#searchNotice').click(function(){
-					$('#searchNotice').hide();
-					$('#searchForm').show();
-					$('#infoSearchInput').focus();
-				});
-				
-				/* 'closeSearchForm' 클릭시 검색바를 숨기고 다시 원래 글씨를 나타나게 한다 */
-				$('#closeSearchForm').click(function(){
-					$('#searchForm').hide();
-					$('#searchNotice').show();
-				});				
-				
 				// 더보기 버튼을 눌렀을 때 조건 검사 후 실행되는 ajax 코드
 				function moreViewAjax(){
 					$.ajax({

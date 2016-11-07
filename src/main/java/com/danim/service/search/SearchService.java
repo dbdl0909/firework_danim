@@ -112,4 +112,12 @@ public class SearchService {
 		return selectStayInfoOne;
 	}
 	
+	public List<String> getSelectCityAll() {
+		logger.info("getSelectCityAll() SearchService.java");
+    	
+    	List<String> selectCityAll = searchDao.selectCityAll();
+    	
+		return selectCityAll;
+	}
+	
 }

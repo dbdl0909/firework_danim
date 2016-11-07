@@ -15,6 +15,10 @@
 	$(document).ready(function(){
 		var infoSearchCheck = /[가-힣]{2,}$/; // 검색조건 2자 이상의 한글만 가능
 		var infoSearchInput = $('#infoSearchInput');
+		var autoComplete = new Array();	// 자동완성을 하기 위해 필요한 도시 이름 배열
+		<c:forEach var="selectCityAll" items="${selectCityAll}">
+		autoComplete.push("${selectCityAll}");
+		</c:forEach>
 		
 		$('.hiddenNavWrap').hover(function(){
 			$(this).children('.hiddenNav').fadeIn(300);
@@ -55,17 +59,12 @@
 	        }			 
 	    });	
 		
-		/* 자동완성 코드 진행중*/
+		/* 자동완성 */
 		$(function(){
-			var autoComplete = new Array();
-			<c:forEach var="selectCityAll" items="${selectCityAll}">
-			autoComplete.push("${selectCityAll}");
-			</c:forEach>
 			$('#infoSearchInput').autocomplete({
 				source: autoComplete
 			});
-		}); 
-		
+		}); 		
 	})
 </script>
 </head>
