@@ -105,7 +105,7 @@
 				<form id="voteForm" action="/community/communityDetail" method="post">
 					<input type="hidden" name="communityNo" value="${detailView.communityNo}">
 					<input type="hidden" name="communityCategoryNo" value="${detailView.communityCategoryNo}">
-					<input type="hidden" name="votedId" value="id002">
+					<input type="hidden" name="votedId" value="${sessionScope.memberId}">
 				</form>
 				<c:if test="${param.votedCheck != null}" >
 					<c:if test="${param.votedCheck == 'failed'}">
@@ -138,7 +138,7 @@
 					<tr>
 						<input type="hidden" name="communityNo" value="${detailView.communityNo}" />
 						<input type="hidden" name="communityCategoryNo" value="${detailView.communityCategoryNo}" />									
-						<td id="replyAuthor">작성자 : <input type="text" id="memberId" name="memberId" value="id002"/></td>
+						<td id="replyAuthor">작성자 : <input type="text" id="memberId" name="memberId" value="${sessionScope.memberId}" readonly="readonly" style="border: 0"/></td>
 						<td id="replyTextArea"><textarea id="replyContent" name="replyContent"></textarea></td>
 						<td id="replyFormSubmitArea"><span type="button" id="replyFormSubmit" class="btn btn-primary" >등록</span></td>
 					</tr>

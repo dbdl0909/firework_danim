@@ -119,7 +119,7 @@
 							<!-- <dt>설정</dt> -->
 							<dd><a href="/community/list?communityCategoryNo=community_category_01">내 정보</a></dd>
 							<dd><a href="">내 여행</a></dd>
-							<dd><a href="">Q&A</a></dd>
+							<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
 							<dd><a href="/member/memberLogout">로그아웃</a></dd>
 						</dl>
 					</div>

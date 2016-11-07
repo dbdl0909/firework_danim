@@ -54,7 +54,7 @@
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="memberId"><span>작성자</span></label>		
-			<input type="text" id="memberId" name="memberId" value="id001" readonly="readonly"/>
+			<input type="text" id="memberId" name="memberId" value="${sessionScope.memberId}" readonly="readonly"/>
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="communitySubject"><span>글 제목</span></label>
