@@ -15,9 +15,15 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script>
-			$(document).ready(function(){				
+			$(document).ready(function(){
+				var communityCategoryNoVal = '${param.communityCategoryNo}';
+				$('#communityCategoryNo option').each(function(i){
+					if($('#communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
+						$(this).attr('selected','selected');				
+					}			
+				});
 				$('#communityCategoryNo').change(function(){
-					
+					$('#qnaCategory').submit();
 				});
 			});
 		</script>
@@ -32,6 +38,7 @@
 			tbody>tr:HOVER{color:#da8c92;cursor: pointer;}
 			.menu-wrap{text-align: right;}
 			.form-wrap{text-align: center;}
+			.container #qnaCategory{width:30px; height:30px; margin: 0; float: right;}
 		</style>
 	</head>
 <body>
@@ -61,8 +68,8 @@
 			<h2 class="sub-header">숙박시설</h2>
 		</c:otherwise>
 	</c:choose>
-	<form action="/community/myQnaList" method="GET">
-		<select id="communityCategoryNo" name="communityCategoryNo" onchange="this.form.submit()">
+	<form id="qnaCategory" action="/community/myQnaList" method="GET">
+		<select id="communityCategoryNo" name="communityCategoryNo">
 			<optgroup label="QNA">
 				<option value="community_category_05">숙박시설</option>
 				<option value="community_category_06">교통편</option>
@@ -72,6 +79,7 @@
 				<option value="community_category_10">여행관련</option>
 			</optgroup>
 		</select>
+		<input type="hidden" name="memberId" value="${sessionScope.memberId}">
 	</form>
 	<div class="table-responsive">
 		<table class="table table-striped">
@@ -189,7 +197,7 @@ var onList = function(){
 	location.href = '/community/list?communityCategoryNo='+'${param.communityCategoryNo}';
 };
 var onSearch = function(){
-	location.href= '/community/list?communityCategoryNo='+'${param.communityCategoryNo}'
+	location.href= '/community/myQnaList?memberId='+'${sessionScope.memberId}'+'&'+'communityCategoryNo='+'${param.communityCategoryNo}'
 			+'&searchOption='+document.getElementById('searchOption').value
 			+'&searchInput='+document.getElementById('searchInput').value;
 }
