@@ -151,8 +151,16 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			if (options.mode == 'event') {
 				// Remove previous events
 				// Add Events
-				$.get(''+options.xmlUrl+'', function(plan){
-					$(plan).find('plan').each(function(i){
+				$.get('/plan/mainPlan', function(plan){
+					console.log($(plan));					
+					$(plan).find('.plan').each(function(){
+						$(this).find('.route').each(function(){
+							var thisRoute = $(this).val();
+							alert(thisRoute);
+						});
+					});
+					//console.log($(plan).find('#stayDay').val());
+/*					$(plan).find('date').each(function(i){
 						// Year [0]   Month [1]   Day [2]
 						var memberId = $(this).find('planid').text();
 						//alert(memberId);    
@@ -182,94 +190,94 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 								//insertPlanMemo = $(this).find('memo').text("asd");
 								planMemo = $(this).find('memo').text();
 								//alert(planMemo);
-						/* Convert times to 12 hour & determine AM or PM */
-						if(parseInt(startSplit[0]) >= 12) {
-							var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
-							var startPeriod = 'PM'
-						}
-						
-
-						if(parseInt(startTime) == 0) {
-							var startTime = '12:'+startSplit[1]+'';
-						}
-
-						if(parseInt(endSplit[0]) >= 12) {
-							var endTime = (endSplit[0] - 12)+':'+endSplit[1]+'';
-							var endPeriod = 'PM'
-						}
-						if(parseInt(endTime) == 0) {
-							var endTime = '12:'+endSplit[1]+'';
-						}
-						if (eventURL){
-							var eventLink = 'href="'+eventURL+'"';
-						}
-
-						// function to print out list for multi day events
-						function multidaylist(){
-							$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
-						}
-						
-
-						// If event is one day & within month
-						if (!fullendDate && startMonth == setMonth && startYear == setYear) {
-							// Add Indicators
-							$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-							// Print out event list for single day event
-							$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
-
-
-						// If event is multi day & within month
-						} else if (startMonth == setMonth && startYear == setYear && endMonth == setMonth && endYear == setYear){
-							for(var i = parseInt(startDay); i <= parseInt(endDay); i++) {
-								// If first day, add title 
-								if (i == parseInt(startDay)) {
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-								} else {
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-								}
-								multidaylist();
+						 Convert times to 12 hour & determine AM or PM 
+							if(parseInt(startSplit[0]) >= 12) {
+								var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
+								var startPeriod = 'PM'
 							}
-
-						// If event is multi day, starts in prev month, and ends in current month
-						} else if ((endMonth == setMonth && endYear == setYear) && ((startMonth < setMonth && startYear == setYear) || (startYear < setYear))) {
-							for(var i = 0; i <= parseInt(endDay); i++) {
-								// If first day, add title 
-								if (i==1){
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-								} else {
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-								}
-								multidaylist();
+							
+	
+							if(parseInt(startTime) == 0) {
+								var startTime = '12:'+startSplit[1]+'';
 							}
-
-						// If event is multi day, starts in this month, but ends in next
-						} else if ((startMonth == setMonth && startYear == setYear) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
-							for(var i = parseInt(startDay); i <= dayQty; i++) {
-								// If first day, add title 
-								if (i == parseInt(startDay)) {
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-								} else {
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-								}
-								multidaylist();
+	
+							if(parseInt(endSplit[0]) >= 12) {
+								var endTime = (endSplit[0] - 12)+':'+endSplit[1]+'';
+								var endPeriod = 'PM'
 							}
-
-						// If event is multi day, starts in a prev month, ends in a future month
-						} else if (((startMonth < setMonth && startYear == setYear) || (startYear < setYear)) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
-							for(var i = 0; i <= dayQty; i++) {
-								// If first day, add title 
-								if (i == 1){
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-								} else {
-									$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-								}
-								multidaylist();
+							if(parseInt(endTime) == 0) {
+								var endTime = '12:'+endSplit[1]+'';
 							}
-
-						}
-						});
-						}
-					});
+							if (eventURL){
+								var eventLink = 'href="'+eventURL+'"';
+							}
+	
+							// function to print out list for multi day events
+							function multidaylist(){
+								$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
+							}
+							
+	
+							// If event is one day & within month
+							if (!fullendDate && startMonth == setMonth && startYear == setYear) {
+								// Add Indicators
+								$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+								// Print out event list for single day event
+								$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
+	
+	
+							// If event is multi day & within month
+							} else if (startMonth == setMonth && startYear == setYear && endMonth == setMonth && endYear == setYear){
+								for(var i = parseInt(startDay); i <= parseInt(endDay); i++) {
+									// If first day, add title 
+									if (i == parseInt(startDay)) {
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+									} else {
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+									}
+									multidaylist();
+								}
+	
+							// If event is multi day, starts in prev month, and ends in current month
+							} else if ((endMonth == setMonth && endYear == setYear) && ((startMonth < setMonth && startYear == setYear) || (startYear < setYear))) {
+								for(var i = 0; i <= parseInt(endDay); i++) {
+									// If first day, add title 
+									if (i==1){
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+									} else {
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+									}
+									multidaylist();
+								}
+	
+							// If event is multi day, starts in this month, but ends in next
+							} else if ((startMonth == setMonth && startYear == setYear) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
+								for(var i = parseInt(startDay); i <= dayQty; i++) {
+									// If first day, add title 
+									if (i == parseInt(startDay)) {
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+									} else {
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+									}
+									multidaylist();
+								}
+	
+							// If event is multi day, starts in a prev month, ends in a future month
+							} else if (((startMonth < setMonth && startYear == setYear) || (startYear < setYear)) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
+								for(var i = 0; i <= dayQty; i++) {
+									// If first day, add title 
+									if (i == 1){
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+									} else {
+										$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+									}
+									multidaylist();
+								}
+	
+							}
+						});*/
+						//}
+					//});
 					
 				});
 
@@ -382,30 +390,36 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			}
 			var idx = $(this).index();
 			var thisId = $(this).attr('data-eventid');
-			//alert(thisId);
-			var memo = null;
+			$.get(''+options.xmlUrl+'', function(plan){
+				$(plan).find('plan').each(function(i){
+					// Year [0]   Month [1]   Day [2]
+					var memberId = $(this).find('planid').text();
+					//alert(memberId);    
+					if(memberId == 'id002'){
+						$(this).find('event').each(function(i, item){
+							var eventId = $(this).find('id').text(),
+							//insertPlanMemo = $(this).find('memo').text(memo);
+							planMemo = $(this).find('memo').text();
+							if(thisId==eventId) {									
+								/*alert(planMemo);*/
+								$('#memoWrap').show();
+								$('#submitMemo').click(function(){
+									$('#submitMemo').attr('data-eventid', thisId);
+									memo = $('textarea').val();   				
+								});
+							}
+						});
+					}
+				});
+			});
+			
+/*			var memo = null;
 			$('#memoWrap').show();
 			$('#submitMemo').click(function(){
+				$('#submitMemo').attr('data-eventid', thisId);
 				memo = $('textarea').val();
-				alert(memo);
-				$.get(''+options.xmlUrl+'', function(plan){
-					$(plan).find('plan').each(function(i){
-						// Year [0]   Month [1]   Day [2]
-						var memberId = $(this).find('planid').text();
-						//alert(memberId);    
-						if(memberId == 'id002'){
-							$(this).find('event').each(function(i){
-								var eventId = $(this).find('id').text(),
-									insertPlanMemo = $(this).find('memo').text(memo);
-									planMemo = $(this).find('memo').text();
-									if(thisId==eventId) {									
-										alert(planMemo);
-									}
-							});
-						}
-					});
-				});
-			});			
+				alert(thisMemo);				
+			});	*/		
 		});		
 		}
 	});
