@@ -28,6 +28,14 @@ var markerIcon2 = "../../resources/images/planIcon/placeholder2.png";
 
 var $stayDay;
 
+//landmark 마커를 담은 배열
+var $landmarkMarkerArray = [];
+
+//landmark 마커 hover
+var $hoverTemp = false;
+var $landmarkHoverIndex = 0;
+
+
 //구글 지도 (현재위치 설정)
 function initMap() {
 	//처음 지도 위치
@@ -64,6 +72,7 @@ function initMap() {
 }
 
 function infoWindowEvent() {
+	var infoNoArray = [];
     var infoNameArray = [];
 	var infoSummaryArray = [];
 	var infoImageArray = [];
@@ -71,6 +80,7 @@ function infoWindowEvent() {
 	
 	for(var i = 0; i < markerArray.length; i++) {
 		//infoArray 배열에 차례대로 각 도시의 name, summary, image들을 담는다.
+		infoNoArray.push(cityInfoList[i].no);
 		infoNameArray.push(cityInfoList[i].name);
 		infoSummaryArray.push(cityInfoList[i].summary);
 		infoImageArray.push(cityInfoList[i].image);
@@ -82,7 +92,8 @@ function infoWindowEvent() {
 			
 			//시 마커를 클릭했을때 보여줄 내용을 담은 함수
 			var infowindow = new google.maps.InfoWindow({
-				content: "<img id='mainPlanCityInfoImage' src=" + infoImageArray[markerIndex] + "/>" +
+				content: "<img id='mainPlanCityInfoImage' src='" + infoImageArray[markerIndex] + "'/>" +
+						 "<input id='mainPlanCityinfoNo' type='hidden' value='" + infoNoArray[markerIndex] +  "'/>" +
 						 "<span id='mainPlanCityInfo'>" + infoSummaryArray[markerIndex] + "</span>" +
 						 "<div id='mainPlanAddButton'>" +
 						 	"<img id='addButton' src='../../resources/images/planIcon/addButton.png'/>" +
@@ -117,6 +128,7 @@ function infoWindowEvent() {
 			    		$('#mainPlanUl').append(
 		    				"<li class='leftMenuLi'>" +
 								"<span class='cityName'>" + infoNameArray[markerIndex] + "</span>" +
+								"<input class='cityNo' type='hidden' value='" + markerIndex + "'/>" +
 								"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/planIcon/removeButton.png'/>" +
 								"<div class='cityChooseMenu'>" +
 									"<img class='arrowLeft' src='../../resources/images/planIcon/arrowPointingToLeft.png'/>" +
@@ -369,6 +381,14 @@ function lineRemoveFunction(removeButtonIndex) {
 	}
 }
 
+function landmarkHover($hoverTemp, $landmarkHoverIndex) {
+	if($hoverTemp == false) {
+		$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
+	} else {
+		$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPin.png');
+	}
+}
+
 $(document).ready(function() {
 	var $stayCount = 0;
 	$('.cityInfoLi').click(function() {
@@ -442,7 +462,6 @@ $(document).ready(function() {
 	
 	//landmark의 좌표를 찍을 배열
 	var landmarkMarker = [];
-	var landmarkMarkerArray = [];
 	var landmarkPosition = [];
 	var landmarkName = [];
 	var landmarkNo = [];
@@ -450,6 +469,7 @@ $(document).ready(function() {
 	
 	var cityClickIndex = 0;
 	var clickCityName;
+	var clickCityNo;
 	
 	//ajax로 받아오는 값 초기화
 	var count = 0;
@@ -476,6 +496,8 @@ $(document).ready(function() {
 			success:function(data){
 				count++;
 				if(temp != count) {
+					landmarkMarker = [];
+					$landmarkMarkerArray = [];
 					landmarkPosition = [];
 					landmarkName = [];
 					landmarkNo = [];
@@ -490,8 +512,7 @@ $(document).ready(function() {
 					landmarkPosition.push({lat: Number($('.landmarkInfoLatitude').eq(i).val()), lng: Number($('.landmarkInfoLangitude').eq(i).val())});
 					landmarkName.push($('.landmarkInfoName').eq(i).text());
 					landmarkNo.push($('.landmarkInfoNo').eq(i).val());
-					
-					console.log(landmarkName[i]);
+					//console.log(landmarkName[i]);
 				}
 				
 				//landmarkInfoList의 length만큼 마커를 찍어준다.
@@ -505,9 +526,36 @@ $(document).ready(function() {
 						index:i
 					});
 					landmarkMarker.setVisible(true);
-					landmarkMarkerArray.push(landmarkMarker);
+					$landmarkMarkerArray.push(landmarkMarker);
 				}
-								
+				
+				for(var i=0; i<landmarkCount; i++) {
+					google.maps.event.addListener($landmarkMarkerArray[i], 'mouseover', function() {
+						var landmarkMouseOverIndex = this.index;
+						
+						$landmarkMarkerArray[landmarkMouseOverIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
+					});
+					google.maps.event.addListener($landmarkMarkerArray[i], 'mouseout', function() {
+						var landmarkMouseOutIndex = this.index;
+						
+						$landmarkMarkerArray[landmarkMouseOutIndex].setIcon('../../resources/images/planIcon/landmarkPin.png');
+					});
+				}
+				
+				$('.clickLandmark').on('mouseover', function() {
+					$hoverTemp = false;
+					$landmarkHoverIndex = $('.clickLandmark').index(this);
+					//console.log($landmarkHoverIndex + '번째 랜드마크');
+					
+					landmarkHover($hoverTemp, $landmarkHoverIndex);
+					
+				}).on('mouseout', function() {
+					$hoverTemp = true;
+					$landmarkHoverIndex = $('.clickLandmark').index(this);
+					
+					landmarkHover($hoverTemp, $landmarkHoverIndex);
+				});
+				
 				$('.clickLandmark').click(function() {
 					var clickLandmarkIndex = $('.clickLandmark').index(this);
 					console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
@@ -522,6 +570,7 @@ $(document).ready(function() {
 								"<span class='landmarkName'>" + clickLandmark + "</span>" +
 							"</li>"
 						);
+						$landmarkMarkerArray[clickLandmarkIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
 					}
 					
 					console.log($('.landmarkInfoLangitude').eq(clickLandmarkIndex).val());
@@ -537,10 +586,12 @@ $(document).ready(function() {
 		cityClickIndex = $('.cityName').index(this);
 		
 		clickCityName = $('.cityName').eq(cityClickIndex).text();
-		console.log(cityClickIndex + '번째 도시 : ' + clickCityName);
+		clickCityNo = $('.cityNo').eq(cityClickIndex).val();
+		console.log(cityClickIndex + ' 번째 li 의 ' + clickCityNo + ' 번째 도시 : ' + clickCityName);
+		
 		$('#clickCityName').text(clickCityName);
 		
-		map.setCenter(markerArray[markerIndex].getPosition());
+		map.setCenter(markerArray[clickCityNo].getPosition());
 		map.setZoom(12);
 		
 		clickIcon = "명소";
@@ -605,6 +656,4 @@ $(document).ready(function() {
 			});
 		}
 	});
-	
-	//도시루트(도시명), 일 수
 });
