@@ -123,6 +123,9 @@ function infoWindowEvent() {
 									"<span class='stayCount'>1</span>일" +
 									"<img class='arrowRight' src='../../resources/images/planIcon/arrowPointingToRight.png'/>" +
 								"</div>" +
+								"<div class='cityRouteTime'>" +
+									////////
+								"</div>" +
 								"<div class='landmarkListDiv' style='cursor:pointer;background-color:#CBC7C7'>" +
 									"<span class='landmarkListSpan'>명소 루트</span>" +
 								"</div>" +
@@ -455,7 +458,6 @@ $(document).ready(function() {
 	function totalInfoList() {
 		//console.log('totalMoreView : ' + totalMoreView);
 		
-		
 		if(clickIcon == '식당') {
 			eateryMoreView += 13;
 			totalMoreView = eateryMoreView;
@@ -604,7 +606,5 @@ $(document).ready(function() {
 		}
 	});
 	
-	
 	//도시루트(도시명), 일 수
-	
 });

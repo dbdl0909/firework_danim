@@ -346,8 +346,8 @@ p {
 	background:#434343;
 	color:#fff;
 }
-#leftMenuRouteList ul li {
-	height:100px;
+#leftMenuRouteList #mainPlanUl li {
+	height:70px;
 	list-style:none;
 }
 
@@ -476,6 +476,12 @@ p {
 #leftMenuList .landmarkInfoImage {
 	width:100px;
 	height:70px;
+}
+
+.landmarkRouteUl {
+	overflow-y: scroll;
+	height: 40px;
+	list-style: none;
 }
 
 #mainPlanDivContent {
