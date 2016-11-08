@@ -26,11 +26,27 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	//회원정보수정
-	@RequestMapping(value="/member/memberUpdate", method = RequestMethod.GET)
-	public String memberUpdate(Model model) {
+	//회원정보수정폼
+	@RequestMapping(value="/member/memberUpdateForm", method = RequestMethod.GET)
+	public String memberUpdate(Model model, @RequestParam(value="memberLoginId") String memberId) {
 		logger.info("memberUpdate MemberController.java");
-		return "/member/memberUpdate";		
+		logger.info("memberId : {} MemberController.java", memberId);
+		return "/member/memberUpdate";	
+	}
+	//회원정보폼 실행
+	@RequestMapping(value = "/member/memberUpdateSubmit", method = RequestMethod.POST)
+	public String memberUpdate(Model model, MemberDto memberDto) {
+		logger.info("memberUpdate MemberController.java");
+		logger.info("MemberDto : {}", memberDto);
+		memberService.memberUpdate(memberDto);
+		return"/member/memberInfo";
+	}
+	//회원정보보기
+	@RequestMapping(value="/member/memberInfo", method = RequestMethod.GET)
+	public String memberInfo(Model model, @RequestParam(value="memberLoginId") String memberId) {
+		logger.info("memberInfo MemberController.java");
+		logger.info("memberId : {} MemberController.java", memberId);
+		return "/member/memberInfo";
 	}	
 	//로그아웃
 	@RequestMapping(value="/member/memberLogout", method = RequestMethod.GET)

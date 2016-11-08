@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class MemberDao {
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
@@ -18,12 +19,16 @@ public class MemberDao {
 	private SqlSessionTemplate sessionTemplate;
 	private final String nameSpace = "com.danim.service.MemberMapper";
 	//회원정보보기
-	public int memberUpdate(String memberId) {
-		logger.info("memberUpdate() MemberDao.java");
+	public MemberDto memberinfo(String memberId) {
+		logger.info("memberinfo() MemberDao.java");
 		logger.info("memberId : {}", memberId);
-		return sessionTemplate.selectOne(nameSpace+".memberUpdate");
+		return sessionTemplate.selectOne(nameSpace+".memberinfo", memberId);
 	}
-	
+	//회원정보 수정
+	public void memberUpdate(MemberDto memberDto){
+		logger.info("memberUpdate() MemberDao.java");
+		sessionTemplate.update(nameSpace+".memberUpdate", memberDto);		
+	}	
 	//로그인 체크
 	public int memberCheck(String memberId, String memberInfoPassword) {
 		logger.info("memberCheck() MemberDao.java");

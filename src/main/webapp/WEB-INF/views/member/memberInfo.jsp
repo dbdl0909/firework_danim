@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,28 +18,32 @@
 		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<h3>회원정보수정</h3>
+		<h3>회원정보보기</h3>
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="memberId" value="${memberAll.memberId}" readonly></td>
+					<td>${memberAll.memberId}</td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="button" value="비밀번호변경"></td>
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" name="memberName" value="${memberAll.memberName}"></td>
+					<td>${memberAll.memberName}</td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td><input type="text" name="memberInfoBirth" value="${memberAll.memberInfoBirth}"></td>
+					<td>${memberAll.memberInfoBirth}</td>
 				</tr>
 				<tr>
 					<td>성별</td>
-					<td><input type="text" name="memberInfoGender" value="${memberAll.memberInfoGender}" readonly></td>
+					<td>${memberAll.memberInfoGender}</td>
 				</tr>
 				<tr>
 					<td>이메일</td>
-					<td><input type="text" name="memberInfoGender" value="${memberAll.memberInfoEmail}"></td>
+					<td><${memberAll.memberInfoEmail}</td>
 				</tr>
 			</tbody>
 		</table>
