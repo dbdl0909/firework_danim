@@ -27,7 +27,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-/*	//회원정보수정폼
+	//회원정보수정폼
 	@RequestMapping(value="/member/memberUpdateForm", method = RequestMethod.GET)
 	public String memberUpdate(Model model, @RequestParam(value="memberLoginId") String memberId) {
 		logger.info("memberUpdate MemberController.java");
@@ -41,8 +41,7 @@ public class MemberController {
 		logger.info("MemberDto : {}", memberDto);
 		memberService.memberUpdate(memberDto);
 		return"/member/memberInfo";
-	}*/
-
+	}
 	//회원정보보기
 	@RequestMapping(value="/member/memberInfo", method = RequestMethod.GET)
 	public String memberInfo(Model model, @RequestParam(value="memberLoginId") String memberId) {
