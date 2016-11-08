@@ -170,14 +170,6 @@
 					xmlUrl: '/events.xml'
 				});
 			
-				switch(window.location.protocol) {
-				case 'http:':
-				case 'https:':
-				// running on a server, should be good.
-				break;
-				case 'file:':
-				alert('Just a heads-up, events will not work when run locally.');
-				}
 		
 			});
 	    </script>
@@ -191,7 +183,7 @@
 	    	<div id="mainPlanDivTop">
 	    		<div style="float:left;">
 		    		<ul id="planTabList">
-		    			<li>도시루트</li>
+		    			<li  id="planTabRoute">도시루트</li>
 		    			<li id="planTabDiary">일정표</li>
 		    		</ul>
 	    		</div>
