@@ -35,7 +35,6 @@ var $landmarkMarkerArray = [];
 var $hoverTemp = false;
 var $landmarkHoverIndex = 0;
 
-
 //구글 지도 (현재위치 설정)
 function initMap() {
 	//처음 지도 위치
@@ -154,8 +153,8 @@ function infoWindowEvent() {
 						);
 			    		
 			    		$stayDay = Number(document.getElementById('stayDay').value);
-			    		$stayDay += 1;
 			    		document.getElementById('stayDay').value = Number($stayDay);
+			    		console.log('stayDay : ' + document.getElementById('stayDay').value);
 			    		
 			    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
 						var latitude = Number(cityInfoList[markerIndex].latitude);
@@ -394,7 +393,7 @@ function landmarkHover($hoverTemp, $landmarkHoverIndex) {
 	}
 }
 
-$(document).ready(function() {
+$(document).ready(function() {	
 	var $stayCount = 0;
 	$('.cityInfoLi').click(function() {
 		cityInfoIndex = $('.cityInfoLi').index(this);
