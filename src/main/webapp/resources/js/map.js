@@ -431,11 +431,17 @@ $(document).ready(function() {
 		lineRemoveFunction(removeButtonIndex);
 		
 		console.log(Number($('.stayCount').eq(removeButtonIndex).text()));
-		$stayDay -= Number($('.stayCount').eq(removeButtonIndex).text());
-		$('#stayDay').val($stayDay);
+		if($stayDay > 0) {
+			$stayDay -= Number($('.stayCount').eq(removeButtonIndex).text());
+			$('#stayDay').val($stayDay);
+		}
 		
 		//경로 제거후 li 태그 제거
 		$('.leftMenuLi').eq(removeButtonIndex).remove();
+		
+		if(!$('#mainPlanUl').hasClass('leftMenuLi')) {
+			stayCount = 0;
+		}
 	});
 	
 	//arrowLeft 이미지 태그를 클릭했을때 실행할 함수
