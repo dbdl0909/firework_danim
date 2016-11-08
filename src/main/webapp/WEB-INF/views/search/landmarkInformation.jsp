@@ -17,6 +17,12 @@
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
+			<p class="infoButton">
+				<a href="/" role="button" class="btn btn-info">홈으로</a>
+				<a href="" role="button" class="btn btn-info">버튼2</a>
+				<a id="addToPlan" role="button" class="btn btn-info">일정에 추가</a>
+			</p>
+			
 			<h1>${selectLandmarkInfoOne.landmarkInfoName}</h1>
 			<p>${cityInfoName} > 갈만한곳</p>
 			<div class="infoImage">
@@ -39,11 +45,6 @@
 						<li>홈페이지 : <a href="${selectLandmarkInfoOne.landmarkInfoHomepage}">${selectLandmarkInfoOne.landmarkInfoHomepage}</a></li>
 						<li>이용료 : ${selectLandmarkInfoOne.landmarkInfoFee} 원</li>
 					</ul>
-				</p>
-				<p class="infoButton">
-					<a href="/" role="button" class="btn btn-info">홈으로</a>
-					<a href="" role="button" class="btn btn-info">버튼2</a>
-					<a href="" role="button" class="btn btn-info">일정에 추가</a>
 				</p>
 			</div>
 		</div>		
