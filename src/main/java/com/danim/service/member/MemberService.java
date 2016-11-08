@@ -1,6 +1,5 @@
 package com.danim.service.member;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.danim.service.community.CommunityDto;
 
 @Service
 @Transactional
@@ -26,9 +23,11 @@ public class MemberService {
 	MemberInfoDto memberInfoDto;
 	
 	//회원정보조회
-	public MemberDto memberinfo(String memberId) {
-		MemberDto memberDto = memberDao.memberinfo(memberId);
-		return memberDto;
+	public MemberSelectInfoDto memberinfo(String memberId) {
+		logger.info("MemberService.java, memberinfo : {}", memberId);
+		MemberSelectInfoDto memberSelectInfoDto = memberDao.memberInfo(memberId);
+		logger.info("memberSelectInfoDto : {}", memberSelectInfoDto);
+		return memberSelectInfoDto;
 	}
 	//회원정보 수정처리
 	public void memberUpdate(MemberDto memberDto) {

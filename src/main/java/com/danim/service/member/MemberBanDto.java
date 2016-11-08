@@ -1,5 +1,5 @@
 package com.danim.service.member;
-
+//정지회원 DTO
 public class MemberBanDto {
 	private String memberBanNo;
 	private String memberId;

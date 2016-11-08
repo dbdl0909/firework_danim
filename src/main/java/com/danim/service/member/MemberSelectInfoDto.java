@@ -1,14 +1,12 @@
 package com.danim.service.member;
-//내부회원 DTO
-import org.springframework.stereotype.Component;
-
-@Component
-public class MemberInfoDto {
+//회원정보조회 DTO
+public class MemberSelectInfoDto {
 	private String memberId;
-	private String memberInfoPassword;
+	private String memberName;
 	private String memberInfoBirth;
 	private String memberInfoGender;
 	private String memberInfoEmail;
+	private String memberDate;
 	
 	public String getMemberId() {
 		return memberId;
@@ -16,11 +14,11 @@ public class MemberInfoDto {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getMemberInfoPassword() {
-		return memberInfoPassword;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setMemberInfoPassword(String memberInfoPassword) {
-		this.memberInfoPassword = memberInfoPassword;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public String getMemberInfoBirth() {
 		return memberInfoBirth;
@@ -40,11 +38,17 @@ public class MemberInfoDto {
 	public void setMemberInfoEmail(String memberInfoEmail) {
 		this.memberInfoEmail = memberInfoEmail;
 	}
-	@Override
-	public String toString() {
-		return "MemberInfoDto [memberId=" + memberId + ", memberInfoPassword=" + memberInfoPassword
-				+ ", memberInfoBirth=" + memberInfoBirth + ", memberInfoGender=" + memberInfoGender
-				+ ", memberInfoEmail=" + memberInfoEmail + "]";
+	public String getMemberDate() {
+		return memberDate;
+	}
+	public void setMemberDate(String memberDate) {
+		this.memberDate = memberDate;
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberSelectInfoDto [memberId=" + memberId + ", memberName=" + memberName + ", memberInfoBirth="
+				+ memberInfoBirth + ", memberInfoGender=" + memberInfoGender + ", memberInfoEmail=" + memberInfoEmail
+				+ ", memberDate=" + memberDate + "]";
+	}
 }

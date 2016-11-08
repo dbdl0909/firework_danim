@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.danim.service.MemberMapper">
-
+	<!-- 회원정보 조회 -->
+	<select id="memberSelectInfo"
+			resultType="com.danim.service.member.MemberSelectInfoDto"
+			parameterType="String">
+		SELECT
+			total.member_id as 'memberId',
+			total.member_name as 'memberName',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail',
+			total.member_date as 'memberDate'
+		FROM
+			member_total as total
+		LEFT JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_id = #{memberId};
+	</select>
+	
 	<!-- 로그인 아이디, 비밀번호 체크 -->
 	<select id="memberCheck"
 			resultType="Map"

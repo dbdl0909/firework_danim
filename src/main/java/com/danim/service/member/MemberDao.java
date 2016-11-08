@@ -19,10 +19,10 @@ public class MemberDao {
 	private SqlSessionTemplate sessionTemplate;
 	private final String nameSpace = "com.danim.service.MemberMapper";
 	//회원정보보기
-	public MemberDto memberinfo(String memberId) {
-		logger.info("memberinfo() MemberDao.java");
+	public MemberSelectInfoDto memberInfo(String memberId) {
+		logger.info("memberinfo() MemberSelectInfoDto.java");
 		logger.info("memberId : {}", memberId);
-		return sessionTemplate.selectOne(nameSpace+".memberinfo", memberId);
+		return sessionTemplate.selectOne(nameSpace+".memberSelectInfo", memberId);
 	}
 	//회원정보 수정
 	public void memberUpdate(MemberDto memberDto){

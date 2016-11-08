@@ -23,7 +23,7 @@
 			<tbody>
 				<tr>
 					<td>아이디</td>
-					<td></td>
+					<td>${memberInfo.memberId}</td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
@@ -31,19 +31,23 @@
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td></td>
+					<td>${memberInfo.memberName}</td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td></td>
+					<td>${memberInfo.memberInfoBirth}</td>
 				</tr>
 				<tr>
 					<td>성별</td>
-					<td></td>
+					<td>${memberInfo.memberInfoGender}</td>
 				</tr>
 				<tr>
 					<td>이메일</td>
-					<td></td>
+					<td>${memberInfo.memberInfoEmail}</td>
+				</tr>
+				<tr>
+					<td>가입날짜</td>
+					<td>${memberInfo.memberDate}</td>
 				</tr>
 			</tbody>
 		</table>

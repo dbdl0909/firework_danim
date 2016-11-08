@@ -1,5 +1,5 @@
 package com.danim.service.member;
-
+//내부회원 가입 DTO
 import org.springframework.stereotype.Component;
 
 @Component
