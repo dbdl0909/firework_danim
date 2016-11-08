@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html> 
@@ -20,8 +19,8 @@
 		<script>
 			$(document).ready(function(){
 				var communityCategoryNoVal = '${param.communityCategoryNo}';
-				$('#communityCategoryNo option').each(function(i){
-					if($('#communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
+				$('.communityCategoryNo option').each(function(i){
+					if($('.communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
 						$(this).attr('selected','selected');				
 					}			
 				});
@@ -30,57 +29,66 @@
 	</head>
 <body>
 <!-- 헤더 -->
-<jsp:include page="../module/header.jsp" />
+<jsp:include page="../module/header.jsp" />		
 <div class="container">
 	<form id="communityInsertForm" method="post">
-		<input type="hidden" name="communityNo" value="${communityNo}">
 		<div class="communityTitleWrap">
 			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
-			<select id="communityCategoryNo" name="communityCategoryNo">
-			<optgroup label=":::::::: 커뮤니티 ::::::::">
-				<option value="community_category_01"> 플랜</option>
-				<option value="community_category_02"> 후기</option>
-				<option value="community_category_03"> 자유게시판</option>
-				<option value="community_category_04"> 동행찾기</option>
-			</optgroup>					
-			<optgroup label=":::::::: 고객센터 ::::::::">	
-				<option value="community_category_05"> 숙박시설</option>
-				<option value="community_category_06"> 교통편</option>
-				<option value="community_category_07"> 예약/결제</option>
-				<option value="community_category_08"> 취소/환불/변경</option>
-				<option value="community_category_09"> 회원/로그인</option>
-				<option value="community_category_10"> 여행관련</option>
-			</optgroup>	
-			</select>
+			<c:choose>
+				<c:when test="${param.boardCheck == 'C'}">			
+					<select class="communityCategoryNo" name="communityCategoryNo">
+						<optgroup label=":::::::: 커뮤니티 ::::::::">
+							<option value="community_category_01" selected="selected"> 플랜</option>
+							<option value="community_category_02"> 후기</option>
+							<option value="community_category_03"> 자유게시판</option>
+							<option value="community_category_04"> 동행찾기</option>
+						</optgroup>
+					</select>	
+				</c:when>
+				<c:when test="${param.boardCheck == 'Q'}">
+					<select class="communityCategoryNo" name="communityCategoryNo">					
+						<optgroup label=":::::::: 고객센터 ::::::::">	
+							<option value="community_category_05"> 숙박시설</option>
+							<option value="community_category_06"> 교통편</option>
+							<option value="community_category_07"> 예약/결제</option>
+							<option value="community_category_08"> 취소/환불/변경</option>
+							<option value="community_category_09"> 회원/로그인</option>
+							<option value="community_category_10"> 여행관련</option>
+						</optgroup>			
+					</select>
+				</c:when>
+			</c:choose>	
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="memberId"><span>작성자</span></label>		
-			<input type="text" id="memberId" name="memberId" value="${detailView.memberId}" readonly="readonly"/>
+			<input type="text" id="memberId" name="memberId" value="${sessionScope.memberId}" readonly="readonly"/>
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="communitySubject"><span>글 제목</span></label>
-			<input type="text" id="communitySubject" name="communitySubject" value="${detailView.communitySubject}" />
-			<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
-			<c:choose>
-				<c:when test="${detailView.communityNotice == 'T'}">
-					<input type="checkbox" id="communityNotice" name="communityNotice" value="T" checked="checked"/>
-				</c:when>
-				<c:otherwise>
-					<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>
-				</c:otherwise>
-			</c:choose>		
+			<input type="text" id="communitySubject" name="communitySubject" />
+			<c:if test="${sessionScope.memberLevel == '관리자'}">
+				<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
+				<c:choose>
+					<c:when test="${detailView.communityNotice == 'T'}">
+						<input type="checkbox" id="communityNotice" name="communityNotice" value="T" checked="checked"/>
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>
+					</c:otherwise>
+				</c:choose>				
+			</c:if>		
 		</div>
 		<div class="communityContentWrap">
-		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;" >${detailView.communityContent}</textarea>
+		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;"></textarea>
 		</div>
 		<div class="buttonDiv">
-			<button type="button" class="btn btn-primary" onclick="onWrite()">수정</button>
+			<button type="button" class="btn btn-primary" onclick="onWrite()">쓰기</button>
 			<button type="button" class="btn btn-primary" onclick="history.go(-1);"> 취소</button>
 		</div>
 	</form>
 </div>
 <!-- 헤더 -->
-<jsp:include page="../module/footer.jsp" />		
+<jsp:include page="../module/footer.jsp" />
 </body>
 <script type="text/javascript">
 var oEditors = [];
