@@ -349,6 +349,7 @@ p {
 #leftMenuRouteList #mainPlanUl .leftMenuLi {
 	height:200px;
 	list-style:none;
+	width: 168px;
 }
 
 #mainPlanTotalInfoUl .clickLandmark:hover {
