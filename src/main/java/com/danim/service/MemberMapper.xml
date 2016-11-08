@@ -4,10 +4,11 @@
 
 	<!-- 로그인 아이디, 비밀번호 체크 -->
 	<select id="memberCheck"
-			resultType="int"
+			resultType="Map"
 			parameterType="java.util.Map">
 		SELECT
-			COUNT(total.member_id)
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName'
 		FROM
 			member_total as total
 		LEFT JOIN

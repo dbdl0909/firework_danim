@@ -2,6 +2,7 @@ package com.danim.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,6 +42,7 @@ public class MemberController {
 		memberService.memberUpdate(memberDto);
 		return"/member/memberInfo";
 	}
+
 	//회원정보보기
 	@RequestMapping(value="/member/memberInfo", method = RequestMethod.GET)
 	public String memberInfo(Model model, @RequestParam(value="memberLoginId") String memberId) {
@@ -50,7 +52,7 @@ public class MemberController {
 	}	
 	//로그아웃
 	@RequestMapping(value="/member/memberLogout", method = RequestMethod.GET)
-	public String memberLogout(HttpSession session) {	//MemberLogout -> memberLogout 변경함
+	public String memberLogout(HttpSession session) {
 		String logoutTime = new SimpleDateFormat("yyyy/mm/dd/hh:mm").format(new Date());
 		logger.info("logoutTime : {}", logoutTime);
 		session.invalidate();	//세션 종료(데이터 전부 삭제)
@@ -58,17 +60,22 @@ public class MemberController {
 	}
 	//로그인
 	@RequestMapping(value="/member/memberLoginSubmit", method = RequestMethod.POST)
-	public String memberLogin(HttpServletRequest request,	//MemberLogin -> memberLogin변경함
+	public String memberLogin(HttpServletRequest request,
 			@RequestParam(value="memberLoginId") String memberId,
 			@RequestParam(value="memberLoginPassword") String memberInfoPassword) {
 		logger.info("memberId : {} MemberController.java", memberId);
 		logger.info("memberInfoPassword : {} MemberController.java", memberInfoPassword);
 
-		int memberCheckIndex = memberService.selectMemberCheck(memberId, memberInfoPassword);
+		Map<String, String> memberLoginInfo = memberService.selectMemberCheck(memberId, memberInfoPassword);
+		logger.info("memberLoginInfo : {}", memberLoginInfo);
 		
-		if(memberCheckIndex == 1) {
+		if(memberLoginInfo != null) {
 			HttpSession session  = request.getSession(true);
 			session.setAttribute("memberId", memberId);
+			session.setAttribute("memberLevel", memberLoginInfo.get("memberLevel"));
+			session.setAttribute("memberName", memberLoginInfo.get("memberName"));
+			logger.info("memberLevel : {}", memberLoginInfo.get("memberLevel"));
+			logger.info("memberName : {}", memberLoginInfo.get("memberName"));
 		}
 		return "redirect:/";
 	}

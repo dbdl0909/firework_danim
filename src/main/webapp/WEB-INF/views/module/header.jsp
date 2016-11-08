@@ -113,7 +113,7 @@
 						<a href="/member/memberLoginForm">로그인</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.memberId}">
-						<a href="">${memberId} ▼</a>
+						<a href="">${sessionScope.memberName} ▼</a>
 						<div class="hiddenNav">
 						<dl>
 							<dd><a href="/member/memberInfo">내정보</a></dd>

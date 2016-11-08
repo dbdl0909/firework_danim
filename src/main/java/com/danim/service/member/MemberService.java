@@ -1,6 +1,8 @@
 package com.danim.service.member;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.danim.service.community.CommunityDto;
 
 @Service
 @Transactional
@@ -38,20 +41,24 @@ public class MemberService {
 		memberDao.memberUpdate(memberDto);
 	}
 	//로그인 아이디 체크
-	public int selectMemberCheck(String memberId, String memberInfoPassword) {
+	public Map<String, String> selectMemberCheck(String memberId, String memberInfoPassword) {
 		logger.info("selectMemberCheck() MemberService.java");
-		int index = memberDao.memberCheck(memberId, memberInfoPassword);
-		if(index == 0) {
+		
+		Map<String, String> resultMap = memberDao.memberCheck(memberId, memberInfoPassword);
+		
+		if(resultMap == null) {
 			logger.info("일치하는 아이디 없음");
 		} else {
 			logger.info("일치하는 아이디 있음");
 		}
-		return index;
+		
+		return resultMap;
 	}
 	
 	//회원리스트 출력
 	public List<MemberDto> selectMemberAll() {
 		logger.info("selectMemberAll() MemberService.java");
+		
 		//Map<String, Object> map = new HashMap<String, Object>();
 		List<MemberDto> MemberListAll =  memberDao.selectMemberAll();
 		for(int i=0; i<MemberListAll.size(); i++) {

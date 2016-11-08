@@ -30,15 +30,13 @@ public class MemberDao {
 		sessionTemplate.update(nameSpace+".memberUpdate", memberDto);		
 	}	
 	//로그인 체크
-	public int memberCheck(String memberId, String memberInfoPassword) {
+	public Map<String, String>memberCheck(String memberId, String memberInfoPassword) {
 		logger.info("memberCheck() MemberDao.java");
 		logger.info("memberId : {}", memberId);
 		logger.info("memberInfoPassword : {}", memberInfoPassword);
-		
 		Map map = new HashMap();
 		map.put("memberId", memberId);
 		map.put("memberInfoPassword", memberInfoPassword);
-		
 		return sessionTemplate.selectOne(nameSpace+".memberCheck", map);
 	}
 	
