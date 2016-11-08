@@ -44,24 +44,6 @@
 		<c:when test="${param.communityCategoryNo == 'community_category_04'}">
 			<h2 class="sub-header">동행찾기</h2>
 		</c:when>
-		<c:when test="${param.communityCategoryNo == 'community_category_05'}">
-			<h2 class="sub-header">숙박시설</h2>
-		</c:when>
-		<c:when test="${param.communityCategoryNo == 'community_category_06'}">
-			<h2 class="sub-header">교통편</h2>
-		</c:when>
-		<c:when test="${param.communityCategoryNo == 'community_category_07'}">
-			<h2 class="sub-header">예약/결제</h2>
-		</c:when>
-		<c:when test="${param.communityCategoryNo == 'community_category_08'}">
-			<h2 class="sub-header">취소/환불/변경</h2>
-		</c:when>
-		<c:when test="${param.communityCategoryNo == 'community_category_09'}">
-			<h2 class="sub-header">회원/로그인</h2>
-		</c:when>
-		<c:when test="${param.communityCategoryNo == 'community_category_10'}">
-			<h2 class="sub-header">여행관련</h2>
-		</c:when>
 		<c:otherwise>
 			<h2 class="sub-header">플랜</h2>
 		</c:otherwise>
@@ -94,7 +76,7 @@
 			<c:forEach varStatus="status" items="${communityList}" var="list">				
 				<tr> 
 					<td>${(totalCount-status.index)-((page-1)*10)}</td>					
-					<td><a href="/community/communityDetail?communityNo=${list.communityNo}">${list.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${list.communityReplyCount}]</span></td>
+					<td><a href="/community/communityDetail?communityCategoryNo=${list.communityCategoryNo}&communityNo=${list.communityNo}">${list.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${list.communityReplyCount}]</span></td>
 					<td>${list.memberId}</td>
 					<td>${list.communityUpdate}</td>
 					<td>${list.communityReadcount}</td>	
@@ -189,7 +171,7 @@
 </body>
 <script type="text/javascript">
 var onWrite = function(){
-	location.href = '/community/write?communityCategoryNo='+'${param.communityCategoryNo}'; 
+	location.href = '/community/write?communityCategoryNo='+'${param.communityCategoryNo}'+'&'+'boardCheck=C'; 
 };
 var onList = function(){
 	location.href = '/community/list?communityCategoryNo='+'${param.communityCategoryNo}';

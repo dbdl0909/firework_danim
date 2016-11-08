@@ -69,4 +69,10 @@ public class CommunityDao {
 	public List<QnaDto> selectQnaByMemberId(Map<String, Object> map) {
 		return sqlSession.selectList(NS+".selectQnaByMemberId", map);
 	}
+	
+	//나의 QNA 총 게시글 수 조회
+	public int countMyQnaList(Map<String, Object> map) {
+		logger.info("countMyQnaList CommunityDao.java");
+		return sqlSession.selectOne(NS+".countMyQnaList", map);
+	}
 }
