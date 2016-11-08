@@ -61,136 +61,58 @@
 		    		$('.hiddenPlan').removeClass('on');		    		
 		    		if(!($(this).hasClass('on'))){
 		    			$('.hiddenPlan').eq(idx).addClass('on');
-		    		}
-		    		/* if (!($('#myPlanWrap').is(':hidden'))) {
-						$('.leftMenuLi').each(function(i){
-							var fullstartDate = $(document).find('#startDate').val(),
-								startArr = fullstartDate.split("-"),
-								startYear = startArr[0],
-								startMonth = parseInt(startArr[1], 10),
-								startDay = parseInt(startArr[2], 10),
-								fullendDate = $(document).find('#endDate').val(),
-								thisRoute = $(this).find('.cityName').text(),
-								startTime = $(this).find('.startTime').val(),
-								startSplit = startTime.split(":");
-								startPeriod = 'AM',
-								endTime = $(this).find('.endTime').val(),
-								endSplit = endTime.split(":");
-								endPeriod = 'AM',
-								eventColor = '#cccccc',
-								eventTitle = $(this).find('.cityName').text();
-								
-								//alert(fullendDate);
-								//console.log('123123');
-								if(parseInt(startSplit[0]) >= 12) {
-									var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
-									var startPeriod = 'PM'
-								}								
-		
-								if(parseInt(startTime) == 0) {
-									var startTime = '12:'+startSplit[1]+'';
-								}
-		
-								if(parseInt(endSplit[0]) >= 12) {
-									var endTime = (endSplit[0] - 12)+':'+endSplit[1]+'';
-									var endPeriod = 'PM'
-								}
-								if(parseInt(endTime) == 0) {
-									var endTime = '12:'+endSplit[1]+'';
-								}
-								// function to print out list for multi day events
-								function multidaylist(){
-									$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
-								}
-								
-		
-								// If event is one day & within month
-								if (!fullendDate && startMonth == setMonth && startYear == setYear) {
-									// Add Indicators
-									$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-									// Print out event list for single day event
-									$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
-		
-		
-								// If event is multi day & within month
-								} else if (startMonth == setMonth && startYear == setYear && endMonth == setMonth && endYear == setYear){
-									for(var i = parseInt(startDay); i <= parseInt(endDay); i++) {
-										// If first day, add title 
-										if (i == parseInt(startDay)) {
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-										} else {
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-										}
-										multidaylist();
-									}
-		
-								// If event is multi day, starts in prev month, and ends in current month
-								} else if ((endMonth == setMonth && endYear == setYear) && ((startMonth < setMonth && startYear == setYear) || (startYear < setYear))) {
-									for(var i = 0; i <= parseInt(endDay); i++) {
-										// If first day, add title 
-										if (i==1){
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-										} else {
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-										}
-										multidaylist();
-									}
-		
-								// If event is multi day, starts in this month, but ends in next
-								} else if ((startMonth == setMonth && startYear == setYear) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
-									for(var i = parseInt(startDay); i <= dayQty; i++) {
-										// If first day, add title 
-										if (i == parseInt(startDay)) {
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-										} else {
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-										}
-										multidaylist();
-									}
-		
-								// If event is multi day, starts in a prev month, ends in a future month
-								} else if (((startMonth < setMonth && startYear == setYear) || (startYear < setYear)) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
-									for(var i = 0; i <= dayQty; i++) {
-										// If first day, add title 
-										if (i == 1){
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
-										} else {
-											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
-										}
-										multidaylist();
-									}
-		
-								}
-						});
-		    		} */
-		    		
+		    		}	    		
 		    	});
 				$('#mycalendar').monthly({
 					mode: 'event',
 					xmlUrl: '/events.xml'
 				});
-			
-		
 			});
 	    </script>
 	    <script src="../../../resources/js/map.js"></script>
+	    <style>
+	    	#logoWrap{height:80px;}
+	    	#logoWrap img{margin-top:20px; margin-left:30px;}
+	    	#tabWrapt{float:right;}
+	    	#planTabList li{width:50%; color:#434343; font-size:18px; font-weight: bold;}
+	    	#planTabList li:hover{background:#434343; color:#fff; text-align:center;}
+	    	#calendarWrap{float:right; margin-top:-100px;}
+	    	#calendarWrap ul li{float:left; padding:0 20px;}
+	    	#calendarWrap label,
+	    	#calendarWrap input{border:1px solid #ccc; height:30px; vertical-align: middle;}
+	    	#calendarWrap label{width:90px; margin-top:4px; background:#434343;}
+	    	#calendarWrap label span{margin-top:5.5px; color:#fff;}
+	    	#calendarWrap input{margin-left:-5px;}
+	    	.calendrDay{margin-left:6px;}
+	    </style>
 	</head>
 	<body>
-	    <div id="mainPlanDivRoot">
-		    <div>
+	    <div id="mainPlanDivRoot" class="clearfix">
+		    <div id="logoWrap">
 				<a href="/"><img src="../../resources/images/logo.png" ></a>
 			</div>
 	    	<div id="mainPlanDivTop">
-	    		<div style="float:left;">
-		    		<ul id="planTabList">
+	    		<div id="tabWrap">
+		    		<ul id="planTabList" class="clearfix">
 		    			<li  id="planTabRoute">도시루트</li>
 		    			<li id="planTabDiary">일정표</li>
 		    		</ul>
 	    		</div>
-				<div style="float:left;">
-					출발일<input type="date" id="startDate"/>
-					숙박일<input type="text" id="stayDay" value="0"/>
-					종료일<input type="date" id="endDate"/>
+				<div id="calendarWrap">
+					<ul>
+						<li>
+							<label for="startDate"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">출발일</span></label>
+							<input type="date" id="startDate" name="startDate"/>
+						</li>
+						<li>					
+							<label for="endDate"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">종료일</span></label>
+							<input type="date" id="endDate" name="endDate"/>
+						</li>
+						<li>
+							<label for="stayDay"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">여행기간</span></label>
+							<input type="text" id="stayDay" name="stayDay" value="0"/>
+						</li>
+					</ul>
 				</div>
 			</div>
 			<div class="hiddenPlan on">
@@ -212,8 +134,10 @@
 							<label>도시 루트</label>
 						</div>
 						<div id="leftMenuRouteList">
-							<ul id="mainPlanUl">
-							</ul>
+							<form>
+								<ul id="mainPlanUl">
+								</ul>
+							</form>
 						</div>
 					</div>				
 				</div>
