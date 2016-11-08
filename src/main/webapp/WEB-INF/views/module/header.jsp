@@ -111,7 +111,7 @@
 						<dl>
 							<dd><a href="/member/memberInfo?memberLoginId=${sessionScope.memberId}">내 정보</a></dd>
 							<dd><a href="">내 여행</a></dd>
-							<dd><a href="">Q&A</a></dd>
+							<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
 							<dd><a href="/member/memberLogout">로그아웃</a></dd>
 						</dl>
 					</div>
