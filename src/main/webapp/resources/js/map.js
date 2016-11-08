@@ -128,6 +128,7 @@ function infoWindowEvent() {
 			    		$('#mainPlanUl').append(
 		    				"<li class='leftMenuLi'>" +
 								"<span class='cityName'>" + infoNameArray[markerIndex] + "</span>" +
+								"<input class='cityInfoNo' type='hidden' value='" + infoNoArray[markerIndex] +"'/>" +
 								"<input class='cityNo' type='hidden' value='" + markerIndex + "'/>" +
 								"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/planIcon/removeButton.png'/>" +
 								"<div class='cityChooseMenu'>" +
@@ -560,9 +561,12 @@ $(document).ready(function() {
 					var clickLandmarkIndex = $('.clickLandmark').index(this);
 					console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
 					
+					var landmarkInfoNo = landmarkNo[clickLandmarkIndex];
 					var clickLandmark = landmarkName[clickLandmarkIndex];
+					console.log($('.landmarkInfoLangitude').eq(clickLandmarkIndex).val());
+					console.log($('.landmarkInfoLatitude').eq(clickLandmarkIndex).val());
 					
-					var  result = confirm(clickLandmark + '를 추가하시겠습니까?');
+					/*var  result = confirm(clickLandmark + '를 추가하시겠습니까?');
 					if (result == true) {
 						console.log('도시 클릭한 것' + cityClickIndex);
 						$('.landmarkRouteUl').eq(cityClickIndex).append(
@@ -571,10 +575,26 @@ $(document).ready(function() {
 							"</li>"
 						);
 						$landmarkMarkerArray[clickLandmarkIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
-					}
+					}*/
 					
-					console.log($('.landmarkInfoLangitude').eq(clickLandmarkIndex).val());
-					console.log($('.landmarkInfoLatitude').eq(clickLandmarkIndex).val());
+					console.log(landmarkInfoNo + ', ' + clickCityName);
+					
+					$('#landmarkInfoPopWrap').show();
+					
+					$.ajax({
+						url:'http://localhost/search/landmarkInfo',
+						data:{landmarkInfoNo:landmarkInfoNo, cityInfoName:clickCityName},
+						type:'GET',
+						success:function(data){
+							var $body = $(data).filter('.container');
+							//console.log($body);
+							$('#landmarkInfoPopContent').html($body);
+							
+							//console.log($(data).contents().find('.container'));
+							//$('#landmarkInfoPopContent').append(data);
+						}
+					})
+					
 				});
 			}
 		})
@@ -588,6 +608,7 @@ $(document).ready(function() {
 		clickCityName = $('.cityName').eq(cityClickIndex).text();
 		clickCityNo = $('.cityNo').eq(cityClickIndex).val();
 		console.log(cityClickIndex + ' 번째 li 의 ' + clickCityNo + ' 번째 도시 : ' + clickCityName);
+		
 		
 		$('#clickCityName').text(clickCityName);
 		

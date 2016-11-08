@@ -21,6 +21,7 @@ public class SearchController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 	
+//****매핑 value search 앞에 '/' 붙이기!
 	@RequestMapping(value="search/infoSearch")
 	public String infoSearch(Model model, String search, @RequestParam(value="moreView", defaultValue="0") int moreView) {
 		// search : 검색어(도시이름)

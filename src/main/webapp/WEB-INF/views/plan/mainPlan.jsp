@@ -154,6 +154,13 @@
 				<div class="monthly" id="mycalendar"></div>
 			</div>				
 		</div>
+		
 		<jsp:include page="../module/footer.jsp"></jsp:include>
+		
+		<div id="landmarkInfoPopWrap" style="width:100%; height:100%; display:none; position:absolute; top:0; background:#000; z-index:999999;">
+			<div id="landmarkInfoPopContent" class="container" style="height:100%; background:#fff; margin:0 auto; opacity:1;">
+				
+			</div>
+		</div>
 	</body>
 </html>

@@ -43,7 +43,7 @@
 				<p class="infoButton">
 					<a href="/" role="button" class="btn btn-info">홈으로</a>
 					<a href="" role="button" class="btn btn-info">버튼2</a>
-					<a href="" role="button" class="btn btn-info">버튼3</a>
+					<a href="" role="button" class="btn btn-info">일정에 추가</a>
 				</p>
 			</div>
 		</div>		
