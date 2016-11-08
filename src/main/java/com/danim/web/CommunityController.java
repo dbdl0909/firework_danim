@@ -88,7 +88,7 @@ public class CommunityController {
 		logger.info("endPage{} CommunityController.java", endPage);
 		logger.info("totalPage{} CommunityController.java", lastPage);				
 		model.addAttribute("myQnaList", myQnaList);
-		model.addAttribute("totalCount", communityService.countCommunityList(communityCategoryNo, searchOption, searchInput));
+		model.addAttribute("totalCount", communityService.countMyQnaList(communityCategoryNo, searchOption, searchInput, memberId));
         model.addAttribute("startPage", startPage);
         model.addAttribute("page", page);
         model.addAttribute("endPage", endPage);
@@ -114,11 +114,25 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.GET)
-	public String communityDetailView(Model model, @RequestParam(value="communityNo") int communityNo) {
+	public String communityDetailView(Model model, 
+									@RequestParam(value="communityNo") int communityNo,
+									@RequestParam(value="communityCategoryNo") String communityCategoryNo) {
 		logger.info("communityNo {} CommunityController.java", communityNo);
+		logger.info("communityCategoryNo {} CommunityController.java", communityCategoryNo);
 		model.addAttribute("detailViewReply", communityService.selectDetailViewReplyByCommunityNo(communityNo));
 		model.addAttribute("detailView", communityService.selectDetailViewByCommunityNo(communityNo));
-		return "/community/communityDetail";
+		
+		int CategoryNo = Integer.parseInt(communityCategoryNo.substring(20));
+		logger.info("CategoryNo {} CommunityController.java", CategoryNo);
+		
+		String detail = "";
+		if(CategoryNo < 5 && CategoryNo > 0) {
+			detail = "/community/communityDetail";
+		}else if(CategoryNo < 11 && CategoryNo > 4) {
+			detail = "/community/qnaDetail";
+		}
+		
+		return detail;
 	}
 	
 	@RequestMapping(value = "/community/communityModify", method = RequestMethod.GET)

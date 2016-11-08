@@ -82,6 +82,18 @@ public class CommunityService {
 		map.put("searchInput", searchInput);
 		return communityDao.countCommunityList(map);
 	}
+	
+	//특정 유저 1인 QNA의 총 게시글 수
+	public int countMyQnaList(String communityCategoryNo, String searchOption, String searchInput, String memberId ){
+		logger.info("countMyQnaList CommunityService.java");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("communityCategoryNo", communityCategoryNo);
+		map.put("searchOption", searchOption);
+		map.put("searchInput", searchInput);
+		map.put("memberId", memberId);
+		return communityDao.countMyQnaList(map);
+	}
+	
 	//시작페이지를 정하기 위한 메소드
     public int getStartPage(int page){
     	this.startPage = ((page - 1) / BLOCK_PER_PAGE) * BLOCK_PER_PAGE + 1;
