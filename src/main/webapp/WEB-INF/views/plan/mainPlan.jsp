@@ -41,6 +41,17 @@
 		    </c:forEach>
 		    //console.log("cityInfoList.length : " + cityInfoList.length);
 		    $(document).ready(function() {
+		    	document.getElementById('startDate').valueAsDate = new Date();
+		    	var endDate = new Date();
+		    	$('#stayDay').bind('propertychange change click keyup input paste', function(){
+			    	var startDate = new Date($('#startDate').val()),			    		
+			    		month = startDate.getMonth()+1,
+			    		date = startDate.getDate(),
+			    		stayDay = parseInt($('#stayDay').val());
+			    		endDate.setMonth(month-1);
+			    		endDate.setDate(date+stayDay);
+			    		document.getElementById('endDate').valueAsDate = endDate;
+		    	})
 		    	$('#planTabList li').click(function(){
 		    		var idx = $(this).index();
 		    		$('.hiddenPlan').removeClass('on');		    		
@@ -48,20 +59,24 @@
 		    			$('.hiddenPlan').eq(idx).addClass('on');
 		    		}
 		    		if (!($('#myPlanWrap').is(':hidden'))) {
-						$('.leftMenuLi').each(function(){
+						$('.leftMenuLi').each(function(i){
 							var fullstartDate = $(document).find('#startDate').val(),
 								startArr = fullstartDate.split("-"),
 								startYear = startArr[0],
 								startMonth = parseInt(startArr[1], 10),
 								startDay = parseInt(startArr[2], 10),
-								//fullendDate = $(this).find('enddate').text(),
+								//fullendDate = fullstartDate+parseInt($('#stayDay').val()),
 								thisRoute = $(this).find('.cityName').text(),
-								startTime = $(this).find('.startTime').val(),								
+								startTime = $(this).find('.startTime').val(),
+								startSplit = startTime.split(":");
+								startPeriod = 'AM',
 								endTime = $(this).find('.endTime').val(),
+								endSplit = endTime.split(":");
+								endPeriod = 'AM',
 								eventColor = '#cccccc',
 								eventTitle = $(this).find('.cityName').text();
 								
-								//alert(startTime);
+								//alert(fullendDate);
 								//console.log('123123');
 								if(parseInt(startSplit[0]) >= 12) {
 									var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
@@ -79,8 +94,68 @@
 								if(parseInt(endTime) == 0) {
 									var endTime = '12:'+endSplit[1]+'';
 								}
+								// function to print out list for multi day events
 								function multidaylist(){
-									$('.monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="" class="listed-event"  " style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
+									$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
+								}
+								
+		
+								// If event is one day & within month
+								if (!fullendDate && startMonth == setMonth && startYear == setYear) {
+									// Add Indicators
+									$('#'+uniqueId+' *[data-number="'+startDay+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+									// Print out event list for single day event
+									$('#'+uniqueId+' .monthly-list-item[data-number="'+startDay+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
+		
+		
+								// If event is multi day & within month
+								} else if (startMonth == setMonth && startYear == setYear && endMonth == setMonth && endYear == setYear){
+									for(var i = parseInt(startDay); i <= parseInt(endDay); i++) {
+										// If first day, add title 
+										if (i == parseInt(startDay)) {
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+										} else {
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+										}
+										multidaylist();
+									}
+		
+								// If event is multi day, starts in prev month, and ends in current month
+								} else if ((endMonth == setMonth && endYear == setYear) && ((startMonth < setMonth && startYear == setYear) || (startYear < setYear))) {
+									for(var i = 0; i <= parseInt(endDay); i++) {
+										// If first day, add title 
+										if (i==1){
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+										} else {
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+										}
+										multidaylist();
+									}
+		
+								// If event is multi day, starts in this month, but ends in next
+								} else if ((startMonth == setMonth && startYear == setYear) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
+									for(var i = parseInt(startDay); i <= dayQty; i++) {
+										// If first day, add title 
+										if (i == parseInt(startDay)) {
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+										} else {
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+										}
+										multidaylist();
+									}
+		
+								// If event is multi day, starts in a prev month, ends in a future month
+								} else if (((startMonth < setMonth && startYear == setYear) || (startYear < setYear)) && ((endMonth > setMonth && endYear == setYear) || (endYear > setYear))){
+									for(var i = 0; i <= dayQty; i++) {
+										// If first day, add title 
+										if (i == 1){
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'</div>');
+										} else {
+											$('#'+uniqueId+' *[data-number="'+i+'"] .monthly-indicator-wrap').append('<div class="monthly-event-indicator" data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'"></div>');
+										}
+										multidaylist();
+									}
+		
 								}
 						});
 		    		}
@@ -119,6 +194,7 @@
 				<div style="float:left;">
 					출발일<input type="date" id="startDate"/>
 					숙박일<input type="text" id="stayDay"/>
+					종료일<input type="date" id="endDate"/>
 				</div>
 			</div>
 			<div class="hiddenPlan on">
