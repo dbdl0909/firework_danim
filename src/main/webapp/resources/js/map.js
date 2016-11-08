@@ -35,6 +35,8 @@ var $landmarkMarkerArray = [];
 var $hoverTemp = false;
 var $landmarkHoverIndex = 0;
 
+var stayCount = 0;
+
 //구글 지도 (현재위치 설정)
 function initMap() {
 	//처음 지도 위치
@@ -153,6 +155,9 @@ function infoWindowEvent() {
 						);
 			    		
 			    		$stayDay = Number(document.getElementById('stayDay').value);
+			    		if(stayCount > 0) {
+			    			$stayDay += 1;
+			    		}
 			    		document.getElementById('stayDay').value = Number($stayDay);
 			    		console.log('stayDay : ' + document.getElementById('stayDay').value);
 			    		
@@ -176,6 +181,8 @@ function infoWindowEvent() {
 						}
 					    //prevInfowindow 변수에 infowindow를 담는다.
 						prevInfowindow = infowindow;
+						
+						stayCount++;
 					}
 		    	});
 			});
@@ -313,33 +320,41 @@ function poly(pathArray) {
 //이동경로를 찍거나 제거하기 위한 함수
 function lineFunction(pathArray, flag){
 	console.log('-------lineFunction on-------');
-	//console.log('pathArray 길이 : ' + pathArray.length);
+	console.log('pathArray 길이 : ' + pathArray.length);
 	//console.log('flag : ' + flag);
 	
 	if(flag == true) {
 		poly(pathArray);
+		console.log('pathArray 길이 : ' + pathArray.length);
 		
 	} else if(flag == false) {
 		console.log('lineRemoveIndex : ' + lineRemoveIndex);
 		pathArray.splice(lineRemoveIndex, 1);
+		console.log('pathArray 길이 : ' + pathArray.length);
 		console.log('lineArray 길이 : ' + lineArray.length);
 		var maxLength = lineArray.length;
 		
 		if(lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2) {
 			//선택한 도시가 2개 이상일때 처음과 끝 제외한 모든 중간 요소 제거
 			console.log('lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2');
+			
+			for(var i=0; i<maxLength; i++) {
+				lineArray[i].setMap(null);
+			}
+			lineArray = [];
+			poly(pathArray);
+			
+			/*for(var i=0; i<2; i++) {
+				lineArray[lineRemoveIndex-1].setMap(null);
+				lineArray.splice(lineRemoveIndex-1, 1);
+			}
 			lineArray[lineRemoveIndex].setMap(null);
 			lineArray.splice(lineRemoveIndex, 1);
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
-			poly(pathArray);
-		}/* else if(lineRemoveIndex == 1 && maxLength == 1) {
-			//선택한 도시가 2개 일때 두번째 요소 제거(마지막요소)
-			console.log('lineRemoveIndex > 0 && maxLength == 1');
-			lineArray[lineRemoveIndex-1].setMap(null);
-			lineArray.splice(lineRemoveIndex-1, 1);
-			poly(pathArray);
-		}*/ else if(maxLength == lineRemoveIndex && maxLength >= 1) {
+			poly(pathArray);*/
+			
+		} else if(maxLength == lineRemoveIndex && maxLength >= 1) {
 			//선택한 도시가 1개 이상일때 마지막 요소 제거
 			console.log('maxLength == lineRemoveIndex && maxLength >= 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
@@ -393,7 +408,7 @@ function landmarkHover($hoverTemp, $landmarkHoverIndex) {
 	}
 }
 
-$(document).ready(function() {	
+$(document).ready(function() {
 	var $stayCount = 0;
 	$('.cityInfoLi').click(function() {
 		cityInfoIndex = $('.cityInfoLi').index(this);
@@ -429,11 +444,10 @@ $(document).ready(function() {
 		var liIndex = $('.arrowLeft').index(this);
 		console.log(liIndex);
 		$stayCount = Number($('.stayCount').eq(liIndex).text());
-		if($stayCount > 1) {
+		if($stayCount > 1 && $stayDay > 1) {
 			$stayCount-=1;
 			$('.stayCount').eq(liIndex).text($stayCount);
-		}
-		if($stayDay > 1) {
+			
 			$stayDay -= 1;
 			$('#stayDay').val($stayDay);
 		}
