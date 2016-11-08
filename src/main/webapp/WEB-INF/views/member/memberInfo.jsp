@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<title>다님플래너 :: 회원정보수정</title>
+		<title>다님플래너 :: 회원정보보기</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -23,7 +23,7 @@
 			<tbody>
 				<tr>
 					<td>아이디</td>
-					<td>${memberAll.memberId}</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
@@ -31,19 +31,19 @@
 				</tr>
 				<tr>
 					<td>닉네임</td>
-					<td>${memberAll.memberName}</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
-					<td>${memberAll.memberInfoBirth}</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>성별</td>
-					<td>${memberAll.memberInfoGender}</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>이메일</td>
-					<td><${memberAll.memberInfoEmail}</td>
+					<td></td>
 				</tr>
 			</tbody>
 		</table>

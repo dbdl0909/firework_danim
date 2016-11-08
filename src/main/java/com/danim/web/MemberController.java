@@ -48,6 +48,9 @@ public class MemberController {
 	public String memberInfo(Model model, @RequestParam(value="memberLoginId") String memberId) {
 		logger.info("memberInfo MemberController.java");
 		logger.info("memberId : {} MemberController.java", memberId);
+		
+		
+		
 		return "/member/memberInfo";
 	}	
 	//로그아웃
