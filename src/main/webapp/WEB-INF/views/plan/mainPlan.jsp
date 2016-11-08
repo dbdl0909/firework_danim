@@ -43,15 +43,19 @@
 		    $(document).ready(function() {
 		    	document.getElementById('startDate').valueAsDate = new Date();
 		    	var endDate = new Date();
-		    	$('#stayDay').bind('propertychange change click keyup input paste', function(){
-			    	var startDate = new Date($('#startDate').val()),			    		
+	    		var stayDay = 0;
+		    	$('body').bind('propertychange change click keyup input', function(){		    		
+			    	var startDate = new Date($('#startDate').val()),
+			    		year = startDate.getFullYear(),
 			    		month = startDate.getMonth()+1,
 			    		date = startDate.getDate(),
 			    		stayDay = parseInt($('#stayDay').val());
+			    		endDate.setFullYear(year);
 			    		endDate.setMonth(month-1);
 			    		endDate.setDate(date+stayDay);
-			    		document.getElementById('endDate').valueAsDate = endDate;
-		    	})
+			    		//alert(endDate.getFullYear());
+			    		document.getElementById('endDate').valueAsDate = endDate;			    		
+		    	});
 		    	$('#planTabList li').click(function(){
 		    		var idx = $(this).index();
 		    		$('.hiddenPlan').removeClass('on');		    		
@@ -193,7 +197,7 @@
 	    		</div>
 				<div style="float:left;">
 					출발일<input type="date" id="startDate"/>
-					숙박일<input type="text" id="stayDay"/>
+					숙박일<input type="text" id="stayDay" value="0"/>
 					종료일<input type="date" id="endDate"/>
 				</div>
 			</div>
