@@ -144,7 +144,7 @@ function infoWindowEvent() {
 								"</div>" +
 								"<div class='landmarkListDiv' style='cursor:pointer;background-color:#CBC7C7'>" +
 									"<span class='landmarkListSpan'>명소 루트</span>" +
-									"<img src=''" +
+									"<img class='landmarkListSlideCheck' src='../../resources/images/planIcon/downArrow.png' style='float:right;margin-right:5px'" +
 								"</div>" +
 								"<div class='css_test' style='display:none;border-radius:5px;border:2px solid #CBC7C7;background-color:#fff;position:absolute;z-index:10000;width:53%'>" +
 									"<ul class='landmarkRouteUl'>" +
@@ -570,17 +570,6 @@ $(document).ready(function() {
 					console.log($('.landmarkInfoLangitude').eq(clickLandmarkIndex).val());
 					console.log($('.landmarkInfoLatitude').eq(clickLandmarkIndex).val());
 					
-					/*var  result = confirm(clickLandmark + '를 추가하시겠습니까?');
-					if (result == true) {
-						console.log('도시 클릭한 것' + cityClickIndex);
-						$('.landmarkRouteUl').eq(cityClickIndex).append(
-							"<li class='landmarkLi'>" +
-								"<span class='landmarkName'>" + clickLandmark + "</span>" +
-							"</li>"
-						);
-						$landmarkMarkerArray[clickLandmarkIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
-					}*/
-					
 					console.log(landmarkInfoNo + ', ' + clickCityName);
 					
 					$('#landmarkInfoPopWrap').show();
@@ -684,15 +673,21 @@ $(document).ready(function() {
 	});
 	
 	var slideOnOff = false;
+	var slideOn = "../../resources/images/planIcon/upArrow.png";
+	var slideOff = "../../resources/images/planIcon/downArrow.png";
 	$('body').on('click', '.landmarkListDiv', function() {
 		var landmarkListDivIndex = $('.landmarkListDiv').index(this);
 		if(slideOnOff == false) {
-			$(".css_test").eq(landmarkListDivIndex).slideDown("slow", function() {
+			$('.landmarkListSlideCheck').eq(landmarkListDivIndex).attr('src', slideOn);
+			
+			$(".css_test").eq(landmarkListDivIndex).slideDown("normal", function() {
 				slideOnOff = true;
 				//console.log('명소 루트 열기');
 			});
 		} else {
-			$(".css_test").eq(landmarkListDivIndex).slideUp("slow", function() {
+			$('.landmarkListSlideCheck').eq(landmarkListDivIndex).attr('src', slideOff);
+			
+			$(".css_test").eq(landmarkListDivIndex).slideUp("normal", function() {
 				slideOnOff = false;
 				//console.log('명소 루트 닫기');
 			});
