@@ -75,6 +75,7 @@ public class CommunityController {
 		
 		logger.info("memberId{} CommunityController.java", memberId);
 		List<QnaDto> myQnaList = communityService.selectQnaByMemberId(communityCategoryNo, page, memberId, searchOption, searchInput);
+		List<CommunityDto> communityNoticeList = communityService.selectCommunityNoticeList(communityCategoryNo);
 
 		//페이징시 마지막 페이지와 총 블럭페이지의 오차를 없애기위한 코드
 		// 마지막 페이지를 강제로 endpage로 치환하여 오차를 없애준다.
@@ -88,6 +89,7 @@ public class CommunityController {
 		logger.info("endPage{} CommunityController.java", endPage);
 		logger.info("totalPage{} CommunityController.java", lastPage);				
 		model.addAttribute("myQnaList", myQnaList);
+		model.addAttribute("communityNoticeList", communityNoticeList);
 		model.addAttribute("totalCount", communityService.countMyQnaList(communityCategoryNo, searchOption, searchInput, memberId));
         model.addAttribute("startPage", startPage);
         model.addAttribute("page", page);
@@ -104,13 +106,24 @@ public class CommunityController {
 	
 	@RequestMapping(value = "/community/communityInsert", method = RequestMethod.POST)
 	public String writeSubmit(Model model, CommunityDto communityDto) {
-		logger.info("categoryNo {} CommunityController.java", communityDto.getCommunityCategoryNo());
+		//logger.info("categoryNo {} CommunityController.java", communityDto.getCommunityCategoryNo());
 		logger.info("memberId {} CommunityController.java", communityDto.getMemberId());
 		logger.info("communitySubject {} ", communityDto.getCommunitySubject());
 		logger.info("communityNotice {} CommunityController.java", communityDto.getCommunityNotice());
 		logger.info("communityContent {} CommunityController.java", communityDto.getCommunityContent());		
 		communityService.insertCommunityItem(communityDto);
-		return "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
+		
+		int CategoryNo = Integer.parseInt(communityDto.getCommunityCategoryNo().substring(20));
+		
+		String returnList = "";
+		if(CategoryNo < 5 && CategoryNo > 0) {
+			returnList = "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
+		}else if(CategoryNo < 11 && CategoryNo > 4) {
+			returnList = "redirect:/community/myQnaList?communityCategoryNo="+communityDto.getCommunityCategoryNo()+"&"+"memberId="+communityDto.getMemberId();
+		}
+		
+		return returnList;
+		// 나중에 시간나면 바로 자기가 쓴 글로 이동하게 바꿀 예정
 	}
 	
 	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.GET)
@@ -156,7 +169,7 @@ public class CommunityController {
 	@RequestMapping(value = "/community/communityReply", method = RequestMethod.POST)
 	public String insertCommunityReply(CommunityReplyDto communityReplyDto){
 		communityService.insertCommunityReply(communityReplyDto);
-		return "redirect:/community/communityDetail?communityNo="+communityReplyDto.getCommunityNo();
+		return "redirect:/community/communityDetail?communityCategoryNo="+communityReplyDto.getCommunityCategoryNo()+"&communityNo="+communityReplyDto.getCommunityNo();
 	}
 	
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
@@ -185,7 +198,7 @@ public class CommunityController {
 		logger.info("communityCategoryNo {} CommunityController.java", communityCategoryNo);		
 		String votedCheck = communityService.insertCommunityVote(votedId, communityNo, communityCategoryNo);
 		model.addAttribute("votedCheck", votedCheck);
-		return "redirect:/community/communityDetail?communityNo="+communityNo;
+		return "redirect:/community/communityDetail?communityCategoryNo="+communityCategoryNo+"&communityNo="+communityNo;
 	}
 
 }

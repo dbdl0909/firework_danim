@@ -18,7 +18,6 @@
 		<link rel="stylesheet" href="../../../resources/css/style.css">
 		<script>
 			$(document).ready(function(){
-				console.log(boardCheck)
 				var communityCategoryNoVal = '${param.communityCategoryNo}';
 				$('.communityCategoryNo option').each(function(i){
 					if($('.communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
@@ -67,8 +66,10 @@
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="communitySubject"><span>글 제목</span></label>
 			<input type="text" id="communitySubject" name="communitySubject" />
-			<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
-			<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>		
+			<c:if test="${sessionScope.memberLevel == '관리자'}">
+				<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
+				<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>
+			</c:if>		
 		</div>
 		<div class="communityContentWrap">
 		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;"></textarea>

@@ -65,7 +65,7 @@
 			<c:forEach items="${communityNoticeList}" var="noticeList">	
 				<tr>
 					<td style="font-weight:bold;">[공지]</td>
-					<td style="font-weight:bold;"><a href="/community/communityDetail?communityNo=${noticeList.communityNo}">${noticeList.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${noticeList.communityReplyCount}]</span></td>
+					<td style="font-weight:bold;"><a href="/community/communityDetail?communityCategoryNo=${noticeList.communityCategoryNo}&communityNo=${noticeList.communityNo}">${noticeList.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${noticeList.communityReplyCount}]</span></td>
 					<td style="font-weight:bold;">${noticeList.memberId}</td>
 					<td style="font-weight:bold;">${noticeList.communityUpdate}</td>
 					<td style="font-weight:bold;">${noticeList.communityReadcount}</td>	

@@ -95,6 +95,16 @@
 				</tr>
 			</thead>
 			<tbody>
+			<!-- 공지글만 출력하는 포이치문 -->	
+			<c:forEach items="${communityNoticeList}" var="noticeList">	
+				<tr>
+					<td style="font-weight:bold;">[공지]</td>
+					<td style="font-weight:bold;"><a href="/community/communityDetail?communityCategoryNo=${noticeList.communityCategoryNo}&communityNo=${noticeList.communityNo}">${noticeList.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${noticeList.communityReplyCount}]</span></td>
+					<td style="font-weight:bold;">${noticeList.memberId}</td>
+					<td style="font-weight:bold;">${noticeList.communityUpdate}</td>
+					<td style="font-weight:bold;">${noticeList.communityReadcount}</td>
+				</tr>
+			</c:forEach>			
 			<!-- 게시글 출력 포이치문 -->	
 			<c:forEach varStatus="status" items="${myQnaList}" var="myQnaList">				
 				<tr> 
