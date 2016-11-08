@@ -137,7 +137,10 @@ function infoWindowEvent() {
 									"<img class='arrowRight' src='../../resources/images/planIcon/arrowPointingToRight.png'/>" +
 								"</div>" +
 								"<div class='cityRouteTime'>" +
-									////////
+									"<label for='startTime'>startTime</label>"+
+									"<input type='time' name='startTime' class='startTime' style='width:100%;'/>"+
+									"<label for='endTime'>endTime</label>"+
+									"<input type='time' name='endTime' class='endTime' style='width:100%;'/>"+
 								"</div>" +
 								"<div class='landmarkListDiv' style='cursor:pointer;background-color:#CBC7C7'>" +
 									"<span class='landmarkListSpan'>명소 루트</span>" +

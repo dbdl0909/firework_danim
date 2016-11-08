@@ -47,6 +47,44 @@
 		    		if(!($(this).hasClass('on'))){
 		    			$('.hiddenPlan').eq(idx).addClass('on');
 		    		}
+		    		if (!($('#myPlanWrap').is(':hidden'))) {
+						$('.leftMenuLi').each(function(){
+							var fullstartDate = $(document).find('#startDate').val(),
+								startArr = fullstartDate.split("-"),
+								startYear = startArr[0],
+								startMonth = parseInt(startArr[1], 10),
+								startDay = parseInt(startArr[2], 10),
+								//fullendDate = $(this).find('enddate').text(),
+								thisRoute = $(this).find('.cityName').text(),
+								startTime = $(this).find('.startTime').val(),								
+								endTime = $(this).find('.endTime').val(),
+								eventColor = '#cccccc',
+								eventTitle = $(this).find('.cityName').text();
+								
+								//alert(startTime);
+								//console.log('123123');
+								if(parseInt(startSplit[0]) >= 12) {
+									var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
+									var startPeriod = 'PM'
+								}								
+		
+								if(parseInt(startTime) == 0) {
+									var startTime = '12:'+startSplit[1]+'';
+								}
+		
+								if(parseInt(endSplit[0]) >= 12) {
+									var endTime = (endSplit[0] - 12)+':'+endSplit[1]+'';
+									var endPeriod = 'PM'
+								}
+								if(parseInt(endTime) == 0) {
+									var endTime = '12:'+endSplit[1]+'';
+								}
+								function multidaylist(){
+									$('.monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="" class="listed-event"  " style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+'<div><div class="monthly-list-time-start">'+startTime+' '+startPeriod+'</div><div class="monthly-list-time-end">'+endTime+' '+endPeriod+'</div></div></a>');
+								}
+						});
+		    		}
+		    		
 		    	});
 				$('#mycalendar').monthly({
 					mode: 'event',
@@ -149,9 +187,11 @@
 				</div>
 			</div>
 		</div>
-		<div id="myPlanWrap"  class="hiddenPlan on">
-			<div id="myPlanCalendar" style="width:51%; float:left; z-index:2; postion:absolute;">
-				<div class="monthly" id="mycalendar"></div>
+		<div id="myPlanWrap"  class="hiddenPlan">
+			<div class="container">
+				<div id="myPlanCalendar" style="width:52.5%; float:left; z-index:2; postion:absolute;">
+					<div class="monthly" id="mycalendar"></div>
+				</div>
 			</div>				
 		</div>
 		

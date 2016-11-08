@@ -148,17 +148,12 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			}
 			
 			// Events
-			if (options.mode == 'event') {
+			if (options.mode == 'event') {				
 				// Remove previous events
 				// Add Events
-				$.get('/plan/mainPlan', function(plan){
-					console.log($(plan));					
-					$(plan).find('.plan').each(function(){
-						$(this).find('.route').each(function(){
-							var thisRoute = $(this).val();
-							alert(thisRoute);
-						});
-					});
+				//$.get('/plan/mainPlan', function(plan){
+					//console.log($(plan));	
+
 					//console.log($(plan).find('#stayDay').val());
 /*					$(plan).find('date').each(function(i){
 						// Year [0]   Month [1]   Day [2]
@@ -278,8 +273,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						});*/
 						//}
 					//});
-					
-				});
+
 
 			}
 			
