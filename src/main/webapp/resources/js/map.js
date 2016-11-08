@@ -138,15 +138,15 @@ function infoWindowEvent() {
 								"</div>" +
 								"<div class='cityRouteTime'>" +
 									"<label for='startTime'>startTime</label>"+
-									"<input type='time' name='startTime' class='startTime' style='width:100%;'/>"+
+									"<input type='time' name='startTime' class='startTime'/>"+
 									"<label for='endTime'>endTime</label>"+
-									"<input type='time' name='endTime' class='endTime' style='width:100%;'/>"+
+									"<input type='time' name='endTime' class='endTime'/>"+
 								"</div>" +
-								"<div class='landmarkListDiv' style='cursor:pointer;background-color:#CBC7C7'>" +
+								"<div class='landmarkListDiv'>" +
 									"<span class='landmarkListSpan'>명소 루트</span>" +
-									"<img class='landmarkListSlideCheck' src='../../resources/images/planIcon/downArrow.png' style='float:right;margin-right:5px'" +
+									"<img class='landmarkListSlideCheck' src='../../resources/images/planIcon/downArrow.png'>" +
 								"</div>" +
-								"<div class='css_test' style='display:none;border-radius:5px;border:2px solid #CBC7C7;background-color:#fff;position:absolute;z-index:10000;width:53%'>" +
+								"<div class='landmarkListSlide'>" +
 									"<ul class='landmarkRouteUl'>" +
 									"</ul>" +
 								"</div>"+
@@ -455,6 +455,11 @@ $(document).ready(function() {
 	
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {
 		$('#mainPlanDivLeft3').animate({"left":"0px"});
+		
+		//해당 도시의 명소 마커들 제거
+		for(var i=0; i<$landmarkMarkerArray.length; i++) {
+			$landmarkMarkerArray[i].setMap(null);
+		}
 	});
 	
 	//어떤 이미지를 클릭했는지 담을 변수(명소, 식당, 숙소, 축제)
@@ -680,14 +685,14 @@ $(document).ready(function() {
 		if(slideOnOff == false) {
 			$('.landmarkListSlideCheck').eq(landmarkListDivIndex).attr('src', slideOn);
 			
-			$(".css_test").eq(landmarkListDivIndex).slideDown("normal", function() {
+			$(".landmarkListSlide").eq(landmarkListDivIndex).slideDown("normal", function() {
 				slideOnOff = true;
 				//console.log('명소 루트 열기');
 			});
 		} else {
 			$('.landmarkListSlideCheck').eq(landmarkListDivIndex).attr('src', slideOff);
 			
-			$(".css_test").eq(landmarkListDivIndex).slideUp("normal", function() {
+			$(".landmarkListSlide").eq(landmarkListDivIndex).slideUp("normal", function() {
 				slideOnOff = false;
 				//console.log('명소 루트 닫기');
 			});

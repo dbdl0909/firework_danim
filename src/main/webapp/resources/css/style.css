@@ -347,7 +347,7 @@ p {
 	color:#fff;
 }
 #leftMenuRouteList #mainPlanUl .leftMenuLi {
-	height:70px;
+	height:200px;
 	list-style:none;
 }
 
@@ -471,11 +471,34 @@ p {
     height: 545px;
     top: 105px;
     width: 320px;
+    margin-bottom: 0px;
 }
 
 #leftMenuList .landmarkInfoImage {
 	width:100px;
 	height:70px;
+}
+
+.startTime, .endTime {
+	width:100%;
+}
+
+.landmarkListDiv {
+	cursor:pointer;
+	background-color:#CBC7C7;
+}
+.landmarkListSlideCheck {
+	float:right;
+	margin-right:5px;
+}
+.landmarkListSlide {
+	display:none;
+	border-radius:5px;
+	border:2px solid #CBC7C7;
+	background-color:#fff;
+	position:absolute;
+	z-index:10000;
+	width:53%;
 }
 
 #mainPlanDivContent {
