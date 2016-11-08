@@ -110,12 +110,14 @@
 						<div class="hiddenNav">
 						<dl>
 							<dd><a href="/member/memberInfo?memberLoginId=${sessionScope.memberId}">내 정보</a></dd>
-							<dd><a href="">내 여행</a></dd>
-							<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
-							<dd><a href="/member/memberLogout">로그아웃</a></dd>
 							<c:if test="${sessionScope.memberLevel=='관리자'}">
 								<dd><a href="/member/memberListAll">회원리스트</a></dd>
 							</c:if>
+							<c:if test="${sessionScope.memberLevel=='유저'}">
+								<dd><a href="">내 여행</a></dd>
+							</c:if>
+							<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
+							<dd><a href="/member/memberLogout">로그아웃</a></dd>
 						</dl>
 					</div>
 					</c:if>					
