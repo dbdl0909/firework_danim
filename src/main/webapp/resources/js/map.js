@@ -163,7 +163,7 @@ function infoWindowEvent() {
 			    		
 			    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
 						var latitude = Number(cityInfoList[markerIndex].latitude);
-						var langitude = Number(cityInfoList[markerIndex].langitude);
+						var langitude = Number(cityInfoList[markerIndex].langitude); 
 						//console.log(markerIndex + ' : ' + latitude + ', ' + langitude);
 						
 						//pathArray 배열에 클릭한 도시의 좌표를 누적시키기 위해 전역변수로 둔다.
