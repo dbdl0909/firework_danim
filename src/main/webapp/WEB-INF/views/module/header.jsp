@@ -95,13 +95,6 @@
 							<dd><a href="/community/list?communityCategoryNo=community_category_02">후기</a></dd>
 							<dd><a href="/community/list?communityCategoryNo=community_category_03">자유게시판</a></dd>
 							<dd><a href="/community/list?communityCategoryNo=community_category_04">동행찾기</a></dd>
-							<dt>Q&A</dt>
-							<dd><a href="/community/list?communityCategoryNo=community_category_05">숙박시설</a></dd>
-							<dd><a href="/community/list?communityCategoryNo=community_category_06">교통편</a></dd>
-							<dd><a href="/community/list?communityCategoryNo=community_category_07">예약/결제</a></dd>
-							<dd><a href="/community/list?communityCategoryNo=community_category_08">취소/환불/변경</a></dd>
-							<dd><a href="/community/list?communityCategoryNo=community_category_09">회원/로그인</a></dd>
-							<dd><a href="/community/list?communityCategoryNo=community_category_10">여행관련</a></dd>
 						</dl>
 					</div>
 				</li>
@@ -118,7 +111,7 @@
 						<dl>
 							<dd><a href="/member/memberInfo">내정보</a></dd>
 							<dd><a href="">내 여행</a></dd>
-							<dd><a href="">Q&A</a></dd>
+							<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
 							<dd><a href="/member/memberLogout">로그아웃</a></dd>
 						</dl>
 					</div>

@@ -156,6 +156,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 					//console.log(plan);
 					$('#planTabRoute').click(function(){						
 						$('.monthly-event-indicator').remove();
+						$('.listed-event').remove();
 					});
 					$('#planTabDiary').click(function(){
 						//console.log(i);
@@ -179,8 +180,8 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						startPeriod = 'AM',
 						endTime = $(this).find('.endTime').val(),
 						endSplit = endTime.split(":");
-						endPeriod = 'AM',
-						eventColor = '#cccccc',
+						endPeriod = 'AM', 
+						eventColor = '#434343',
 						eventURL = $(this).find('url').text(),
 						eventId = $(this).attr('id', 'p'),
 						eventTitle = $(this).find('.cityName').text();

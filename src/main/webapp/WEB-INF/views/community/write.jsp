@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html> 
@@ -19,9 +18,10 @@
 		<link rel="stylesheet" href="../../../resources/css/style.css">
 		<script>
 			$(document).ready(function(){
+				console.log(boardCheck)
 				var communityCategoryNoVal = '${param.communityCategoryNo}';
-				$('#communityCategoryNo option').each(function(i){
-					if($('#communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
+				$('.communityCategoryNo option').each(function(i){
+					if($('.communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
 						$(this).attr('selected','selected');				
 					}			
 				});
@@ -35,22 +35,30 @@
 	<form id="communityInsertForm" method="post">
 		<div class="communityTitleWrap">
 			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
-			<select  id="communityCategoryNo" name="communityCategoryNo">
-			<optgroup label=":::::::: 커뮤니티 ::::::::">
-				<option value="community_category_01" selected="selected"> 플랜</option>
-				<option value="community_category_02"> 후기</option>
-				<option value="community_category_03"> 자유게시판</option>
-				<option value="community_category_04"> 동행찾기</option>
-			</optgroup>					
-			<optgroup label=":::::::: 고객센터 ::::::::">	
-				<option value="community_category_05"> 숙박시설</option>
-				<option value="community_category_06"> 교통편</option>
-				<option value="community_category_07"> 예약/결제</option>
-				<option value="community_category_08"> 취소/환불/변경</option>
-				<option value="community_category_09"> 회원/로그인</option>
-				<option value="community_category_10"> 여행관련</option>
-			</optgroup>	
-			</select>
+			<c:choose>
+				<c:when test="${param.boardCheck == 'C'}">			
+					<select class="communityCategoryNo" name="communityCategoryNo">
+						<optgroup label=":::::::: 커뮤니티 ::::::::">
+							<option value="community_category_01" selected="selected"> 플랜</option>
+							<option value="community_category_02"> 후기</option>
+							<option value="community_category_03"> 자유게시판</option>
+							<option value="community_category_04"> 동행찾기</option>
+						</optgroup>
+					</select>	
+				</c:when>
+				<c:when test="${param.boardCheck == 'Q'}">
+					<select class="communityCategoryNo" name="communityCategoryNo">					
+						<optgroup label=":::::::: 고객센터 ::::::::">	
+							<option value="community_category_05"> 숙박시설</option>
+							<option value="community_category_06"> 교통편</option>
+							<option value="community_category_07"> 예약/결제</option>
+							<option value="community_category_08"> 취소/환불/변경</option>
+							<option value="community_category_09"> 회원/로그인</option>
+							<option value="community_category_10"> 여행관련</option>
+						</optgroup>			
+					</select>
+				</c:when>
+			</c:choose>	
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="memberId"><span>작성자</span></label>		
