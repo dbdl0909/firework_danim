@@ -154,9 +154,15 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				//$.get('/plan/mainPlan', function(plan){
 					//console.log($(plan));	
 					//console.log(plan);
-					$('#planTabList li').click(function(){
-						//alert('dd');	
-						$(document).find('.leftMenuLi').each(function(i){
+					$('#planTabRoute').click(function(){						
+						$('.monthly-event-indicator').remove();
+					});
+					$('#planTabDiary').click(function(){
+						//console.log(i);
+						//alert('dd');
+						//alert($(document).hasClass('.monthly-event-indicator'));
+						if($('.monthly-event-indicator').length == 0){
+						$(document).find('.leftMenuLi').each(function(){
 						var fullstartDate = $(document).find('#startDate').val(),
 						startArr = fullstartDate.split("-"),
 						startYear = startArr[0],
@@ -176,7 +182,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						endPeriod = 'AM',
 						eventColor = '#cccccc',
 						eventURL = $(this).find('url').text(),
-						eventId = $(this).attr('id'),
+						eventId = $(this).attr('id', 'p'),
 						eventTitle = $(this).find('.cityName').text();
 						//alert(fullstartDate);
 					//console.log($(plan).find('#stayDay').val());
@@ -297,7 +303,8 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 							}
 						//});
 						//}
-					});
+						});					
+						}	
 				});
 
 			}
