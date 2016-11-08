@@ -62,14 +62,14 @@
 		    		if(!($(this).hasClass('on'))){
 		    			$('.hiddenPlan').eq(idx).addClass('on');
 		    		}
-		    		if (!($('#myPlanWrap').is(':hidden'))) {
+		    		/* if (!($('#myPlanWrap').is(':hidden'))) {
 						$('.leftMenuLi').each(function(i){
 							var fullstartDate = $(document).find('#startDate').val(),
 								startArr = fullstartDate.split("-"),
 								startYear = startArr[0],
 								startMonth = parseInt(startArr[1], 10),
 								startDay = parseInt(startArr[2], 10),
-								//fullendDate = fullstartDate+parseInt($('#stayDay').val()),
+								fullendDate = $(document).find('#endDate').val(),
 								thisRoute = $(this).find('.cityName').text(),
 								startTime = $(this).find('.startTime').val(),
 								startSplit = startTime.split(":");
@@ -162,7 +162,7 @@
 		
 								}
 						});
-		    		}
+		    		} */
 		    		
 		    	});
 				$('#mycalendar').monthly({

@@ -153,7 +153,32 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				// Add Events
 				//$.get('/plan/mainPlan', function(plan){
 					//console.log($(plan));	
-
+					//console.log(plan);
+					$('#planTabList li').click(function(){
+						//alert('dd');	
+						$(document).find('.leftMenuLi').each(function(i){
+						var fullstartDate = $(document).find('#startDate').val(),
+						startArr = fullstartDate.split("-"),
+						startYear = startArr[0],
+						startMonth = parseInt(startArr[1], 10),
+						startDay = parseInt(startArr[2], 10),
+						fullendDate = $(document).find('#endDate').val(),
+						endArr = fullendDate.split("-"),
+						endYear = endArr[0],
+						endMonth = parseInt(endArr[1], 10),
+						endDay = parseInt(endArr[2], 10),
+						thisRoute = $(this).find('.cityName').text(),
+						startTime = $(this).find('.startTime').val(),
+						startSplit = startTime.split(":");
+						startPeriod = 'AM',
+						endTime = $(this).find('.endTime').val(),
+						endSplit = endTime.split(":");
+						endPeriod = 'AM',
+						eventColor = '#cccccc',
+						eventURL = $(this).find('url').text(),
+						eventId = $(this).attr('id'),
+						eventTitle = $(this).find('.cityName').text();
+						//alert(fullstartDate);
 					//console.log($(plan).find('#stayDay').val());
 /*					$(plan).find('date').each(function(i){
 						// Year [0]   Month [1]   Day [2]
@@ -184,8 +209,8 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 								eventLink = '',
 								//insertPlanMemo = $(this).find('memo').text("asd");
 								planMemo = $(this).find('memo').text();
-								//alert(planMemo);
-						 Convert times to 12 hour & determine AM or PM 
+								//alert(planMemo);*/
+						 	//Convert times to 12 hour & determine AM or PM 
 							if(parseInt(startSplit[0]) >= 12) {
 								var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
 								var startPeriod = 'PM'
@@ -270,10 +295,10 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 								}
 	
 							}
-						});*/
+						//});
 						//}
-					//});
-
+					});
+				});
 
 			}
 			
