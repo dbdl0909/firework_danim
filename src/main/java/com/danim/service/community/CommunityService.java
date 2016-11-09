@@ -167,4 +167,9 @@ public class CommunityService {
     	return selectQnaByMemberId;
     }
     
+    // 게시글 삭제
+    public void deleteCommunity(int communityNo) {   	
+        communityDao.deleteCommunity(communityNo);
+        communityDao.insertDeleteCommunity(communityNo);
+    }
 }

@@ -46,7 +46,7 @@
 		#{communityNo},
 		#{communityCategoryNo},
 		1,
-		SYSDATE()
+		CURDATE()
 	)
 	</insert>
 	<!-- 리플카운트 업데이트 -->
@@ -75,8 +75,8 @@
 			#{communityCategoryNo},
 			#{memberId},
 			#{replyContent},	
-			SYSDATE(),
-			SYSDATE()
+			CURDATE(),
+			CURDATE()
 		);
 	</insert>
 	<!-- 리플 가져오기 -->
@@ -144,7 +144,7 @@
 			community_notice = 'T'	
 		ORDER BY communityNo DESC	
 	</select>
-	<!-- 해당 카테고리 내의 총 게시글 -->
+	<!-- 해당 카테고리 내의 총 게시글 수-->
 	<select id="countCommunityList" 
 		parameterType="java.util.Map"
 		resultType="Integer" >
@@ -180,7 +180,7 @@
 	</choose>	
 	</select>
 	
-	<!-- 나의 QNA 리스트 목록 -->
+	<!-- 나의 QNA 리스트 수 -->
 	<select id="countMyQnaList" 
 		parameterType="java.util.Map"
 		resultType="Integer">
@@ -247,6 +247,8 @@
 					community
 				WHERE
 					community_category_no = #{communityCategoryNo}
+				AND
+					community_ban = 'F'	
 				ORDER BY communityNo DESC	
 				LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
 			</when>
@@ -278,6 +280,8 @@
 						member_id LIKE CONCAT('%',#{searchInput},'%')
 					</when>
 				</choose>
+				AND
+					community_ban = 'F'
 				ORDER BY communityNo DESC	
 				LIMIT #{pageNation.startRow} , #{pageNation.linePerPage}
 			</when>
@@ -308,8 +312,8 @@
 				#{communityNotice},
 			</if>
 			#{communityContent},
-			SYSDATE(),
-			SYSDATE()
+			CURDATE(),
+			CURDATE()
 		);
 	</insert>
 	<!-- 나의 QNA 리스트 조회 -->
@@ -334,6 +338,8 @@
 			member_id = #{memberId}	
 		AND 
 			community_category_no = #{communityCategoryNo}
+		AND
+			community_ban = 'F'	
 		<choose>
 			<when test="searchOption == 'title'">
 			AND	community_subject LIKE CONCAT('%',#{searchInput},'%')
@@ -346,4 +352,28 @@
 			</otherwise>
 		</choose>		
 	</select>
+	<!-- 정지 및 삭제 게시글 보관 -->
+	<insert 
+		id="insertDeleteCommunity"
+		parameterType="int">
+		INSERT INTO
+		delete_community(
+			community_no,
+			delete_community_date
+		)VALUES(
+			#{communityNo},
+			CURDATE()
+		)
+	</insert>
+	<!-- 해당게시글 삭제 및 정지 (해당 게시글 안보이게) -->
+	<update 
+		id="deleteCommunity"
+		parameterType="int">
+		UPDATE 
+			community
+		SET
+			community_ban = 'T'
+		WHERE
+			community_no = #{communityNo}
+	</update>
 </mapper>	

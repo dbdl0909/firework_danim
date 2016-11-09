@@ -25,6 +25,13 @@
 						$('#replyForm').submit();
 					}
 				});
+				
+				/* $('#deleteButton').click(function(){
+					if(${sessionScope.memberId} != ${detailView.memberId}) {
+						alert('남의 게시글을 삭제하지마라 이놈');
+						return
+					}
+				}); */
 			});
 		</script>
 	</head>
@@ -96,6 +103,9 @@
 				<li>
 					<a href="/community/communityModify?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&boardCheck=Q"><span type="button" class="btn btn-primary">수정</span></a>
 				</li>
+				<li>
+					<a href="/community/communityDelete?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&memberId=${sessionScope.memberId}"><span type="button" id="deleteButton" class="btn btn-primary">삭제</span></a>
+				</li>				
 				<li>
 					<a href="/community/myQnaList?memberId=${sessionScope.memberId}&communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
 				</li>

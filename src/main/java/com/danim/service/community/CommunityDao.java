@@ -75,4 +75,16 @@ public class CommunityDao {
 		logger.info("countMyQnaList CommunityDao.java");
 		return sqlSession.selectOne(NS+".countMyQnaList", map);
 	}
+	
+	//게시글 삭제 및 정지
+	public void deleteCommunity(int communityNo) {
+		logger.info("deleteCommunity CommunityDao.java");
+		sqlSession.update(NS + ".deleteCommunity", communityNo);
+	}
+	
+	//삭제 및 정지 게시글 보관
+	public void insertDeleteCommunity(int communityNo) {
+		logger.info("insertDeleteCommunity CommunityDao.java");
+		sqlSession.insert(NS + ".insertDeleteCommunity", communityNo);
+	}
 }

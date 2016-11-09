@@ -1,6 +1,5 @@
 package com.danim.web;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -199,6 +198,26 @@ public class CommunityController {
 		String votedCheck = communityService.insertCommunityVote(votedId, communityNo, communityCategoryNo);
 		model.addAttribute("votedCheck", votedCheck);
 		return "redirect:/community/communityDetail?communityCategoryNo="+communityCategoryNo+"&communityNo="+communityNo;
+	}
+	
+	@RequestMapping(value = "/community/communityDelete")
+	public String deleteCommunity(@RequestParam(value="communityNo") int communityNo, 
+								@RequestParam(value="communityCategoryNo") String communityCategoryNo,
+								@RequestParam(value="memberId", defaultValue="") String memberId) {
+		
+		communityService.deleteCommunity(communityNo);
+		
+		int CategoryNo = Integer.parseInt(communityCategoryNo.substring(20));
+		logger.info("CategoryNo {} CommunityController.java", CategoryNo);
+		
+		String returnList = "";
+		if(CategoryNo < 5 && CategoryNo > 0) {
+			returnList = "redirect:/community/list?communityCategoryNo="+communityCategoryNo;
+		}else if(CategoryNo < 11 && CategoryNo > 4) {
+			returnList = "redirect:/community/myQnaList?communityCategoryNo="+communityCategoryNo+"&"+"memberId="+memberId;
+		}
+		
+		return returnList;
 	}
 
 }

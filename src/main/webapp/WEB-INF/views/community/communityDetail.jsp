@@ -50,6 +50,16 @@
 					 
 				  }
 				});
+				
+				function delchk() {
+					if(${sessionScope.memberId} != ${detailView.memberId}){
+						alert('댓츠노노');
+						return false;
+					}else{
+						return true;
+					}
+				}
+				
 			});
 		</script>
 	</head>
@@ -151,7 +161,7 @@
 					<a href="/community/communityModify?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&boardCheck=C"><span type="button" class="btn btn-primary">수정</span></a>
 				</li>
 				<li>
-					<span type="button" class="btn btn-primary">신고</span>
+					<a href="/community/communityDelete?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&memberId=${sessionScope.memberId}" onclick="return delchk();"><span type="button" class="btn btn-primary">삭제</span></a>
 				</li>
 				<li>
 					<a href="/community/list?communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
