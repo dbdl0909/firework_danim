@@ -22,7 +22,7 @@
 				$('.communityCategoryNo option').each(function(i){
 					if($('.communityCategoryNo option').eq(i).val() == communityCategoryNoVal) {
 						$(this).attr('selected','selected');				
-					}			
+					}
 				});
 			});
 		</script>

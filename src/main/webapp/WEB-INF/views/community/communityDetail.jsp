@@ -151,6 +151,9 @@
 					<a href="/community/communityModify?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&boardCheck=C"><span type="button" class="btn btn-primary">수정</span></a>
 				</li>
 				<li>
+					<span type="button" class="btn btn-primary">신고</span>
+				</li>
+				<li>
 					<a href="/community/list?communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
 				</li>
 			</ul>
