@@ -38,6 +38,9 @@
 	       	itemsDesktop : [1199,3],
 	        itemsDesktopSmall : [979,3]
 	      });
+		$('#closeIntro').click(function(){			
+			$('#introWrap').hide();
+		});	 
 	});
 </script>
 <body>
@@ -63,6 +66,12 @@
 	</div>
 </div>
 <!-- 컨텐츠 -->
+<div id="introWrap" style="width:100%; position:absolute; top:0; text-align:center; background:#000; margin:0 auto; z-index:999;">
+	<span id="closeIntro" style="color:#fff; cursor:pointer; position:fixed; top:0; right:0; margin-top:30px; margin-right:50px; font-size:28px; z-index:1000;">이 창 닫기</span>
+	<div id="introContent" style="margin:0 auto; text-align:center;">
+		<img src="../../resources/images/intro.jpg" />
+	</div>
+</div>
 <div class="container clearfix">
 	<div id="mainGallerySilderWrap">
 		<h2>======================= 전국 명소 =======================</h2> 
