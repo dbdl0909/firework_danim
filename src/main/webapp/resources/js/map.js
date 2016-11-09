@@ -36,7 +36,10 @@ var $hoverTemp = false;
 var $landmarkHoverIndex = 0;
 
 var stayCount = 0;
+
+//도시루트에 도시가 추가되었는지 확인하기 위해 사용할 변수
 var cityRouteLiIndex = 0;
+var temp = 0;
 
 //구글 지도 (현재위치 설정)
 function initMap() {
@@ -71,6 +74,19 @@ function initMap() {
 
 	/* infoWindow function */
 	infoWindowEvent();
+}
+
+//날짜 수정될때마다 도시루트 시작날짜, 종료날짜 셋팅(일정표에 담을것)
+function cityRouteDateSet() {
+	console.log('종료일 셋팅 후 hidden에 값 넣기!');
+	
+	var startDate = document.getElementById('startDate').value;
+	console.log('startDate : ' + startDate);
+	var endDate = document.getElementById('endDate').value;
+	console.log('endDate : ' + endDate);
+	
+	//$('.cityRouteStartDate').eq(cityRouteLiIndex).val(startDate);
+	//$('.cityRouteEndDate').eq(cityRouteLiIndex).val(endDate);
 }
 
 function infoWindowEvent() {
@@ -158,6 +174,7 @@ function infoWindowEvent() {
 								"</div>" +
 							"</li>"
 						);
+			    		cityRouteLiIndex++;
 			    		
 			    		$stayDay = Number(document.getElementById('stayDay').value);
 			    		if(stayCount > 0) {
@@ -165,8 +182,6 @@ function infoWindowEvent() {
 			    		}
 			    		document.getElementById('stayDay').value = Number($stayDay);
 			    		console.log('stayDay : ' + document.getElementById('stayDay').value);
-			    		
-			    		cityRouteDate(cityRouteLiIndex);
 			    		
 			    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
 						var latitude = Number(cityInfoList[markerIndex].latitude);
@@ -190,24 +205,11 @@ function infoWindowEvent() {
 						prevInfowindow = infowindow;
 						
 						stayCount++;
-						cityRouteLiIndex++;
-					}
-		    	});
+					}					
+		    	});		    	
 			});
 		});
-	}
-}
-
-//날짜 수정될때마다 도시루트 시작날짜, 종료날짜 셋팅(일정표에 담을것)
-function cityRouteDate(cityRouteLiIndex) {
-	var startDate = document.getElementById('startDate').value;
-	console.log('startDate : ' + startDate);
-	var endDate = document.getElementById('endDate').value;
-	console.log('endDate : ' + endDate);
-	
-	$('.cityRouteStartDate').eq(cityRouteLiIndex).val(startDate);
-	$('.cityRouteEndDate').eq(cityRouteLiIndex).val(endDate);
-	
+	}	
 }
 
 function zoomEvent() {
@@ -440,6 +442,15 @@ $(document).ready(function() {
     	map.setCenter(zoomCity);
     	map.setZoom(10);
     });
+	
+	if(cityRouteLiIndex != temp) {
+		console.log('왜 실행이 안되냐1');
+		cityRouteDateSet();
+		
+		temp = cityRouteLiIndex;
+	} else {
+		console.log('왜 실행이 안되냐2');
+	}
 	
 	//removeButton 이미지 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.removeButton', function() {
