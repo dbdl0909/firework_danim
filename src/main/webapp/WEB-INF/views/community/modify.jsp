@@ -32,6 +32,7 @@
 <jsp:include page="../module/header.jsp" />		
 <div class="container">
 	<form id="communityInsertForm" method="post">
+		<input type="hidden" name="communityNo" value="${communityNo}">
 		<div class="communityTitleWrap">
 			<label class="communityTitle" for="communityCategoryNo"><span>카테고리</span></label>
 			<c:choose>
@@ -61,11 +62,11 @@
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="memberId"><span>작성자</span></label>		
-			<input type="text" id="memberId" name="memberId" value="${sessionScope.memberId}" readonly="readonly"/>
+			<input type="text" id="memberId" name="memberId" value="${detailView.memberId}" readonly="readonly"/>
 		</div>
 		<div class="communityTitleWrap">
 			<label class="communityTitle"  for="communitySubject"><span>글 제목</span></label>
-			<input type="text" id="communitySubject" name="communitySubject" />
+			<input type="text" id="communitySubject" name="communitySubject" value="${detailView.communitySubject}" />
 			<c:if test="${sessionScope.memberLevel == '관리자'}">
 				<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
 				<c:choose>
@@ -79,7 +80,7 @@
 			</c:if>		
 		</div>
 		<div class="communityContentWrap">
-		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;"></textarea>
+		 	<textarea id="communityContent" name="communityContent" cols="10" rows="30" style="width:100%;">${detailView.communityContent}</textarea>
 		</div>
 		<div class="buttonDiv">
 			<button type="button" class="btn btn-primary" onclick="onWrite()">쓰기</button>
