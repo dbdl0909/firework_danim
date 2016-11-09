@@ -26,7 +26,7 @@
 		$('.goPlan').click(function(){
 			location.href = '/plan/mainPlan'			
 		})
-		
+		 
 		$(function(){
 			$('.galleryTitleImage').click(function(){
 				$(this).parents('ul').find('li').picEyes();
@@ -69,7 +69,7 @@
 <div id="introWrap" style="width:100%; position:absolute; top:0; text-align:center; background:#000; margin:0 auto; z-index:999;">
 	<span id="closeIntro" style="color:#fff; cursor:pointer; position:fixed; top:0; right:0; margin-top:30px; margin-right:50px; font-size:28px; z-index:1000;">이 창 닫기</span>
 	<div id="introContent" style="margin:0 auto; text-align:center;">
-		<img src="../../resources/images/intro.jpg" />
+		<img src="../../resources/images/intro1.jpg" />
 	</div>
 </div>
 <div class="container clearfix">
