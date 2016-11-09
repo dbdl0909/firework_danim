@@ -71,7 +71,7 @@
 			});
 	    </script>
 	    <script src="../../../resources/js/map.js"></script>
-	    <style>
+	    <style> 
 	    	#logoWrap{height:80px;}
 	    	#logoWrap img{margin-top:20px; margin-left:30px;}
 	    	#tabWrapt{float:right;}

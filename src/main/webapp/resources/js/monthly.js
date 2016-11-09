@@ -329,7 +329,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			var setMonth = $('#' + uniqueId).data('setMonth'),
 				setYear = $('#' + uniqueId).data('setYear');
 			if (setMonth == 12) {
-				var newMonth = 1,
+				var newMonth = 1, 
 					newYear = setYear + 1;
 				setMonthly(newMonth, newYear);
 			} else {
