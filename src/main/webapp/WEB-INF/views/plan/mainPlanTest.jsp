@@ -46,9 +46,7 @@
 		    	document.getElementById('startDate').valueAsDate = new Date();
 		    	var endDate = new Date();
 	    		var stayDay = 0;
-		    	$('body').bind('propertychange change click keyup input', function(){
-		    		var endDateTemp = document.getElementById('endDate').value;
-		    		console.log('endDateTemp : ' + endDateTemp);
+		    	$('body').bind('propertychange change click keyup input', function(){		    		
 			    	var startDate = new Date($('#startDate').val()),
 			    		year = startDate.getFullYear(),
 			    		month = startDate.getMonth()+1,
@@ -58,11 +56,8 @@
 			    		endDate.setMonth(month-1);
 			    		endDate.setDate(date+stayDay);
 			    		//alert(endDate.getFullYear());
-			    		document.getElementById('endDate').valueAsDate = endDate;
-			    		
-			    		if(endDateTemp != endDate) {
-			    			dateCheckTemp++;
-			    		}
+			    		document.getElementById('endDate').valueAsDate = endDate;	
+			    		dateCheckTemp++;
 		    	});
 		    	$('#planTabList li').click(function(){
 		    		var idx = $(this).index();

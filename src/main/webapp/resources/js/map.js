@@ -35,11 +35,16 @@ var $landmarkMarkerArray = [];
 var $hoverTemp = false;
 var $landmarkHoverIndex = 0;
 
+var liIndex = 0;
 var stayCount = 0;
 
 //도시루트에 도시가 추가되었는지 확인하기 위해 사용할 변수
 var cityRouteLiIndex = 0;
-var temp = 0;
+var $temp = 0;
+//도시루트에 도시가 추가되었을때 stayCount 초기값 담는 변수
+var stayCountInit = 0;
+//도시에 머물 일 수가 변경된 태그가 몇번째인지 담는 변수
+var $stayCountIndex = 0;
 
 //구글 지도 (현재위치 설정)
 function initMap() {
@@ -79,14 +84,76 @@ function initMap() {
 //날짜 수정될때마다 도시루트 시작날짜, 종료날짜 셋팅(일정표에 담을것)
 function cityRouteDateSet() {
 	console.log('종료일 셋팅 후 hidden에 값 넣기!');
+	console.log('cityRouteLiIndex(li) : ' + cityRouteLiIndex);
 	
-	var startDate = document.getElementById('startDate').value;
-	console.log('startDate : ' + startDate);
-	var endDate = document.getElementById('endDate').value;
-	console.log('endDate : ' + endDate);
+	//mainPlan페이지에 처음 들어왔을때의 출발일
+	console.log('출발일 init : ' + startDateInit);
 	
-	//$('.cityRouteStartDate').eq(cityRouteLiIndex).val(startDate);
-	//$('.cityRouteEndDate').eq(cityRouteLiIndex).val(endDate);
+	var cityStartDate = document.getElementById('startDate').valueAsDate;
+	console.log('cityStartDate : ' + cityStartDate);
+	var cityEndDate = document.getElementById('endDate').valueAsDate;
+	console.log('cityEndDate : ' + cityEndDate);
+	
+	var cityStartDateTemp = new Date(cityStartDate);
+	var yearTemp = cityStartDateTemp.getFullYear();
+	var monthTemp = cityStartDateTemp.getMonth()+1;
+	var dateTemp = cityStartDateTemp.getDate();
+	
+	var cityEndDateTemp = new Date();
+	
+	cityStayCount = Number(document.getElementsByClassName('stayCount')[$stayCountIndex].value);
+	console.log('머물 일 : ' + cityStayCount);
+	
+	if(startDateInit == cityStartDateTemp) {			//출발일이 변경되지 않았을 경우
+		console.log('출발일이 변경되지 않았을 경우');
+		if(stayCountInit == cityStayCount) {
+			console.log('도시에 머물 일 수 변경X');
+			if(cityRouteLiIndex == 0) {
+				//처음 루트에 도시가 추가되었을때 0번째(li)의 startDate에 출발일 담는다.
+				document.getElementsByClassName('cityRouteStartDate')[0].valueAsDate = cityStartDate;
+				console.log(0 + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].value);
+				
+				//처음 루트에 도시가 추가되었을때 0번째(li)의 endDate에 종료일 담는다.
+				document.getElementsByClassName('cityRouteEndDate')[0].valueAsDate = cityEndDate;
+				console.log(0 + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].value);
+				console.log('-----------------------------');
+			} else {
+				
+			}
+		} else if(stayCountInit != cityStayCount) {		//도시에 머물 일 수가 변경되었을 경우
+			console.log('도시에 머물 일 수 변경O');
+			
+			cityEndDateTemp.setFullYear(yearTemp);
+			cityEndDateTemp.setMonth(monthTemp-1);
+			cityEndDateTemp.setDate(dateTemp+cityStayCount-1);
+			
+			document.getElementsByClassName('cityRouteEndDate')[liIndex].valueAsDate = cityEndDateTemp;
+			console.log(liIndex + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[liIndex].value);
+			console.log(liIndex + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[liIndex].value);
+			console.log('-----------------------------');
+		}
+		
+		//도시루트에 도시 하나씩 추가마다 +1
+		cityRouteLiIndex++;
+		
+	} else if(startDateInit != cityStartDateTemp) {		//출발일이 변경되었을 경우
+		console.log('출발일이 변경되었을 경우');
+		
+		for(var i=0; i<$('.leftMenuLi').length; i++) {
+			if(i == 0) {
+				//0번째
+				document.getElementsByClassName('cityRouteStartDate')[i].valueAsDate = cityStartDate;
+				console.log(i + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[i].value);
+				
+				document.getElementsByClassName('cityRouteEndDate')[i].valueAsDate = cityEndDate;
+				console.log(i + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[i].value);
+			} else {
+				
+			}
+		}
+		
+	}
+	
 }
 
 function infoWindowEvent() {
@@ -106,7 +173,7 @@ function infoWindowEvent() {
 		//makrerArray의 i번째를 클릭했을때 실행할 함수
 		google.maps.event.addListener(markerArray[i], 'click', function() {
 			markerIndex = this.index;
-			console.log(markerIndex + '번째 도시 : ' + infoNameArray[markerIndex]);
+			//console.log(markerIndex + '번째 도시 : ' + infoNameArray[markerIndex]);
 			
 			//시 마커를 클릭했을때 보여줄 내용을 담은 함수
 			var infowindow = new google.maps.InfoWindow({
@@ -137,12 +204,12 @@ function infoWindowEvent() {
 					if(startDate == '') {
 						alert('출발일을 입력해주세요!');
 					} else {
-			    		console.log(markerIndex);
+			    		//console.log(markerIndex);
 			    		markerArray[markerIndex].setIcon(markerIcon1);
 			    		markerArray[markerIndex].setVisible(true);
 			    		
 			    		markerIndexArray.push(markerIndex);
-			    		console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
+			    		//console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
 			    		$('#mainPlanUl').append(
 		    				"<li class='leftMenuLi'>" +
 								"<span class='cityName'>" + infoNameArray[markerIndex] + "</span>" +
@@ -151,7 +218,7 @@ function infoWindowEvent() {
 								"<img class='removeButton' id='mainPlanRemoveButton' src='../../resources/images/planIcon/removeButton.png'/>" +
 								"<div class='cityChooseMenu'>" +
 									"<img class='arrowLeft' src='../../resources/images/planIcon/arrowPointingToLeft.png'/>" +
-									"<span class='stayCount'>1</span>일" +
+									"<input class='stayCount' type='text' value='1' style='border:0;'/>일" +
 									"<img class='arrowRight' src='../../resources/images/planIcon/arrowPointingToRight.png'/>" +
 								"</div>" +
 								"<div class='cityRouteTime'>" +
@@ -169,12 +236,13 @@ function infoWindowEvent() {
 									"</ul>" +
 								"</div>" +
 								"<div>" +
-/*날짜넘기기*/						"<input type='hidden' class='cityRouteStartDate' style='width:100%'/>" +
-									"<input type='hidden' class='cityRouteEndDate' style='width:100%'/>" +
+/*날짜넘기기*/						"<input type='date' class='cityRouteStartDate' style='display:none;width:100%'/>" +
+									"<input type='date' class='cityRouteEndDate' style='display:none;width:100%'/>" +
 								"</div>" +
 							"</li>"
 						);
-			    		cityRouteLiIndex++;
+			    		
+			    		stayCountInit = document.getElementsByClassName('stayCount')[cityRouteLiIndex].value;
 			    		
 			    		$stayDay = Number(document.getElementById('stayDay').value);
 			    		if(stayCount > 0) {
@@ -183,6 +251,8 @@ function infoWindowEvent() {
 			    		document.getElementById('stayDay').value = Number($stayDay);
 			    		console.log('stayDay : ' + document.getElementById('stayDay').value);
 			    		
+			    		cityRouteDateSet();
+			    		
 			    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
 						var latitude = Number(cityInfoList[markerIndex].latitude);
 						var langitude = Number(cityInfoList[markerIndex].langitude); 
@@ -190,7 +260,7 @@ function infoWindowEvent() {
 						
 						//pathArray 배열에 클릭한 도시의 좌표를 누적시키기 위해 전역변수로 둔다.
 						pathArray.push({lat: latitude, lng: langitude});
-						console.log('pathArray 길이 : ' + pathArray.length);
+						//console.log('pathArray 길이 : ' + pathArray.length);
 			    		
 						//도시를 2개 이상 선택했을때, 이동경로를 찍기 위한 함수를 호출한다.
 						if(pathArray.length >= 2) {
@@ -234,7 +304,7 @@ function zoomEvent() {
 				markerArray[i].setVisible(true);
 			}
 		} else if(zoom <= 8) {	//zoom이 8됬을때 다시 광역시만 보여준다. 클릭한 도시는 지우지 않고 그대로 보여준다.
-			console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
+			//console.log('클릭한 도시 개수 : ' + markerIndexArray.length);
 			var markerIndexArraySort = [];
 			markerIndexArraySort = markerIndexArray;
 			markerIndexArraySort.sort();
@@ -336,29 +406,29 @@ function poly(pathArray) {
 	});
 	pathLine.setMap(map);
 	lineArray.push(pathLine);
-	console.log('getPath : ' + pathLine.getPath().getArray().toString());
+	//console.log('getPath : ' + pathLine.getPath().getArray().toString());
 }
 
 //이동경로를 찍거나 제거하기 위한 함수
 function lineFunction(pathArray, flag){
-	console.log('-------lineFunction on-------');
-	console.log('pathArray 길이 : ' + pathArray.length);
+	//console.log('-------lineFunction on-------');
+	//console.log('pathArray 길이 : ' + pathArray.length);
 	//console.log('flag : ' + flag);
 	
 	if(flag == true) {
 		poly(pathArray);
-		console.log('pathArray 길이 : ' + pathArray.length);
+		//console.log('pathArray 길이 : ' + pathArray.length);
 		
 	} else if(flag == false) {
-		console.log('lineRemoveIndex : ' + lineRemoveIndex);
+		//console.log('lineRemoveIndex : ' + lineRemoveIndex);
 		pathArray.splice(lineRemoveIndex, 1);
-		console.log('pathArray 길이 : ' + pathArray.length);
-		console.log('lineArray 길이 : ' + lineArray.length);
+		//console.log('pathArray 길이 : ' + pathArray.length);
+		//console.log('lineArray 길이 : ' + lineArray.length);
 		var maxLength = lineArray.length;
 		
 		if(lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2) {
 			//선택한 도시가 2개 이상일때 처음과 끝 제외한 모든 중간 요소 제거
-			console.log('lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2');
+			//console.log('lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2');
 			
 			for(var i=0; i<maxLength; i++) {
 				lineArray[i].setMap(null);
@@ -378,17 +448,17 @@ function lineFunction(pathArray, flag){
 			
 		} else if(maxLength == lineRemoveIndex && maxLength >= 1) {
 			//선택한 도시가 1개 이상일때 마지막 요소 제거
-			console.log('maxLength == lineRemoveIndex && maxLength >= 1');
+			//console.log('maxLength == lineRemoveIndex && maxLength >= 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
 		} else if(lineRemoveIndex == 0 && maxLength >= 1) {
 			//선택한 도시 1개 이상일때 첫번째 요소 제거
-			console.log('lineRemoveIndex == 0 && maxLength >= 1');
+			//console.log('lineRemoveIndex == 0 && maxLength >= 1');
 			lineArray[lineRemoveIndex].setMap(null);
 			lineArray.splice(lineRemoveIndex, 1);
 		} else if(lineRemoveIndex == 0 && maxLength < 1) {
 			//선택한 도시 하나일때 그 요소 제거
-			console.log('lineRemoveIndex == 0 && maxLength < 1');
+			//console.log('lineRemoveIndex == 0 && maxLength < 1');
 			lineArray.splice(lineRemoveIndex, 1);
 		}
 	}
@@ -396,13 +466,13 @@ function lineFunction(pathArray, flag){
 
 //이동경로에서 클릭한 도시를 제거하기 위한 함수
 function lineRemoveFunction(removeButtonIndex) {
-	console.log('-------lineRemoveFunction on-------');
+	//console.log('-------lineRemoveFunction on-------');
 	//console.log('removeButtonIndex : ' + removeButtonIndex);
 	lineRemoveIndex = removeButtonIndex;
 	
 	//pathArray 배열에서 선택한 도시의 좌표를 제거한다.
 	var markerIndexTemp = markerIndexArray[removeButtonIndex];
-	console.log(markerIndexArray + ' 중 제거할 도시번호 : ' + markerIndexTemp);
+	//console.log(markerIndexArray + ' 중 제거할 도시번호 : ' + markerIndexTemp);
 	markerIndexArray.splice(removeButtonIndex, 1);
 	markerArray[markerIndexTemp].setIcon(markerIcon2);
 	
@@ -412,9 +482,9 @@ function lineRemoveFunction(removeButtonIndex) {
 	
 	//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
 	//console.log('pathArray 길이 : ' + pathArray.length);
-	for(var i=0; i<pathArray.length; i++) {
+	/*for(var i=0; i<pathArray.length; i++) {
 		console.log(pathArray[i]);
-	}
+	}*/
 	
 	if(pathArray.length >= 1) {
 		flag = false;
@@ -434,7 +504,7 @@ $(document).ready(function() {
 	var $stayCount = 0;
 	$('.cityInfoLi').click(function() {
 		cityInfoIndex = $('.cityInfoLi').index(this);
-    	console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
+    	//console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
     	var zoomLatitude = Number(cityInfoList[cityInfoIndex].latitude);
     	var zoomLangitude = Number(cityInfoList[cityInfoIndex].langitude);
     	
@@ -442,15 +512,6 @@ $(document).ready(function() {
     	map.setCenter(zoomCity);
     	map.setZoom(10);
     });
-	
-	if(dateCheckTemp != temp) {
-		console.log('왜 실행이 안되냐1');
-		cityRouteDateSet();
-		
-		temp = cityRouteLiIndex;
-	} else {
-		console.log('왜 실행이 안되냐2');
-	}
 	
 	//removeButton 이미지 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.removeButton', function() {
@@ -461,9 +522,9 @@ $(document).ready(function() {
 		//이동 경로에서 removeButton 이미지를 클릭한 도시 제거
 		lineRemoveFunction(removeButtonIndex);
 		
-		console.log(Number($('.stayCount').eq(removeButtonIndex).text()));
+		//console.log(Number($('.stayCount').eq(removeButtonIndex).val()));
 		if($stayDay > 0) {
-			$stayDay -= Number($('.stayCount').eq(removeButtonIndex).text());
+			$stayDay -= Number($('.stayCount').eq(removeButtonIndex).val());
 			$('#stayDay').val($stayDay);
 		}
 		
@@ -475,33 +536,56 @@ $(document).ready(function() {
 		}
 	});
 	
+	//출발일이 변경되었을때 실행할 함수
+	$('#startDate').on('change', function() {
+		var startDateChange = $('#startDate').val();
+		console.log('출발일 변경 : ' + startDateChange);
+		
+		cityRouteDateSet();
+	});
+	
 	//arrowLeft 이미지 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.arrowLeft', function() {
 		//클릭할때마다 일 수를 1씩 뺀다.
-		var liIndex = $('.arrowLeft').index(this);
-		console.log(liIndex);
-		$stayCount = Number($('.stayCount').eq(liIndex).text());
-		if($stayCount > 1 && $stayDay > 1) {
+		liIndex = $('.arrowLeft').index(this);
+		//console.log(liIndex);
+		$stayCount = Number($('.stayCount').eq(liIndex).val());
+		if($stayCount > 1 || $stayDay > 1) {
 			$stayCount-=1;
-			$('.stayCount').eq(liIndex).text($stayCount);
+			$('.stayCount').eq(liIndex).val($stayCount);
 			
 			$stayDay -= 1;
 			$('#stayDay').val($stayDay);
 		}
+		
+		cityRouteDateSet();
 	});
 	//arrowRight 이미지 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.arrowRight', function() {
 		//클릭할때마다 일 수를 1씩 더한다.
-		var liIndex = $('.arrowRight').index(this);
-		console.log(liIndex);
-		$stayCount = Number($('.stayCount').eq(liIndex).text());
+		liIndex = $('.arrowRight').index(this);
+		//console.log(liIndex);
+		$stayCount = Number($('.stayCount').eq(liIndex).val());
 		if($stayCount >= 1) {
 			$stayCount+=1;
-			$('.stayCount').eq(liIndex).text($stayCount);
+			$('.stayCount').eq(liIndex).val($stayCount);
 		}
 		$stayDay += 1;
 		$('#stayDay').val($stayDay);
-	});
+		
+		cityRouteDateSet();
+	});	
+	
+	/*$('.stayCount').change(function() {
+		console.log('바뀐다');
+		$stayCountIndex = $('.stayCount').index(this);
+		console.log('일 바뀐 도시 : ' + $stayCountIndex);
+		
+		var stayCountChange = $('.stayCount').eq($stayCountIndex).val();
+		console.log('도시에 머물 일 변경 : ' + stayCountChange);
+		
+		//cityRouteDateSet();
+	});*/
 	
 	$('body').on('click', '#mainPlanDivLeft3Close', function() {
 		$('#mainPlanDivLeft3').animate({"left":"0px"});

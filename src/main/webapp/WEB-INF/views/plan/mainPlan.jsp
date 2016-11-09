@@ -27,7 +27,8 @@
    		<script src="../../resources/js/monthly.js"></script>
 	    <script>
 	    	var cityInfoList = [];
-	    	var dateCheckTemp = 0;
+	    	var startDateInit;
+	    	//var dateCheckTemp = 0;
 	    	
 		    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */
 		    <c:forEach var="listCityInfo" items="${listCityInfo}">
@@ -44,9 +45,11 @@
 		    //console.log("cityInfoList.length : " + cityInfoList.length);
 		    $(document).ready(function() {
 		    	document.getElementById('startDate').valueAsDate = new Date();
+		    	startDateInit = new Date($('#startDate').val());
+		    	
 		    	var endDate = new Date();
 	    		var stayDay = 0;
-		    	$('body').bind('propertychange change click keyup input', function(){		    		
+		    	$('body').bind('propertychange change click keyup input', function(){
 			    	var startDate = new Date($('#startDate').val()),
 			    		year = startDate.getFullYear(),
 			    		month = startDate.getMonth()+1,
@@ -56,8 +59,7 @@
 			    		endDate.setMonth(month-1);
 			    		endDate.setDate(date+stayDay);
 			    		//alert(endDate.getFullYear());
-			    		document.getElementById('endDate').valueAsDate = endDate;	
-			    		dateCheckTemp++;
+			    		document.getElementById('endDate').valueAsDate = endDate;
 		    	});
 		    	$('#planTabList li').click(function(){
 		    		var idx = $(this).index();
