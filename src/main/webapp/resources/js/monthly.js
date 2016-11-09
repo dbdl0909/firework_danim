@@ -155,15 +155,14 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 					//console.log($(plan));	
 					//console.log(plan);
 					$('#planTabRoute').click(function(){						
-
+						$('.monthly-event-indicator').remove();
+						$('.listed-event').remove();
 					});
 					$('#planTabDiary').click(function(){
-	/*					$('.monthly-event-indicator').remove();
-						$('.listed-event').remove();*/
 						//console.log(i);
 						//alert('dd');
 						//alert($(document).hasClass('.monthly-event-indicator'));
-						//if($('.monthly-event-indicator').length == 0){
+						if($('.monthly-event-indicator').length == 0){
 						$(document).find('.leftMenuLi').each(function(){
 						var fullstartDate = $(document).find('#startDate').val(),
 						startArr = fullstartDate.split("-"),
@@ -306,7 +305,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						//});
 						//}
 						});					
-						//}	
+						}	
 				});
 
 			}
@@ -329,7 +328,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			var setMonth = $('#' + uniqueId).data('setMonth'),
 				setYear = $('#' + uniqueId).data('setYear');
 			if (setMonth == 12) {
-				var newMonth = 1, 
+				var newMonth = 1,
 					newYear = setYear + 1;
 				setMonthly(newMonth, newYear);
 			} else {
