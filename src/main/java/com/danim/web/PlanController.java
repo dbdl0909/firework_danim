@@ -56,7 +56,7 @@ public class PlanController {
 		//가져온 리스트를 jsp 페이지에서 출력하기 위해 model에 담는다. 
 		model.addAttribute("listCityInfo", listCityInfo);
 		
-		return "plan/mainPlanTest.jsp";
+		return "plan/mainPlanTest";
 	}
 
 }
