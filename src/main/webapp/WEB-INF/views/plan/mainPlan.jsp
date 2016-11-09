@@ -67,6 +67,7 @@
 					mode: 'event',
 					xmlUrl: '/events.xml'
 				});
+				
 			});
 	    </script>
 	    <script src="../../../resources/js/map.js"></script>
