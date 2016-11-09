@@ -94,7 +94,7 @@
 		<div id="communityContentButtonWrap" class="clearfix">
 			<ul id="communityContentButton">
 				<li>
-					<a href="/community/communityModify?communityNo=${detailView.communityNo}"><span type="button" class="btn btn-primary">수정</span></a>
+					<a href="/community/communityModify?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&boardCheck=Q"><span type="button" class="btn btn-primary">수정</span></a>
 				</li>
 				<li>
 					<a href="/community/myQnaList?memberId=${sessionScope.memberId}&communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
