@@ -443,7 +443,7 @@ $(document).ready(function() {
     	map.setZoom(10);
     });
 	
-	if(cityRouteLiIndex != temp) {
+	if(dateCheckTemp != temp) {
 		console.log('왜 실행이 안되냐1');
 		cityRouteDateSet();
 		
