@@ -45,7 +45,7 @@
 		    //console.log("cityInfoList.length : " + cityInfoList.length);
 		    $(document).ready(function() {
 		    	document.getElementById('startDate').valueAsDate = new Date();
-		    	startDateInit = new Date($('#startDate').val());
+		    	startDateInit = new Date(document.getElementById('startDate').valueAsDate);
 		    	
 		    	var endDate = new Date();
 	    		var stayDay = 0;

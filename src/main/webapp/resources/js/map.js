@@ -42,9 +42,11 @@ var stayCount = 0;
 var cityRouteLiIndex = 0;
 var $temp = 0;
 //도시루트에 도시가 추가되었을때 stayCount 초기값 담는 변수
-var stayCountInit = 0;
+//var stayCountInit = 0;
+//도시에 머물 일 수가 변경되었는지 체크하는 변수
+var cityStayDayChange = false;
 //도시에 머물 일 수가 변경된 태그가 몇번째인지 담는 변수
-var $stayCountIndex = 0;
+//var $stayCountIndex = 0;
 
 //구글 지도 (현재위치 설정)
 function initMap() {
@@ -94,34 +96,52 @@ function cityRouteDateSet() {
 	var cityEndDate = document.getElementById('endDate').valueAsDate;
 	console.log('cityEndDate : ' + cityEndDate);
 	
-	var cityStartDateTemp = new Date(cityStartDate);
-	var yearTemp = cityStartDateTemp.getFullYear();
-	var monthTemp = cityStartDateTemp.getMonth()+1;
-	var dateTemp = cityStartDateTemp.getDate();
-	
 	var cityEndDateTemp = new Date();
 	
-	cityStayCount = Number(document.getElementsByClassName('stayCount')[$stayCountIndex].value);
-	console.log('머물 일 : ' + cityStayCount);
+	console.log('cityRouteLiIndex : ' + cityRouteLiIndex);
 	
-	if(startDateInit == cityStartDateTemp) {			//출발일이 변경되지 않았을 경우
+	if(startDateInit.toString() == cityStartDate.toString()) {			//출발일이 변경되지 않았을 경우
 		console.log('출발일이 변경되지 않았을 경우');
-		if(stayCountInit == cityStayCount) {
+		
+		if(cityStayDayChange == false) {
 			console.log('도시에 머물 일 수 변경X');
+			
+			cityStayCount = 1;
+			console.log('머물 일 : ' + cityStayCount);
+			
 			if(cityRouteLiIndex == 0) {
+				console.log('cityRouteLiIndex : ' + cityRouteLiIndex);
 				//처음 루트에 도시가 추가되었을때 0번째(li)의 startDate에 출발일 담는다.
-				document.getElementsByClassName('cityRouteStartDate')[0].valueAsDate = cityStartDate;
-				console.log(0 + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].value);
+				document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate = cityStartDate;
+				console.log(cityRouteLiIndex + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].value);
 				
 				//처음 루트에 도시가 추가되었을때 0번째(li)의 endDate에 종료일 담는다.
-				document.getElementsByClassName('cityRouteEndDate')[0].valueAsDate = cityEndDate;
-				console.log(0 + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].value);
+				document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].valueAsDate = cityEndDate;
+				console.log(cityRouteLiIndex + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].value);
+				
 				console.log('-----------------------------');
 			} else {
+				console.log('cityRouteLiIndex : ' + cityRouteLiIndex);
+				//처음 루트에 도시가 추가되었을때 cityRouteLiIndex번째(li)의 startDate에 출발일 담는다.
+				document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate = document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex-1].valueAsDate;
+				console.log(cityRouteLiIndex + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].value);
 				
+				//처음 루트에 도시가 추가되었을때 cityRouteLiIndex번째(li)의 endDate에 종료일 담는다.
+				document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].valueAsDate = cityEndDate;
+				console.log(cityRouteLiIndex + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].value);
+				
+				console.log('-----------------------------');
 			}
-		} else if(stayCountInit != cityStayCount) {		//도시에 머물 일 수가 변경되었을 경우
+		} else if(cityStayDayChange == true) {		//도시에 머물 일 수가 변경되었을 경우
 			console.log('도시에 머물 일 수 변경O');
+			
+			cityStayCount = Number(document.getElementsByClassName('stayCount')[liIndex].value);
+			console.log('머물 일 : ' + cityStayCount);
+			
+			var cityStartDateTemp = new Date(document.getElementsByClassName('cityRouteStartDate')[liIndex].valueAsDate);
+			var yearTemp = cityStartDateTemp.getFullYear();
+			var monthTemp = cityStartDateTemp.getMonth()+1;
+			var dateTemp = cityStartDateTemp.getDate();
 			
 			cityEndDateTemp.setFullYear(yearTemp);
 			cityEndDateTemp.setMonth(monthTemp-1);
@@ -130,14 +150,12 @@ function cityRouteDateSet() {
 			document.getElementsByClassName('cityRouteEndDate')[liIndex].valueAsDate = cityEndDateTemp;
 			console.log(liIndex + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[liIndex].value);
 			console.log(liIndex + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[liIndex].value);
+			
 			console.log('-----------------------------');
 		}
 		
-		//도시루트에 도시 하나씩 추가마다 +1
-		cityRouteLiIndex++;
-		
-	} else if(startDateInit != cityStartDateTemp) {		//출발일이 변경되었을 경우
-		console.log('출발일이 변경되었을 경우');
+	} else if(startDateInit.toString() != cityStartDate.toString()) {		//출발일이 변경되었을 경우
+		/*console.log('출발일이 변경되었을 경우');
 		
 		for(var i=0; i<$('.leftMenuLi').length; i++) {
 			if(i == 0) {
@@ -150,7 +168,7 @@ function cityRouteDateSet() {
 			} else {
 				
 			}
-		}
+		}*/
 		
 	}
 	
@@ -242,16 +260,23 @@ function infoWindowEvent() {
 							"</li>"
 						);
 			    		
-			    		stayCountInit = document.getElementsByClassName('stayCount')[cityRouteLiIndex].value;
+			    		//stayCountInit = document.getElementsByClassName('stayCount')[cityRouteLiIndex].value;
+			    		//console.log('stayCountInit : ' + stayCountInit);
 			    		
-			    		$stayDay = Number(document.getElementById('stayDay').value);
+ 			    		$stayDay = Number(document.getElementById('stayDay').value);
 			    		if(stayCount > 0) {
 			    			$stayDay += 1;
 			    		}
 			    		document.getElementById('stayDay').value = Number($stayDay);
 			    		console.log('stayDay : ' + document.getElementById('stayDay').value);
 			    		
+			    		//도시 하나마다 출발일 종료일 설정하는 함수(일정표)
+			    		cityStayDayChange = false;
 			    		cityRouteDateSet();
+		    		
+			    		//도시루트에 도시 하나씩 추가마다 +1
+			    		cityRouteLiIndex++;
+			    		console.log('cityRouteLiIndex : ' + cityRouteLiIndex);
 			    		
 			    		//클릭한 도시만 리스트로 받아와서 이동경로(line)를 추가해야한다!!
 						var latitude = Number(cityInfoList[markerIndex].latitude);
@@ -525,7 +550,7 @@ $(document).ready(function() {
 		//console.log(Number($('.stayCount').eq(removeButtonIndex).val()));
 		if($stayDay > 0) {
 			$stayDay -= Number($('.stayCount').eq(removeButtonIndex).val());
-			$('#stayDay').val($stayDay);
+			$('#stayDay').val($stayDay + 1);
 		}
 		
 		//경로 제거후 li 태그 제거
@@ -558,6 +583,7 @@ $(document).ready(function() {
 			$('#stayDay').val($stayDay);
 		}
 		
+		cityStayDayChange = true;
 		cityRouteDateSet();
 	});
 	//arrowRight 이미지 태그를 클릭했을때 실행할 함수
@@ -573,6 +599,7 @@ $(document).ready(function() {
 		$stayDay += 1;
 		$('#stayDay').val($stayDay);
 		
+		cityStayDayChange = true;
 		cityRouteDateSet();
 	});	
 	
