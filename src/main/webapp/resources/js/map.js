@@ -246,7 +246,7 @@ function infoWindowEvent() {
 									"<label for='endTime'>endTime</label>"+
 									"<input type='time' name='cityRouteArrivalTime' class='endTime'/>"+
 								"</div>" +
-								"<div class='landmarkListDiv'>" +
+								"<div class='landmarkListDiv'>" + 
 									"<span class='landmarkListSpan'>명소 루트</span>" +
 									"<img class='landmarkListSlideCheck' src='../../resources/images/planIcon/downArrow.png'>" +
 								"</div>" +

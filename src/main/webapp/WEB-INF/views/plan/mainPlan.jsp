@@ -67,7 +67,7 @@
 		    		if(!($(this).hasClass('on'))){
 		    			$('.hiddenPlan').eq(idx).addClass('on');
 		    		}
-		    		var monthly = new Object();
+		    		var monthly = new Object(); 
 		    		var plan = new Array();
 		    		$('.leftMenuLi').each(function(i){
 		    			var planContent = new Object();
