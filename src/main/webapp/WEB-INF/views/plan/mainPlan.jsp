@@ -86,6 +86,9 @@
 		    		localStorage.setItem('events',  JSON.stringify(monthly));
 		    		document.getElementById("jsonContainer").innerHTML = localStorage.getItem('events');
 		    	});
+		    	$('#closeLandmarkInfoPop').click(function(){
+		    		$('#landmarkInfoPopWrap').hide();		    		
+		    	})
 				$('#mycalendar').monthly({
 					mode: 'event',
 					jsonUrl: '/plan/mainPlan',
@@ -225,6 +228,7 @@
 			<jsp:include page="../module/footer.jsp"></jsp:include>
 			
 			<div id="landmarkInfoPopWrap" style="width:100%; height:100%; display:none; position:absolute; top:0; background:#000; z-index:999999;">
+				<span id="closeLandmarkInfoPop" style="color:#fff; font-size:28px; z-index:9999999; float:right; margin-top:30px; margin-right:50px; cursor:pointer;">X</span>
 				<div id="landmarkInfoPopContent" class="container" style="height:100%; background:#fff; margin:0 auto; opacity:1;">
 					
 				</div>
