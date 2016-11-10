@@ -152,6 +152,7 @@
 								<textarea id="reportReason" name="reportReason" placeholder="신고사유를 적어주세요"></textarea>
 								<input name="memberId" type="hidden" value="${sessionScope.memberId}">
 								<input name="communityNo" type="hidden" value="${detailView.communityNo}">
+								<input name="communityCategoryNo" type="hidden" value="${detailView.communityCategoryNo}">
 							</form>
 						</div>
 						<div class="modal-footer">
