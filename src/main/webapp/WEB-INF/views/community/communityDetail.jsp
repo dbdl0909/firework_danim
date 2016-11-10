@@ -148,8 +148,10 @@
 							<h4 class="modal-title">게시글 신고</h4>
 						</div>
 						<div class="modal-body">
-							<form id="reportForm" action="/community/reprot" method="post">
-								<textarea id="reportReason" placeholder="신고사유를 적어주세요"></textarea>
+							<form id="reportForm" action="/community/communityReport" method="post">
+								<textarea id="reportReason" name="reportReason" placeholder="신고사유를 적어주세요"></textarea>
+								<input name="memberId" type="hidden" value="${sessionScope.memberId}">
+								<input name="communityNo" type="hidden" value="${detailView.communityNo}">
 							</form>
 						</div>
 						<div class="modal-footer">

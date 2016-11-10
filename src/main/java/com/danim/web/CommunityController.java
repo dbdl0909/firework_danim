@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.danim.service.community.CommunityDao;
 import com.danim.service.community.CommunityDto;
 import com.danim.service.community.CommunityReplyDto;
 import com.danim.service.community.CommunityService;
 import com.danim.service.community.QnaDto;
+import com.danim.service.community.ReportDto;
 import com.danim.util.FileUpload;
  
 @Controller
@@ -201,9 +203,10 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community/communityReport", method = RequestMethod.POST)
-	public String communityReport() {
+	public String communityReport(ReportDto reportDto) {
+		communityService.insertReport(reportDto);
 		
-		return "";
+		return "redirect:/community/communityDetail?communityCategoryNo="+reportDto.getCommunityNo();
 	}
 	
 	@RequestMapping(value = "/community/communityDelete")

@@ -172,4 +172,9 @@ public class CommunityService {
         communityDao.deleteCommunity(communityNo);
         communityDao.insertDeleteCommunity(communityNo);
     }
+    
+    // 게시글 및 리플 신고
+    public void insertReport(ReportDto reportDto) {
+    	communityDao.insertReport(reportDto);
+    }
 }

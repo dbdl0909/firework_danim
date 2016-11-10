@@ -87,4 +87,10 @@ public class CommunityDao {
 		logger.info("insertDeleteCommunity CommunityDao.java");
 		sqlSession.insert(NS + ".insertDeleteCommunity", communityNo);
 	}
+	
+	//신고
+	public void insertReport(ReportDto reportDto) {
+		logger.info("insertReport CommunityDao.java");
+		sqlSession.insert(NS + ".insertReport", reportDto);
+	}
 }

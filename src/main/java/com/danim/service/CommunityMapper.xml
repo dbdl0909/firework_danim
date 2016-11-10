@@ -376,4 +376,23 @@
 		WHERE
 			community_no = #{communityNo}
 	</update>
+	<!-- 게시글 및 리플 신고 -->
+	<insert
+		id="insertReport"
+		parameterType="com.danim.service.community.ReportDto">
+		INSERT INTO
+			report(
+				member_id,
+				community_no,
+				reply_no,
+				report_reason,
+				report_date				
+			)VALUES(
+				#{memberId},
+				#{communityNo}
+				#{replyNo},
+				#{reportReason},
+				CURDATE()
+			)
+	</insert>
 </mapper>	
