@@ -79,7 +79,7 @@
 			    		planContent.endTime = $(this).find('.endTime').val(),
 			    		planContent.color = '#434343',
 			    		planContent.url = '';
-			    		plan.push(planContent);
+			    		plan.push(planContent); 
 		    		});
 		    		monthly.monthly = plan;
 		    		var jsonInfo = JSON.stringify(monthly);
