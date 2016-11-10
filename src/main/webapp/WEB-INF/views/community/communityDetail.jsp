@@ -51,15 +51,6 @@
 				  }
 				});
 				
-				function delchk() {
-					if(${sessionScope.memberId} != ${detailView.memberId}){
-						alert('댓츠노노');
-						return false;
-					}else{
-						return true;
-					}
-				}
-				
 			});
 		</script>
 	</head>
@@ -133,6 +124,25 @@
 				</c:if>
 			</div>
 		</div>
+		<div id="reportWrap" style="float:right;">
+			<button id="reportButton" data-toggle="modal" data-target="#reportModal" type="button" class="btn btn-danger btn-xs">게시글 신고</button>
+			<div class="modal fade" id="reportModal" role="dialog">
+			  <div class="modal-dialog">	
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">Close</button>
+			        <h4 class="modal-title">게시글 신고</h4>
+			      </div>
+			      <div class="modal-body">
+			        <textarea placeholder="신고사유를 적어주세요"></textarea>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>			      
+			  </div>
+			</div>							
+		</div>
 		<div id="replyWrap">
 			<table class="replyTalbe">
 				<c:forEach items="${detailViewReply}" var="replyList">				
@@ -161,7 +171,7 @@
 					<a href="/community/communityModify?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&boardCheck=C"><span type="button" class="btn btn-primary">수정</span></a>
 				</li>
 				<li>
-					<a href="/community/communityDelete?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&memberId=${sessionScope.memberId}" onclick="return delchk();"><span type="button" class="btn btn-primary">삭제</span></a>
+					<a href="/community/communityDelete?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&memberId=${sessionScope.memberId}"><span type="button" class="btn btn-primary">삭제</span></a>
 				</li>
 				<li>
 					<a href="/community/list?communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
