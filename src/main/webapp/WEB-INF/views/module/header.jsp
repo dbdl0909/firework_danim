@@ -116,7 +116,7 @@
 					</div>
 				</li>
 				<li class="hiddenNavWrap">
-					<a href="/search/infoSearch">추천여행</a>
+					<a href="/recommand/recommandMain">추천여행</a>
 				</li>
 				<li class="hiddenNavWrap">
 					<c:if test="${empty sessionScope.memberId}">
