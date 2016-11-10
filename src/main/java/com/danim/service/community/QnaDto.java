@@ -11,8 +11,8 @@ public class QnaDto {
 	private String communitySubject;
 	private String communityContent;
 	private Integer communityReadcount;
-	private Date communityDate;
-	private Date communityUpdate;
+	private String communityDate;
+	private String communityUpdate;
 	private Integer communityReplyCount;
 	
 	public String getCommunityNo() {
@@ -57,16 +57,16 @@ public class QnaDto {
 	public void setCommunityReadcount(Integer communityReadcount) {
 		this.communityReadcount = communityReadcount;
 	}
-	public Date getCommunityDate() {
+	public String getCommunityDate() {
 		return communityDate;
 	}
-	public void setCommunityDate(Date communityDate) {
+	public void setCommunityDate(String communityDate) {
 		this.communityDate = communityDate;
 	}
-	public Date getCommunityUpdate() {
+	public String getCommunityUpdate() {
 		return communityUpdate;
 	}
-	public void setCommunityUpdate(Date communityUpdate) {
+	public void setCommunityUpdate(String communityUpdate) {
 		this.communityUpdate = communityUpdate;
 	}
 	public Integer getCommunityReplyCount() {
@@ -83,5 +83,4 @@ public class QnaDto {
 				+ communityContent + ", communityReadcount=" + communityReadcount + ", communityDate=" + communityDate
 				+ ", communityUpdate=" + communityUpdate + ", communityReplyCount=" + communityReplyCount + "]";
 	}
-	
 }

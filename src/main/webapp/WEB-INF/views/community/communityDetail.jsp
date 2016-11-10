@@ -141,23 +141,23 @@
 		<div id="reportWrap" style="float:right;">
 			<button id="reportButton" type="button" class="btn btn-danger btn-xs">게시글 신고</button>
 			<div class="modal fade" id="reportModal" role="dialog">
-			  <div class="modal-dialog">	
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal">Close</button>
-			        <h4 class="modal-title">게시글 신고</h4>
-			      </div>
-			      <div class="modal-body">
-			      	<form id="reportForm" action="/community/reprot" method="post">
-						<textarea id="reportReason" placeholder="신고사유를 적어주세요"></textarea>
-			        </form>
-			      </div>
-			      <div class="modal-footer">
-			        <button id="reportSubmit" type="button" class="btn btn-default">신고</button>
-			      </div>
-			    </div>			      
-			  </div>
-			</div>							
+				<div class="modal-dialog">	
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">Close</button>
+							<h4 class="modal-title">게시글 신고</h4>
+						</div>
+						<div class="modal-body">
+							<form id="reportForm" action="/community/reprot" method="post">
+								<textarea id="reportReason" placeholder="신고사유를 적어주세요"></textarea>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button id="reportSubmit" type="button" class="btn btn-default">신고</button>
+						</div>
+					</div>			      
+				</div>
+			</div>				
 		</div>
 		<div id="replyWrap">
 			<table class="replyTalbe">

@@ -19,7 +19,7 @@ public class CommunityService {
 	@Autowired
 	CommunityDao communityDao;
 	
-    private final int LINE_PER_PAGE = 10;//한페이지에 보여줄 글 갯수 공지 제외
+    private final int LINE_PER_PAGE = 15;//한페이지에 보여줄 글 갯수 공지 제외
     private final int BLOCK_PER_PAGE = 5;//하단 페이징 블록의 갯수
     int startPage;
     int endPage;

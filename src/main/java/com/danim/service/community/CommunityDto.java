@@ -17,10 +17,11 @@ public class CommunityDto{
 	private Integer communityReadcount;
 	private Integer communityRating;
 	private String communityNotice;
-	private Date communityDate;
-	private Date communityUpdate;
+	private String communityDate;
+	private String communityUpdate;
 	private Integer communityReportCount;
 	private Integer communityReplyCount;
+	
 	public String getCommunityNo() {
 		return communityNo;
 	}
@@ -87,22 +88,18 @@ public class CommunityDto{
 	public void setCommunityNotice(String communityNotice) {
 		this.communityNotice = communityNotice;
 	}
-	
-	public Date getCommunityDate() {
+	public String getCommunityDate() {
 		return communityDate;
 	}
-	public void setCommunityDate(Date communityDate) {
+	public void setCommunityDate(String communityDate) {
 		this.communityDate = communityDate;
 	}
-	
-	public Date getCommunityUpdate() {
+	public String getCommunityUpdate() {
 		return communityUpdate;
 	}
-	
-	public void setCommunityUpdate(Date communityUpdate) {
+	public void setCommunityUpdate(String communityUpdate) {
 		this.communityUpdate = communityUpdate;
 	}
-	
 	public Integer getCommunityReportCount() {
 		return communityReportCount;
 	}
@@ -116,7 +113,7 @@ public class CommunityDto{
 		this.communityReplyCount = communityReplyCount;
 	}
 	
-	/*@Override
+	@Override
 	public String toString() {
 		return "CommunityDto [communityNo=" + communityNo + ", communityBan=" + communityBan + ", communityBanReason="
 				+ communityBanReason + ", communityCategoryNo=" + communityCategoryNo + ", planNo=" + planNo
@@ -125,6 +122,6 @@ public class CommunityDto{
 				+ communityRating + ", communityNotice=" + communityNotice + ", communityDate=" + communityDate
 				+ ", communityUpdate=" + communityUpdate + ", communityReportCount=" + communityReportCount
 				+ ", communityReplyCount=" + communityReplyCount + "]";
-	}*/
-	
+	}
+
 }
