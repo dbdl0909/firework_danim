@@ -203,10 +203,12 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community/communityReport", method = RequestMethod.POST)
-	public String communityReport(ReportDto reportDto) {
+	public String communityReport(ReportDto reportDto,
+								@RequestParam(value="communityCategoryNo") String communityCategoryNo) {
 		communityService.insertReport(reportDto);
+		logger.info("CommunityNo {} CommunityController.java", reportDto.getCommunityNo());
 		
-		return "redirect:/community/communityDetail?communityCategoryNo="+reportDto.getCommunityNo();
+		return "redirect:/community/communityDetail?communityCategoryNo="+communityCategoryNo+"&communityNo="+reportDto.getCommunityNo();
 	}
 	
 	@RequestMapping(value = "/community/communityDelete")

@@ -389,7 +389,7 @@
 				report_date				
 			)VALUES(
 				#{memberId},
-				#{communityNo}
+				#{communityNo},
 				#{replyNo},
 				#{reportReason},
 				CURDATE()
