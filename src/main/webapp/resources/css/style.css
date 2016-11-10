@@ -775,6 +775,7 @@ a.voted:hover {
 #footer #footContent ul li{font-size:14px; font-weight:400; padding:10px 0; color:#434343;}
 #footer #footContent ul li span{color:#e55d53; font-size:12px;}
 /* 캘린더 */
+/* Overall wrapper */
 .monthly {
 	background: #F3F3F5;
 	color:#545454;
@@ -783,10 +784,9 @@ a.voted:hover {
 	-ms-user-select: none;
 	user-select: none;
 	position: relative;
-	z-index:2;
 }
 
-/* Contains title & nav */
+/* Top bar containing title, navigation, and buttons */
 .monthly-header {
 	position: relative;
 	text-align:center;
@@ -795,9 +795,59 @@ a.voted:hover {
 	height: 40px;
 	box-sizing: border-box;
 }
+/* Center area of top bar containing title and buttons */
 .monthly-header-title {
 	font-size:.8em;
 	text-transform: uppercase;
+}
+
+/* Buttons for reverting to "today", and closing event list */
+.monthly-header-title a:link,
+.monthly-header-title a:visited {
+	display: inline-block;
+	border: 1px solid #ccc;
+	color: #545454;
+	text-decoration: none;
+	font-size: 11px;
+	height: 25px;
+	padding: 1px 10px 0 10px;
+	box-sizing: border-box;
+	transition:background .1s;
+}
+/* Add some roundy-ness */
+.monthly-header-title a:first-of-type {
+	border-top-left-radius:15px;
+	border-bottom-left-radius:15px;
+}
+.monthly-header-title a:last-of-type {
+	border-top-right-radius:15px;
+	border-bottom-right-radius:15px;
+}
+.monthly-header-title a:hover {
+	background: #8b8b8b;
+	border:1px solid #8b8b8b;
+	color:#fff;
+}
+.monthly-header-title a:active {
+	background: #222;
+	border:1px solid #222;
+	transition:none;
+}
+/* current month/yr block */
+.monthly-header-title-date,
+.monthly-header-title-date:hover {
+	background: #eee!important;
+	border:1px solid #ccc!important;
+	color:#545454!important;
+	cursor: default;
+}
+/* Button to reset to current month */
+.monthly-reset {
+	border-left:0!important;
+}
+/* Button to return to month view */
+.monthly-cal {
+	border-right:0!important;
 }
 /* wrapper for left button to make the clickable area bigger */
 .monthly-prev {
@@ -822,7 +872,9 @@ a.voted:hover {
 	width:5px;
 	height:5px;
 	margin:-3px 0 0 -5px;
-	transform:rotate(45deg) ;
+	-webkit-transform:rotate(45deg) ;
+		-ms-transform:rotate(45deg) ;
+	        transform:rotate(45deg) ;
 }
 /* wrapper for right button to make the clickable area bigger */
 .monthly-next {
@@ -847,17 +899,22 @@ a.voted:hover {
 	width:5px;
 	height:5px;
 	margin:-3px 0 0 -5px;
-	transform:rotate(45deg) ;
+	-webkit-transform:rotate(45deg) ;
+		-ms-transform:rotate(45deg) ;
+	        transform:rotate(45deg) ;
 }
 
 /* Day of the week headings */
 .monthly-day-title-wrap {
-	display: flex;
+	display:table;
+	table-layout:fixed;
+	width:100%;
 	background: #fff;
 	border-bottom: 1px solid #EBEBEB;
 }
 .monthly-day-title-wrap div {
-	width: calc(100% / 7);
+	width: 14.28%!important;
+	display:table-cell;
 	box-sizing:border-box;
 	position: relative;
 	font-weight: bold;
@@ -868,30 +925,34 @@ a.voted:hover {
 
 /* Calendar days wrapper */
 .monthly-day-wrap {
-	display:flex;
-	flex-wrap:wrap;
-	align-content:stretch;
+	display:table;
+	table-layout:fixed;
 	width:100%;
 	overflow: hidden;
-	z-index:3;
 }
-
+.monthly-week {
+	display:table-row;
+	width:100%;
+}
 /* Calendar Days */
 .monthly-day, .monthly-day-blank {
-	width: calc(100% / 7);
+	width: 14.28%!important;
+	display:table-cell;
+	vertical-align: top;
 	box-sizing:border-box;
 	position: relative;
 	font-weight: bold;
 	color:inherit;
 	background: #fff;
 	box-shadow: 0 0 0 1px #EBEBEB;
+	-webkit-transition: .25s;
 	transition:.25s;
 	padding:0;
 	text-decoration: none;
 }
 
 /* Trick to make the days' width equal their height */
-.monthly-day:before, .monthly-day-blank:before {
+.monthly-day:before {
 	content: "";
 	display: block;
 	padding-top: 100%;
@@ -935,8 +996,12 @@ a.voted:hover {
 	content: '';
 	width: 150%;
 	height: 2px;
-	transform-origin: left top;
-	transform: rotate(45deg);
+	-webkit-transform-origin: left top;
+		-ms-transform-origin: left top;
+	        transform-origin: left top;
+	-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
 	background: rgba(0, 0, 0, 0.1);
 	position: absolute;
 	left: 0;
@@ -960,89 +1025,10 @@ a.voted:hover {
 }
 .monthly-day-pick.monthly-today .monthly-day-number {
 	padding:0;
-	margin:22%;
+	margin:22% 22% 0 22%;
 }
 
-/* Button to reset to current month */
-.monthly-reset {
-	display: inline-block;
-	width: 9px;
-	height: 9px;
-	border: 2px solid #222;
-	border-radius: 9px;
-	position: relative;
-	opacity: .5;
-	margin-left: 5px;
-	vertical-align: middle;
-}
-.monthly-reset:hover {
-	opacity: 1;
-}
-/* Makes the little arrow on the reset button */
-.monthly-reset:before {
-	content: '';
-	border: 3px solid transparent;
-	border-left: 3px solid #fff;
-	border-bottom: 3px solid #fff;
-	position: absolute;
-	left: 2px;
-	top: 6px;
-}
-.monthly-reset:after {
-	content: '';
-	border: 3px solid transparent;
-	border-left: 3px solid #222;
-	border-bottom: 3px solid #222;
-	position: absolute;
-	left: 5px;
-	top: 5px;
-}
-/* Button to return to month view */
-.monthly-cal {
-	display: inline-block;
-	height:11px;
-	width:13px;
-	background:#222;
-	position: relative;
-	top:1px;
-	margin-right:5px;
-	opacity: .5;
-}
-.monthly-cal:hover {
-	cursor: pointer;
-	opacity: 1;
-}
-.monthly-cal:before {
-	content:'';
-	position: absolute;
-	width:2px;
-	height: 3px;
-	border:1px solid #fff;
-	background:#222;
-	top:-2px;
-	left:2px;
-}
-.monthly-cal:after {
-	content:'';
-	position: absolute;
-	width:2px;
-	height: 3px;
-	border:1px solid #fff;
-	background:#222;
-	top:-2px;
-	right:2px;
-}
-.monthly-cal div {
-	background: #fff;
-	height:6px;
-	width:11px;
-	position: absolute;
-	top:4px;
-	left:1px;
-}
-
-
-/* Class for days with events */
+/* Wrapper around events */
 .monthly-indicator-wrap {
 	position: relative;
 	text-align: center;
@@ -1074,13 +1060,15 @@ a.voted:hover {
 	background: rgba(233, 235, 236, 0.9);
 	overflow: auto;
 	position: absolute;
-	top: 55px;
+	top: 42px;
 	width: 100%;
-	height: calc(100% - 55px);
+	height: calc(100% - 42px);
 	display: none;
+	-webkit-transition: .25s;
 	transition:.25s;
-	transform:scale(0);
-	z-index:1;
+	-webkit-transform:scale(0);
+		-ms-transform:scale(0);
+	        transform:scale(0);
 }
 
 /* Days in Events List */
@@ -1119,10 +1107,7 @@ a.voted:hover {
 .item-has-event {
 	display: block;
 }
-.item-has-event span{
-	float:right;
-	cursor:pointer;	
-}
+
 .item-has-event:after{
     display:none!important;
 }
@@ -1143,18 +1128,18 @@ a.voted:hover {
 	font-size:.8em;
 	display: inline-block;
 }
-.monthly-list-time-start:not(:empty):after {
-	content:' -';
-	padding-right:5px;
+.monthly-list-time-end:not(:empty):before {
+	content:'-';
+	padding:0 2px;
 }
 
 /* Events List custom webkit scrollbar */
 
 .monthly-event-list::-webkit-scrollbar {width: 9px;}
- 
+
 /* Track */
 .monthly-event-list::-webkit-scrollbar-track {background: none;}
- 
+
 /* Handle */
 .monthly-event-list::-webkit-scrollbar-thumb {
 	background:#ccc;
@@ -1180,7 +1165,7 @@ a.voted:hover {
 		padding-top: 77%;
 	}
 	.monthly-day-event > .monthly-indicator-wrap {
-		width:100%;
+		width:auto;
 		max-width: none;
 	}
 	.monthly-indicator-wrap {
@@ -1189,7 +1174,7 @@ a.voted:hover {
 	.monthly-day .monthly-event-indicator {
 		display: block;
 		margin: 0 0 1px 0;
-		width: 100%;
+		width: auto;
 		height:20px;
 		font-size: 10px;
 		padding: 4px;

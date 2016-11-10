@@ -367,9 +367,11 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			}
 			e.preventDefault();
 		});
-		
+		$('.listed-event').click(function(){			
+			alert('dd');
+		});
 		// Clicking an event within the list
-		$(document.body).on('click', '#'+uniqueId+' .listed-event', function (e) {
+		/*$(document.body).on('click', '#'+uniqueId+' .listed-event', function (e) {
 			var href = $(this).attr('href');
 			// If there isn't a link, don't go anywhere
 			if(!href) {
@@ -384,7 +386,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 							//insertPlanMemo = $(this).find('memo').text(memo);
 							planMemo = $(this).find('memo').text();
 							if(thisId==eventId) {									
-								/*alert(planMemo);*/
+								alert(planMemo);
 								$('#memoWrap').show();
 								$('#submitMemo').click(function(){
 									$('#submitMemo').attr('data-eventid', thisId);
@@ -396,7 +398,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				});
 			});			
 
-		});		
+		});	*/	
 		}
 	});
 })(jQuery);

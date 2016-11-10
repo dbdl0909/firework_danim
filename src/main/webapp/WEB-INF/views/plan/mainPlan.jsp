@@ -66,11 +66,30 @@
 		    		$('.hiddenPlan').removeClass('on');		    		
 		    		if(!($(this).hasClass('on'))){
 		    			$('.hiddenPlan').eq(idx).addClass('on');
-		    		}	    		
+		    		}
+		    		var monthly = new Object();
+		    		var plan = new Array();
+		    		$('.leftMenuLi').each(function(i){
+		    			var planContent = new Object();
+			    		planContent.id = i,
+			    		planContent.name = $(this).find('.cityName').text(),
+			    		planContent.startDate = $(document).find('#startDate').val(),
+			    		planContent.endDate = $(document).find('#endDate').val(),
+			    		planContent.startTime = $(this).find('.startTime').val(),
+			    		planContent.endTime = $(this).find('.endTime').val(),
+			    		planContent.color = '#434343',
+			    		planContent.url = '';
+			    		plan.push(planContent);
+		    		});
+		    		monthly.monthly = plan;
+		    		var jsonInfo = JSON.stringify(monthly)
+		    		localStorage.setItem('events', jsonInfo)
+					console.log(jsonInfo);
 		    	});
 				$('#mycalendar').monthly({
 					mode: 'event',
-					xmlUrl: '/events.xml'
+					jsonUrl: '/plan/mainPlan',
+					dataType: 'json'
 				});
 				
 			});
@@ -191,8 +210,10 @@
 		</div>
 		<div id="myPlanWrap"  class="hiddenPlan">
 			<div class="container">
-				<div id="myPlanCalendar" style="width:52.5%; float:left; z-index:2; postion:absolute;">
-					<div class="monthly" id="mycalendar"></div>
+				<div id="myPlanCalendar">
+					<div style="width:100%; max-width:600px; display:inline-block;">
+						<div class="monthly" id="mycalendar"></div>
+					</div>
 				</div>
 			</div>				
 		</div>
