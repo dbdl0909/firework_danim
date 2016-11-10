@@ -250,13 +250,13 @@
 							<div>
 								<label>여행종류</label>
 								<select id="planType" name="planType">
-									<option>배낭</option>
-									<option>신혼</option>
-									<option>가족</option>
-									<option>비즈니스</option>
-									<option>커플</option>
-									<option>솔로</option>
-									<option>단체</option>
+									<option value="배낭">배낭</option>
+									<option value="신혼">신혼</option>
+									<option value="가족">가족</option>
+									<option value="비즈니스">비즈니스</option>
+									<option value="커플">커플</option>
+									<option value="솔로">솔로</option>
+									<option value="단체">단체</option>
 								</select>
 							</div>
 		 				</div>
