@@ -260,7 +260,7 @@ function infoWindowEvent() {
 								"</div>" +
 							"</li>"
 						);
-			    		
+			    		//차례대로 숙박일수 조정 시는 잘나오는데, 중간에서 숙박일수 조정시  다음 루트의 시간변동이 이루어지지 않음
 			    		//stayCountInit = document.getElementsByClassName('stayCount')[cityRouteLiIndex].value;
 			    		//console.log('stayCountInit : ' + stayCountInit);
 			    		

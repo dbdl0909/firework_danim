@@ -73,8 +73,8 @@
 		    			var planContent = new Object();
 			    		planContent.id = i,
 			    		planContent.name = $(this).find('.cityName').text(),
-			    		planContent.startDate = $(document).find('#startDate').val(),
-			    		planContent.endDate = $(document).find('#endDate').val(),
+			    		planContent.startDate = $(this).find('.cityRouteStartDate').val(),
+			    		planContent.endDate = $(this).find('.cityRouteEndDate').val(),
 			    		planContent.startTime = $(this).find('.startTime').val(),
 			    		planContent.endTime = $(this).find('.endTime').val(),
 			    		planContent.color = '#434343',
