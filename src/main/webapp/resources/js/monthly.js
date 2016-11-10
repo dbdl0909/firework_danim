@@ -162,23 +162,23 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				var addEvents = function(event) {
 					// Year [0]   Month [1]   Day [2]
 					
-					var fullstartDate = options.dataType == 'xml' ? $(event).find('startdate').text() : planContent.startDate,
+					var fullstartDate =  event.startDate,
 						startArr = fullstartDate.split("-"),
 						startYear = startArr[0],
 						startMonth = parseInt(startArr[1], 10),
 						startDay = parseInt(startArr[2], 10),
-						fullendDate = options.dataType == 'xml' ? $(event).find('enddate').text() : planContent.endDate,
+						fullendDate = event.endDate,
 						endArr = fullendDate.split("-"),
 						endYear = endArr[0],
 						endMonth = parseInt(endArr[1], 10),
 						endDay = parseInt(endArr[2], 10),
-						eventURL = options.dataType == 'xml' ? $(event).find('url').text() : planContent.url,
-						eventTitle = options.dataType == 'xml' ? $(event).find('name').text() : planContent.name,
-						eventColor = options.dataType == 'xml' ? $(event).find('color').text() : planContent.color,
-						eventId = options.dataType == 'xml' ? $(event).find('id').text() : planContent.id,
-						startTime = options.dataType == 'xml' ? $(event).find('starttime').text() : planContent.startTime,
+						eventURL = options.dataType = event.url,
+						eventTitle = options.dataType = event.name,
+						eventColor = options.dataType = event.color,
+						eventId = options.dataType = event.id,
+						startTime = options.dataType = event.startTime,
 						startSplit = startTime.split(":"),
-						endTime = options.dataType == 'xml' ? $(event).find('endtime').text() : planContent.endTime,
+						endTime = options.dataType = event.endTime,
 						endSplit = endTime.split(":"),
 						eventLink = '',
 						startPeriod = 'AM',
@@ -287,23 +287,31 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 					}
 				};
-
-				var eventsResource = (options.dataType == 'xml' ? options.xmlUrl : options.jsonUrl);
-
-				$.get('/plan/mainPlan', {now: jQuery.now()}, function(d){
-					if (options.dataType == 'xml') {
-						$(d).find('event').each(function(index, event) {
-							addEvents(event);
-						});
-					} else if (options.dataType == 'json') {
-						$.each(d.monthly, function(index, event) {
-							addEvents(event);
-						});
-					}
-				}, options.dataType).fail(function() {
-					console.error('Monthly.js failed to import '+eventsResource+'. Please check for the correct path & '+options.dataType+' syntax.');
+				$(document).bind('click', function(){
+					$('.monthly-event-indicator').remove();
+					$('.listed-event').remove();
+					var json = null;
+					json = JSON.parse($('#jsonContainer').text());
+					//alert(json.monthly[0].name);
+					$.each(json.monthly, function(i, json){
+						addEvents(json);
+						//alert(json.name);
+					});
+					/*var eventsResource = (options.dataType == 'xml' ? options.xmlUrl : options.jsonUrl);	
+					$.get(''+eventsResource+'', {now: jQuery.now()}, function(d){
+						if (options.dataType == 'xml') {
+							$(d).find('event').each(function(index, event) {
+								addEvents(event);
+							});
+						} else if (options.dataType == 'json') {
+							$.each(d.monthly, function(index, event) {
+								addEvents(event);
+							});
+						}
+					}, options.dataType).fail(function() {
+						//console.error('Monthly.js failed to import '+eventsResource+'. Please check for the correct path & '+options.dataType+' syntax.');
+					});*/
 				});
-
 			}
 			var divs = $("#"+uniqueId+" .m-d");
 			for(var i = 0; i < divs.length; i+=7) {

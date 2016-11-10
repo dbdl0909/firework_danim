@@ -82,9 +82,9 @@
 			    		plan.push(planContent);
 		    		});
 		    		monthly.monthly = plan;
-		    		var jsonInfo = JSON.stringify(monthly)
-		    		localStorage.setItem('events', jsonInfo)
-					console.log(jsonInfo);
+		    		var jsonInfo = JSON.stringify(monthly);
+		    		localStorage.setItem('events',  JSON.stringify(monthly));
+		    		document.getElementById("jsonContainer").innerHTML = localStorage.getItem('events');
 		    	});
 				$('#mycalendar').monthly({
 					mode: 'event',
@@ -229,7 +229,9 @@
 					
 				</div>
 			</div>
+			<div id="jsonContainer">
 			
+			</div>
 			<!-- 플래너 저장 버튼 누르면 나오는 Modal -->
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">

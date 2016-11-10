@@ -68,8 +68,8 @@
 		$('#openIntroWrap').click(function(){
 			$('#introWrap').slideDown();
 		});
-		$('#closeIntro').click(function(){			
-			$('#introWrap').slideUp();
+		$('#introWrap').click(function(){			
+			$(this).slideUp();
 		});	
 	})
 </script>
