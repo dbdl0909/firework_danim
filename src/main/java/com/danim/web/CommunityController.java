@@ -200,6 +200,12 @@ public class CommunityController {
 		return "redirect:/community/communityDetail?communityCategoryNo="+communityCategoryNo+"&communityNo="+communityNo;
 	}
 	
+	@RequestMapping(value = "/community/communityReport", method = RequestMethod.POST)
+	public String communityReport() {
+		
+		return "";
+	}
+	
 	@RequestMapping(value = "/community/communityDelete")
 	public String deleteCommunity(@RequestParam(value="communityNo") int communityNo, 
 								@RequestParam(value="communityCategoryNo") String communityCategoryNo,

@@ -55,10 +55,15 @@
 			        $('div.modal').modal();
 			    })
 			    
+			    $('#reportSubmit').click(function(){
+			    	$('#reportForm').submit();
+			    });
+			    
 			});
 		</script>
 		<style type="text/css">
 			.modal-dialog{z-index: 3000;}
+			.modal-content{margin-top: 200px;}
 			#reportForm{height: 180px;}
 			#reportReason{height: 200px; width: 568px;}
 		</style>
@@ -143,12 +148,12 @@
 			        <h4 class="modal-title">게시글 신고</h4>
 			      </div>
 			      <div class="modal-body">
-			      	<form id="reportForm" action="" method="post">
+			      	<form id="reportForm" action="/community/reprot" method="post">
 						<textarea id="reportReason" placeholder="신고사유를 적어주세요"></textarea>
 			        </form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default">신고</button>
+			        <button id="reportSubmit" type="button" class="btn btn-default">신고</button>
 			      </div>
 			    </div>			      
 			  </div>

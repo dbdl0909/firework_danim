@@ -611,6 +611,7 @@ display:none; margin-left:-130px; top:130px;}
 /* 추천 */
 #voteArea{width:100%; margin:0 auto; text-align:center; padding:18px 0; height:100px;}
 #voteWrap{width:100%; margin:0 auto; text-align:center;margin-left:45%;}
+#voteForm{height: 0px;}
 .votecard {
 	background: url(/resources/images/sprite.png) no-repeat 0 0;
 	padding: 4px;
