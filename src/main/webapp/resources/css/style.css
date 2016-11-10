@@ -550,7 +550,7 @@ display:none; margin-left:-130px; top:130px;}
 #header #headerWrap #searchWrap{color: #687074; float:left; margin-top: 60px;}
 #header #headerWrap #searchWrap .glyphicon{font-size: 18px;}
 #header #headerWrap #searchWrap .searchCityNameSpan{cursor: pointer; margin-left: 10px; opacity: 0.8; font-size: 26px;}
-#searchHeader{width:100%; height:116px; border-bottom:1px solid #ccc; display: none; margin-top: 50px;}
+#searchHeader{width:100%; height:116px; border-bottom:1px solid #ccc; display: none; margin-top: 45px;}
 #searchHeader .searchInner{margin: 0 auto; width: 1200px; height: 116px;}
 #searchHeader .searchInner #searchGlyphicon{font-size: 25px; float:left; margin-right: 20px; margin-top: 44px;}
 #searchHeader .searchInner #closeSearchForm{cursor: pointer; font-size: 38px;  padding: 30px; float: right;}
