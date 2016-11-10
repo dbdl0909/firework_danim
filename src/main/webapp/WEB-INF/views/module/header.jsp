@@ -73,14 +73,6 @@
 		});	
 	})
 </script>
-<style>
-	#openIntroWrap{width:100%;  height:50px; position:absolute; top:0; background:url(resources/images/bg2.jpg); background-size: cover; text-align:center; cursor:pointer;}
-	#openIntroContent{margin-top:13px;}
-	#openIntroContent span{color:#fff; font-size:18px; margin-top:10px;}
-	#introWrap{display:none; width:100%; position:absolute; top:0;text-align:center; background:#000; margin:0 auto; z-index:999; margin-top:50px; }
-	#closeIntro{color:#fff; cursor:pointer; position:fixed; top:0; right:0; margin-top:30px; margin-right:50px; font-size:28px; z-index:1000;}
-	#introContent{margin:0 auto; text-align:center;}
-</style>
 </head>
 <body>
 <!-- 헤더 -->
