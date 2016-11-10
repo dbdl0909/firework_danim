@@ -15,33 +15,42 @@
 		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		 <!-- <script>
+		 $(document).ready(function() {
+			 memberUpdateForm.submit(function() {
+				 
+			 });
+		 });
+		 </script> -->
 	</head>
 	<body>
-		<h3>회원정보수정</h3>
-		<table class="table table-bordered">
-			<tbody>
-				<tr>
-					<td>아이디</td>
-					<td><input type="text" name="memberId" value="${memberAll.memberId}" readonly></td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td><input type="text" name="memberName" value="${memberAll.memberName}"></td>
-				</tr>
-				<tr>
-					<td>생년월일</td>
-					<td><input type="text" name="memberInfoBirth" value="${memberAll.memberInfoBirth}"></td>
-				</tr>
-				<tr>
-					<td>성별</td>
-					<td><input type="text" name="memberInfoGender" value="${memberAll.memberInfoGender}" readonly></td>
-				</tr>
-				<tr>
-					<td>이메일</td>
-					<td><input type="text" name="memberInfoGender" value="${memberAll.memberInfoEmail}"></td>
-				</tr>
-			</tbody>
-		</table>
-		<input type="button" value="내정보수정">
+		<form class="memberUpdateForm" action="/member/memberUpdateSubmit" method="post">
+			<h3>회원정보수정</h3>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<td>아이디</td>
+						<td><input type="text" name="memberId" value="${memberAll.memberId}" readonly></td>
+					</tr>
+					<tr>
+						<td>닉네임</td>
+						<td><input type="text" name="memberName" value="${memberAll.memberName}"></td>
+					</tr>
+					<tr>
+						<td>생년월일</td>
+						<td><input type="text" name="memberInfoBirth" value="${memberAll.memberInfoBirth}"></td>
+					</tr>
+					<tr>
+						<td>성별</td>
+						<td><input type="text" name="memberInfoGender" value="${memberAll.memberInfoGender}" readonly></td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td><input type="text" name="memberInfoGender" value="${memberAll.memberInfoEmail}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="button" value="내정보수정">
+		</form>
 	</body>
 </html>

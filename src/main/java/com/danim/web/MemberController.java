@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.member.MemberDto;
 import com.danim.service.member.MemberService;
+import com.danim.service.member.MemberTotalDto;
 
 @Controller
 public class MemberController {
@@ -79,6 +80,37 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	
+	//연동로그인
+	@RequestMapping(value="/member/memberLinkLoginSubmit", method = RequestMethod.POST)
+	public String memberLinkLogin(HttpServletRequest request,
+			@RequestParam(value="memberId") String memberId,
+			@RequestParam(value="memberName") String memberName) {
+		logger.info("memberId : {} memberLinkLogin MemberController.java", memberId);
+		logger.info("memberName : {} memberLinkLogin MemberController.java", memberName);
+		
+		Map<String, String> memberLoginTotal = memberService.memberLinkCheck(memberId, memberName);
+		logger.info("memberLoginTotal : {}", memberLoginTotal);
+		if(memberLoginTotal != null) {
+			HttpSession session  = request.getSession(true);
+			session.setAttribute("memberId", memberId);
+			session.setAttribute("memberLevel", memberLoginTotal.get("memberLevel"));
+			session.setAttribute("memberName", memberLoginTotal.get("memberName"));
+			logger.info("memberLevel : {}", memberLoginTotal.get("memberLevel"));
+			logger.info("memberName : {}", memberLoginTotal.get("memberName"));
+		}
+		
+		//return "redirect:/";
+		return null;
+	}
+	//외부회원 입력(연동)
+	@RequestMapping(value = "/member/memberLinkSubmit", method = RequestMethod.POST)
+	public String memberLinkInsert(Model model, MemberTotalDto memberTotalDto) {
+		logger.info("memberLinkInsert MemberController.java");
+		logger.info("memberTotalDto : {}", memberTotalDto);
+		memberService.inserLinkMember(memberTotalDto);
+		return "redirect:/";
+	}	
 	//로그인폼
 	@RequestMapping(value="/member/memberLoginForm", method = RequestMethod.GET)
 	public String memberLogin(Model model) {
@@ -97,7 +129,7 @@ public class MemberController {
 	public String memberJoin(Model model) {
 		return "member/memberJoinForm";
 	}
-	//입력폼 실행
+	//내부회원 입력폼 실행
 	@RequestMapping(value = "/member/memberJoinSubmit", method = RequestMethod.POST)
 	public String memberInsert(Model model, MemberDto memberDto) {
 		logger.info("memberInsert MemberController.java");

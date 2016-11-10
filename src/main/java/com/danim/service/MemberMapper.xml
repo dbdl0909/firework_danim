@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.danim.service.MemberMapper">
+	<!-- 회원정보 수정 -->
+	<update id="memberUpdeat"
+			parameterType="String">
+	
+	</update>
 	<!-- 회원정보 조회 -->
 	<select id="memberSelectInfo"
 			resultType="com.danim.service.member.MemberSelectInfoDto"
@@ -107,7 +112,7 @@
 				SYSDATE(),
 				DEFAULT,
 				#{memberIdCheck}
-		);
+			);
 	</insert>
 	<!-- MemberInfo입력 (내부회원) -->
 	<insert id="insertMemberInfo"
@@ -125,6 +130,42 @@
 				#{memberInfoBirth},
 				#{memberInfoGender},
 				#{memberInfoEmail}
-		);
+			);
 	</insert>
+	<!-- MemberInfo입력 (외부회원) -->
+	<insert id="memberLinkJoin"
+			parameterType="com.danim.service.member.MemberTotalDto">
+		INSERT INTO
+		 	member_total(
+			 	member_id,
+			 	member_level
+				member_name,
+				member_status,
+				member_date,
+				member_update,
+				member_login_check,
+				member_id_check
+			) VALUES (
+				#{memberId},
+				DEFAULT,
+				#{memberName},
+				DEFAULT,
+				SYSDATE(),
+				SYSDATE(),
+				DEFAULT,
+				#{memberIdCheck}
+			);
+	</insert>
+	
+	<select id="memberLinkCheck"
+		parameterType="com.danim.service.member.MemberTotalDto">
+		SELECT
+			COUNT(total.member_id)
+		FROM
+			member_total as total
+		WHERE
+			total.member_id = 'link01'
+		AND
+			total.member_name = '연동회원1';
+	</select>
 </mapper>

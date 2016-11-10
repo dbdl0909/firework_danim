@@ -39,7 +39,16 @@ public class MemberDao {
 		map.put("memberInfoPassword", memberInfoPassword);
 		return sessionTemplate.selectOne(nameSpace+".memberCheck", map);
 	}
-	
+	//연동로그인 체크
+	public Map<String, String> memberLinkCheck(String memberId, String memberName) {
+		logger.info("memberCheck() MemberDao.java");
+		logger.info("memberId : {}", memberId);
+		logger.info("memberName : {}", memberName);
+		Map map = new HashMap();
+		map.put("memberId", memberId);
+		map.put("memberName", memberName);
+		return sessionTemplate.selectOne(nameSpace+".memberLinkCheck", map);
+	}
 	//모든 회원 리스트 출력
 	public List<MemberDto> selectMemberAll() {
 		logger.info("selectMemberAll() MemberDao.java");

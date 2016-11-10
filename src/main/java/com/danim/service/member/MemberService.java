@@ -42,18 +42,27 @@ public class MemberService {
 	//로그인 아이디 체크
 	public Map<String, String> selectMemberCheck(String memberId, String memberInfoPassword) {
 		logger.info("selectMemberCheck() MemberService.java");
-		
 		Map<String, String> resultMap = memberDao.memberCheck(memberId, memberInfoPassword);
-		
 		if(resultMap == null) {
 			logger.info("일치하는 아이디 없음");
 		} else {
 			logger.info("일치하는 아이디 있음");
 		}
-		
 		return resultMap;
 	}
-	
+	//연동로그인 아이디 체크
+	public Map<String, String> memberLinkCheck(String memberId, String memberName) {
+		logger.info("memberLinkCheck() MemberService.java");
+		Map<String, String> resultMap = memberDao.memberLinkCheck(memberId, memberName);
+		if(resultMap == null) {
+			logger.info("일치하는 아이디 없음");
+			
+		} else {
+			logger.info("일치하는 아이디 있음");
+			
+		}
+		return resultMap;
+	}
 	//회원리스트 출력
 	public List<MemberDto> selectMemberAll() {
 		logger.info("selectMemberAll() MemberService.java");
@@ -84,6 +93,16 @@ public class MemberService {
 		
 		memberDao.insertMemberTotal(memberTotalInsertDto);
 		memberDao.insertMemberInfo(memberInfoDto);
+	}
+	
+	//외부회원 가입 메서드  :total(모든회원)테이블에만 입력
+	public void inserLinkMember(MemberTotalDto memberTotalDto) {
+		logger.info("insertMember() MemberService.java");
 		
+		memberTotalInsertDto.setMemberId(memberTotalDto.getMemberId());
+		memberTotalInsertDto.setMemberName(memberTotalDto.getMemberName());
+		memberTotalInsertDto.setMemberIdCheck(memberTotalDto.getMemberIdCheck());
+		logger.info("memberTotalInsertDto : {}", memberTotalInsertDto);
+		memberDao.insertMemberTotal(memberTotalInsertDto);
 	}
 }
