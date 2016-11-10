@@ -742,7 +742,7 @@ $(document).ready(function() {
 					$('#landmarkInfoPopWrap').show();
 					
 					$.ajax({
-						url:'http://localhost/search/landmarkInfo',
+						url:'/search/landmarkInfo',
 						data:{landmarkInfoNo:landmarkInfoNo, cityInfoName:clickCityName},
 						type:'GET',
 						success:function(data){
