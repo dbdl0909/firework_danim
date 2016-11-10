@@ -22,6 +22,16 @@ public class PlanController {
 	
 	Model model;
 	
+	//mainPlan에서 넘어온 값들 받아서 입력하기 
+	@RequestMapping(value = "/plan/planInfo")
+	public String planInfo(Model model) {
+		logger.info("planInfo() PlanController.java");
+		
+		
+		
+		return "";
+	}
+	
 	@RequestMapping(value = "/plan/mainPlan")
 	public String mainPlan(Model model) {	//@RequestParam(value="do")String doArea
 		logger.info("mainPlan() PlanController.java");

@@ -112,118 +112,162 @@
 	    </style>
 	</head>
 	<body>
-	    <div id="mainPlanDivRoot" class="clearfix">
-		    <div id="logoWrap">
-				<a href="/"><img src="../../resources/images/logo.png" ></a>
-			</div>
-	    	<div id="mainPlanDivTop">
-	    		<div id="tabWrap">
-		    		<ul id="planTabList" class="clearfix">
-		    			<li  id="planTabRoute">도시루트</li>
-		    			<li id="planTabDiary">일정표</li>
-		    		</ul>
-	    		</div>
-				<div id="calendarWrap">
-					<ul>
-						<li>
-							<label for="startDate"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">출발일</span></label>
-							<input type="date" id="startDate" name="startDate"/>
-						</li>
-						<li>					
-							<label for="endDate"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">종료일</span></label>
-							<input type="date" id="endDate" name="endDate"/>
-						</li>
-						<li>
-							<label for="stayDay"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">여행기간</span></label>
-							<input type="text" id="stayDay" name="stayDay" value="0"/>
-						</li>
-					</ul>
+		<form id="mainPlanSubmit" method="post" action="/plan/planInfo">
+		    <div id="mainPlanDivRoot" class="clearfix">
+			    <div id="logoWrap">
+					<a href="/"><img src="../../resources/images/logo.png" ></a>
 				</div>
-			</div>
-			<div class="hiddenPlan on">
-				<div id="mainPlanWrap">
-					<div id="mainPlanDivLeft">
-						<div id="mainPlanDivLeftCityList">
-							<label>도시 목록</label>
-						</div>
-						<div id="leftMenuCityList">
-							<ul id="mainPlanCityUl">
-								<c:forEach var="listCityInfo" items="${listCityInfo}">
-							    	<li class="cityInfoLi">${listCityInfo.cityInfoName}</li>
-							    </c:forEach>
-							</ul>
-						</div>
+		    	<div id="mainPlanDivTop">
+		    		<div id="tabWrap">
+			    		<ul id="planTabList" class="clearfix">
+			    			<li  id="planTabRoute">도시루트</li>
+			    			<li id="planTabDiary">일정표</li>
+			    		</ul>
+		    		</div>
+					<div id="calendarWrap">
+						<ul>
+							<li>
+								<label for="startDate"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">출발일</span></label>
+								<input type="date" id="startDate" name="startDate"/>
+							</li>
+							<li>					
+								<label for="endDate"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">종료일</span></label>
+								<input type="date" id="endDate" name="endDate"/>
+							</li>
+							<li>
+								<label for="stayDay"><span class="glyphicon glyphicon-calendar"></span><span class="calendrDay">여행기간</span></label>
+								<input type="text" id="stayDay" name="stayDay" value="0"/>
+							</li>
+							<li>
+								<input type="button" id="planInfoSet" value="플래너 저장" class="btn btn-default" data-toggle="modal" data-target="#myModal"/>
+							</li>
+						</ul>
 					</div>
-					<div id="mainPlanDivLeft2">
-						<div id="mainPlanDivLeftLabel">
-							<label>도시 루트</label>
-						</div>
-						<div id="leftMenuRouteList">
-							<form>
-								<ul id="mainPlanUl">
-								</ul>
-							</form>
-						</div>
-					</div>				
 				</div>
-				<div id="mainPlanDivLeft3">
-					<div id="mainPlanDivLeftLabel2">
-						<label id="clickCityName"></label>
-						<img id="mainPlanDivLeft3Close" src="../../resources/images/planIcon/closeArrow.png"/>
+				<div class="hiddenPlan on">
+					<div id="mainPlanWrap">
+						<div id="mainPlanDivLeft">
+							<div id="mainPlanDivLeftCityList">
+								<label>도시 목록</label>
+							</div>
+							<div id="leftMenuCityList">
+								<ul id="mainPlanCityUl">
+									<c:forEach var="listCityInfo" items="${listCityInfo}">
+								    	<li class="cityInfoLi">${listCityInfo.cityInfoName}</li>
+								    </c:forEach>
+								</ul>
+							</div>
+						</div>
+						<div id="mainPlanDivLeft2">
+							<div id="mainPlanDivLeftLabel">
+								<label>도시 루트</label>
+							</div>
+							<div id="leftMenuRouteList">
+								<form>
+									<ul id="mainPlanUl">
+									</ul>
+								</form>
+							</div>
+						</div>				
+					</div>
+					<div id="mainPlanDivLeft3">
+						<div id="mainPlanDivLeftLabel2">
+							<label id="clickCityName"></label>
+							<img id="mainPlanDivLeft3Close" src="../../resources/images/planIcon/closeArrow.png"/>
+						</div>
+						
+						<div id="mainPlanDivLeftTab">
+							<div style="background-color:#E9F5FF;">
+								<!-- <label>명소</label> -->
+								<p id="mainPlanlandmarkIcon" class="iconImg onIcon"></p>
+								<!-- <img id="mainPlanlandmarkIcon" class="iconImg" src="../../resources/images/planIcon/landmarkIcon.png"/> -->
+							</div>
+							<div style="background-color:#E9F5FF;">
+								<!-- <label>식당</label> -->
+								<p id="mainPlanEateryIcon" class="iconImg"></p>
+								<!-- <img id="mainPlanEateryIcon" class="iconImg" src="../../resources/images/planIcon/eateryIcon.png"/> -->
+							</div>
+							<div style="background-color:#E9F5FF;">
+								<p id="mainPlanStayIcon" class="iconImg"></p>
+								<!-- <label>숙소</label> -->
+								<!-- <img id="mainPlanStayIcon" class="iconImg" src="../../resources/images/planIcon/stayIcon.png"/> -->
+							</div>
+							<div style="background-color:#E9F5FF;">
+								<p id="mainPlanEventIcon" class="iconImg"></p>
+								<!-- <label>축제</label> -->
+								<!-- <img id="mainPlanEventIcon" class="iconImg" src="../../resources/images/planIcon/eventIcon.png"/> -->
+							</div>
+						</div>
+						<div id="mainPlanDivLeftTabMenu">
+							<div id="leftMenuList">
+								<ul id="mainPlanTotalInfoUl" style="margin-bottom: 0px;">
+								</ul>
+							</div>
+						</div>
 					</div>
 					
-					<div id="mainPlanDivLeftTab">
-						<div style="background-color:#E9F5FF;">
-							<!-- <label>명소</label> -->
-							<p id="mainPlanlandmarkIcon" class="iconImg onIcon"></p>
-							<!-- <img id="mainPlanlandmarkIcon" class="iconImg" src="../../resources/images/planIcon/landmarkIcon.png"/> -->
+					<div id="mainPlanDivContent">
+						<div id="map">
 						</div>
-						<div style="background-color:#E9F5FF;">
-							<!-- <label>식당</label> -->
-							<p id="mainPlanEateryIcon" class="iconImg"></p>
-							<!-- <img id="mainPlanEateryIcon" class="iconImg" src="../../resources/images/planIcon/eateryIcon.png"/> -->
-						</div>
-						<div style="background-color:#E9F5FF;">
-							<p id="mainPlanStayIcon" class="iconImg"></p>
-							<!-- <label>숙소</label> -->
-							<!-- <img id="mainPlanStayIcon" class="iconImg" src="../../resources/images/planIcon/stayIcon.png"/> -->
-						</div>
-						<div style="background-color:#E9F5FF;">
-							<p id="mainPlanEventIcon" class="iconImg"></p>
-							<!-- <label>축제</label> -->
-							<!-- <img id="mainPlanEventIcon" class="iconImg" src="../../resources/images/planIcon/eventIcon.png"/> -->
-						</div>
-					</div>
-					<div id="mainPlanDivLeftTabMenu">
-						<div id="leftMenuList">
-							<ul id="mainPlanTotalInfoUl" style="margin-bottom: 0px;">
-							</ul>
-						</div>
-					</div>
-				</div>
-				
-				<div id="mainPlanDivContent">
-					<div id="map">
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="myPlanWrap"  class="hiddenPlan">
-			<div class="container">
-				<div id="myPlanCalendar">
-					<div style="width:100%; max-width:600px; display:inline-block;">
-						<div class="monthly" id="mycalendar"></div>
+			<div id="myPlanWrap"  class="hiddenPlan">
+				<div class="container">
+					<div id="myPlanCalendar">
+						<div style="width:100%; max-width:600px; display:inline-block;">
+							<div class="monthly" id="mycalendar"></div>
+						</div>
 					</div>
-				</div>
-			</div>				
-		</div>
-		
-		<jsp:include page="../module/footer.jsp"></jsp:include>
-		
-		<div id="landmarkInfoPopWrap" style="width:100%; height:100%; display:none; position:absolute; top:0; background:#000; z-index:999999;">
-			<div id="landmarkInfoPopContent" class="container" style="height:100%; background:#fff; margin:0 auto; opacity:1;">
-				
+				</div>				
 			</div>
-		</div>
+			
+			<jsp:include page="../module/footer.jsp"></jsp:include>
+			
+			<div id="landmarkInfoPopWrap" style="width:100%; height:100%; display:none; position:absolute; top:0; background:#000; z-index:999999;">
+				<div id="landmarkInfoPopContent" class="container" style="height:100%; background:#fff; margin:0 auto; opacity:1;">
+					
+				</div>
+			</div>
+			
+			<!-- 플래너 저장 버튼 누르면 나오는 Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+	  
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">플래너 저장</h4>
+						</div>
+						<div class="modal-body">
+							<div>
+								<label>플랜명</label>
+								<input type="text" id="planName" name="planName" />
+								<label>인원수</label>
+								<input type="text" id="planHeadcount" name="planHeadcount" />
+							</div>
+							<div>
+								<label>여행종류</label>
+								<select id="planType" name="planType">
+									<option>배낭</option>
+									<option>신혼</option>
+									<option>가족</option>
+									<option>비즈니스</option>
+									<option>커플</option>
+									<option>솔로</option>
+									<option>단체</option>
+								</select>
+							</div>
+		 				</div>
+						<div class="modal-footer">
+							<button type="button" id="planInfoSubmit" class="btn btn-default">저장</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						</div>
+					</div>
+	      
+				</div>
+			</div>
+		</form>
 	</body>
 </html>
