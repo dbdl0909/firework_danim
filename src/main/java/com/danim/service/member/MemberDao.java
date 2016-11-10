@@ -30,7 +30,7 @@ public class MemberDao {
 		sessionTemplate.update(nameSpace+".memberUpdate", memberDto);		
 	}	
 	//로그인 체크
-	public Map<String, String>memberCheck(String memberId, String memberInfoPassword) {
+	public Map<String, String> memberCheck(String memberId, String memberInfoPassword) {
 		logger.info("memberCheck() MemberDao.java");
 		logger.info("memberId : {}", memberId);
 		logger.info("memberInfoPassword : {}", memberInfoPassword);
@@ -40,14 +40,34 @@ public class MemberDao {
 		return sessionTemplate.selectOne(nameSpace+".memberCheck", map);
 	}
 	//연동로그인 체크
-	public Map<String, String> memberLinkCheck(String memberId, String memberName) {
-		logger.info("memberCheck() MemberDao.java");
+	public int memberLinkCheck(String memberId, String memberName) {
+		logger.info("memberLinkCheck() MemberDao.java");
 		logger.info("memberId : {}", memberId);
 		logger.info("memberName : {}", memberName);
 		Map map = new HashMap();
 		map.put("memberId", memberId);
 		map.put("memberName", memberName);
 		return sessionTemplate.selectOne(nameSpace+".memberLinkCheck", map);
+	}
+	//첫 연동회원 DB저장
+	public int memberLinkJoin(String memberId, String memberName) {
+		logger.info("memberLinkJoin() MemberDao.java");
+		logger.info("memberId : {}", memberId);
+		logger.info("memberName : {}", memberName);
+		Map map = new HashMap();
+		map.put("memberId", memberId);
+		map.put("memberName", memberName);
+		return sessionTemplate.insert(nameSpace+".memberLinkJoin", map);
+	}
+	//연동회원 로그인
+	public MemberTotalDto memberSelectLink(String memberId, String memberName) {
+		logger.info("memberSelectLink() MemberDao.java");
+		logger.info("memberId : {}", memberId);
+		logger.info("memberName : {}", memberName);
+		Map map = new HashMap();
+		map.put("memberId", memberId);
+		map.put("memberName", memberName);
+		return sessionTemplate.selectOne(nameSpace+".memberSelectLink", map);
 	}
 	//모든 회원 리스트 출력
 	public List<MemberDto> selectMemberAll() {

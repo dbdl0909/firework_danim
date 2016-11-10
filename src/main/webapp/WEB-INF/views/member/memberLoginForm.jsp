@@ -42,30 +42,18 @@
 	        var id_token = googleUser.getAuthResponse().id_token;
 	        //console.log("ID Token: " + id_token);
 	
-	        /* if(profile != null) {	//profile에 값이 있으면(null값이 아니면)
-	        //로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지!)
-	        	//DB에 값이 있으면 그냥 로그인
-        		$.ajax({
-					url:'/member/memberLinkLoginSubmit',
-					data:{memberId:memberId, memberName:memberName},
-					type:'POST',
-					success:function(data){
-						 if(var i == 0) {
-							//만약 data에 담겨있는 값이 0이면 회원가입 되어있지 않은 상태
-							//DB에 값이 없으므로 회원가입(DB에 첫등록)
-							
-				       		return "/member/memberLinkJoinSubmit";
-							
-						} else {	//1이면 회원가입 되어있는 상태
-							//메인 화면으로 페이지 이동
-						} 
-					}					
-        		})
-		        	
+	        if(profile != null) {	//profile에 값이 있으면(null값이 아니면)
+	        	$('#memberId').val(memberId);
+	        	$('#memberName').val(memberName);
+	        	console.log($('#memberId').val());
+	        	console.log($('#memberName').val());
+	        	
+	        	 //로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지!)
+	        	$('#memberLinkLoginForm').submit();
 	        } else {	//profile에 값이 없으면
 	        	//로그인 안됨
 	        	return false;
-	        } */
+	        }
 		};
     </script>
 </head>
@@ -88,7 +76,8 @@
 		</form>
 		<!-- 연동로그인 -->
 		<form class ="memberLinkLoginForm" id="memberLinkLoginForm" action="/member/memberLinkLoginSubmit" method="post">
-			<input type="hidden" id="memberLoginName" name="memberLoginName" type="text" />
+			<input type="hidden" id="memberId" name="memberId"/>
+			<input type="hidden" id="memberName" name="memberName"/>
 			<div>		<!-- 구글 연동로그인 -->
 				<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			</div>

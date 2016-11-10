@@ -89,19 +89,18 @@ public class MemberController {
 		logger.info("memberId : {} memberLinkLogin MemberController.java", memberId);
 		logger.info("memberName : {} memberLinkLogin MemberController.java", memberName);
 		
-		Map<String, String> memberLoginTotal = memberService.memberLinkCheck(memberId, memberName);
-		logger.info("memberLoginTotal : {}", memberLoginTotal);
-		if(memberLoginTotal != null) {
+		MemberTotalDto memberTotalDto = memberService.memberLinkCheck(memberId, memberName);
+		logger.info("memberLoginTotal : {}", memberTotalDto);
+		if(memberTotalDto != null) {
 			HttpSession session  = request.getSession(true);
-			session.setAttribute("memberId", memberId);
-			session.setAttribute("memberLevel", memberLoginTotal.get("memberLevel"));
-			session.setAttribute("memberName", memberLoginTotal.get("memberName"));
-			logger.info("memberLevel : {}", memberLoginTotal.get("memberLevel"));
-			logger.info("memberName : {}", memberLoginTotal.get("memberName"));
+			session.setAttribute("memberId", memberTotalDto.getMemberId());
+			session.setAttribute("memberLevel", memberTotalDto.getMemberLevel());
+			session.setAttribute("memberName", memberTotalDto.getMemberName());
+			logger.info("memberLevel : {}", memberTotalDto.getMemberLevel());
+			logger.info("memberName : {}", memberTotalDto.getMemberName());
 		}
 		
-		//return "redirect:/";
-		return null;
+		return "redirect:/";
 	}
 	//외부회원 입력(연동)
 	@RequestMapping(value = "/member/memberLinkSubmit", method = RequestMethod.POST)

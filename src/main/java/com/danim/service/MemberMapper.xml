@@ -12,6 +12,7 @@
 			parameterType="String">
 		SELECT
 			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
 			total.member_name as 'memberName',
 			info.member_info_birth as 'memberInfoBirth',
 			info.member_info_gender as 'memberInfoGender',
@@ -134,11 +135,11 @@
 	</insert>
 	<!-- MemberInfo입력 (외부회원) -->
 	<insert id="memberLinkJoin"
-			parameterType="com.danim.service.member.MemberTotalDto">
+			parameterType="Map">
 		INSERT INTO
 		 	member_total(
 			 	member_id,
-			 	member_level
+			 	member_level,
 				member_name,
 				member_status,
 				member_date,
@@ -153,19 +154,41 @@
 				SYSDATE(),
 				SYSDATE(),
 				DEFAULT,
-				#{memberIdCheck}
+				'F'
 			);
 	</insert>
 	
 	<select id="memberLinkCheck"
+		resultType="int"
 		parameterType="com.danim.service.member.MemberTotalDto">
 		SELECT
 			COUNT(total.member_id)
 		FROM
 			member_total as total
 		WHERE
-			total.member_id = 'link01'
+			total.member_id = #{memberId}
 		AND
-			total.member_name = '연동회원1';
+			total.member_name = #{memberName};
 	</select>
+	
+	<!-- 연동회원 로그인 -->
+	<select id="memberSelectLink"
+			resultType="com.danim.service.member.MemberTotalDto"
+			parameterType="Map">
+		SELECT
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName'
+		FROM
+			member_total as total
+		LEFT JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_id = #{memberId}
+		AND
+			total.member_name = #{memberName};
+	</select>
+	
 </mapper>

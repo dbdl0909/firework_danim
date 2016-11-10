@@ -51,17 +51,20 @@ public class MemberService {
 		return resultMap;
 	}
 	//연동로그인 아이디 체크
-	public Map<String, String> memberLinkCheck(String memberId, String memberName) {
+	public MemberTotalDto memberLinkCheck(String memberId, String memberName) {
 		logger.info("memberLinkCheck() MemberService.java");
-		Map<String, String> resultMap = memberDao.memberLinkCheck(memberId, memberName);
-		if(resultMap == null) {
+		MemberTotalDto memberTotalDto = null;
+		int result = memberDao.memberLinkCheck(memberId, memberName);
+		if(result == 0) {
 			logger.info("일치하는 아이디 없음");
-			
+			memberDao.memberLinkJoin(memberId, memberName);			
+			logger.info("등록을 한 뒤 회원의 정보 가져옴");
+			memberTotalDto = memberDao.memberSelectLink(memberId, memberName);
 		} else {
 			logger.info("일치하는 아이디 있음");
-			
+			memberTotalDto = memberDao.memberSelectLink(memberId, memberName);
 		}
-		return resultMap;
+		return memberTotalDto;
 	}
 	//회원리스트 출력
 	public List<MemberDto> selectMemberAll() {
