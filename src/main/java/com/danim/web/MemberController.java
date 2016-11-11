@@ -99,7 +99,6 @@ public class MemberController {
 			logger.info("memberLevel : {}", memberTotalDto.getMemberLevel());
 			logger.info("memberName : {}", memberTotalDto.getMemberName());
 		}
-		
 		return "redirect:/";
 	}
 	//외부회원 입력(연동)

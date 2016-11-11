@@ -64,6 +64,7 @@ public class MemberService {
 			logger.info("일치하는 아이디 있음");
 			memberTotalDto = memberDao.memberSelectLink(memberId, memberName);
 		}
+		
 		return memberTotalDto;
 	}
 	//회원리스트 출력

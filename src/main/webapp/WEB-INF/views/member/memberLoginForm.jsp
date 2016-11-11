@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>DANIM JOIN</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="chrome=1"><!-- Optimistically rendering in Chrome Frame in IE. --> 
 	<link rel="stylesheet" href="../../../resources/css/style.css" type="text/css">
@@ -23,16 +23,17 @@
 	</style>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- 구글 연동 로그인 -->
-    <script>
-	      function onSignIn(googleUser) {
+    <script type="text/javascript">
+    var memberId;
+    var memberName;
+    	function onSignIn(googleUser) {
 	        // Useful data for your client-side scripts:
 	        var profile = googleUser.getBasicProfile();
-	        
-	        var memberId = profile.getId();		//연동회원아이디
-        	var memberName = profile.getName();		//연동회원닉네임
+	       	memberId = profile.getId();		//연동회원아이디
+        	memberName = profile.getName();		//연동회원닉네임
         	
-	        console.log("ID: " + memberId); // Don't send this directly to your server!
-	        console.log('Full Name: ' + memberName);
+	        console.log("google ID: " + memberId); // Don't send this directly to your server!
+	        console.log('google Full Name: ' + memberName);
 	        //console.log('Given Name: ' + profile.getGivenName());
 	        //console.log('Family Name: ' + profile.getFamilyName());
 	        //console.log("Image URL: " + profile.getImageUrl());
@@ -47,14 +48,85 @@
 	        	$('#memberName').val(memberName);
 	        	console.log($('#memberId').val());
 	        	console.log($('#memberName').val());
-	        	
-	        	 //로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지!)
+				//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
 	        	$('#memberLinkLoginForm').submit();
 	        } else {	//profile에 값이 없으면
 	        	//로그인 안됨
 	        	return false;
 	        }
 		};
+		//페이스북
+			function statusChangeCallback(response) {
+			memberId = response.authResponse.userID;				//연동회원아이디
+        	var accessToken = response.authResponse.accessToken;		//연동회원토큰
+			console.log('facebook memberId: '+memberId);				//사용자 고유값
+			console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
+			console.log('statusChangeCallback');
+		    console.log(response);
+		    if (response.status === 'connected') {
+		      // 페이스북과 앱에 같이 로그인되어 있다.
+				/* var uid = response.authResponse.userID;
+				var accessToken = response.authResponse.accessToken;
+				console.log('uid: '+uid);//사용자 고유값
+				console.log('accessToken: '+accessToken);//권한 체크를 위한 값 일정 기간 마다 변경 됨 */
+				testAPI();
+		    } else if (response.status === 'not_authorized') {
+				//페이스북에는 로그인 되어있으나, 앱에는 로그인 되어있지 않다.
+				document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+				//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
+	        	$('#memberLinkLoginForm').submit();
+		    } else {
+				//페이스북에 로그인이 되어있지 않아서, 앱에 로그인 되어있는지 불명확하다.
+				document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+				//로그인 안됨
+				return false;
+		    }
+		}
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+		    });
+		}
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '1698844840441321',
+				cookie     : true,  // enable cookies to allow the server to access 
+			                        // the session
+			    xfbml      : true,  // parse social plugins on this page
+			    version    : 'v2.5' // use graph api version 2.5
+			});
+			FB.getLoginStatus(function(response) {
+			    statusChangeCallback(response);
+			});
+		  };
+		  (function(d, s, id) {
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return;
+		    js = d.createElement(s); js.id = id;
+		    js.src = "//connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk'));
+		  function testAPI() {
+		    console.log('Welcome!  Fetching your information.... ');
+		    FB.api('/me', function(response) {
+		      console.log('Successful login for: ' + response.name);
+		      memberName = response.name;								//연동회원닉네임
+		      console.log('facebook memberId222: '+memberId);
+			  console.log('facebook memberName222: '+memberName);
+		      //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '! '+' id : '+response.id;
+				if(memberId != null) {	//response에 값이 있으면(null값이 아니면)
+		        	$('#memberId').val(memberId);
+		        	$('#memberName').val(memberName);
+		        	console.log($('#memberId').val());
+		        	console.log($('#memberName').val());
+					//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
+		        		$('#memberLinkLoginForm').submit();
+				} else {	//profile에 값이 없으면
+		        	//로그인 안됨
+		        	return false;
+		        }
+		    });
+		  };
     </script>
 </head>
 <body>
@@ -75,11 +147,17 @@
 			</div>
 		</form>
 		<!-- 연동로그인 -->
-		<form class ="memberLinkLoginForm" id="memberLinkLoginForm" action="/member/memberLinkLoginSubmit" method="post">
+		<form class="memberLinkLoginForm" id="memberLinkLoginForm" action="/member/memberLinkLoginSubmit" method="post">
 			<input type="hidden" id="memberId" name="memberId"/>
 			<input type="hidden" id="memberName" name="memberName"/>
-			<div>		<!-- 구글 연동로그인 -->
-				<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+			<div>
+				<div class="google">		<!-- 구글 연동로그인 -->
+					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+				</div>
+				<div class="facebook">		<!-- 페이스북 연동로그인 -->
+					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="300px" height="75px;">
+					</fb:login-button>
+				</div>
 			</div>
 		</form>
 	</div>
