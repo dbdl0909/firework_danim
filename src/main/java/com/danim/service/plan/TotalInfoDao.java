@@ -51,4 +51,28 @@ public class TotalInfoDao {
 			
 			return sessionTemplate.selectList(namesPace + ".selectEventInfoByCityName", map);
 		}
+		
+		//plan 테이블의 PK인 planNo의 제일 큰 숫자를 가져오는 매퍼 호출
+		public int selectMaxPlanNo() {
+			logger.info("selectMaxPlanNo() TotalInfoDao.java");
+			
+			return sessionTemplate.selectOne(namesPace + ".selectMaxPlanNo");
+		}
+		//plan 테이블에 값 입력하는 매퍼 호출
+		public int insertPlan(PlanDto planDto) {
+			logger.info("insertPlan() TotalInfoDao.java");
+			
+			return sessionTemplate.insert(namesPace + ".insertPlan", planDto);
+		}
+		public int selectMaxCityRouteNo() {
+			logger.info("selectMaxCityRouteNo() TotalInfoDao.java");
+			
+			return sessionTemplate.selectOne(namesPace + ".selectMaxCityRouteNo");
+		}
+		//city_route 테이블에 값 입력하는 매퍼 호출
+		public int insertCityRoute(Map<String, Object> map) {
+			logger.info("insertCityRoute() TotalInfoDao.java");
+			
+			return sessionTemplate.insert(namesPace + ".insertCityRoute", map);
+		}
 }

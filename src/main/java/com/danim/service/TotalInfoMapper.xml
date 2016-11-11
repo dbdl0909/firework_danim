@@ -2,6 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.danim.service.TotalInfoMapper">
+	<select id="selectMaxPlanNo"
+		resultType="int">
+		SELECT MAX(plan_no)+1 FROM plan;
+	</select>
+	
+	<insert id="insertPlan"
+			parameterType="com.danim.service.plan.PlanDto">
+		INSERT INTO plan(
+			plan_no,
+			member_id,
+			plan_name,
+			plan_headcount,
+			plan_type,
+			plan_departure,
+			plan_arrival,
+			plan_stay,
+			plan_date,
+			plan_update,
+			plan_total_money,
+			plan_memo
+		) VALUES(
+			#{planNo},
+			'user02',
+			#{planName},
+			#{planHeadcount},
+			#{planType},
+			#{planDeparture},
+			#{planArrival},
+			#{planStay},
+			CURDATE(),
+			CURDATE(),
+			0,
+			'메모1'
+		);
+	</insert>
+	
+	<select id="selectMaxCityRouteNo"
+			resultType="int">
+		SELECT MAX(city_route_no)+1 FROM city_route;
+	</select>
+	
+	<insert id="insertCityRoute"
+			parameterType="java.util.Map">
+		INSERT INTO city_route(
+			city_route_no,
+			plan_no,
+			city_route_date,
+			city_route_departure_city,
+			city_route_arrival_city,
+			city_route_departure_time,
+			city_route_arrival_time
+		) VALUES
+		<foreach collection="cityRouteDtoList" item="cityRouteDtoList" index="index" open="(" separator="),(" close=")">
+			#{cityRouteDtoList.cityRouteNo},
+		    #{cityRouteDtoList.planNo},
+		    #{cityRouteDtoList.cityRouteDate},
+		    #{cityRouteDtoList.cityRouteDepartureCity},
+		    #{cityRouteDtoList.cityRouteArrivalCity},
+		    #{cityRouteDtoList.cityRouteDepartureTime},
+		    #{cityRouteDtoList.cityRouteArrivalTime}
+		</foreach>
+		;
+	</insert>
+	
 	<select id="selectCityInfo"
 			resultType="com.danim.service.plan.CityInfoDto">
 		SELECT
