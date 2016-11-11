@@ -206,6 +206,7 @@ public class CommunityController {
 	public String communityReport(ReportDto reportDto,
 								@RequestParam(value="communityCategoryNo") String communityCategoryNo) {
 		communityService.insertReport(reportDto);
+		logger.info("reportDto {} CommunityController.java", reportDto);
 		logger.info("CommunityNo {} CommunityController.java", reportDto.getCommunityNo());
 		
 		return "redirect:/community/communityDetail?communityCategoryNo="+communityCategoryNo+"&communityNo="+reportDto.getCommunityNo();
