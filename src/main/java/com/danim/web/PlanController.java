@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.plan.CityInfoDto;
+import com.danim.service.plan.PlanAndLandmarkPlanDto;
 import com.danim.service.plan.TotalInfoService;
 
 @Controller
@@ -23,11 +25,11 @@ public class PlanController {
 	Model model;
 	
 	//mainPlan에서 넘어온 값들 받아서 입력하기 
-	@RequestMapping(value = "/plan/planInfo")
-	public String planInfo(Model model) {
+	@RequestMapping(value = "/plan/planInfo", method = RequestMethod.POST)
+	public String planInfo(Model model, PlanAndLandmarkPlanDto planAndLandmarkPlanDto) {
 		logger.info("planInfo() PlanController.java");
 		
-		
+		logger.info("planAndLandmarkPlanDto : {}", planAndLandmarkPlanDto);
 		
 		return "";
 	}

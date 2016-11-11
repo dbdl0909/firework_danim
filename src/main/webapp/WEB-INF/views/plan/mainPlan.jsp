@@ -166,10 +166,8 @@
 								<label>도시 루트</label>
 							</div>
 							<div id="leftMenuRouteList">
-								<form>
-									<ul id="mainPlanUl">
-									</ul>
-								</form>
+								<ul id="mainPlanUl">
+								</ul>
 							</div>
 						</div>				
 					</div>
