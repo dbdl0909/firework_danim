@@ -13,7 +13,7 @@
             	p.plan_date AS 'planDate'
 			FROM 
 				plan p 
-			INNER JOIN 
+			INNER JOIN  
 				member_total m 
 			ON 
 				p.member_id=m.member_id
