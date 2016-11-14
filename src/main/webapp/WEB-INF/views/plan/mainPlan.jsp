@@ -22,6 +22,14 @@
 			#planTabList li{width:150px; float:left; line-height:2em; cursor:pointer; list-style:none;}
 			.hiddenPlan{display:none;}
 			.hiddenPlan.on{display:block;}
+			#planType{height:26px;}
+			.modal-body{width:100%;}
+			.modal-body div{width:100%; height:40px;}
+			.modal-body div label{float:left; margin-left:20%;}
+			.modal-body div input,
+			.modal-body div select,
+			.modal-body div textarea{float:right; margin-right:20%; width:250px;}
+			.modal-body div textarea{height:50px;}
 	    </style><!-- 구글에 등록된 기본 맵 스타일 -->
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
    		<script src="../../resources/js/monthly.js"></script>
@@ -276,13 +284,15 @@
 							<h4 class="modal-title">플래너 저장</h4>
 						</div>
 						<div class="modal-body">
-							<div>
+							<div class="clearfix">
 								<label>플랜명</label>
 								<input type="text" id="planName" name="planName" />
+							</div>
+							<div class="clearfix">
 								<label>인원수</label>
 								<input type="text" id="planHeadcount" name="planHeadcount" />
 							</div>
-							<div>
+							<div class="clearfix">
 								<label>여행종류</label>
 								<select id="planType" name="planType">
 									<option value="배낭">배낭</option>
@@ -293,6 +303,10 @@
 									<option value="솔로">솔로</option>
 									<option value="단체">단체</option>
 								</select>
+							</div>
+							<div class="clearfix">
+								<label for="memo">메모 : </label>
+								<textarea name="memo"></textarea>
 							</div>
 		 				</div>
 						<div class="modal-footer">
