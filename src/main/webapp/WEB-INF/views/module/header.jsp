@@ -74,7 +74,8 @@
 		
 		$('#memberIdCheckForPlan').click(function() {
 			if($('#sessionMemberId').val() != '') {
-				$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan');
+				var memberId = $('#sessionMemberId').val();
+				$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan?memberId=' + memberId);
 			} else {
 				alert('로그인을 해주세요');
 			}

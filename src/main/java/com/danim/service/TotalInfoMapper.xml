@@ -24,7 +24,7 @@
 			plan_memo
 		) VALUES(
 			#{planNo},
-			'user02',
+			#{memberId},
 			#{planName},
 			#{planHeadcount},
 			#{planType},

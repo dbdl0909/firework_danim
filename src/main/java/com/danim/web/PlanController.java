@@ -35,8 +35,7 @@ public class PlanController {
 		logger.info("planAndLandmarkPlanDto : {}", mainPlanDto);
 		
 		totalInfoService.insertPlanTotal(mainPlanDto);
-		
-		return "redirect:/plan/mainPlan";
+		return "redirect:/";
 	}
 	//아이디값 받아서 내 플랜 보여주기
 /*	@RequestMapping(value = "/plan/planList")
@@ -49,7 +48,7 @@ public class PlanController {
 		return "plan/planList";
 	}*/
 	@RequestMapping(value = "/plan/mainPlan")
-	public String mainPlan(Model model) {	//@RequestParam(value="do")String doArea
+	public String mainPlan(Model model, @RequestParam(value="memberId")String memberId) {
 		logger.info("mainPlan() PlanController.java");
 		/*//지도 그림에서 도를 클릭했을때 do 담겨진 값을 doArea에 담는다.
 		logger.info("doArea(도 이름) : {} <-- mainPlan() PlanController.java", doArea);
@@ -60,6 +59,7 @@ public class PlanController {
 		List<CityInfoDto> listCityInfo = totalInfoService.selectCityInfoAll();
 		//가져온 리스트를 jsp 페이지에서 출력하기 위해 model에 담는다. 
 		model.addAttribute("listCityInfo", listCityInfo);
+		model.addAttribute("memberId", memberId);
 		
 		return "plan/mainPlan";
 	}

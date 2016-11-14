@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainPlanDto {
+	private String memberId;
 	private String planName;
 	private int planHeadcount;
 	private String planType;
@@ -17,6 +18,12 @@ public class MainPlanDto {
 	private ArrayList<String> cityRouteArrivalTime;
 	private ArrayList<String> landmarkPlanNo;
 	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public String getPlanName() {
 		return planName;
 	}
@@ -89,12 +96,14 @@ public class MainPlanDto {
 	public void setLandmarkPlanNo(ArrayList<String> landmarkPlanNo) {
 		this.landmarkPlanNo = landmarkPlanNo;
 	}
+	
 	@Override
 	public String toString() {
-		return "MainPlanDto [planName=" + planName + ", planHeadcount=" + planHeadcount + ", planType=" + planType
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", stayDay=" + stayDay + ", cityRouteStartDate="
-				+ cityRouteStartDate + ", cityRouteDepartureCity=" + cityRouteDepartureCity + ", cityRouteArrivalCity="
-				+ cityRouteArrivalCity + ", cityRouteDepartureTime=" + cityRouteDepartureTime
-				+ ", cityRouteArrivalTime=" + cityRouteArrivalTime + ", landmarkPlanNo=" + landmarkPlanNo + "]";
+		return "MainPlanDto [memberId=" + memberId + ", planName=" + planName + ", planHeadcount=" + planHeadcount
+				+ ", planType=" + planType + ", startDate=" + startDate + ", endDate=" + endDate + ", stayDay="
+				+ stayDay + ", cityRouteStartDate=" + cityRouteStartDate + ", cityRouteDepartureCity="
+				+ cityRouteDepartureCity + ", cityRouteArrivalCity=" + cityRouteArrivalCity
+				+ ", cityRouteDepartureTime=" + cityRouteDepartureTime + ", cityRouteArrivalTime="
+				+ cityRouteArrivalTime + ", landmarkPlanNo=" + landmarkPlanNo + "]";
 	}
 }

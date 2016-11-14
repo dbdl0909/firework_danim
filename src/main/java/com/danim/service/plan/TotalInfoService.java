@@ -86,6 +86,7 @@ public class TotalInfoService {
 		//plan 테이블에 넣을 데이터 셋팅
 		PlanDto planDto = new PlanDto();
 		planDto.setPlanNo(planNo+1);
+		planDto.setMemberId(mainPlanDto.getMemberId());
 		planDto.setPlanName(mainPlanDto.getPlanName());
 		planDto.setPlanHeadcount(mainPlanDto.getPlanHeadcount());
 		planDto.setPlanType(mainPlanDto.getPlanType());
