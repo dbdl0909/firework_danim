@@ -23,7 +23,7 @@
 			.hiddenPlan{display:none;}
 			.hiddenPlan.on{display:block;}
 			#planType{height:26px;}
-			.modal-body{width:100%;}
+			.modal-body{width:100%;} 
 			.modal-body div{width:100%; height:40px;}
 			.modal-body div label{float:left; margin-left:20%;}
 			.modal-body div input,
