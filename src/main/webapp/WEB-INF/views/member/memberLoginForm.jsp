@@ -22,14 +22,15 @@
 	    }
 	</style>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <!-- 구글 연동 로그인 -->
     <script type="text/javascript">
+    <!-- 구글 연동 로그인 -->
     var memberId;
     var memberName;
+    var check = false;
     	function onSignIn(googleUser) {
 	        // Useful data for your client-side scripts:
 	        var profile = googleUser.getBasicProfile();
-	       	memberId = profile.getId();		//연동회원아이디
+	       	memberId = profile.getId();			//연동회원아이디
         	memberName = profile.getName();		//연동회원닉네임
         	
 	        console.log("google ID: " + memberId); // Don't send this directly to your server!
@@ -55,7 +56,7 @@
 	        	return false;
 	        }
 		};
-		//페이스북
+		//페이스북 연동로그인
 			function statusChangeCallback(response) {
 			memberId = response.authResponse.userID;				//연동회원아이디
         	var accessToken = response.authResponse.accessToken;		//연동회원토큰
@@ -74,7 +75,7 @@
 				//페이스북에는 로그인 되어있으나, 앱에는 로그인 되어있지 않다.
 				document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
 				//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-	        	$('#memberLinkLoginForm').submit();
+					$('#memberLinkLoginForm').submit();
 		    } else {
 				//페이스북에 로그인이 되어있지 않아서, 앱에 로그인 되어있는지 불명확하다.
 				document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
@@ -120,12 +121,17 @@
 		        	console.log($('#memberId').val());
 		        	console.log($('#memberName').val());
 					//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-		        		$('#memberLinkLoginForm').submit();
+					check = true;
+					
 				} else {	//profile에 값이 없으면
 		        	//로그인 안됨
 		        	return false;
 		        }
 		    });
+		    
+		    if(check == true) {
+		    	$('#memberLinkLoginForm').submit();
+		    }
 		  };
     </script>
 </head>
@@ -154,9 +160,11 @@
 				<div class="google">		<!-- 구글 연동로그인 -->
 					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 				</div>
-				<div class="facebook">		<!-- 페이스북 연동로그인 -->
+				<div id="facebook">		<!-- 페이스북 연동로그인 -->
 					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="300px" height="75px;">
 					</fb:login-button>
+					<div id="status">
+					</div>
 				</div>
 			</div>
 		</form>

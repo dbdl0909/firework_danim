@@ -18,6 +18,8 @@
 		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
+		<!-- 헤더 -->
+		<jsp:include page="../module/header.jsp" />
 		<h3>회원정보보기</h3>
 		<table class="table table-bordered">
 			<tbody>
@@ -52,5 +54,7 @@
 			</tbody>
 		</table>
 		<input type="button" value="내정보수정">
+		<!-- 풋터 -->
+		<jsp:include page="../module/footer.jsp" />
 	</body>
 </html>

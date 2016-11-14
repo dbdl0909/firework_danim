@@ -12,6 +12,8 @@
 <title>다님플래너 :: 회원리스트</title>
 </head>
 <body>
+	<!-- 헤더 -->
+	<jsp:include page="../module/header.jsp" />
 	<h2 align="center">전체회원 리스트</h2>
 	<form class="memberList" action="" method="post">
 		<table class="table table-hover">
@@ -35,7 +37,7 @@
 					<tr>
 						<td>${memberAll.memberId}</td>
 						<td>${memberAll.memberLevel}</td>
-						<td>${memberAll.memberLoginCheck}</td>
+						<td>${memberAll.memberIdCheck}</td>
 						<td>${memberAll.memberName}</td>
 						<td>${memberAll.memberInfoBirth}</td>
 						<td>${memberAll.memberInfoGender}</td>
@@ -48,5 +50,7 @@
 			</tbody>
 		</table>
 	</form>
+	<!-- 풋터 -->
+	<jsp:include page="../module/footer.jsp" />
 </body>
 </html>
