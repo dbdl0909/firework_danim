@@ -17,9 +17,17 @@ public class RecommandDao {
 	
 	private final String nameSpace = "com.danim.service.RecommandMapper";
 	
+	// 여성이 선호하는 도시
 	public List<RecommandDto> selectCityForGender(String gender) {
 		logger.info("selectCityForFemale RecommandDao.java");
 		
 		return sessionTemplate.selectList(nameSpace + ".selectCityForGender", gender);
+	}
+	
+	// 가장 많이 찾은 도시
+	public List<RecommandDto> selectPopularityCity() {
+		logger.info("selectPopularityCity RecommandDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectPopularityCity");
 	}
 }

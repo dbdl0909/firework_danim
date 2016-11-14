@@ -31,5 +31,14 @@ public class RecommandService {
 		return map;
     	
     }
+    
+    public List<RecommandDto> selectPopularityCity() {
+    	logger.info("selectPopularityCity() RecommandService.java");
+		
+    	List<RecommandDto> selectPopularityCity = recommandDao.selectPopularityCity();
+    	
+    	return selectPopularityCity;
+    	
+    }
 
 }
