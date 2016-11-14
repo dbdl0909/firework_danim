@@ -9,9 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.plan.CityInfoDto;
 import com.danim.service.plan.MainPlanDto;
+import com.danim.service.plan.PlanDto;
+import com.danim.service.plan.PlanService;
 import com.danim.service.plan.TotalInfoService;
 
 @Controller
@@ -20,7 +23,8 @@ public class PlanController {
 	
 	@Autowired
     private TotalInfoService totalInfoService;
-	
+	@Autowired
+    private PlanService planService;
 	Model model;
 	
 	//mainPlan에서 넘어온 값들 받아서 입력하기 
@@ -34,7 +38,16 @@ public class PlanController {
 		
 		return "redirect:/plan/mainPlan";
 	}
-	
+	//아이디값 받아서 내 플랜 보여주기
+	@RequestMapping(value = "/plan/planList")
+	public String MemberPlanList(Model model,@RequestParam(value="memberId") String memberId){
+		
+		List<PlanDto> planList = planService.selectPlanList(memberId);
+		
+		model.addAttribute("planList",planList);
+		
+		return "plan/planList";
+	}
 	@RequestMapping(value = "/plan/mainPlan")
 	public String mainPlan(Model model) {	//@RequestParam(value="do")String doArea
 		logger.info("mainPlan() PlanController.java");
