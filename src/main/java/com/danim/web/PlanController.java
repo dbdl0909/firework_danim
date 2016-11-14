@@ -39,7 +39,7 @@ public class PlanController {
 		return "redirect:/plan/mainPlan";
 	}
 	//아이디값 받아서 내 플랜 보여주기
-	@RequestMapping(value = "/plan/planList")
+/*	@RequestMapping(value = "/plan/planList")
 	public String MemberPlanList(Model model,@RequestParam(value="memberId") String memberId){
 		
 		List<PlanDto> planList = planService.selectPlanList(memberId);
@@ -47,7 +47,7 @@ public class PlanController {
 		model.addAttribute("planList",planList);
 		
 		return "plan/planList";
-	}
+	}*/
 	@RequestMapping(value = "/plan/mainPlan")
 	public String mainPlan(Model model) {	//@RequestParam(value="do")String doArea
 		logger.info("mainPlan() PlanController.java");
