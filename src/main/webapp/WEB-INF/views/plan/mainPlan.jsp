@@ -129,6 +129,7 @@
 		    <div id="mainPlanDivRoot" class="clearfix">
 			    <div id="logoWrap">
 					<a href="/"><img src="../../resources/images/logo.png" ></a>
+					<input type="hidden" id="memberId" name="memberId" value="${sessionScope.memberId}"/>
 				</div>
 		    	<div id="mainPlanDivTop">
 		    		<div id="tabWrap">

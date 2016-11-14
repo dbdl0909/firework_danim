@@ -71,6 +71,14 @@
 		$('#introWrap').click(function(){			
 			$(this).slideUp();
 		});	
+		
+		$('#memberIdCheckForPlan').click(function() {
+			if($('#sessionMemberId').val() != '') {
+				$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan');
+			} else {
+				alert('로그인을 해주세요');
+			}
+		});
 	})
 </script>
 </head>
@@ -101,7 +109,8 @@
 		<div id="headerNavWrap">
 			<ul id="headerNav">
 				<li class="hiddenNavWrap">
-					<a href="/plan/mainPlan">플래너</a>							
+					<input id="sessionMemberId" type="hidden" value="${sessionScope.memberId}"/>
+					<a id="memberIdCheckForPlan">플래너</a>							
 				</li>
 				<li class="hiddenNavWrap">
 					<a href="/community/list">광장</a>

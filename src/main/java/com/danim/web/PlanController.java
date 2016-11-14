@@ -32,7 +32,7 @@ public class PlanController {
 		
 		totalInfoService.insertPlanTotal(mainPlanDto);
 		
-		return "";
+		return "redirect:/plan/mainPlan";
 	}
 	
 	@RequestMapping(value = "/plan/mainPlan")
