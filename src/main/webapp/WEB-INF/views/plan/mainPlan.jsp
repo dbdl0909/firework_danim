@@ -92,7 +92,6 @@
 			    		plan.push(planContent); 
 		    		});
 		    		monthly.monthly = plan;
-		    		var jsonInfo = JSON.stringify(monthly);
 		    		localStorage.setItem('events',  JSON.stringify(monthly));
 		    		document.getElementById("jsonContainer").innerHTML = localStorage.getItem('events');
 		    	});
@@ -229,25 +228,11 @@
 					<div id="myPlanCalendar">
 						<div style="width:100%; max-width:600px; display:inline-block;">
 							<div class="monthly" id="mycalendar"></div>
-						</div>
-						<div id="detailPlanWrap">
-							<table id="detailPlanContent" class="table">
-								<thead>
-									<th>날짜</th>
-									<th>도시</th>
-									<th>교통</th>
-									<th>일정</th>
-									<th>숙소</th>
-								</thead>
-								<tbody>
-									
-								</tbody>
-							</table>	
-						</div>
+						</div>						
 					</div>
 				</div>				
 			</div>
-			<div id="detailPlanWrap" class="container">
+			<!-- <div id="detailPlanWrap" class="container">
 				<table id="detailPlanContent">
 					<thead>
 						<tr>
@@ -268,7 +253,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
+			</div> -->
 			<jsp:include page="../module/footer.jsp"></jsp:include>
 			
 			<div id="landmarkInfoPopWrap" style="width:100%; height:100%; display:none; position:absolute; top:0; background:#000; z-index:999999;">

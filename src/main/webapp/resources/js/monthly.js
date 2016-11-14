@@ -153,7 +153,6 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 					$('#' + uniqueId + ' .monthly-day-wrap').append('<div class="m-d monthly-day-blank"><div class="monthly-day-number"></div></div>');
 				}
 			}
-			
 			// Events
 			if (options.mode == 'event') {
 				// Remove previous events
@@ -186,20 +185,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						startPeriod = 'AM',
 						endPeriod = 'PM';
 						//alert(eventRoute)
-					$('#detailPlanContent tbody').append(								
-						'<tr class="planLine">'+
-							'<td>'+fullstartDate+
-							'</td>'+
-							'<td>'+eventTitle+
-							'</td>'+
-							'<td>'+									
-							'</td>'+
-							'<td>'+
-							'</td>'+
-							'<td>'+
-							'</td>'+
-						'</tr>'
-					);
+					
 						
 					/* Convert times to 12 hour & determine AM or PM */
 					if(parseInt(startSplit[0]) >= 12) {
@@ -233,7 +219,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 							}
 							var timeHtml = startTimehtml + endTimehtml + '</div>';
 						}
-						$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+' '+timeHtml+' <span style="font-size:12px;">('+eventRoute+')</span></a>');
+						$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event clearfix"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+' '+timeHtml+' <span style="font-size:11px;">'+eventRoute+'</span><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#planMemo" style="background:none; margin-top:-25px; border-color:#fff; float:right;">메모추가</button></a>');
 					}
 
 
@@ -428,8 +414,35 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 		$(document.body).on('click', '#'+uniqueId+' .listed-event', function (e) {
 			var href = $(this).attr('href');
 			// If there isn't a link, don't go anywhere
+			var i = $('.listed-event').index(this);
+			//alert(i);
+			$(this).find('button').attr('data-target','#planMemo'+i+'');
+			//alert($(this).find('button').attr('data-target'));			
 			if(!href) {
-				console.log(e);
+				var modalHtml = '<div class="modal fade" id="planMemo'+i+'" role="dialog">'+
+			    '<div class="modal-dialog">'+
+			      '<div class="modal-content">'+
+			       '<div class="modal-header">'+
+			          '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+			          '<h4 class="modal-title">메모입력</h4>'+
+			        '</div>'+
+			        '<div class="modal-body">'+
+			          '<textarea cols="77" rows="3"></textarea>'+
+			        '</div>'+
+			        '<div class="modal-footer">'+
+			          '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+			       '</div>'+
+			      '</div>'+					      
+			    '</div>'+
+			 '</div>';
+				$('body').append(modalHtml);
+				/*var fullRoute = $(this).find('span').text(),
+					routeArr = fullRoute.split(',');
+				
+				$(routeArr).each(function(i){
+					alert(routeArr[i]);				
+				})*/
+			
 				e.preventDefault();
 				
 			}

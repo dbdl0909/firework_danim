@@ -1061,9 +1061,10 @@ a.voted:hover {
 	background: rgba(233, 235, 236, 0.9);
 	overflow: auto;
 	position: absolute;
+	z-index:999;
 	top: 42px;
 	width: 100%;
-	height: calc(100% - 42px);
+	height: calc(100% - 38px);
 	display: none;
 	-webkit-transition: .25s;
 	transition:.25s;
