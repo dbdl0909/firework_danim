@@ -83,6 +83,18 @@ function initMap() {
 	infoWindowEvent();
 }
 
+/*function dateSetting() {
+	var index = 0;
+	var cityStartDateTemp = new Date(document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate);
+	var yearTemp = cityStartDateTemp.getFullYear();
+	var monthTemp = cityStartDateTemp.getMonth()+1;
+	var dateTemp = cityStartDateTemp.getDate();
+	
+	cityEndDateTemp.setFullYear(yearTemp);
+	cityEndDateTemp.setMonth(monthTemp-1);
+	cityEndDateTemp.setDate(dateTemp+cityStayCount);
+}*/
+
 //날짜 수정될때마다 도시루트 시작날짜, 종료날짜 셋팅(일정표에 담을것)
 function cityRouteDateSet() {
 	//console.log('종료일 셋팅 후 hidden에 값 넣기!');
@@ -212,7 +224,7 @@ function cityRouteDateSet() {
 		}
 		
 	} else if(startDateInit.toString() != cityStartDate.toString()) {		//출발일이 변경되었을 경우
-		/*console.log('출발일이 변경되었을 경우');
+		console.log('출발일이 변경되었을 경우');
 		
 		for(var i=0; i<$('.leftMenuLi').length; i++) {
 			if(i == 0) {
@@ -220,12 +232,36 @@ function cityRouteDateSet() {
 				document.getElementsByClassName('cityRouteStartDate')[i].valueAsDate = cityStartDate;
 				console.log(i + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[i].value);
 				
-				document.getElementsByClassName('cityRouteEndDate')[i].valueAsDate = cityEndDate;
+				startDateInit = document.getElementsByClassName('cityRouteStartDate')[i].valueAsDate;
+				
+				var cityStartDateTemp = new Date(document.getElementsByClassName('cityRouteStartDate')[i].valueAsDate);
+				var yearTemp = cityStartDateTemp.getFullYear();
+				var monthTemp = cityStartDateTemp.getMonth()+1;
+				var dateTemp = cityStartDateTemp.getDate();
+				
+				cityEndDateTemp.setFullYear(yearTemp);
+				cityEndDateTemp.setMonth(monthTemp-1);
+				cityEndDateTemp.setDate(dateTemp+cityStayCount);
+				
+				document.getElementsByClassName('cityRouteEndDate')[i].valueAsDate = cityEndDateTemp;
 				console.log(i + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[i].value);
 			} else {
+				document.getElementsByClassName('cityRouteStartDate')[i].valueAsDate = document.getElementsByClassName('cityRouteEndDate')[i-1].valueAsDate;
+				console.log(i + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[i].value);
 				
+				var cityStartDateTemp = new Date(document.getElementsByClassName('cityRouteStartDate')[i].valueAsDate);
+				var yearTemp = cityStartDateTemp.getFullYear();
+				var monthTemp = cityStartDateTemp.getMonth()+1;
+				var dateTemp = cityStartDateTemp.getDate();
+				
+				cityEndDateTemp.setFullYear(yearTemp);
+				cityEndDateTemp.setMonth(monthTemp-1);
+				cityEndDateTemp.setDate(dateTemp+cityStayCount);
+				
+				document.getElementsByClassName('cityRouteEndDate')[i].valueAsDate = cityEndDateTemp;
+				console.log(i + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[i].value);
 			}
-		}*/
+		}
 		
 	}
 	
@@ -300,9 +336,9 @@ function infoWindowEvent() {
 								"</div>" +
 								"<div class='cityRouteTime'>" +
 									"<label for='startTime'>startTime</label>"+
-									"<input type='time' name='cityRouteDepartureTime' class='startTime'/>"+
+									"<input type='time' name='cityRouteDepartureTime' class='startTime' value='00:00'/>"+
 									"<label for='endTime'>endTime</label>"+
-									"<input type='time' name='cityRouteArrivalTime' class='endTime'/>"+
+									"<input type='time' name='cityRouteArrivalTime' class='endTime' value='12:00'/>"+
 								"</div>" +
 								"<div class='landmarkListDiv'>" + 
 									"<span class='landmarkListSpan'>명소 루트</span>" +
@@ -567,7 +603,7 @@ function lineRemoveFunction(removeButtonIndex) {
 	//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
 	//console.log('pathArray 길이 : ' + pathArray.length);
 	/*for(var i=0; i<pathArray.length; i++) {
-		console.log(pathArray[i]);
+		console.log(pathArray[i].lat + ', ' + pathArray[i].lan);
 	}*/
 	
 	if(pathArray.length >= 1) {
@@ -614,6 +650,7 @@ $(document).ready(function() {
 		
 		//경로 제거후 li 태그 제거
 		$('.leftMenuLi').eq(removeButtonIndex).remove();
+		cityRouteLiIndex--;
 		
 		if(!$('#mainPlanUl').hasClass('leftMenuLi')) {
 			stayCount = 0;
