@@ -153,7 +153,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 					$('#' + uniqueId + ' .monthly-day-wrap').append('<div class="m-d monthly-day-blank"><div class="monthly-day-number"></div></div>');
 				}
 			}
-
+			
 			// Events
 			if (options.mode == 'event') {
 				// Remove previous events
@@ -185,7 +185,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						eventLink = '',
 						startPeriod = 'AM',
 						endPeriod = 'PM';
-						alert(eventRoute.size());
+						//alert(eventRoute)
 					$('#detailPlanContent tbody').append(								
 						'<tr class="planLine">'+
 							'<td>'+fullstartDate+
@@ -233,7 +233,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 							}
 							var timeHtml = startTimehtml + endTimehtml + '</div>';
 						}
-						$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+' '+timeHtml+'</a>');
+						$('#'+uniqueId+' .monthly-list-item[data-number="'+i+'"]').addClass('item-has-event').append('<a href="'+eventURL+'" class="listed-event"  data-eventid="'+ eventId +'" style="background:'+eventColor+'" title="'+eventTitle+'">'+eventTitle+' '+timeHtml+' <span style="font-size:12px;">('+eventRoute+')</span></a>');
 					}
 
 
@@ -429,7 +429,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			var href = $(this).attr('href');
 			// If there isn't a link, don't go anywhere
 			if(!href) {
-				
+				console.log(e);
 				e.preventDefault();
 				
 			}

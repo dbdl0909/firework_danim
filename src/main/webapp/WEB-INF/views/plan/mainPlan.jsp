@@ -69,11 +69,11 @@
 		    		}
 
 		    		var monthly = new Object(); 
-		    		var plan = new Array();
-		    		var routeArr = new Array();
+		    		var plan = new Array();		    		
 		    		$('.leftMenuLi').each(function(i){
 			    		var randomColor = '#'+Math.round(Math.random()*0xFFFFFF).toString(16);
 		    			var planContent = new Object();
+		    			var routeArr = new Array();
 			    		planContent.id = i,
 			    		planContent.name = $(this).find('.cityName').val(),
 			    		planContent.startDate = $(this).find('.cityRouteStartDate').val(),
@@ -83,8 +83,8 @@
 			    		planContent.color = randomColor,
 			    		planContent.url = '';
 			    		//var temp;
-			    		$('.landmarkName').each(function(){
-			    			routeArr.push($(this).text());
+			    		$(this).find('.landmarkLi').each(function(){
+			    			routeArr.push($(this).find('.landmarkName').text());
 			    		});
 			    		planContent.route = routeArr,
 			    		//alert(planContent.route)
