@@ -172,8 +172,10 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						endYear = endArr[0],
 						endMonth = parseInt(endArr[1], 10),
 						endDay = parseInt(endArr[2], 10),
+						endDay = endDay-1,
 						eventURL = options.dataType = event.url,
 						eventTitle = options.dataType = event.name,
+						eventRoute = event.route,
 						eventColor = options.dataType = event.color,
 						eventId = options.dataType = event.id,
 						startTime = options.dataType = event.startTime,
@@ -183,7 +185,22 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						eventLink = '',
 						startPeriod = 'AM',
 						endPeriod = 'PM';
-
+						alert(eventRoute.size());
+					$('#detailPlanContent tbody').append(								
+						'<tr class="planLine">'+
+							'<td>'+fullstartDate+
+							'</td>'+
+							'<td>'+eventTitle+
+							'</td>'+
+							'<td>'+									
+							'</td>'+
+							'<td>'+
+							'</td>'+
+							'<td>'+
+							'</td>'+
+						'</tr>'
+					);
+						
 					/* Convert times to 12 hour & determine AM or PM */
 					if(parseInt(startSplit[0]) >= 12) {
 						var startTime = (startSplit[0] - 12)+':'+startSplit[1]+'';
@@ -286,31 +303,19 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 						}
 
 					}
+									
 				};
 				$(document).bind('click', function(){
 					$('.monthly-event-indicator').remove();
 					$('.listed-event').remove();
+					$('.planLine').remove();
 					var json = null;
 					json = JSON.parse($('#jsonContainer').text());
 					//alert(json.monthly[0].name);
 					$.each(json.monthly, function(i, json){
-						addEvents(json);
-						//alert(json.name);
+						addEvents(json);						
 					});
-					/*var eventsResource = (options.dataType == 'xml' ? options.xmlUrl : options.jsonUrl);	
-					$.get(''+eventsResource+'', {now: jQuery.now()}, function(d){
-						if (options.dataType == 'xml') {
-							$(d).find('event').each(function(index, event) {
-								addEvents(event);
-							});
-						} else if (options.dataType == 'json') {
-							$.each(d.monthly, function(index, event) {
-								addEvents(event);
-							});
-						}
-					}, options.dataType).fail(function() {
-						//console.error('Monthly.js failed to import '+eventsResource+'. Please check for the correct path & '+options.dataType+' syntax.');
-					});*/
+					
 				});
 			}
 			var divs = $("#"+uniqueId+" .m-d");
@@ -424,8 +429,11 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			var href = $(this).attr('href');
 			// If there isn't a link, don't go anywhere
 			if(!href) {
+				
 				e.preventDefault();
+				
 			}
+			
 		});
 
 		}

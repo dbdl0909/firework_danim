@@ -67,18 +67,28 @@
 		    		if(!($(this).hasClass('on'))){
 		    			$('.hiddenPlan').eq(idx).addClass('on');
 		    		}
+
 		    		var monthly = new Object(); 
 		    		var plan = new Array();
+		    		var routeArr = new Array();
 		    		$('.leftMenuLi').each(function(i){
+			    		var randomColor = '#'+Math.round(Math.random()*0xFFFFFF).toString(16);
 		    			var planContent = new Object();
 			    		planContent.id = i,
-			    		planContent.name = $(this).find('.cityName').text(),
+			    		planContent.name = $(this).find('.cityName').val(),
 			    		planContent.startDate = $(this).find('.cityRouteStartDate').val(),
 			    		planContent.endDate = $(this).find('.cityRouteEndDate').val(),
 			    		planContent.startTime = $(this).find('.startTime').val(),
 			    		planContent.endTime = $(this).find('.endTime').val(),
-			    		planContent.color = '#434343',
+			    		planContent.color = randomColor,
 			    		planContent.url = '';
+			    		//var temp;
+			    		$('.landmarkName').each(function(){
+			    			routeArr.push($(this).text());
+			    		});
+			    		planContent.route = routeArr,
+			    		//alert(planContent.route)
+			    		//planContent.route = temp,
 			    		plan.push(planContent); 
 		    		});
 		    		monthly.monthly = plan;
@@ -219,10 +229,45 @@
 						<div style="width:100%; max-width:600px; display:inline-block;">
 							<div class="monthly" id="mycalendar"></div>
 						</div>
+						<div id="detailPlanWrap">
+							<table id="detailPlanContent" class="table">
+								<thead>
+									<th>날짜</th>
+									<th>도시</th>
+									<th>교통</th>
+									<th>일정</th>
+									<th>숙소</th>
+								</thead>
+								<tbody>
+									
+								</tbody>
+							</table>	
+						</div>
 					</div>
 				</div>				
 			</div>
-			
+			<div id="detailPlanWrap" class="container">
+				<table id="detailPlanContent">
+					<thead>
+						<tr>
+							<th>날짜</th>
+							<th>도시</th>
+							<th>교통</th>
+							<th>일정</th>
+							<th>숙소</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<jsp:include page="../module/footer.jsp"></jsp:include>
 			
 			<div id="landmarkInfoPopWrap" style="width:100%; height:100%; display:none; position:absolute; top:0; background:#000; z-index:999999;">
