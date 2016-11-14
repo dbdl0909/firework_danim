@@ -427,7 +427,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			          '<h4 class="modal-title">메모입력</h4>'+
 			        '</div>'+
 			        '<div class="modal-body">'+
-			          '<textarea cols="77" rows="3"></textarea>'+
+			          '<textarea cols="77" rows="3" name="planMemo"></textarea>'+
 			        '</div>'+
 			        '<div class="modal-footer">'+
 			          '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
@@ -435,7 +435,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			      '</div>'+					      
 			    '</div>'+
 			 '</div>';
-				$('body').append(modalHtml);
+				$('#mainPlanSubmit').append(modalHtml);
 				/*var fullRoute = $(this).find('span').text(),
 					routeArr = fullRoute.split(',');
 				
