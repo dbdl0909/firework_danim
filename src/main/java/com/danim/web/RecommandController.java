@@ -19,7 +19,9 @@ public class RecommandController {
 	@RequestMapping(value = "/recommand/recommandMain")
 	public String recommandMain(Model model) {
 		logger.info("recommandMain RecommandController.java");
+		
 		model.addAttribute("selectCityForGender" , recommandService.selectCityForGender());
+		model.addAttribute("selectPopularityCity", recommandService.selectPopularityCity());
 		
 		return "/recommand/recommandMain";
 	}

@@ -4,10 +4,11 @@
 <mapper namespace="com.danim.service.RecommandMapper">
 	<!-- 성별 간 선호하는 지역 순위  -->
 	<select id="selectCityForGender"
+			parameterType="String"
 			resultType="com.danim.service.recommand.RecommandDto">
 		SELECT
-			city.city_route_departure_city as 'cityRankName',
-			COUNT(city.city_route_departure_city) as 'cityRankcount'
+			info.city_info_name as 'cityRankName',
+			COUNT(route.city_route_departure_city) as 'cityRankCount'
 		FROM
 			plan as pl
 		JOIN
@@ -15,15 +16,19 @@
 		ON
 			pl.member_id = member.member_id
 		JOIN
-			city_route as city
+			city_route as route
 		ON
-			city.plan_no = pl.plan_no
+			route.plan_no = pl.plan_no
+		JOIN
+			city_info as info
+		ON
+			info.city_info_no = route.city_route_departure_city				
 		WHERE
 			member.member_info_gender = #{gender}
 		GROUP BY
-			city.city_route_departure_city
+			route.city_route_departure_city
 		ORDER BY
-			COUNT(city.city_route_departure_city) DESC
+			COUNT(route.city_route_departure_city) DESC
 		LIMIT
 			5		
 	</select>
@@ -32,7 +37,7 @@
 			resultType="com.danim.service.recommand.RecommandDto">
 		SELECT
 			city.city_route_departure_city as 'cityRankName',
-			COUNT(city.city_route_departure_city) as 'cityRankcount'
+			COUNT(city.city_route_departure_city) as 'cityRankCount'
 		FROM
 			plan as pl
 		JOIN
@@ -44,12 +49,37 @@
 		ON
 			city.plan_no = pl.plan_no
 		WHERE
-			member.member_info_birth<![CDATA[ > ]]> '1986-01-01'
+			member.member_info_birth <![CDATA[ > ]]> '1986-01-01'
 		AND
 			member.member_info_birth <![CDATA[ < ]]> '1997-12-31'
 		GROUP BY
 			city.city_route_departure_city
 		ORDER BY
 			COUNT(city.city_route_departure_city) DESC
+	</select>
+	<!-- 가장 많이 찾은 도시 -->
+	<select id="selectPopularityCity"
+			resultType="com.danim.service.recommand.RecommandDto">
+		SELECT
+			if(SUBSTRING(route.city_route_departure_city, 9) <![CDATA[ < ]]> 74, info.city_info_do_name, info.city_info_name) as 'cityRankName',
+			COUNT(route.city_route_departure_city) as 'cityRankCount'
+		FROM
+			plan as pl
+		JOIN
+			member_info as member
+		ON
+			pl.member_id = member.member_id
+		JOIN
+			city_route as route
+		ON
+			route.plan_no = pl.plan_no
+		JOIN
+			city_info as info
+		ON
+			info.city_info_no = route.city_route_departure_city	
+		GROUP BY
+			cityRankName
+		ORDER BY
+			COUNT(route.city_route_departure_city) DESC
 	</select>			
 </mapper>
