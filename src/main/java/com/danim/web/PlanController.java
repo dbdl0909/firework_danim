@@ -37,16 +37,26 @@ public class PlanController {
 		totalInfoService.insertPlanTotal(mainPlanDto);
 		return "redirect:/";
 	}
+
+	
 	//아이디값 받아서 내 플랜 보여주기
-/*	@RequestMapping(value = "/plan/planList")
-	public String MemberPlanList(Model model,@RequestParam(value="memberId") String memberId){
+		@RequestMapping(value = "/plan/planList")
+		public String MemberPlanList(Model model,@RequestParam(value="memberId") String memberId){
+			
+			List<PlanDto> planList = planService.selectPlanList(memberId);
+			
+			model.addAttribute("planList",planList);
+			
+			return "plan/planList";
+		}
 		
-		List<PlanDto> planList = planService.selectPlanList(memberId);
-		
-		model.addAttribute("planList",planList);
-		
-		return "plan/planList";
-	}*/
+		@RequestMapping(value = "/plan/planDetailList")
+		public String MemberPlanDetailList(Model model,@RequestParam(value="planNo") int planNo){
+			
+			
+			
+			return "plan/planDetailList";
+		}
 	@RequestMapping(value = "/plan/mainPlan")
 	public String mainPlan(Model model, @RequestParam(value="memberId")String memberId) {
 		logger.info("mainPlan() PlanController.java");
