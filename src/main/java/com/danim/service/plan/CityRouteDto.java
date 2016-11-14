@@ -1,5 +1,7 @@
 package com.danim.service.plan;
 
+import java.util.ArrayList;
+
 public class CityRouteDto {
 	private int cityRouteNo;
 	private int planNo;
@@ -8,6 +10,7 @@ public class CityRouteDto {
 	private String cityRouteArrivalCity;
 	private String cityRouteDepartureTime;
 	private String cityRouteArrivalTime;
+	private String cityRouteMemo;
 	
 	public int getCityRouteNo() {
 		return cityRouteNo;
@@ -51,12 +54,18 @@ public class CityRouteDto {
 	public void setCityRouteArrivalTime(String cityRouteArrivalTime) {
 		this.cityRouteArrivalTime = cityRouteArrivalTime;
 	}
+	public String getCityRouteMemo() {
+		return cityRouteMemo;
+	}
+	public void setCityRouteMemo(String cityRouteMemo) {
+		this.cityRouteMemo = cityRouteMemo;
+	}
 	
 	@Override
 	public String toString() {
 		return "CityRouteDto [cityRouteNo=" + cityRouteNo + ", planNo=" + planNo + ", cityRouteDate=" + cityRouteDate
 				+ ", cityRouteDepartureCity=" + cityRouteDepartureCity + ", cityRouteArrivalCity="
 				+ cityRouteArrivalCity + ", cityRouteDepartureTime=" + cityRouteDepartureTime
-				+ ", cityRouteArrivalTime=" + cityRouteArrivalTime + "]";
-	}	
+				+ ", cityRouteArrivalTime=" + cityRouteArrivalTime + ", cityRouteMemo=" + cityRouteMemo + "]";
+	}
 }

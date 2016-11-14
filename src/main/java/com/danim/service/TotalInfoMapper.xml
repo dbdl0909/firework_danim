@@ -4,7 +4,7 @@
 <mapper namespace="com.danim.service.TotalInfoMapper">
 	<select id="selectMaxPlanNo"
 		resultType="int">
-		SELECT IF(ISNULL(plan_no), 0, MAX(plan_no)) as plan_no FROM plan;
+		SELECT IFNULL(MAX(plan_no), 0) as plan_no FROM plan;
 	</select>
 	
 	<insert id="insertPlan"
@@ -40,7 +40,7 @@
 	
 	<select id="selectMaxCityRouteNo"
 			resultType="int">
-		SELECT IF(ISNULL(city_route_no), 1, MAX(city_route_no)+1) FROM city_route;
+		SELECT IFNULL(MAX(city_route_no)+1, 0) FROM city_route;
 	</select>
 	
 	<insert id="insertCityRoute"
@@ -66,6 +66,28 @@
 		;
 	</insert>
 	
+	<select id="selectMaxLandmarkNo"
+			resultType="int">
+		SELECT IFNULL(MAX(landmark_plan_no)+1, 0) as landmark_plan_no FROM landmark_plan;
+	</select>
+	
+	<insert id="insertLandmarkPlan"
+			parameterType="java.util.Map">
+		INSERT INTO landmark_plan(
+			landmark_plan_no,
+			plan_no,
+			city_route_no,
+			landmark_info_no
+		) VALUES
+		<foreach collection="landmarkPlanDtoList" item="landmarkPlanDtoList" index="index" open="(" separator="),(" close=")">
+			#{cityRouteDtoList.landmarkPlanNo},
+		    #{cityRouteDtoList.planNo},
+		    #{cityRouteDtoList.cityRouteNo},
+		    #{cityRouteDtoList.landmarkInfoNo}
+		</foreach>
+		;
+	</insert>
+	
 	<select id="selectCityInfo"
 			resultType="com.danim.service.plan.CityInfoDto">
 		SELECT
@@ -79,7 +101,7 @@
 		FROM
 			city_info
 	</select>
-
+	
 	<select id="selectLandmarkInfoByCityName"
 			resultType="com.danim.service.plan.LandmarkInfoDto"
 			parameterType="String">

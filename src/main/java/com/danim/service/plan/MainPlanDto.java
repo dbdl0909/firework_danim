@@ -17,6 +17,7 @@ public class MainPlanDto {
 	private ArrayList<String> cityRouteDepartureTime;
 	private ArrayList<String> cityRouteArrivalTime;
 	private ArrayList<String> landmarkPlanNo;
+	private ArrayList<String> planMemo;
 	
 	public String getMemberId() {
 		return memberId;
@@ -96,7 +97,12 @@ public class MainPlanDto {
 	public void setLandmarkPlanNo(ArrayList<String> landmarkPlanNo) {
 		this.landmarkPlanNo = landmarkPlanNo;
 	}
-	
+	public ArrayList<String> getPlanMemo() {
+		return planMemo;
+	}
+	public void setPlanMemo(ArrayList<String> planMemo) {
+		this.planMemo = planMemo;
+	}
 	@Override
 	public String toString() {
 		return "MainPlanDto [memberId=" + memberId + ", planName=" + planName + ", planHeadcount=" + planHeadcount
@@ -104,6 +110,7 @@ public class MainPlanDto {
 				+ stayDay + ", cityRouteStartDate=" + cityRouteStartDate + ", cityRouteDepartureCity="
 				+ cityRouteDepartureCity + ", cityRouteArrivalCity=" + cityRouteArrivalCity
 				+ ", cityRouteDepartureTime=" + cityRouteDepartureTime + ", cityRouteArrivalTime="
-				+ cityRouteArrivalTime + ", landmarkPlanNo=" + landmarkPlanNo + "]";
+				+ cityRouteArrivalTime + ", landmarkPlanNo=" + landmarkPlanNo + ", planMemo=" + planMemo + "]";
 	}
+	
 }
