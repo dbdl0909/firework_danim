@@ -81,5 +81,48 @@
 			cityRankName
 		ORDER BY
 			COUNT(route.city_route_departure_city) DESC
+	</select>
+	<!-- 20대 계절 별 여행 순위 -->
+	<select id="selectSeasonCityTwenty"
+			parameterType="String"
+			resultType="Integer">
+		SELECT
+			COUNT(pl.plan_name) as cityRankName
+		FROM
+			plan as pl
+		JOIN
+			member_info as member
+		ON
+			pl.member_id = member.member_id
+		WHERE
+			member.member_info_birth <![CDATA[ > ]]> '1986-01-01'
+		AND
+			member.member_info_birth <![CDATA[ < ]]> '1997-12-31'
+		<choose>
+			<when test="#{spring}.equals('spring')">
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 6
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 2			
+			</when>
+			<when test="season.equals('summer')">
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 9
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 5				
+			</when>
+			<when test="season.equals('fall')">
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 12
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 8			
+			</when>
+			<when test="season.equals('winter')">
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 3
+				AND
+					DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 11			
+			</when>									
+		</choose>	
 	</select>			
 </mapper>

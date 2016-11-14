@@ -17,11 +17,50 @@
 		<script type="text/javascript">
 		$(document).ready(function(){
 			google.charts.load('current', {'packages':['corechart']});
-			google.charts.setOnLoadCallback(drawChart);
-			google.charts.setOnLoadCallback(drawRegionsMap);
+			google.charts.setOnLoadCallback(cityForFemaleChart);
+			google.charts.setOnLoadCallback(cityForMaleChart);
+			google.charts.setOnLoadCallback(popularityCityChart);
+			google.charts.setOnLoadCallback(selectSeasonCityTwenty);
 			
-			function drawChart() {
+			//남성이 많이 방문한 도시 top5
+			function cityForMaleChart() {
+				<c:set var="selectCityForMale" value="${selectCityForGender.selectCityForMale}" />
+				
+			    var cityRankName = [];
+			    var cityRankCount = [];
+			    var selectCityForMale = [];
+			    
+			    <c:forEach var="selectCityForMale" items="${selectCityForMale}">
+				    cityRankName.push("${selectCityForMale.cityRankName}");
+					cityRankCount.push(${selectCityForMale.cityRankCount});
+				</c:forEach>
+				
+				console.log('name : ' + cityRankName, 'count : ' + cityRankCount);
+				
+				var data = new google.visualization.DataTable();
+					data.addColumn('string', '도시이름');
+					data.addColumn('number', '여행수');					
+					
+				    for(var i = 0; i<cityRankName.length; i++){
+				    	selectCityForMale.push([cityRankName[i], cityRankCount[i]]);
+				      }
+				    
+				    data.addRows(selectCityForMale);
+				
+				var options = {
+					title: '남성이 선호하는 지역 TOP 5',
+					forceIFrame: false
+				};
+				
+				var chart = new google.visualization.PieChart(document.getElementById('maleChart'));
+				
+				chart.draw(data, options);
+			}
+			
+			// 여성이 많이 방문한 도시 top5
+			function cityForFemaleChart() {
 				<c:set var="selectCityForFemale" value="${selectCityForGender.selectCityForFemale}" />
+				<c:set var="selectCityForMale" value="${selectCityForGender.selectCityForMale}" />
 				
 			    var cityRankName = [];
 			    var cityRankCount = [];
@@ -45,7 +84,8 @@
 				    data.addRows(selectCityForFemale);
 				
 				var options = {
-					title: '여성이 선호하는 지역 TOP 5'
+					title: '여성이 선호하는 지역 TOP 5',
+					forceIFrame: false
 				};
 				
 				var chart = new google.visualization.PieChart(document.getElementById('femaleChart'));
@@ -53,7 +93,8 @@
 				chart.draw(data, options);
 			}
 			
-			function drawRegionsMap() {
+			// 가장 많이 여행한 도시 순
+			function popularityCityChart() {
 				
 				var data = new google.visualization.DataTable();
 				var ivalue = [];
@@ -85,7 +126,7 @@
 				</c:forEach>
 				
 				console.log(koreaRegion[0]);
-				console.log(cityRankName);
+				console.log(cityRankName[0]);
 				
 				data.addColumn('string', 'Country');
 				data.addColumn('number', 'Value'); 
@@ -94,31 +135,15 @@
 			    for(var i = 0; i<cityRankName.length; i++){
 			    	for(var j = 0; j<koreaRegion.length; j++) {
 				    	if(koreaRegion[j].f == cityRankName[i]) {
-					    	selectPopularityCity.push([koreaRegion[i], cityRankCount[i], 'ㅎㅎ']);	
-					    	console.log(selectPopularityCity);
+					    	selectPopularityCity.push([koreaRegion[j], 16 - i, (i + 1) + '위']);
+					    	console.log(koreaRegion[j]);
+					    	console.log(16 - i);
 				    	}
 			    	}
 			    	
-			      }
+			    }
 			    
 			    data.addRows(selectPopularityCity);
-			    
-				/* data.addRows([[{v:'KR-11',f:'서울특별시'},1,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-26',f:'부산광역시'},2,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-27',f:'대구광역시'},3,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-28',f:'인천광역시'},4,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-29',f:'광주광역시'},5,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-30',f:'대전광역시'},6,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-31',f:'울산광역시'},7,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-41',f:'경기도'},8,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-42',f:'강원도'},9,'인기있는 지역 확인하기']]);		
-				data.addRows([[{v:'KR-43',f:'충청북도'},10,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-44',f:'충청남도'},11,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-45',f:'전라북도'},12,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-46',f:'전라남도'},13,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-47',f:'경상북도'},14,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-48',f:'경상남도'},15,'인기있는 지역 확인하기']]);
-				data.addRows([[{v:'KR-49',f:'제주도'},16,'인기있는 지역 확인하기']]); */ 
 				
 				var options = {
 								region: 'KR', // 지역코드
@@ -130,30 +155,60 @@
 								enableRegionInteractivity: 'true', 
 								resolution: 'provinces',
 								//sizeAxis: {minValue: 1, maxValue:16,minSize:1,  maxSize: 16},
-								colorAxis: {colors: ['#aff5ff', '#49b9ff', '#1c58ff']},
+								//colorAxis: {colors: ['#aff5ff', '#49b9ff', '#1c58ff']},
+								colorAxis: {colors: ['#81DAF5', '#2E9AFE', '#0040FF']},
 								keepAspectRatio: true,
-								tooltip: {textStyle: {color: '#444444'}, trigger:'focus'}
+								tooltip: {textStyle: {color: '#444444'}, trigger:'focus'},
+								forceIFrame: false
 								};
 				
-				var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+				var chart = new google.visualization.GeoChart(document.getElementById('popularityChart'));
 				
 				chart.draw(data, options);
 			}
+			
+			function selectSeasonCityTwenty() {
+				<c:set var="selectSpringCityTwenty" value="${selectSeasonCityTwenty.selectSpringCityTwenty}" />
+				<c:set var="selectSummerCityTwenty" value="${selectSeasonCityTwenty.selectSummerCityTwenty}" />				
+				<c:set var="selectFallCityTwenty" value="${selectSeasonCityTwenty.selectFallCityTwenty}" />
+				<c:set var="selectWinterCityTwenty" value="${selectSeasonCityTwenty.selectWinterCityTwenty}" />
+				
+		        var data = google.visualization.arrayToDataTable([
+					['season', 'tour'],
+					['봄',  ${selectSpringCityTwenty}],
+					['여름', ${selectSummerCityTwenty}],
+					['가을', ${selectFallCityTwenty}],
+					['겨울', ${selectWinterCityTwenty}]
+				]);
+				
+				var options = {
+					title: '계절별 20대 여행 순위',
+					curveType: 'function',
+					legend: { position: 'bottom' }
+				};
+				
+				var chart = new google.visualization.LineChart(document.getElementById('seasonTwentyChart'));
+				
+				chart.draw(data, options);
+				
+				}
+			
 		});
 		</script>		
 		<title>Insert title here</title>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
-		<c:set var="selectCityForFemale" value="${selectCityForGender.selectCityForFemale}" />
-			<c:forEach var="selectCityForFemale" items="${selectCityForFemale}" varStatus="status">
-				['${selectCityForFemale.cityRankName}', ${selectCityForFemale.cityRankCount}],
-				<c:if test="${status.last}">
-					['${selectCityForFemale.cityRankName}', ${selectCityForFemale.cityRankCount}]
-				</c:if>	
-			</c:forEach>
-		<div id="femaleChart" style="width: 900px; height: 500px;"></div>	
-		 <div id="regions_div" style="width: 700px; height: 433px;"></div>	
+		<div id = "genderChart">
+			<div id="femaleChart" style="width: 750px; height: 400px;"></div>
+			<div id="maleChart" style="width: 750px; height: 400px;"></div>
+		</div>
+		<div>
+			<div id="popularityChart" style="width: 700px; height: 433px;"></div>
+		</div>
+		<div>
+			<div id="seasonTwentyChart" style="width: 750px; height: 400px;"></div>
+		</div>	
 	</body>
 	<jsp:include page="../module/footer.jsp"></jsp:include>
 </html>

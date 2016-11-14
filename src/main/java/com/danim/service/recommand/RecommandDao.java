@@ -30,4 +30,12 @@ public class RecommandDao {
 		
 		return sessionTemplate.selectList(nameSpace + ".selectPopularityCity");
 	}
+	
+	// 20대 계절별 많이 여행하는 도시
+	public int selectSeasonCityTwenty(String season) {
+		logger.info("selectSeasonCityTwenty RecommandDao.java");
+		logger.info("selectSeasonCityTwenty season {} RecommandDao.java", season);
+		
+		return sessionTemplate.selectOne(nameSpace + ".selectSeasonCityTwenty", season);
+	}	
 }

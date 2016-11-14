@@ -16,6 +16,7 @@ public class RecommandService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RecommandService.class);
 	
+	// 성별 별 많이 여행가는 도시 top5
     public Map<String, Object> selectCityForGender() {
     	logger.info("selectCityForGender() RecommandService.java");
     	
@@ -32,12 +33,32 @@ public class RecommandService {
     	
     }
     
+    // 전국 많이 가는 도시 순위
     public List<RecommandDto> selectPopularityCity() {
     	logger.info("selectPopularityCity() RecommandService.java");
 		
     	List<RecommandDto> selectPopularityCity = recommandDao.selectPopularityCity();
     	
     	return selectPopularityCity;
+    	
+    }
+    
+    public Map<String, Object> selectSeasonCityTwenty() {
+    	logger.info("selectSeasonCityTwenty() RecommandService.java");
+    	
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	String dd = "spring";
+    	int selectSpringCityTwenty = recommandDao.selectSeasonCityTwenty(dd);
+    	/*int selectSummerCityTwenty = recommandDao.selectSeasonCityTwenty("summer");		
+    	int selectFallCityTwenty = recommandDao.selectSeasonCityTwenty("fall");
+    	int selectWinterCityTwenty = recommandDao.selectSeasonCityTwenty("winter");*/
+    	
+    	map.put("selectSpringCityTwenty", selectSpringCityTwenty);
+    	/*map.put("selectSummerCityTwenty", selectSummerCityTwenty);
+    	map.put("selectFallCityTwenty", selectFallCityTwenty);
+    	map.put("selectWinterCityTwenty", selectWinterCityTwenty);*/
+  	
+    	return map;
     	
     }
 
