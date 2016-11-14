@@ -287,7 +287,8 @@ function infoWindowEvent() {
 			    		//console.log('markerIndexArray 길이 : ' + markerIndexArray.length);
 			    		$('#mainPlanUl').append(
 		    				"<li class='leftMenuLi'>" +
-								"<input type='text' class='cityName' name='cityRouteDepartureCity' value='" + infoNameArray[markerIndex] + "' style='border:0' readonly='readonly'/>" +
+								"<input type='text' class='cityName' value='" + infoNameArray[markerIndex] + "' style='border:0' readonly='readonly'/>" +
+								"<input class='cityRouteDepartureCity' name='cityRouteDepartureCity' type='hidden'/>" +
 								"<input class='cityRouteArrivalCity' name='cityRouteArrivalCity' type='hidden'/>" +
 								"<input class='cityInfoNo' type='hidden' value='" + infoNoArray[markerIndex] +"'/>" +
 								"<input class='cityNo' type='hidden' value='" + markerIndex + "'/>" +
@@ -706,6 +707,7 @@ $(document).ready(function() {
 	var cityClickIndex = 0;
 	var clickCityName;
 	var clickCityNo;
+	var clickCityInfoNo;
 	
 	//ajax로 받아오는 값 초기화
 	var count = 0;
@@ -849,8 +851,9 @@ $(document).ready(function() {
 		
 		clickCityName = $('.cityName').eq(cityClickIndex).val();
 		clickCityNo = $('.cityNo').eq(cityClickIndex).val();
+		//clickCityInfoNo = $('.cityInfoNo').eq(cityClickIndex).val();
+		//console.log('clickCityInfoNo : ' + clickCityInfoNo);
 		//console.log(cityClickIndex + ' 번째 li 의 ' + clickCityNo + ' 번째 도시 : ' + clickCityName);
-		
 		
 		$('#clickCityName').text(clickCityName);
 		
@@ -939,15 +942,18 @@ $(document).ready(function() {
 		
 		console.log('도시 루트');
 		for(var i=0; i<$('.leftMenuLi').length; i++) {
+			console.log($('.cityInfoNo').eq(i).val());
 			if(i == ($('.leftMenuLi').length-1)) {
-				$('.cityRouteArrivalCity').eq(i).val($('.cityName').eq(i).val());
+				$('.cityRouteDepartureCity').eq(i).val($('.cityInfoNo').eq(i).val());
+				$('.cityRouteArrivalCity').eq(i).val($('.cityInfoNo').eq(i).val());
 			} else {
-				$('.cityRouteArrivalCity').eq(i).val($('.cityName').eq(i+1).val());
+				$('.cityRouteDepartureCity').eq(i).val($('.cityInfoNo').eq(i).val());
+				$('.cityRouteArrivalCity').eq(i).val($('.cityInfoNo').eq(i+1).val());
 			}
 			
 			console.log(i + '번째 도시 출발날짜 : ' + $('.cityRouteStartDate').eq(i).val());	//cityRouteStartDate
 			
-			console.log(i + '번째 출발 도시 : ' + $('.cityName').eq(i).val());					//cityRouteDepartureCity
+			console.log(i + '번째 출발 도시 : ' + $('.cityRouteDepartureCity').eq(i).val());	//cityRouteDepartureCity
 			console.log(i + '번째 도착 도시 : ' + $('.cityRouteArrivalCity').eq(i).val());		//cityRouteArrivalCity
 			
 			console.log(i + '번째 도시 출발시각 : ' + $('.startTime').eq(i).val());				//cityRouteDepartureTime

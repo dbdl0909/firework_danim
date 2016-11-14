@@ -4,7 +4,7 @@
 <mapper namespace="com.danim.service.TotalInfoMapper">
 	<select id="selectMaxPlanNo"
 		resultType="int">
-		SELECT MAX(plan_no)+1 FROM plan;
+		SELECT IF(ISNULL(plan_no), 0, MAX(plan_no)) as plan_no FROM plan;
 	</select>
 	
 	<insert id="insertPlan"
@@ -40,7 +40,7 @@
 	
 	<select id="selectMaxCityRouteNo"
 			resultType="int">
-		SELECT MAX(city_route_no)+1 FROM city_route;
+		SELECT IF(ISNULL(city_route_no), 1, MAX(city_route_no)+1) FROM city_route;
 	</select>
 	
 	<insert id="insertCityRoute"

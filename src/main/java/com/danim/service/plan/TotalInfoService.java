@@ -22,7 +22,12 @@ public class TotalInfoService {
 	public List<CityInfoDto> selectCityInfoAll() {
 		logger.info("selectCityInfoByCityInfoDoName() TotalInfoService.java");
 		List<CityInfoDto> listCityInfo = totalInfoDao.selectCityInfoAll();
-		logger.info("listCityInfo : {} <-- selectCityInfoByCityInfoDoName() TotalInfoService.java", listCityInfo);
+		//logger.info("listCityInfo : {} <-- selectCityInfoByCityInfoDoName() TotalInfoService.java", listCityInfo);
+		if(listCityInfo != null) {
+			logger.info("listCityInfo SELECT O");
+		} else {
+			logger.info("listCityInfo SELECT X");
+		}
 		
 		return listCityInfo;
 	}
@@ -73,12 +78,14 @@ public class TotalInfoService {
 		logger.info("insertPlan() TotalInfoService.java");
 		
 		int resultIndex = 0;
-		
 		int planNo = totalInfoDao.selectMaxPlanNo();
-		
+		logger.info("planNo : {}", planNo);
+		/*if(planNo == null) {
+			planNo = 1;
+		}*/
 		//plan 테이블에 넣을 데이터 셋팅
 		PlanDto planDto = new PlanDto();
-		planDto.setPlanNo(planNo);
+		planDto.setPlanNo(planNo+1);
 		planDto.setPlanName(mainPlanDto.getPlanName());
 		planDto.setPlanHeadcount(mainPlanDto.getPlanHeadcount());
 		planDto.setPlanType(mainPlanDto.getPlanType());
@@ -97,11 +104,10 @@ public class TotalInfoService {
 		//city_route 테이블에 넣을 데이터 셋팅
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CityRouteDto> cityRouteDtoList = new ArrayList<CityRouteDto>();
-		CityRouteDto cityRouteDto = new CityRouteDto();
-		
+		CityRouteDto cityRouteDto = null;
 		int cityRouteNo = totalInfoDao.selectMaxCityRouteNo();
-		
 		int i = 0;
+		
 		ArrayList<String> cityRouteStartDate = mainPlanDto.getCityRouteStartDate();
 		ArrayList<String> cityRouteDepartureCity = mainPlanDto.getCityRouteDepartureCity();
 		ArrayList<String> cityRouteArrivalCity = mainPlanDto.getCityRouteArrivalCity();
@@ -114,8 +120,10 @@ public class TotalInfoService {
 		logger.info("cityRouteArrivalTime.size() : {}", cityRouteArrivalTime.size());*/
 		
 		for(i=0; i<cityRouteStartDate.size(); i++) {
+			cityRouteDto = new CityRouteDto();
 			cityRouteDto.setCityRouteNo(cityRouteNo+i);
-			cityRouteDto.setPlanNo(planNo);
+			logger.info("getCityRouteNo : {}", cityRouteDto.getCityRouteNo());
+			cityRouteDto.setPlanNo(planNo+1);
 			cityRouteDto.setCityRouteDate(cityRouteStartDate.get(i));
 			cityRouteDto.setCityRouteDepartureCity(cityRouteDepartureCity.get(i));
 			cityRouteDto.setCityRouteArrivalCity(cityRouteArrivalCity.get(i));
@@ -128,10 +136,12 @@ public class TotalInfoService {
 		map.put("cityRouteDtoList", cityRouteDtoList);
 		
 		resultIndex = totalInfoDao.insertCityRoute(map);
-		if(resultIndex == 1) {
-			logger.info("city_route 등록 O");
+		if(resultIndex >= 1) {
+			logger.info("city_route 등록 O : {}", resultIndex);
 		} else {
 			logger.info("city_route 등록 X");
 		}
+		
+		
 	}
 };
