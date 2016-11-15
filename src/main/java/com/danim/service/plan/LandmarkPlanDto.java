@@ -1,27 +1,27 @@
 package com.danim.service.plan;
 
-public class landmarkPlanDto {
-	private String landmarkPlanNo;
-	private String planNo;
-	private String cityRouteNo;
+public class LandmarkPlanDto {
+	private int landmarkPlanNo;
+	private int planNo;
+	private int cityRouteNo;
 	private String landmarkInfoNo;
 	
-	public String getLandmarkPlanNo() {
+	public int getLandmarkPlanNo() {
 		return landmarkPlanNo;
 	}
-	public void setLandmarkPlanNo(String landmarkPlanNo) {
+	public void setLandmarkPlanNo(int landmarkPlanNo) {
 		this.landmarkPlanNo = landmarkPlanNo;
 	}
-	public String getPlanNo() {
+	public int getPlanNo() {
 		return planNo;
 	}
-	public void setPlanNo(String planNo) {
+	public void setPlanNo(int planNo) {
 		this.planNo = planNo;
 	}
-	public String getCityRouteNo() {
+	public int getCityRouteNo() {
 		return cityRouteNo;
 	}
-	public void setCityRouteNo(String cityRouteNo) {
+	public void setCityRouteNo(int cityRouteNo) {
 		this.cityRouteNo = cityRouteNo;
 	}
 	public String getLandmarkInfoNo() {
@@ -33,7 +33,7 @@ public class landmarkPlanDto {
 	
 	@Override
 	public String toString() {
-		return "landmarkPlanDto [landmarkPlanNo=" + landmarkPlanNo + ", planNo=" + planNo + ", cityRouteNo="
+		return "LandmarkPlanDto [landmarkPlanNo=" + landmarkPlanNo + ", planNo=" + planNo + ", cityRouteNo="
 				+ cityRouteNo + ", landmarkInfoNo=" + landmarkInfoNo + "]";
 	}
 }

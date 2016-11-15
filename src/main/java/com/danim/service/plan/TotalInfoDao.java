@@ -52,7 +52,7 @@ public class TotalInfoDao {
 			return sessionTemplate.selectList(namesPace + ".selectEventInfoByCityName", map);
 		}
 		
-		//plan 테이블의 PK인 planNo의 제일 큰 숫자를 가져오는 매퍼 호출
+		//plan 테이블의 PK인 plan_no의 제일 큰 숫자를 가져오는 매퍼 호출
 		public int selectMaxPlanNo() {
 			logger.info("selectMaxPlanNo() TotalInfoDao.java");
 			
@@ -64,6 +64,7 @@ public class TotalInfoDao {
 			
 			return sessionTemplate.insert(namesPace + ".insertPlan", planDto);
 		}
+		//city_route 테이블의 PK인 city_route_no 의 제일 큰 숫자를 가져오는 매퍼 호출
 		public int selectMaxCityRouteNo() {
 			logger.info("selectMaxCityRouteNo() TotalInfoDao.java");
 			
@@ -74,5 +75,17 @@ public class TotalInfoDao {
 			logger.info("insertCityRoute() TotalInfoDao.java");
 			
 			return sessionTemplate.insert(namesPace + ".insertCityRoute", map);
+		}
+		//city_route 테이블의 PK인 city_route_no 의 제일 큰 숫자를 가져오는 매퍼 호출
+		public int selectMaxLandmarkNo() {
+			logger.info("selectMaxLandmarkNo() TotalInfoDao.java");
+			
+			return sessionTemplate.selectOne(namesPace + ".selectMaxLandmarkNo");
+		}
+		//landmark_plan 테이블에 값 입력하는 매퍼 호출
+		public int insertLandmarkPlan(Map<String, Object> map) {
+			logger.info("insertLandmarkPlan() TotalInfoDao.java");
+			
+			return sessionTemplate.insert(namesPace + ".insertLandmarkPlan", map);
 		}
 }

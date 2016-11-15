@@ -1,7 +1,5 @@
 package com.danim.service.plan;
 
-import java.util.ArrayList;
-
 public class CityRouteDto {
 	private int cityRouteNo;
 	private int planNo;

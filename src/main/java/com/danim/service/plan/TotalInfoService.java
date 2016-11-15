@@ -80,12 +80,10 @@ public class TotalInfoService {
 		int resultIndex = 0;
 		int planNo = totalInfoDao.selectMaxPlanNo();
 		logger.info("planNo : {}", planNo);
-		/*if(planNo == null) {
-			planNo = 1;
-		}*/
+		
 		//plan 테이블에 넣을 데이터 셋팅
 		PlanDto planDto = new PlanDto();
-		planDto.setPlanNo(planNo+1);
+		planDto.setPlanNo(planNo);
 		planDto.setMemberId(mainPlanDto.getMemberId());
 		planDto.setPlanName(mainPlanDto.getPlanName());
 		planDto.setPlanHeadcount(mainPlanDto.getPlanHeadcount());
@@ -93,6 +91,7 @@ public class TotalInfoService {
 		planDto.setPlanStay(mainPlanDto.getStayDay());
 		planDto.setPlanDeparture(mainPlanDto.getStartDate());
 		planDto.setPlanArrival(mainPlanDto.getEndDate());
+		planDto.setPlanMemo(mainPlanDto.getPlanMemo());
 		logger.info("planDto : {} <-- insertPlan() TotalInfoService.java", planDto);
 		
 		resultIndex = totalInfoDao.insertPlan(planDto);
@@ -106,30 +105,34 @@ public class TotalInfoService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CityRouteDto> cityRouteDtoList = new ArrayList<CityRouteDto>();
 		CityRouteDto cityRouteDto = null;
-		int cityRouteNo = totalInfoDao.selectMaxCityRouteNo();
 		int i = 0;
+		int cityRouteNo = totalInfoDao.selectMaxCityRouteNo();
+		logger.info("cityRouteNo : {}", cityRouteNo);
 		
 		ArrayList<String> cityRouteStartDate = mainPlanDto.getCityRouteStartDate();
 		ArrayList<String> cityRouteDepartureCity = mainPlanDto.getCityRouteDepartureCity();
 		ArrayList<String> cityRouteArrivalCity = mainPlanDto.getCityRouteArrivalCity();
 		ArrayList<String> cityRouteDepartureTime = mainPlanDto.getCityRouteDepartureTime();
 		ArrayList<String> cityRouteArrivalTime = mainPlanDto.getCityRouteArrivalTime();
+		ArrayList<String> cityRouteMemo = mainPlanDto.getCityRouteMemo();
 		/*logger.info("cityRouteStartDate.size() : {}", cityRouteStartDate.size());
 		logger.info("cityRouteDepartureCity.size() : {}", cityRouteDepartureCity.size());
 		logger.info("cityRouteArrivalCity.size() : {}", cityRouteArrivalCity.size());
 		logger.info("cityRouteDepartureTime.size() : {}", cityRouteDepartureTime.size());
-		logger.info("cityRouteArrivalTime.size() : {}", cityRouteArrivalTime.size());*/
+		logger.info("cityRouteArrivalTime.size() : {}", cityRouteArrivalTime.size());
+		logger.info("cityRouteMemo.size() : {}", cityRouteMemo.size());*/
 		
 		for(i=0; i<cityRouteStartDate.size(); i++) {
 			cityRouteDto = new CityRouteDto();
 			cityRouteDto.setCityRouteNo(cityRouteNo+i);
 			logger.info("getCityRouteNo : {}", cityRouteDto.getCityRouteNo());
-			cityRouteDto.setPlanNo(planNo+1);
+			cityRouteDto.setPlanNo(planNo);
 			cityRouteDto.setCityRouteDate(cityRouteStartDate.get(i));
 			cityRouteDto.setCityRouteDepartureCity(cityRouteDepartureCity.get(i));
 			cityRouteDto.setCityRouteArrivalCity(cityRouteArrivalCity.get(i));
 			cityRouteDto.setCityRouteDepartureTime(cityRouteDepartureTime.get(i));
 			cityRouteDto.setCityRouteArrivalTime(cityRouteArrivalTime.get(i));
+			cityRouteDto.setCityRouteMemo(cityRouteMemo.get(i));
 			cityRouteDtoList.add(cityRouteDto);
 		}
 		logger.info(cityRouteDtoList.toString());
@@ -143,6 +146,31 @@ public class TotalInfoService {
 			logger.info("city_route 등록 X");
 		}
 		
+		//landmark_plan 테이블에 넣을 데이터 셋팅
+		List<LandmarkPlanDto> landmarkPlanDtoList = new ArrayList<LandmarkPlanDto>();
+		LandmarkPlanDto landmarkPlanDto = null;
+		int j = 0;
+		int landmarkPlanNo = totalInfoDao.selectMaxLandmarkNo();
 		
+		ArrayList<String> landmarkInfoNo = mainPlanDto.getLandmarkInfoNo();
+		logger.info("landmarkInfoNo.size() : {}", landmarkInfoNo.size());
+		
+		for(j=0; j<landmarkInfoNo.size(); j++) {
+			landmarkPlanDto = new LandmarkPlanDto();
+			landmarkPlanDto.setLandmarkPlanNo(landmarkPlanNo+i);
+			landmarkPlanDto.setPlanNo(planNo);
+			landmarkPlanDto.setCityRouteNo(cityRouteNo);
+			landmarkPlanDto.setLandmarkInfoNo(landmarkInfoNo.get(i));
+			landmarkPlanDtoList.add(landmarkPlanDto);
+		}
+		logger.info(landmarkPlanDtoList.toString());
+		
+		map.put("landmarkPlanDtoList", landmarkPlanDtoList);
+		resultIndex = totalInfoDao.insertLandmarkPlan(map);
+		if(resultIndex >= 1) {
+			logger.info("city_route 등록 O : {}", resultIndex);
+		} else {
+			logger.info("city_route 등록 X");
+		}
 	}
 };

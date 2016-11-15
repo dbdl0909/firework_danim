@@ -4,7 +4,7 @@
 <mapper namespace="com.danim.service.TotalInfoMapper">
 	<select id="selectMaxPlanNo"
 		resultType="int">
-		SELECT IFNULL(MAX(plan_no), 0) as plan_no FROM plan;
+		SELECT IFNULL(MAX(plan_no)+1, 1) as plan_no FROM plan
 	</select>
 	
 	<insert id="insertPlan"
@@ -34,13 +34,13 @@
 			CURDATE(),
 			CURDATE(),
 			0,
-			'메모1'
-		);
+			#{planMemo}
+		)
 	</insert>
 	
 	<select id="selectMaxCityRouteNo"
 			resultType="int">
-		SELECT IFNULL(MAX(city_route_no)+1, 0) FROM city_route;
+		SELECT IFNULL(MAX(city_route_no)+1, 1) FROM city_route
 	</select>
 	
 	<insert id="insertCityRoute"
@@ -52,7 +52,8 @@
 			city_route_departure_city,
 			city_route_arrival_city,
 			city_route_departure_time,
-			city_route_arrival_time
+			city_route_arrival_time,
+			city_route_memo
 		) VALUES
 		<foreach collection="cityRouteDtoList" item="cityRouteDtoList" index="index" open="(" separator="),(" close=")">
 			#{cityRouteDtoList.cityRouteNo},
@@ -61,14 +62,14 @@
 		    #{cityRouteDtoList.cityRouteDepartureCity},
 		    #{cityRouteDtoList.cityRouteArrivalCity},
 		    #{cityRouteDtoList.cityRouteDepartureTime},
-		    #{cityRouteDtoList.cityRouteArrivalTime}
+		    #{cityRouteDtoList.cityRouteArrivalTime},
+		    #{cityRouteDtoList.cityRouteMemo}
 		</foreach>
-		;
 	</insert>
 	
 	<select id="selectMaxLandmarkNo"
 			resultType="int">
-		SELECT IFNULL(MAX(landmark_plan_no)+1, 0) as landmark_plan_no FROM landmark_plan;
+		SELECT IFNULL(MAX(landmark_plan_no)+1, 1) as landmark_plan_no FROM landmark_plan;
 	</select>
 	
 	<insert id="insertLandmarkPlan"
@@ -85,7 +86,6 @@
 		    #{cityRouteDtoList.cityRouteNo},
 		    #{cityRouteDtoList.landmarkInfoNo}
 		</foreach>
-		;
 	</insert>
 	
 	<select id="selectCityInfo"
@@ -122,7 +122,7 @@
 					city_info
 				WHERE
 					city_info_name=#{clickCityName}
-			);
+			)
 	</select>
 	
 	<select id="selectEateryInfoByCityName"
@@ -144,7 +144,7 @@
 					city_info_name=#{clickCityName}
 			)
 		LIMIT
-			#{infoMoreView};
+			#{infoMoreView}
 	</select>
 	
 	<select id="selectStayInfoByCityName"
@@ -166,7 +166,7 @@
 					city_info_name=#{clickCityName}
 			)
 		LIMIT
-			#{infoMoreView};
+			#{infoMoreView}
 	</select>
 	
 	<select id="selectEventInfoByCityName"
@@ -187,6 +187,6 @@
 					city_info_name=#{clickCityName}
 			)
 		LIMIT
-			#{infoMoreView};
+			#{infoMoreView}
 	</select>
 </mapper>
