@@ -20,4 +20,37 @@
 			WHERE 
 				m.member_id = #{memberId}
     </select>
+    <select id="selectPlanDetailListByPlanNo" 
+            resultType="com.danim.service.plan.PlanAllDto"
+            parameterType="String">
+           SELECT DISTINCT 
+				c.city_route_no as 'cityRouteNo',
+				c.plan_no as 'planNo',
+				c.city_route_date as 'cityRouteDate',
+				c.city_route_departure_city as 'cityRouteDepartureCity',
+				c.city_route_arrival_city as 'cityRouteArrivalCity',
+				c.city_route_departure_time as 'cityRouteDepartureTime',
+				c.city_route_arrival_time as 'cityRouteArrivalTime',
+				c.city_route_memo as 'cityRouteMemo',
+				l.landmark_plan_no as 'landmarkPlanNo',
+				l.landmark_info_no as 'landmarkInfoNo',
+				
+				s.stay_plan_no as 'stayPlanNo',
+				s.stay_info_no as 'stayInfoNo',
+				s.stay_plan_time as 'stayPlanTime',
+				s.stay_plan_memo as 'stayPlanMemo'
+				
+			FROM 
+				plan p
+			INNER JOIN
+				city_route c 
+			INNER JOIN 
+				stay_plan s 
+			INNER JOIN 
+				landmark_plan l
+			ON 
+				p.plan_no= c.plan_no and s.plan_no = l.plan_no
+			WHERE 
+				p.plan_no = #{planNo};
+    </select>
 </mapper>

@@ -46,7 +46,7 @@
 			<c:forEach items="${planList}" var="planList">
 				<tr> 
 					<td>${planList.planNo}</td>					
-					<td><a href="/plan/planDetailList?planNo=${planList.planNo}">${planList.planName}</a></td>
+					<td><a href="/plan/planDetailList?planNo=${planList.planNo}&planList=${planList}">${planList.planName}</a></td>
 					<td>${planList.memberId}</td>
 					<td>${planList.planDate}</td>
 						
