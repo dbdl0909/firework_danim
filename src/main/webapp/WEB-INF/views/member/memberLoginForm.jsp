@@ -5,8 +5,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>DANIM JOIN</title>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+	<title>다님플래너 :: 로그인</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="chrome=1"><!-- Optimistically rendering in Chrome Frame in IE. --> 
 	<link rel="stylesheet" href="../../../resources/css/style.css" type="text/css">
@@ -129,14 +129,15 @@
 		        	console.log($('#memberName').val());
 					//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
 					check = true;
-					
+					console.log("힝입니다1");
+					console.log(check);
 				} else {	//profile에 값이 없으면
 		        	//로그인 안됨
 		        	return false;
 		        }
 		    });
-		    
 		    if(check == true) {
+		    	console.log("힝입니다2");
 		    	$('#memberLinkLoginForm').submit();
 		    }
 		  };
@@ -159,7 +160,7 @@
 				<input type="submit" value="로그인" /> 
 			</div>
 			<div id='button' class='outerDiv' style="float:left;">
-				<input type="button" value="회원가입" /> 
+				<input id="joinButton" type="button" value="회원가입" onclick="location.href='./member/memberJoinForm'"/> 
 			</div>
 		</form>
 		<!-- 연동로그인 -->
@@ -171,10 +172,8 @@
 					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 				</div>
 				<div id="facebook" style="float:left;">		<!-- 페이스북 연동로그인 -->
-					<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="300px" height="75px;">
-					</fb:login-button> -->
-					<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
-					<div id="status">
+					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="300px" height="75px;">
+					</fb:login-button>
 					</div>
 				</div>
 			</div>

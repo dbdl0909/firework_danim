@@ -102,6 +102,8 @@
 	</script>
 </head>
 <body>
+	<!-- 헤더 -->
+	<jsp:include page="../module/header.jsp" />
 	<div id="twitter">
 		<form class="memberJoinForm" action="/member/memberJoinSubmit" method="post"> 
 			<input type="hidden" name="memberIdCheck" value="T">	<!-- T(내부회원) : 이 페이지는 내부회원가입페이지 -->
@@ -164,5 +166,7 @@
 			</div>				
 		</form>
 	</div>
+	<!-- 풋터 -->
+	<jsp:include page="../module/footer.jsp" />
 </body>
 </html>

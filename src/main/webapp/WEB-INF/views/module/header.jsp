@@ -92,115 +92,7 @@
 			}
 	    });
 	})
-	var memberId;
-    var memberName;
-    var check = false;
-    	function onSignIn(googleUser) {
-	        // Useful data for your client-side scripts:
-	        var profile = googleUser.getBasicProfile();
-	       	memberId = profile.getId();			//연동회원아이디
-        	memberName = profile.getName();		//연동회원닉네임
-        	
-	        console.log("google ID: " + memberId); // Don't send this directly to your server!
-	        console.log('google Full Name: ' + memberName);
-	        //console.log('Given Name: ' + profile.getGivenName());
-	        //console.log('Family Name: ' + profile.getFamilyName());
-	        //console.log("Image URL: " + profile.getImageUrl());
-	        //console.log("Email: " + profile.getEmail());
-	
-	        // The ID token you need to pass to your backend:
-	        var id_token = googleUser.getAuthResponse().id_token;
-	        //console.log("ID Token: " + id_token);
-	
-	        if(profile != null) {	//profile에 값이 있으면(null값이 아니면)
-	        	$('#memberId').val(memberId);
-	        	$('#memberName').val(memberName);
-	        	console.log($('#memberId').val());
-	        	console.log($('#memberName').val());
-				//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-	        	$('#memberLinkLoginForm').submit();
-	        } else {	//profile에 값이 없으면
-	        	//로그인 안됨
-	        	return false;
-	        }
-		};
-		//페이스북 연동로그인
-			function statusChangeCallback(response) {
-			memberId = response.authResponse.userID;				//연동회원아이디
-        	var accessToken = response.authResponse.accessToken;		//연동회원토큰
-			console.log('facebook memberId: '+memberId);				//사용자 고유값
-			console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
-			console.log('statusChangeCallback');
-		    console.log(response);
-		    if (response.status === 'connected') {
-		      // 페이스북과 앱에 같이 로그인되어 있다.
-				/* var uid = response.authResponse.userID;
-				var accessToken = response.authResponse.accessToken;
-				console.log('uid: '+uid);//사용자 고유값
-				console.log('accessToken: '+accessToken);//권한 체크를 위한 값 일정 기간 마다 변경 됨 */
-				testAPI();
-		    } else if (response.status === 'not_authorized') {
-				//페이스북에는 로그인 되어있으나, 앱에는 로그인 되어있지 않다.
-				document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-				//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-					$('#memberLinkLoginForm').submit();
-		    } else {
-				//페이스북에 로그인이 되어있지 않아서, 앱에 로그인 되어있는지 불명확하다.
-				document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
-				//로그인 안됨
-				return false;
-		    }
-		}
-		function checkLoginState() {
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-		    });
-		}
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId      : '1698844840441321',
-				cookie     : true,  // enable cookies to allow the server to access 
-			                        // the session
-			    xfbml      : true,  // parse social plugins on this page
-			    version    : 'v2.5' // use graph api version 2.5
-			});
-			FB.getLoginStatus(function(response) {
-			    statusChangeCallback(response);
-			});
-		  };
-		  (function(d, s, id) {
-		    var js, fjs = d.getElementsByTagName(s)[0];
-		    if (d.getElementById(id)) return;
-		    js = d.createElement(s); js.id = id;
-		    js.src = "//connect.facebook.net/en_US/sdk.js";
-		    fjs.parentNode.insertBefore(js, fjs);
-		  }(document, 'script', 'facebook-jssdk'));
-		  function testAPI() {
-		    console.log('Welcome!  Fetching your information.... ');
-		    FB.api('/me', function(response) {
-		      console.log('Successful login for: ' + response.name);
-		      memberName = response.name;								//연동회원닉네임
-		      console.log('facebook memberId222: '+memberId);
-			  console.log('facebook memberName222: '+memberName);
-		      //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '! '+' id : '+response.id;
-				if(memberId != null) {	//response에 값이 있으면(null값이 아니면)
-		        	$('#memberId').val(memberId);
-		        	$('#memberName').val(memberName);
-		        	console.log($('#memberId').val());
-		        	console.log($('#memberName').val());
-					//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-					check = true;
-					
-				} else {	//profile에 값이 없으면
-		        	//로그인 안됨
-		        	return false;
-		        }
-		    });
-		    
-		    if(check == true) {
-		    	$('#memberLinkLoginForm').submit();
-		    }
-		  };
+
 </script>
 </head>
 <body>
@@ -253,8 +145,8 @@
 						<!-- <a href="/member/memberLoginForm">로그인</a> -->
 						<div id="loginButton"><a>로그인</a></div>
 						<div id="loginHiddenNav" style="width:320px; height:260px; background:#fff; position:absolute; z-index:99999;
--webkit-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); -moz-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); 
-display:none; margin-left:-130px; top:130px;">
+							-webkit-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); -moz-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); 
+							display:none; margin-left:-130px; top:130px;">
 							<jsp:include page="../member/memberLoginForm.jsp" />
 						</div>
 					</c:if>
