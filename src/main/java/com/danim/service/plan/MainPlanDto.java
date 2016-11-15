@@ -17,7 +17,9 @@ public class MainPlanDto {
 	private ArrayList<String> cityRouteArrivalCity;
 	private ArrayList<String> cityRouteDepartureTime;
 	private ArrayList<String> cityRouteArrivalTime;
+	private ArrayList<Integer> cityRouteMemoIndex;
 	private ArrayList<String> cityRouteMemo;
+	private ArrayList<Integer> landmarkIndex;
 	private ArrayList<String> landmarkInfoNo;
 	
 	public String getMemberId() {
@@ -110,6 +112,18 @@ public class MainPlanDto {
 	public void setLandmarkInfoNo(ArrayList<String> landmarkInfoNo) {
 		this.landmarkInfoNo = landmarkInfoNo;
 	}
+	public ArrayList<Integer> getLandmarkIndex() {
+		return landmarkIndex;
+	}
+	public void setLandmarkIndex(ArrayList<Integer> landmarkIndex) {
+		this.landmarkIndex = landmarkIndex;
+	}
+	public ArrayList<Integer> getCityRouteMemoIndex() {
+		return cityRouteMemoIndex;
+	}
+	public void setCityRouteMemoIndex(ArrayList<Integer> cityRouteMemoIndex) {
+		this.cityRouteMemoIndex = cityRouteMemoIndex;
+	}
 	
 	@Override
 	public String toString() {
@@ -118,7 +132,8 @@ public class MainPlanDto {
 				+ endDate + ", stayDay=" + stayDay + ", cityRouteStartDate=" + cityRouteStartDate
 				+ ", cityRouteDepartureCity=" + cityRouteDepartureCity + ", cityRouteArrivalCity="
 				+ cityRouteArrivalCity + ", cityRouteDepartureTime=" + cityRouteDepartureTime
-				+ ", cityRouteArrivalTime=" + cityRouteArrivalTime + ", cityRouteMemo=" + cityRouteMemo
-				+ ", landmarkInfoNo=" + landmarkInfoNo + "]";
+				+ ", cityRouteArrivalTime=" + cityRouteArrivalTime + ", cityRouteMemoIndex=" + cityRouteMemoIndex
+				+ ", cityRouteMemo=" + cityRouteMemo + ", landmarkIndex=" + landmarkIndex + ", landmarkInfoNo="
+				+ landmarkInfoNo + "]";
 	}
 }

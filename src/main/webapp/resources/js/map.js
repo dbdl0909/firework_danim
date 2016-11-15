@@ -510,9 +510,9 @@ function markerMouseEvent() {
 var j=0;
 var maxLength = 0;
 function poly(pathArray) {
-	console.log('-------poly on-------');
+	//console.log('-------poly on-------');
 	for(var k=0; k<pathArray.length; k++) {
-		console.log(pathArray[k].lat + ', ' + pathArray[k].lng);
+		//console.log(pathArray[k].lat + ', ' + pathArray[k].lng);
 	}
 	
 	//polyline 끝을 화살표 모양으로 표시하기 위한 코드
@@ -533,10 +533,10 @@ function poly(pathArray) {
 	});
 	pathLine.setMap(map);
 	lineArray.push(pathLine);
-	console.log('getPath : ' + pathLine.getPath().getArray().toString());
+	//console.log('getPath : ' + pathLine.getPath().getArray().toString());
 	
 	maxLength = lineArray.length;
-	console.log('maxLength 길이 : ' + maxLength);
+	//console.log('maxLength 길이 : ' + maxLength);
 }
 
 //이동경로를 찍거나 제거하기 위한 함수
@@ -584,12 +584,12 @@ function lineFunction(pathArray, flag){
 			
 		} else if(maxLength == lineRemoveIndex && maxLength >= 1) {
 			//선택한 도시가 1개 이상일때 마지막 요소 제거
-			console.log('maxLength == lineRemoveIndex && maxLength >= 1');
+			//console.log('maxLength == lineRemoveIndex && maxLength >= 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
 		} else if(lineRemoveIndex == 0 && maxLength >= 1) {
 			//선택한 도시 1개 이상일때 첫번째 요소 제거
-			console.log('lineRemoveIndex == 0 && maxLength >= 1');
+			//console.log('lineRemoveIndex == 0 && maxLength >= 1');
 			
 			for(var i=0; i<maxLength; i++) {
 				lineArray[i].setMap(null);
@@ -608,7 +608,7 @@ function lineFunction(pathArray, flag){
 			lineArray.splice(lineRemoveIndex, 1);*/
 		} else if(maxLength < 1 && lineRemoveIndex == 0) {
 			//선택한 도시 하나일때 그 요소 제거
-			console.log('lineRemoveIndex == 0 && maxLength < 1');
+			//console.log('lineRemoveIndex == 0 && maxLength < 1');
 			lineArray.splice(lineRemoveIndex, 1);
 		}
 	}
@@ -642,13 +642,13 @@ function lineRemoveFunction(removeButtonIndex) {
 	}
 }
 
-function landmarkHover($hoverTemp, $landmarkHoverIndex) {
+/*function landmarkHover($hoverTemp, $landmarkHoverIndex) {
 	if($hoverTemp == false) {
 		$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
 	} else {
 		$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPin.png');
 	}
-}
+}*/
 
 $(document).ready(function() {
 	var $stayCount = 0;
@@ -780,6 +780,10 @@ $(document).ready(function() {
 	var count = 0;
 	var temp = 0;
 	
+	//landmark 상세정보 관련 변수
+	var landmarkInfoNo = "";
+	var clickLandmark = "";
+	
 	function totalInfoList() {
 		//console.log('totalMoreView : ' + totalMoreView);
 		
@@ -817,7 +821,7 @@ $(document).ready(function() {
 					landmarkPosition.push({lat: Number($('.landmarkInfoLatitude').eq(i).val()), lng: Number($('.landmarkInfoLangitude').eq(i).val())});
 					landmarkName.push($('.landmarkInfoName').eq(i).text());
 					landmarkNo.push($('.landmarkInfoNo').eq(i).val());
-					//console.log(landmarkName[i]);
+					//console.log($('.landmarkInfoName').eq(i).text() + ', ' + $('.landmarkInfoNo').eq(i).val());
 				}
 				
 				//landmarkInfoList의 length만큼 마커를 찍어준다.
@@ -848,37 +852,29 @@ $(document).ready(function() {
 				}
 				
 				$('.clickLandmark').on('mouseover', function() {
-					$hoverTemp = false;
 					$landmarkHoverIndex = $('.clickLandmark').index(this);
 					//console.log($landmarkHoverIndex + '번째 랜드마크');
+					$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
 					
-					if($hoverTemp == false) {
-						$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
-					} else {
-						$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPin.png');
-					}
-					
+					/*$hoverTemp = false;
+					landmarkHover($hoverTemp, $landmarkHoverIndex);*/
 				}).on('mouseout', function() {
-					$hoverTemp = true;
 					$landmarkHoverIndex = $('.clickLandmark').index(this);
+					$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPin.png');
 					
-					if($hoverTemp == false) {
-						$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
-					} else {
-						$landmarkMarkerArray[$landmarkHoverIndex].setIcon('../../resources/images/planIcon/landmarkPin.png');
-					}
+					/*$hoverTemp = true;
+					landmarkHover($hoverTemp, $landmarkHoverIndex);*/
 				});
 				
 				$('.clickLandmark').click(function() {
 					var clickLandmarkIndex = $('.clickLandmark').index(this);
-					//console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
+					console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
 					
-					var landmarkInfoNo = landmarkNo[clickLandmarkIndex];
-					var clickLandmark = landmarkName[clickLandmarkIndex];
+					landmarkInfoNo = landmarkNo[clickLandmarkIndex];
+					clickLandmark = landmarkName[clickLandmarkIndex];
+					console.log(clickCityName + ', ' + landmarkInfoNo + ', ' + clickLandmark);
 					//console.log($('.landmarkInfoLangitude').eq(clickLandmarkIndex).val());
-					//console.log($('.landmarkInfoLatitude').eq(clickLandmarkIndex).val());
-					
-					//console.log(landmarkInfoNo + ', ' + clickCityName);
+					//console.log($('.landmarkInfoLatitude').eq(clickLandmarkIndex).val());			
 					
 					$('#landmarkInfoPopWrap').show();
 					
@@ -887,9 +883,12 @@ $(document).ready(function() {
 						data:{landmarkInfoNo:landmarkInfoNo, cityInfoName:clickCityName},
 						type:'GET',
 						success:function(data){
+							console.log(clickCityName);
 							var $body = $(data).filter('.container');
 							//console.log($body);
 							$('#landmarkInfoPopContent').html($body);
+							var routeAppend = "<a id='addToPlan' role='button' class='btn btn-info'>일정에 추가</a>";
+							$('.infoButton').append(routeAppend);
 							
 							//명소 상세보기 팝업창 닫기
 							$('#landmarkInfoPopClose').click(function() {
@@ -904,7 +903,8 @@ $(document).ready(function() {
 									$('.landmarkRouteUl').eq(cityClickIndex).append(
 										"<li class='landmarkLi'>" +
 											"<span class='landmarkName'>" + clickLandmark + "</span>" +
-											"<input type='hidden' class='landmarkInfoNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
+											"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
+											"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
 										"</li>"
 									);
 									//$landmarkMarkerArray[clickLandmarkIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
@@ -1033,10 +1033,14 @@ $(document).ready(function() {
 			
 			console.log(i + '번째 도시 출발시각 : ' + $('.startTime').eq(i).val());				//cityRouteDepartureTime
 			console.log(i + '번째 도시 도착시각 : ' + $('.endTime').eq(i).val());				//cityRouteArrivalTime
-			
-			for(var j=0; j<$('.landmarkInfoNo').length; j++) {									//landmarkInfoNo
-				console.log(i + '번째 도시의 ' + j + '번째 명소 : ' + $('.landmarkInfoNo').eq(j).val());
-			}
+		}
+		
+		for(var j=0; j<$('.landmarkLi').length; j++){											//landmarkIndex, landmarkInfoNo
+			console.log($('.landmarkIndex').eq(j).val());
+			console.log($('.landmarkNo').eq(j).val());
+			/*if(j == $('.landmarkIndex').eq(j).val()) {
+				console.log(j + '번째 도시의 ' + '명소 : ' + $('.landmarkNo').eq(j).val());
+			}*/
 		}
 		
 		$('#mainPlanSubmit').submit();

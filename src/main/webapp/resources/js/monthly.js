@@ -427,6 +427,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			          '<h4 class="modal-title">메모입력</h4>'+
 			        '</div>'+
 			        '<div class="modal-body">'+
+			          '<input type="hidden" name="cityRouteMemoIndex" value="' +i+'"/>'+
 			          '<textarea cols="77" rows="3" name="cityRouteMemo"></textarea>'+
 			        '</div>'+
 			        '<div class="modal-footer">'+
