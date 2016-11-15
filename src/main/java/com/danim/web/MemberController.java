@@ -100,16 +100,12 @@ public class MemberController {
 			session.setAttribute("memberId", memberTotalDto.getMemberId());
 			session.setAttribute("memberLevel", memberTotalDto.getMemberLevel());
 			session.setAttribute("memberName", memberTotalDto.getMemberName());
+			session.setAttribute("facebookCheck", facebookCheck);
 			logger.info("memberLevel : {}", memberTotalDto.getMemberLevel());
 			logger.info("memberName : {}", memberTotalDto.getMemberName());
 		}
-		
-		/*Map<String, Object> map = new HashMap<String, Object>();
-		map.put("facebookCheck", facebookCheck);*/
-		
-		model.addAttribute("facebookCheck", facebookCheck);
-		
-		return "index";
+				
+		return "redirect:/";
 	}
 	//외부회원 입력(연동)
 	@RequestMapping(value = "/member/memberLinkSubmit", method = RequestMethod.POST)

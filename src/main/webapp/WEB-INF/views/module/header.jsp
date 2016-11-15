@@ -93,18 +93,18 @@
 	    });
 		//페이스북 로그아웃
 		
-		var facebookCheck = "<c:out value='${facebookCheck}'/>";
+		var facebookCheck = "<c:out value='${sessionScope.facebookCheck}'/>";
 		
 		$('#logoutButton').click(function(){
 			console.log('페이스북체크');
-			console.log('페북체크값'+ facebookCheck);
-			if(facebookCheck == true) {
+			console.log('페북체크값 : '+ facebookCheck);
+			if(facebookCheck == "true") {
 				console.log('페북로그아웃');
 				FB.logout(function(response) {
 			        // 사용자 로그아웃
 			    });
 			}
-			//location.href="/member/memberLogout";
+			location.href="/member/memberLogout";
 		});
 	})
 
@@ -186,7 +186,7 @@
 						</dl>
 					</div>
 					</c:if>
-					<input type="text" id="facebookCheck" value="${facebookCheck}"/>			
+					<input type="hidden" id="facebookCheck" value="${facebookCheck}"/>			
 				</li>
 			</ul>
 		</div>	
