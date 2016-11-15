@@ -157,10 +157,11 @@ public class TotalInfoService {
 		
 		for(j=0; j<landmarkInfoNo.size(); j++) {
 			landmarkPlanDto = new LandmarkPlanDto();
-			landmarkPlanDto.setLandmarkPlanNo(landmarkPlanNo+i);
+			landmarkPlanDto.setLandmarkPlanNo(landmarkPlanNo+j);
+			logger.info("getLandmarkPlanNo : {}", landmarkPlanDto.getLandmarkPlanNo());
 			landmarkPlanDto.setPlanNo(planNo);
 			landmarkPlanDto.setCityRouteNo(cityRouteNo);
-			landmarkPlanDto.setLandmarkInfoNo(landmarkInfoNo.get(i));
+			landmarkPlanDto.setLandmarkInfoNo(landmarkInfoNo.get(j));
 			landmarkPlanDtoList.add(landmarkPlanDto);
 		}
 		logger.info(landmarkPlanDtoList.toString());

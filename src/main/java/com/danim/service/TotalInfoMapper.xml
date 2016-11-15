@@ -81,10 +81,10 @@
 			landmark_info_no
 		) VALUES
 		<foreach collection="landmarkPlanDtoList" item="landmarkPlanDtoList" index="index" open="(" separator="),(" close=")">
-			#{cityRouteDtoList.landmarkPlanNo},
-		    #{cityRouteDtoList.planNo},
-		    #{cityRouteDtoList.cityRouteNo},
-		    #{cityRouteDtoList.landmarkInfoNo}
+			#{landmarkPlanDtoList.landmarkPlanNo},
+		    #{landmarkPlanDtoList.planNo},
+		    #{landmarkPlanDtoList.cityRouteNo},
+		    #{landmarkPlanDtoList.landmarkInfoNo}
 		</foreach>
 	</insert>
 	

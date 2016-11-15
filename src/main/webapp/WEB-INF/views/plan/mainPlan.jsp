@@ -306,7 +306,7 @@
 							</div>
 							<div class="clearfix">
 								<label for="memo">메모 : </label>
-								<textarea name="memo"></textarea>
+								<textarea name="planMemo"></textarea>
 							</div>
 		 				</div>
 						<div class="modal-footer">
