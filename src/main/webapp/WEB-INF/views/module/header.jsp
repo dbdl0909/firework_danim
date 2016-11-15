@@ -141,11 +141,11 @@
 				</li>
 				<li class="hiddenNavWrap">
 					<c:if test="${empty sessionScope.memberId}">
-						<!-- <a href="/member/memberLoginForm">로그인</a> -->
-						<div id="loginButton"><a>로그인</a></div>
+						<a href="/member/memberLoginForm">로그인</a>
+						<!-- <div id="loginButton"><a>로그인</a></div>
 						<div id="loginHiddenNav" style="width:290px; background:#fff; position:absolute; z-index:99999;
 -webkit-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); -moz-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); 
-display:none; margin-left:-130px; top:130px;">
+display:none; margin-left:-130px; top:130px;"> -->
 							<%-- <jsp:include page="../member/memberLoginForm.jsp" /> --%>
 						</div>
 					</c:if>
