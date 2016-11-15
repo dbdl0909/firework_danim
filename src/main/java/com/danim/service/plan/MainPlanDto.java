@@ -8,6 +8,7 @@ public class MainPlanDto {
 	private String planName;
 	private int planHeadcount;
 	private String planType;
+	private String planMemo;
 	private String startDate;
 	private String endDate;
 	private int stayDay;
@@ -16,8 +17,8 @@ public class MainPlanDto {
 	private ArrayList<String> cityRouteArrivalCity;
 	private ArrayList<String> cityRouteDepartureTime;
 	private ArrayList<String> cityRouteArrivalTime;
-	private ArrayList<String> landmarkPlanNo;
-	private ArrayList<String> planMemo;
+	private ArrayList<String> cityRouteMemo;
+	private ArrayList<String> landmarkInfoNo;
 	
 	public String getMemberId() {
 		return memberId;
@@ -61,6 +62,12 @@ public class MainPlanDto {
 	public void setStayDay(int stayDay) {
 		this.stayDay = stayDay;
 	}
+	public String getPlanMemo() {
+		return planMemo;
+	}
+	public void setPlanMemo(String planMemo) {
+		this.planMemo = planMemo;
+	}
 	public ArrayList<String> getCityRouteStartDate() {
 		return cityRouteStartDate;
 	}
@@ -91,26 +98,27 @@ public class MainPlanDto {
 	public void setCityRouteArrivalTime(ArrayList<String> cityRouteArrivalTime) {
 		this.cityRouteArrivalTime = cityRouteArrivalTime;
 	}
-	public ArrayList<String> getLandmarkPlanNo() {
-		return landmarkPlanNo;
+	public ArrayList<String> getCityRouteMemo() {
+		return cityRouteMemo;
 	}
-	public void setLandmarkPlanNo(ArrayList<String> landmarkPlanNo) {
-		this.landmarkPlanNo = landmarkPlanNo;
+	public void setCityRouteMemo(ArrayList<String> cityRouteMemo) {
+		this.cityRouteMemo = cityRouteMemo;
 	}
-	public ArrayList<String> getPlanMemo() {
-		return planMemo;
+	public ArrayList<String> getLandmarkInfoNo() {
+		return landmarkInfoNo;
 	}
-	public void setPlanMemo(ArrayList<String> planMemo) {
-		this.planMemo = planMemo;
+	public void setLandmarkInfoNo(ArrayList<String> landmarkInfoNo) {
+		this.landmarkInfoNo = landmarkInfoNo;
 	}
+	
 	@Override
 	public String toString() {
 		return "MainPlanDto [memberId=" + memberId + ", planName=" + planName + ", planHeadcount=" + planHeadcount
-				+ ", planType=" + planType + ", startDate=" + startDate + ", endDate=" + endDate + ", stayDay="
-				+ stayDay + ", cityRouteStartDate=" + cityRouteStartDate + ", cityRouteDepartureCity="
-				+ cityRouteDepartureCity + ", cityRouteArrivalCity=" + cityRouteArrivalCity
-				+ ", cityRouteDepartureTime=" + cityRouteDepartureTime + ", cityRouteArrivalTime="
-				+ cityRouteArrivalTime + ", landmarkPlanNo=" + landmarkPlanNo + ", planMemo=" + planMemo + "]";
+				+ ", planType=" + planType + ", planMemo=" + planMemo + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", stayDay=" + stayDay + ", cityRouteStartDate=" + cityRouteStartDate
+				+ ", cityRouteDepartureCity=" + cityRouteDepartureCity + ", cityRouteArrivalCity="
+				+ cityRouteArrivalCity + ", cityRouteDepartureTime=" + cityRouteDepartureTime
+				+ ", cityRouteArrivalTime=" + cityRouteArrivalTime + ", cityRouteMemo=" + cityRouteMemo
+				+ ", landmarkInfoNo=" + landmarkInfoNo + "]";
 	}
-	
 }

@@ -894,7 +894,7 @@ $(document).ready(function() {
 									$('.landmarkRouteUl').eq(cityClickIndex).append(
 										"<li class='landmarkLi'>" +
 											"<span class='landmarkName'>" + clickLandmark + "</span>" +
-											"<input type='hidden' class='landmarkPlanNo' name='landmarkPlanNo' value='" + landmarkInfoNo + "'/>" +
+											"<input type='hidden' class='landmarkInfoNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
 										"</li>"
 									);
 									//$landmarkMarkerArray[clickLandmarkIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
@@ -1024,8 +1024,8 @@ $(document).ready(function() {
 			console.log(i + '번째 도시 출발시각 : ' + $('.startTime').eq(i).val());				//cityRouteDepartureTime
 			console.log(i + '번째 도시 도착시각 : ' + $('.endTime').eq(i).val());				//cityRouteArrivalTime
 			
-			for(var j=0; j<$('.landmarkPlanNo').length; j++) {									//landmarkPlanNo
-				console.log(i + '번째 도시의 ' + j + '번째 명소 : ' + $('.landmarkPlanNo').eq(j).val());
+			for(var j=0; j<$('.landmarkInfoNo').length; j++) {									//landmarkInfoNo
+				console.log(i + '번째 도시의 ' + j + '번째 명소 : ' + $('.landmarkInfoNo').eq(j).val());
 			}
 		}
 		

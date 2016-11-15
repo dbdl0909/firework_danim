@@ -30,6 +30,7 @@
 			.modal-body div select,
 			.modal-body div textarea{float:right; margin-right:20%; width:250px;}
 			.modal-body div textarea{height:50px;}
+
 	    </style><!-- 구글에 등록된 기본 맵 스타일 -->
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
    		<script src="../../resources/js/monthly.js"></script>
@@ -107,9 +108,7 @@
 		    		$('#landmarkInfoPopWrap').hide();		    		
 		    	})
 				$('#mycalendar').monthly({
-					mode: 'event',
-					jsonUrl: '/plan/mainPlan',
-					dataType: 'json'
+					mode: 'event'
 				});
 				
 			});
@@ -129,6 +128,7 @@
 	    	#calendarWrap label span{margin-top:5.5px; color:#fff;}
 	    	#calendarWrap input{margin-left:-5px;}
 	    	.calendrDay{margin-left:6px;}
+	    	.modal-dialog{margin-top:15%;}
 	    </style>
 	</head>
 	<body>
@@ -275,7 +275,7 @@
 			</div>
 			<!-- 플래너 저장 버튼 누르면 나오는 Modal -->
 			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog">
+				<div class="modal-dialog" style="margin-top:15%;">
 	  
 					<!-- Modal content-->
 					<div class="modal-content">
