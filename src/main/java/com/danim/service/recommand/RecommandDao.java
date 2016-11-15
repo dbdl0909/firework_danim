@@ -37,5 +37,12 @@ public class RecommandDao {
 		logger.info("selectSeasonCityTwenty season {} RecommandDao.java", season);
 		
 		return sessionTemplate.selectOne(nameSpace + ".selectSeasonCityTwenty", season);
-	}	
+	}
+	
+	// 여행 타입 별 선호하는 도시
+	public List<RecommandDto> selectCityByPlanType(String planType) {
+		logger.info("selectCityByPlanType RecommandDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectCityByPlanType", planType);
+	}
 }

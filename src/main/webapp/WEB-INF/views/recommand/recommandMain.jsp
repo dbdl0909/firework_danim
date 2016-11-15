@@ -174,11 +174,11 @@
 				<c:set var="selectWinterCityTwenty" value="${selectSeasonCityTwenty.selectWinterCityTwenty}" />
 				
 		        var data = google.visualization.arrayToDataTable([
-					['season', 'tour'],
-					['봄',  ${selectSpringCityTwenty}],
-					['여름', ${selectSummerCityTwenty}],
-					['가을', ${selectFallCityTwenty}],
-					['겨울', ${selectWinterCityTwenty}]
+					['season', '20대', '30대'],
+					['봄',  ${selectSpringCityTwenty}, 23],
+					['여름', ${selectSummerCityTwenty}, 13],
+					['가을', ${selectFallCityTwenty}, 7],
+					['겨울', ${selectWinterCityTwenty}, 38]
 				]);
 				
 				var options = {

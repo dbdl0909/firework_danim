@@ -43,23 +43,34 @@ public class RecommandService {
     	
     }
     
+    // 20대가 계절 별 많이 찾는 도시
     public Map<String, Object> selectSeasonCityTwenty() {
     	logger.info("selectSeasonCityTwenty() RecommandService.java");
     	
     	Map<String, Object> map = new HashMap<String, Object>();
-    	String dd = "spring";
-    	int selectSpringCityTwenty = recommandDao.selectSeasonCityTwenty(dd);
-    	/*int selectSummerCityTwenty = recommandDao.selectSeasonCityTwenty("summer");		
+    	
+    	int selectSpringCityTwenty = recommandDao.selectSeasonCityTwenty("spring");
+    	int selectSummerCityTwenty = recommandDao.selectSeasonCityTwenty("summer");		
     	int selectFallCityTwenty = recommandDao.selectSeasonCityTwenty("fall");
-    	int selectWinterCityTwenty = recommandDao.selectSeasonCityTwenty("winter");*/
+    	int selectWinterCityTwenty = recommandDao.selectSeasonCityTwenty("winter");
     	
     	map.put("selectSpringCityTwenty", selectSpringCityTwenty);
-    	/*map.put("selectSummerCityTwenty", selectSummerCityTwenty);
+    	map.put("selectSummerCityTwenty", selectSummerCityTwenty);
     	map.put("selectFallCityTwenty", selectFallCityTwenty);
-    	map.put("selectWinterCityTwenty", selectWinterCityTwenty);*/
+    	map.put("selectWinterCityTwenty", selectWinterCityTwenty);
   	
     	return map;
     	
     }
+    
+    // 여행 타입 별 많이 여행가는 도시
+    public Map<String, Object> selectCityByPlanType() {
+    	logger.info("selectCityByPlanType() RecommandService.java");
+    	
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	
+		return map;
+    	
+    }    
 
 }

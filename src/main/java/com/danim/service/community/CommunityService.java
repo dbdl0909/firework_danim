@@ -177,4 +177,21 @@ public class CommunityService {
     public void insertReport(ReportDto reportDto) {
     	communityDao.insertReport(reportDto);
     }
+    
+    //관리자용 전체 회원 QNA 리스트 조회
+    public List<QnaDto> selectQnaForAdmin(String communityCategoryNo, int page, String searchOption, String searchInput) {
+        Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("pageNation", pageNation);
+        map.put("communityCategoryNo", communityCategoryNo);
+        map.put("searchOption", searchOption);
+        map.put("searchInput", searchInput);
+        
+        logger.info("searchOption {} ", map.get("searchOption"));
+        logger.info("searchInput {} ", map.get("searchInput"));
+        
+        List<QnaDto> selectQnaForAdmin = communityDao.selectQnaForAdmin(map);
+    	
+    	return selectQnaForAdmin;
+    }   
 }

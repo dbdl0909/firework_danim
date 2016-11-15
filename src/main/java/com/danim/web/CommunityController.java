@@ -99,6 +99,39 @@ public class CommunityController {
 		
 		return "/community/qnaList";
 	}
+	
+	// 전체 회원 QNA 리스트 조회
+	@RequestMapping(value="/community/qnaListAll", method = RequestMethod.GET)
+	public String selectQnaForAdmin(Model model,
+			@RequestParam(value="communityCategoryNo", defaultValue="community_category_05") String communityCategoryNo,
+			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(value="searchOption", defaultValue="") String searchOption,
+			@RequestParam(value="searchInput", defaultValue="") String searchInput) {
+		
+		List<QnaDto> qnaListAll = communityService.selectQnaForAdmin(communityCategoryNo, page, searchOption, searchInput);
+		List<CommunityDto> communityNoticeList = communityService.selectCommunityNoticeList(communityCategoryNo);
+
+		//페이징시 마지막 페이지와 총 블럭페이지의 오차를 없애기위한 코드
+		// 마지막 페이지를 강제로 endpage로 치환하여 오차를 없애준다.
+		int startPage = communityService.getStartPage(page);
+		int endPage = communityService.getEndPage(startPage);
+		int lastPage = communityService.getLastPage(communityCategoryNo, page, searchOption, searchInput);
+		if(lastPage < endPage){
+			endPage = lastPage;			
+		}
+		logger.info("startPage{} CommunityController.java", startPage);
+		logger.info("endPage{} CommunityController.java", endPage);
+		logger.info("totalPage{} CommunityController.java", lastPage);				
+		model.addAttribute("qnaListAll", qnaListAll);
+		model.addAttribute("communityNoticeList", communityNoticeList);
+		model.addAttribute("totalCount", communityService.countCommunityList(communityCategoryNo, searchOption, searchInput));
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("page", page);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("lastPage", lastPage);
+		
+		return "/community/qnaListAll";
+	}	
 
 	@RequestMapping(value = "/community/write", method = RequestMethod.GET)
 	public String write(Model model) {		

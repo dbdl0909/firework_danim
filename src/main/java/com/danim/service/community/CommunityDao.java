@@ -93,4 +93,11 @@ public class CommunityDao {
 		logger.info("insertReport CommunityDao.java");
 		sqlSession.insert(NS + ".insertReport", reportDto);
 	}
+	
+	//관리자용 전체 회원 QNA 리스트
+	public List<QnaDto> selectQnaForAdmin(Map<String, Object> map) {
+		logger.info("selectQnaForAdmin CommunityDao.java");
+		
+		return sqlSession.selectList(NS + ".selectQnaForAdmin", map);
+	}
 }

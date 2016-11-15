@@ -352,6 +352,42 @@
 			</otherwise>
 		</choose>		
 	</select>
+	<!-- 관리자용 전체 회원 QNA 리스트 조회 -->
+	<select
+		id="selectQnaForAdmin"
+		parameterType="String"
+		resultType="com.danim.service.community.QnaDto">
+		SELECT
+			community_no as 'communityNo',
+			community_category_no as 'communityCategoryNo',
+			plan_no as 'planNo',
+			member_id as 'memberId',
+			community_subject as 'communitySubject',
+			community_content as 'communityContent',
+			community_readcount as 'communityReadcount',
+			community_date as 'communityDate',
+			community_update as 'communityUpdate',
+			community_reply_count as 'communityReplyCount'
+		FROM
+			community
+		WHERE 
+			community_category_no = #{communityCategoryNo}
+		AND
+			community_ban = 'F'	
+		<choose>
+			<when test="searchOption == 'title'">
+			AND	community_subject LIKE CONCAT('%',#{searchInput},'%')
+			</when>
+			<when test="searchOption == 'contents'">
+			AND	community_content LIKE CONCAT('%',#{searchInput},'%')
+			</when>
+			<when test="searchOption == 'author'">
+				member_id LIKE CONCAT('%',#{searchInput},'%')
+			</when>			
+		</choose>
+		ORDER BY communityNo DESC	
+		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage}		
+	</select>	
 	<!-- 정지 및 삭제 게시글 보관 -->
 	<insert 
 		id="insertDeleteCommunity"
