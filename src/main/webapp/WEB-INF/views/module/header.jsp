@@ -127,7 +127,7 @@
 				<li class="hiddenNavWrap">
 					<a href="/community/list">광장</a>
 					<div class="hiddenNav">
-						<dl>
+						<dl> 
 							<dt>커뮤니티</dt>
 							<dd><a href="/community/list?communityCategoryNo=community_category_01">플랜</a></dd>
 							<dd><a href="/community/list?communityCategoryNo=community_category_02">후기</a></dd>
