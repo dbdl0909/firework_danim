@@ -254,12 +254,15 @@ public class CommunityController {
 		
 		int CategoryNo = Integer.parseInt(communityCategoryNo.substring(20));
 		logger.info("CategoryNo {} CommunityController.java", CategoryNo);
+		logger.info("memberId {} CommunityController.java", memberId);
 		
 		String returnList = "";
 		if(CategoryNo < 5 && CategoryNo > 0) {
 			returnList = "redirect:/community/list?communityCategoryNo="+communityCategoryNo;
-		}else if(CategoryNo < 11 && CategoryNo > 4) {
+		}else if(CategoryNo < 11 && CategoryNo > 4 && memberId != "") {
 			returnList = "redirect:/community/myQnaList?communityCategoryNo="+communityCategoryNo+"&"+"memberId="+memberId;
+		}else if(CategoryNo < 11 && CategoryNo > 4 && memberId == "") {
+			returnList = "redirect:/community/qnaListAll?communityCategoryNo="+communityCategoryNo;
 		}
 		
 		return returnList;

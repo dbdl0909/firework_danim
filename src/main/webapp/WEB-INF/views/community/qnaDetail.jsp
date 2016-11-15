@@ -26,6 +26,20 @@
 					}
 				});
 				
+				$('#modifyButton').click(function() {
+					var sessionId = "<c:out value='${sessionScope.memberId}'/>";
+					var communityId = "<c:out value='${detailView.memberId}'/>";
+					var communityCategoryNo = "<c:out value='${detailView.communityCategoryNo}'/>";
+					var communityNo = "<c:out value='${detailView.communityNo}'/>";
+									
+					if(sessionId == communityId) {
+						$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan?memberId=' + memberId);
+						$('#modifyA').attr('href', '/community/communityModify?communityCategoryNo=' + communityCategoryNo + '&communityNo=' + communityNo + '&boardCheck=C');
+					}else if(sessionId != communityId){
+						alert('게시글을 수정할 권한이 없습니다');
+					}
+				})
+				
 				/* $('#deleteButton').click(function(){
 					if(${sessionScope.memberId} != ${detailView.memberId}) {
 						alert('남의 게시글을 삭제하지마라 이놈');
@@ -101,13 +115,26 @@
 		<div id="communityContentButtonWrap" class="clearfix">
 			<ul id="communityContentButton">
 				<li>
-					<a href="/community/communityModify?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&boardCheck=Q"><span type="button" class="btn btn-primary">수정</span></a>
+					<a id="modifyA">
+						<span id="modifyButton" type="button" class="btn btn-primary">수정</span>
+					</a>
 				</li>
 				<li>
-					<a href="/community/communityDelete?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&memberId=${sessionScope.memberId}"><span type="button" id="deleteButton" class="btn btn-primary">삭제</span></a>
+					<c:if test="${sessionScope.memberLevel == '관리자'}">
+						<a href="/community/communityDelete?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}"><span type="button" id="deleteButton" class="btn btn-primary">삭제</span></a>
+					</c:if>
+					<c:if test="${sessionScope.memberLevel == '유저'}">
+						<a href="/community/communityDelete?communityCategoryNo=${detailView.communityCategoryNo}&communityNo=${detailView.communityNo}&memberId=${sessionScope.memberId}"><span type="button" id="deleteButton" class="btn btn-primary">삭제</span></a>
+					</c:if>					
+					
 				</li>				
 				<li>
-					<a href="/community/myQnaList?memberId=${sessionScope.memberId}&communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
+					<c:if test="${sessionScope.memberLevel == '관리자'}">
+						<a href="/community/qnaListAll?communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
+					</c:if>
+					<c:if test="${sessionScope.memberLevel == '유저'}">
+						<a href="/community/myQnaList?memberId=${sessionScope.memberId}&communityCategoryNo=${detailView.communityCategoryNo}"><span type="button" class="btn btn-primary">목록</span></a>
+					</c:if>				
 				</li>
 			</ul>
 		</div>
