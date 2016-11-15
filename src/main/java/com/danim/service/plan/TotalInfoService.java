@@ -92,6 +92,7 @@ public class TotalInfoService {
 		planDto.setPlanDeparture(mainPlanDto.getStartDate());
 		planDto.setPlanArrival(mainPlanDto.getEndDate());
 		planDto.setPlanMemo(mainPlanDto.getPlanMemo());
+		
 		logger.info("planDto : {} <-- insertPlan() TotalInfoService.java", planDto);
 		
 		resultIndex = totalInfoDao.insertPlan(planDto);
@@ -106,6 +107,7 @@ public class TotalInfoService {
 		List<CityRouteDto> cityRouteDtoList = new ArrayList<CityRouteDto>();
 		CityRouteDto cityRouteDto = null;
 		int i = 0;
+		int k=0;
 		int cityRouteNo = totalInfoDao.selectMaxCityRouteNo();
 		logger.info("cityRouteNo : {}", cityRouteNo);
 		
@@ -132,7 +134,9 @@ public class TotalInfoService {
 			cityRouteDto.setCityRouteArrivalCity(cityRouteArrivalCity.get(i));
 			cityRouteDto.setCityRouteDepartureTime(cityRouteDepartureTime.get(i));
 			cityRouteDto.setCityRouteArrivalTime(cityRouteArrivalTime.get(i));
-			cityRouteDto.setCityRouteMemo(cityRouteMemo.get(i));
+			if(cityRouteMemo != null && i < cityRouteMemo.size()) {
+				cityRouteDto.setCityRouteMemo(cityRouteMemo.get(k));
+			}
 			cityRouteDtoList.add(cityRouteDto);
 		}
 		logger.info(cityRouteDtoList.toString());
