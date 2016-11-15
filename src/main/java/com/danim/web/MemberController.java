@@ -2,6 +2,7 @@ package com.danim.web;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,9 +86,12 @@ public class MemberController {
 	@RequestMapping(value="/member/memberLinkLoginSubmit", method = RequestMethod.POST)
 	public String memberLinkLogin(HttpServletRequest request,
 			@RequestParam(value="memberId") String memberId,
-			@RequestParam(value="memberName") String memberName) {
+			@RequestParam(value="memberName") String memberName,
+			@RequestParam(value="facebookCheck") String facebookCheck,
+			Model model) {
 		logger.info("memberId : {} memberLinkLogin MemberController.java", memberId);
 		logger.info("memberName : {} memberLinkLogin MemberController.java", memberName);
+		logger.info("facebookCheck : {} memberLinkLogin MemberController.java", facebookCheck);
 		
 		MemberTotalDto memberTotalDto = memberService.memberLinkCheck(memberId, memberName);
 		logger.info("memberLoginTotal : {}", memberTotalDto);
@@ -99,7 +103,13 @@ public class MemberController {
 			logger.info("memberLevel : {}", memberTotalDto.getMemberLevel());
 			logger.info("memberName : {}", memberTotalDto.getMemberName());
 		}
-		return "redirect:/";
+		
+		/*Map<String, Object> map = new HashMap<String, Object>();
+		map.put("facebookCheck", facebookCheck);*/
+		
+		model.addAttribute("facebookCheck", facebookCheck);
+		
+		return "index";
 	}
 	//외부회원 입력(연동)
 	@RequestMapping(value = "/member/memberLinkSubmit", method = RequestMethod.POST)

@@ -26,7 +26,7 @@
     <!-- 구글 연동 로그인 -->
     var memberId;
     var memberName;
-    var check = false;
+    var facebookCheck = false;
     	function onSignIn(googleUser) {
 	        // Useful data for your client-side scripts:
 	        var profile = googleUser.getBasicProfile();
@@ -128,16 +128,14 @@
 		        	console.log($('#memberId').val());
 		        	console.log($('#memberName').val());
 					//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-					check = true;
-					console.log("힝입니다1");
-					console.log(check);
+					facebookCheck = true;
+					//console.log(facebookCheck);
 				} else {	//profile에 값이 없으면
 		        	//로그인 안됨
 		        	return false;
 		        }
 		    });
-		    if(check == true) {
-		    	console.log("힝입니다2");
+		    if(facebookCheck == true) {
 		    	$('#memberLinkLoginForm').submit();
 		    }
 		  };
@@ -167,6 +165,7 @@
 		<form class="memberLinkLoginForm" id="memberLinkLoginForm" action="/member/memberLinkLoginSubmit" method="post">
 			<input type="hidden" id="memberId" name="memberId"/>
 			<input type="hidden" id="memberName" name="memberName"/>
+			<input type="hidden" id="facebookCheck" name="facebookCheck" value="true"/>
 			<div>
 				<div id="google" style="float:left;">		<!-- 구글 연동로그인 -->
 					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>

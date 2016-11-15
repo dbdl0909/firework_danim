@@ -91,6 +91,21 @@
 				slideCheck = false;
 			}
 	    });
+		//페이스북 로그아웃
+		
+		var facebookCheck = "<c:out value='${facebookCheck}'/>";
+		
+		$('#logoutButton').click(function(){
+			console.log('페이스북체크');
+			console.log('페북체크값'+ facebookCheck);
+			if(facebookCheck == true) {
+				console.log('페북로그아웃');
+				FB.logout(function(response) {
+			        // 사용자 로그아웃
+			    });
+			}
+			//location.href="/member/memberLogout";
+		});
 	})
 
 </script>
@@ -162,10 +177,11 @@
 								<dd><a href="/plan/planList?memberId=${sessionScope.memberId}">내 여행</a></dd>
 							</c:if>
 							<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
-							<dd><a href="/member/memberLogout">로그아웃</a></dd>
+							<dd><a id="logoutButton">로그아웃</a></dd>
 						</dl>
 					</div>
-					</c:if>					
+					</c:if>
+					<input type="text" id="facebookCheck" value="${facebookCheck}"/>			
 				</li>
 			</ul>
 		</div>	
