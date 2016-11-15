@@ -36,7 +36,7 @@
    		<script src="../../resources/js/monthly.js"></script>
 	    <script>
 	    	var cityInfoList = [];
-	    	var startDateInit;
+	    	var startDateInit = new Date();
 	    	//var dateCheckTemp = 0;
 	    	
 		    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */

@@ -135,7 +135,7 @@ public class TotalInfoService {
 			cityRouteDto.setCityRouteDepartureTime(cityRouteDepartureTime.get(i));
 			cityRouteDto.setCityRouteArrivalTime(cityRouteArrivalTime.get(i));
 			if(cityRouteMemo != null && i < cityRouteMemo.size()) {
-				cityRouteDto.setCityRouteMemo(cityRouteMemo.get(k));
+				cityRouteDto.setCityRouteMemo(cityRouteMemo.get(i));
 			}
 			cityRouteDtoList.add(cityRouteDto);
 		}
