@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>DANIM JOIN</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="chrome=1"><!-- Optimistically rendering in Chrome Frame in IE. --> 
 	<link rel="stylesheet" href="../../../resources/css/style.css" type="text/css">
@@ -100,11 +100,18 @@
 			    statusChangeCallback(response);
 			});
 		  };
-		  (function(d, s, id) {
+		  /* (function(d, s, id) {
 		    var js, fjs = d.getElementsByTagName(s)[0];
 		    if (d.getElementById(id)) return;
 		    js = d.createElement(s); js.id = id;
 		    js.src = "//connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk')); */
+		  (function(d, s, id) {
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return;
+		    js = d.createElement(s); js.id = id;
+		    js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.8";
 		    fjs.parentNode.insertBefore(js, fjs);
 		  }(document, 'script', 'facebook-jssdk'));
 		  function testAPI() {
@@ -136,8 +143,8 @@
     </script>
 </head>
 <body>
-	<div id="twitter" class="loginFormCss" style="height:200px;">
-		<form class="memberLoginForm" id="memberLoginForm" action="/member/memberLoginSubmit" method="post" style="height:200px;">
+	<div id="twitter" class="loginFormCss" style="height:170px;">
+		<form class="memberLoginForm" id="memberLoginForm" action="/member/memberLoginSubmit" method="post" style="height:170px;">
 			<div class='outerDiv'>
 				<label for="memberLoginId">아이디</label>
 				<input id="memberLoginId" name="memberLoginId" type="text" value="user01" required />
@@ -148,8 +155,11 @@
 				<input id="memberLoginPassword" name="memberLoginPassword" type="password" value="0000" required />
 			</div>
 			<div class='clearfix'></div>
-			<div id='submit' class='outerDiv'>
+			<div id='submit' class='outerDiv' style="float:left;">
 				<input type="submit" value="로그인" /> 
+			</div>
+			<div id='button' class='outerDiv' style="float:left;">
+				<input type="button" value="회원가입" /> 
 			</div>
 		</form>
 		<!-- 연동로그인 -->
@@ -157,12 +167,13 @@
 			<input type="hidden" id="memberId" name="memberId"/>
 			<input type="hidden" id="memberName" name="memberName"/>
 			<div>
-				<div class="google">		<!-- 구글 연동로그인 -->
+				<div id="google" style="float:left;">		<!-- 구글 연동로그인 -->
 					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 				</div>
-				<div id="facebook">		<!-- 페이스북 연동로그인 -->
-					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="300px" height="75px;">
-					</fb:login-button>
+				<div id="facebook" style="float:left;">		<!-- 페이스북 연동로그인 -->
+					<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="300px" height="75px;">
+					</fb:login-button> -->
+					<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
 					<div id="status">
 					</div>
 				</div>
