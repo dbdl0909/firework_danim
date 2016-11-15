@@ -155,27 +155,32 @@ public class TotalInfoService {
 		LandmarkPlanDto landmarkPlanDto = null;
 		int j = 0;
 		int landmarkPlanNo = totalInfoDao.selectMaxLandmarkNo();
+		logger.info("landmarkPlanNo : {}", landmarkPlanNo);
 		
 		ArrayList<String> landmarkInfoNo = mainPlanDto.getLandmarkInfoNo();
-		logger.info("landmarkInfoNo.size() : {}", landmarkInfoNo.size());
+		//logger.info("landmarkInfoNo.size() : {}", landmarkInfoNo.size());
 		
-		for(j=0; j<landmarkInfoNo.size(); j++) {
-			landmarkPlanDto = new LandmarkPlanDto();
-			landmarkPlanDto.setLandmarkPlanNo(landmarkPlanNo+j);
-			logger.info("getLandmarkPlanNo : {}", landmarkPlanDto.getLandmarkPlanNo());
-			landmarkPlanDto.setPlanNo(planNo);
-			landmarkPlanDto.setCityRouteNo(cityRouteNo);
-			landmarkPlanDto.setLandmarkInfoNo(landmarkInfoNo.get(j));
-			landmarkPlanDtoList.add(landmarkPlanDto);
+		if(landmarkInfoNo != null) {
+			for(j=0; j<landmarkInfoNo.size(); j++) {
+				landmarkPlanDto = new LandmarkPlanDto();
+				landmarkPlanDto.setLandmarkPlanNo(landmarkPlanNo+j);
+				logger.info("getLandmarkPlanNo : {}", landmarkPlanDto.getLandmarkPlanNo());
+				landmarkPlanDto.setPlanNo(planNo);
+				landmarkPlanDto.setCityRouteNo(cityRouteNo);
+				landmarkPlanDto.setLandmarkInfoNo(landmarkInfoNo.get(j));			
+				landmarkPlanDtoList.add(landmarkPlanDto);
+			}
+			
+			logger.info(landmarkPlanDtoList.toString());
+			
+			map.put("landmarkPlanDtoList", landmarkPlanDtoList);
+			resultIndex = totalInfoDao.insertLandmarkPlan(map);
+			if(resultIndex >= 1) {
+				logger.info("city_route 등록 O : {}", resultIndex);
+			} else {
+				logger.info("city_route 등록 X");
+			}
 		}
-		logger.info(landmarkPlanDtoList.toString());
 		
-		map.put("landmarkPlanDtoList", landmarkPlanDtoList);
-		resultIndex = totalInfoDao.insertLandmarkPlan(map);
-		if(resultIndex >= 1) {
-			logger.info("city_route 등록 O : {}", resultIndex);
-		} else {
-			logger.info("city_route 등록 X");
-		}
 	}
 };
