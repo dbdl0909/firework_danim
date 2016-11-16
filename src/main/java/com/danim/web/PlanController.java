@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.plan.CityInfoDto;
 import com.danim.service.plan.MainPlanDto;
+import com.danim.service.plan.PlanAllDto;
 import com.danim.service.plan.PlanDto;
 import com.danim.service.plan.PlanService;
 import com.danim.service.plan.TotalInfoService;
@@ -49,11 +50,13 @@ public class PlanController {
 			
 			return "plan/planList";
 		}
-		
+		//플랜넘버값 받아 상세플랜 보여주기
 		@RequestMapping(value = "/plan/planDetailList")
 		public String MemberPlanDetailList(Model model,@RequestParam(value="planNo") int planNo){
 			
-			
+			List<PlanAllDto> PlanDetailList = planService.selectPlanDetailList(planNo);
+			System.out.println(PlanDetailList);
+			model.addAttribute("PlanDetailList",PlanDetailList);
 			
 			return "plan/planDetailList";
 		}

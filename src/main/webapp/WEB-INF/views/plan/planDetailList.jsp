@@ -29,10 +29,35 @@
 	</head>
 <body>
 <jsp:include page="../module/header.jsp" />
-<%String i = request.getParameter("planNo"); %> 
+	<div class="table-responsive">
 
+		<table class="table table-striped">
+			<thead>
+				<c:forEach end="0" items="${PlanDetailList}" var="PlanDetailList">
+					<h1>${PlanDetailList.planName}</h1>
+				</c:forEach>
+				
+				<c:forEach end="0" items="${PlanDetailList}" var="PlanDetailList" varStatus="PlanDetail">
+					<dl>
+						<dt>${PlanDetailList.cityRouteDepartureCity}(${PlanDetailList.cityRouteArrivalCity})</dt>
+						<dd>날짜:${PlanDetailList.cityRouteDate}</dd>
+						<dd>시간:${PlanDetailList.cityRouteDepartureTime}~${PlanDetailList.cityRouteArrivalTime}</dd>
+						<dd>메모:${PlanDetailList.cityRouteMemo}</dd>
+						<dt>랜드마크:${PlanDetailList.landmarkPlanNo}(${PlanDetailList.landmarkInfoNo})</dt>
+						<dt>숙박정보:${PlanDetailList.stayPlanNo}(${PlanDetailList.stayInfoNo})</dt>
+						<dd>체크인:${PlanDetailList.stayPlanTime}</dd>
+						<dd>메모:${PlanDetailList.stayPlanMemo}</dd>
+					</dl>
+				</c:forEach>
 
-<jsp:include page="../module/footer.jsp" />
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+	</div>
+
+	<jsp:include page="../module/footer.jsp" />
 
 </body>
 </html>

@@ -6,9 +6,11 @@ import java.sql.Time;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 
+
 public class PlanAllDto {
-	private String planNo;
-	private String cityRouteNo;
+	private int planNo;
+	private String planName;
+	private int cityRouteNo;
 	private Date cityRouteDate;
 	private String cityRouteDepartureCity;
 	private String cityRouteArrivalCity;
@@ -16,24 +18,30 @@ public class PlanAllDto {
 	private Time cityRouteArrivalTime;
 	private Text cityRouteMemo;
 	
-	private String landmarkPlanNo;
+	private int landmarkPlanNo;
 	private String landmarkInfoNo;
 
-
-	private String stayPlanNo;
+	private int stayPlanNo;
 	private String stayInfoNo;
 	private Time stayPlanTime;
 	private String stayPlanMemo;
-	public String getPlanNo() {
+	
+	public String getPlanName() {
+		return planName;
+	}
+	public void setPlanName(String planName) {
+		this.planName = planName;
+	}
+	public int getPlanNo() {
 		return planNo;
 	}
-	public void setPlanNo(String planNo) {
+	public void setPlanNo(int planNo) {
 		this.planNo = planNo;
 	}
-	public String getCityRouteNo() {
+	public int getCityRouteNo() {
 		return cityRouteNo;
 	}
-	public void setCityRouteNo(String cityRouteNo) {
+	public void setCityRouteNo(int cityRouteNo) {
 		this.cityRouteNo = cityRouteNo;
 	}
 	public Date getCityRouteDate() {
@@ -72,10 +80,10 @@ public class PlanAllDto {
 	public void setCityRouteMemo(Text cityRouteMemo) {
 		this.cityRouteMemo = cityRouteMemo;
 	}
-	public String getLandmarkPlanNo() {
+	public int getLandmarkPlanNo() {
 		return landmarkPlanNo;
 	}
-	public void setLandmarkPlanNo(String landmarkPlanNo) {
+	public void setLandmarkPlanNo(int landmarkPlanNo) {
 		this.landmarkPlanNo = landmarkPlanNo;
 	}
 	public String getLandmarkInfoNo() {
@@ -84,10 +92,10 @@ public class PlanAllDto {
 	public void setLandmarkInfoNo(String landmarkInfoNo) {
 		this.landmarkInfoNo = landmarkInfoNo;
 	}
-	public String getStayPlanNo() {
+	public int getStayPlanNo() {
 		return stayPlanNo;
 	}
-	public void setStayPlanNo(String stayPlanNo) {
+	public void setStayPlanNo(int stayPlanNo) {
 		this.stayPlanNo = stayPlanNo;
 	}
 	public String getStayInfoNo() {

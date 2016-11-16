@@ -22,5 +22,11 @@ public class PlanDao {
     	logger.info("selectPlanListByMemberId :{} PlanDao.java",memberId);
     	
     	return sessionTemplate.selectList(namesPace + ".selectPlanListByMemberId",memberId);
+    }//아이디를 받아 플랜리스트를 띄워줌 
+	
+	public List<PlanAllDto> selectPlanDetailListByPlanNo(int planNo) {
+    	logger.info("selectPlanListByplanNo :{} PlanDao.java",planNo);
+    	
+    	return sessionTemplate.selectList(namesPace + ".selectPlanDetailListByPlanNo",planNo);
     }
 }

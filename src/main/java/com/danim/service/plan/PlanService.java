@@ -23,6 +23,14 @@ private static final Logger logger = LoggerFactory.getLogger(PlanService.class);
 		
 		return PlanList;
 	}
+	public List<PlanAllDto> selectPlanDetailList(int planNo) {
+		logger.info("selectPlanList() PlanService.java");
+		logger.info("planNo : {} selectPlanDetailList Service.java", planNo);
+		List<PlanAllDto> PlanDetailList = planDao.selectPlanDetailListByPlanNo(planNo);
+		
+		
+		return PlanDetailList;
+	}
 }
 
 
