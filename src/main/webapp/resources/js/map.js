@@ -900,13 +900,45 @@ $(document).ready(function() {
 								var  result = confirm(clickLandmark + '를 추가하시겠습니까?');
 								if (result == true) {
 									//console.log('도시 클릭한 것' + cityClickIndex);
+									
+									alert(clickLandmark);
+									alert($('li').hasClass('landmarkLi'));
+									alert($('.landmarkName').length);
+									
+									for(i = 0; i < $('.landmarkName').length; i++){
+										if($('li').hasClass('landmarkLi') == true && $('.landmarkName').eq(i).text() == clickLandmark){
+											alert('이미 선택한 명소입니다');
+										}else if($('li').hasClass('landmarkLi') == true && !($('.landmarkName').eq(i).text() == clickLandmark)) {
+											$('.landmarkRouteUl').eq(cityClickIndex).append(
+													"<li class='landmarkLi'>" +
+														"<span class='landmarkName'>" + clickLandmark + "</span>" +
+														"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
+														"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
+													"</li>"
+												);
+										}
+									}
+									
+									if($('li').hasClass('landmarkLi') == false) {
 									$('.landmarkRouteUl').eq(cityClickIndex).append(
+											"<li class='landmarkLi'>" +
+												"<span class='landmarkName'>" + clickLandmark + "</span>" +
+												"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
+												"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
+											"</li>"
+										);										
+									}
+									
+
+									
+
+									/*$('.landmarkRouteUl').eq(cityClickIndex).append(
 										"<li class='landmarkLi'>" +
 											"<span class='landmarkName'>" + clickLandmark + "</span>" +
 											"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
 											"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
 										"</li>"
-									);
+									);*/
 									//$landmarkMarkerArray[clickLandmarkIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
 									$('#landmarkInfoPopWrap').hide();
 								}

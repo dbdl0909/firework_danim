@@ -52,7 +52,7 @@
 		});
 		
 		/* 엔터키 유효성 검사 */
-	    $(infoSearchInput).keydown(function (key) {			    	 
+	    $(infoSearchInput).keydown(function (key) {
 	        if(key.keyCode == 13 && infoSearchCheck.test(infoSearchInput.val()) != true){ // 엔터키를 누르고 유효성검사를 통과하지 못했을 경우
 	        	alert('도시이름을 제대로 입력해주세요');
 	        	event.returnValue = false;
