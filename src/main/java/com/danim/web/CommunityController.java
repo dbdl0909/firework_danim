@@ -139,7 +139,8 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community/communityInsert", method = RequestMethod.POST)
-	public String writeSubmit(Model model, CommunityDto communityDto) {
+	public String writeSubmit(Model model, CommunityDto communityDto,
+							@RequestParam(value = "memberLevel", defaultValue = "") String memberLevel) {
 		//logger.info("categoryNo {} CommunityController.java", communityDto.getCommunityCategoryNo());
 		logger.info("memberId {} CommunityController.java", communityDto.getMemberId());
 		logger.info("communitySubject {} ", communityDto.getCommunitySubject());
@@ -150,10 +151,17 @@ public class CommunityController {
 		int CategoryNo = Integer.parseInt(communityDto.getCommunityCategoryNo().substring(20));
 		
 		String returnList = "";
-		if(CategoryNo < 5 && CategoryNo > 0) {
+		/*if(CategoryNo < 5 && CategoryNo > 0) {
 			returnList = "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
 		}else if(CategoryNo < 11 && CategoryNo > 4) {
 			returnList = "redirect:/community/myQnaList?communityCategoryNo="+communityDto.getCommunityCategoryNo()+"&"+"memberId="+communityDto.getMemberId();
+		}*/
+		if(CategoryNo < 5 && CategoryNo > 0) {
+			returnList = "redirect:/community/list?communityCategoryNo="+communityDto.getCommunityCategoryNo();
+		}else if(!memberLevel.equals("관리자")) {
+			returnList = "redirect:/community/myQnaList?communityCategoryNo="+communityDto.getCommunityCategoryNo()+"&"+"memberId="+communityDto.getMemberId();
+		}else if(memberLevel.equals("관리자")) {
+			returnList = "redirect:/community/qnaListAll?communityCategoryNo="+communityDto.getCommunityCategoryNo();
 		}
 		
 		return returnList;
@@ -248,7 +256,7 @@ public class CommunityController {
 	@RequestMapping(value = "/community/communityDelete")
 	public String deleteCommunity(@RequestParam(value="communityNo") int communityNo, 
 								@RequestParam(value="communityCategoryNo") String communityCategoryNo,
-								@RequestParam(value="memberId", defaultValue="") String memberId) {
+								@RequestParam(value="memberId", defaultValue="admin") String memberId) {
 		
 		communityService.deleteCommunity(communityNo);
 		
@@ -259,9 +267,9 @@ public class CommunityController {
 		String returnList = "";
 		if(CategoryNo < 5 && CategoryNo > 0) {
 			returnList = "redirect:/community/list?communityCategoryNo="+communityCategoryNo;
-		}else if(CategoryNo < 11 && CategoryNo > 4 && memberId != "") {
+		}else if(CategoryNo < 11 && CategoryNo > 4 && !memberId.equals("admin")) {
 			returnList = "redirect:/community/myQnaList?communityCategoryNo="+communityCategoryNo+"&"+"memberId="+memberId;
-		}else if(CategoryNo < 11 && CategoryNo > 4 && memberId == "") {
+		}else if(CategoryNo < 11 && CategoryNo > 4 && memberId.equals("admin")) {
 			returnList = "redirect:/community/qnaListAll?communityCategoryNo="+communityCategoryNo;
 		}
 		

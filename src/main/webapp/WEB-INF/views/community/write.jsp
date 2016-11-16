@@ -69,6 +69,7 @@
 			<c:if test="${sessionScope.memberLevel == '관리자'}">
 				<label id="communityNoticeLabel" for="communityNotice"><span>공지사항</span></label>
 				<input type="checkbox" id="communityNotice" name="communityNotice" value="T"/>
+				<input type="hidden" name="memberLevel" value="${sessionScope.memberLevel}"/>
 			</c:if>		
 		</div>
 		<div class="communityContentWrap">
