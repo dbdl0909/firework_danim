@@ -12,7 +12,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!-- 자체 css -->
 		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">		
-		<title>Insert title here</title>
+		<title>다님 플래너</title>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>

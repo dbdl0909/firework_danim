@@ -93,7 +93,7 @@
 				
 			});
 		</script>
-		<title>Insert title here</title>
+		<title>다님 플래너</title>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
