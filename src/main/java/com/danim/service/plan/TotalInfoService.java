@@ -146,9 +146,15 @@ public class TotalInfoService {
 			cityRouteDto.setCityRouteArrivalCity(cityRouteArrivalCity.get(i));
 			cityRouteDto.setCityRouteDepartureTime(cityRouteDepartureTime.get(i));
 			cityRouteDto.setCityRouteArrivalTime(cityRouteArrivalTime.get(i));
-			if(cityRouteMemo != null && i < cityRouteMemo.size()) {
-				cityRouteDto.setCityRouteMemo(cityRouteMemo.get(i));
+			if(cityRouteMemoIndex != null && i < cityRouteMemo.size()) {
+				if(i == cityRouteMemoIndex.get(i)) {
+					logger.info("cityRouteMemoIndex : {}", cityRouteMemoIndex.get(i));
+					
+					cityRouteDto.setCityRouteMemo(cityRouteMemo.get(i));
+				}
 			}
+			
+			
 			cityRouteDtoList.add(cityRouteDto);
 			
 			//선택한 도시 중에서도 명소를 선택한 곳만 landmark_plan에 입력

@@ -409,7 +409,9 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			}
 			e.preventDefault();
 		});
-
+		
+		var cityNameArray = [];
+		var cityRouteMemoIndex = 0;
 		// Clicking an event within the list
 		$(document.body).on('click', '#'+uniqueId+' .listed-event', function (e) {
 			var href = $(this).attr('href');
@@ -418,6 +420,15 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			//alert(i);
 			$(this).find('button').attr('data-target','#planMemo'+i+'');
 			//alert($(this).find('button').attr('data-target'));			
+			
+			var cityName = $(this).attr('title');
+			cityNameArray[i] = cityName;
+			if(i >= 1) {
+				if(cityNameArray[i] != cityNameArray[i-1]) {
+					cityRouteMemoIndex++;
+				}
+			}
+			
 			if(!href) {
 				var modalHtml = '<div class="modal fade" id="planMemo'+i+'" role="dialog">'+
 			    '<div class="modal-dialog">'+
@@ -427,7 +438,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			          '<h4 class="modal-title">메모입력</h4>'+
 			        '</div>'+
 			        '<div class="modal-body">'+
-			          '<input type="hidden" name="cityRouteMemoIndex" value="' +i+'"/>'+
+			          '<input type="hidden" name="cityRouteMemoIndex" value="'+cityRouteMemoIndex+'"/>'+
 			          '<textarea cols="77" rows="3" name="cityRouteMemo"></textarea>'+
 			        '</div>'+
 			        '<div class="modal-footer">'+
