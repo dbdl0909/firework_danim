@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>DANIM JOIN</title>
+	<title>다님플래너</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="chrome=1"><!-- Optimistically rendering in Chrome Frame in IE. --> 
@@ -35,7 +35,7 @@
 		}
 		window.onload = init; */
 	$(document).ready(function(){
-		jQuery(function($) {
+		//jQuery(function($) {
 				// 정규식을 변수에 할당
 				//아이디 검사
 					//첫글자는 무조건 소문자, 5~15자, 특수기호 사용불가(-,_ 제외)
@@ -97,13 +97,12 @@
 						return true;
 					}
 				});
-		});
+		//});
 	});
 	</script>
 </head>
+<%-- <jsp:include page="../module/header.jsp"></jsp:include> --%>
 <body>
-	<!-- 헤더 -->
-	<jsp:include page="../module/header.jsp" />
 	<div id="twitter">
 		<form class="memberJoinForm" action="/member/memberJoinSubmit" method="post"> 
 			<input type="hidden" name="memberIdCheck" value="T">	<!-- T(내부회원) : 이 페이지는 내부회원가입페이지 -->
@@ -166,7 +165,6 @@
 			</div>				
 		</form>
 	</div>
-	<!-- 풋터 -->
-	<jsp:include page="../module/footer.jsp" />
 </body>
+<jsp:include page="../module/footer.jsp"></jsp:include>
 </html>

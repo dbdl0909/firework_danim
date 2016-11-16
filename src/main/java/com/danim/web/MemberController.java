@@ -125,11 +125,19 @@ public class MemberController {
 	@RequestMapping(value="/member/memberListAll", method = RequestMethod.GET)
 	public String memberListAll(Model model,
 			@RequestParam(value="memberIdCheck", defaultValue = "") String memberIdCheck,
-			@RequestParam(value="memberStatus", defaultValue = "") String memberStatus) {
+			@RequestParam(value="memberStatus", defaultValue = "") String memberStatus,
+			@RequestParam(value="page", defaultValue="1") int page) {		//페이징
 		logger.info("memberListAll MemberController.java");
 		logger.info("memberListAll MemberController memberIdCheck : {} ", memberIdCheck);
 		logger.info("memberListAll MemberController memberStatus : {} ", memberStatus);
-
+		//페이징
+		int startPage = memberService.getStartPage(page);
+		int endPage = memberService.getEndPage(startPage);
+		int lastPage = memberService.getLastPage(page);
+		if(lastPage < endPage){
+			endPage = lastPage;			
+		}
+		
 		if(memberIdCheck.equals("")) {		//연동여부 선택되지 않았을 때(전체회원)
 			if(memberStatus.equals("")) {	//회원상태가 선택되지 않았을 때(전체회원)
 				model.addAttribute("selectMemberAll", memberService.selectMemberAll());
@@ -147,6 +155,11 @@ public class MemberController {
 				model.addAttribute("selectMemberAll", memberService.selectMemberF());
 			}
 		}
+		
+		model.addAttribute("startPage", startPage);
+        model.addAttribute("page", page);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("lastPage", lastPage);
 		return "member/memberListAll";
 	}
 	//입력 폼

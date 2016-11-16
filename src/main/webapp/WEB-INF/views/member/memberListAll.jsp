@@ -45,7 +45,7 @@
 									<a href="/member/memberListAll">전체회원</a>
 									<a href="/member/memberListAll?memberStatus=normalMember">정상회원</a>
 									<a href="/member/memberListAll?memberStatus=stopMember">정지회원</a>
-									<a href="/member/memberListAll?memberStatus=leaveMember">탈퇴회원</a>
+									<a href="/member/memberListAll?memberStatus=leave">탈퇴회원</a>
 							     </div>
 						    </li>
 						</th>
@@ -73,6 +73,32 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div id="paginationWrap">
+			<ul class="pagination">
+			<li>
+				<c:if test="${page>1}">
+					<a href="/member/memberListAll&page=${page-1}">&laquo;</a>
+				</c:if>
+			</li>
+			<c:forEach begin="${startPage}" end="${endPage}" var="i">
+			<li>
+				<c:choose>
+					<c:when test="${page == i}">
+						<a href="/member/memberListAll&page=${i}" style="background:#434343; color:#fff;">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="/member/memberListAll&page=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</li>
+			</c:forEach>
+			<li>
+				<c:if test="${page<lastPage}">
+					<a href="/member/memberListAll&page=${page+1}">&raquo;</a>
+				</c:if>
+			</li>
+			</ul>
+		</div>
 	</form>
 	<!-- 풋터 -->
 	<jsp:include page="../module/footer.jsp" />

@@ -22,6 +22,11 @@ public class MemberService {
 	@Autowired
 	MemberInfoDto memberInfoDto;
 	
+	private final int LINE_PER_PAGE = 15;	//한페이지에 보여줄 글 개수
+    private final int BLOCK_PER_PAGE = 5;	//하단 페이징 블록의 갯수
+    int startPage;
+    int endPage;
+	
 	//회원정보조회
 	public MemberSelectInfoDto memberinfo(String memberId) {
 		logger.info("MemberService.java, memberinfo : {}", memberId);
@@ -128,6 +133,23 @@ public class MemberService {
 		}		
 		return selectLeaveMember;
 	}
+	//시작페이지를 정하기 위한 메소드
+    public int getStartPage(int page) {
+    	this.startPage = ((page - 1) / BLOCK_PER_PAGE) * BLOCK_PER_PAGE + 1;
+        return this.startPage;        
+    }
+    //마지막 페이지 구하기
+    public int getEndPage(int startpage) {
+    	this.endPage = startpage+BLOCK_PER_PAGE-1;
+        return this.endPage;
+    }
+    
+    public int getLastPage(int page) {
+		int lastPage = (int) Math.ceil(LINE_PER_PAGE);
+		return lastPage;    	
+    }
+	
+	
 	//내부회원 가입 메서드 :total(모든회원)과 info(내부회원)로 나눈 후 각각 테이블에 get
 	public void insertMember(MemberDto memberDto) {
 		logger.info("insertMember() MemberService.java");
