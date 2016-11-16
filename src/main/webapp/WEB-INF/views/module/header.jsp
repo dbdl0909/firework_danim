@@ -92,7 +92,6 @@
 			}
 	    });
 		//페이스북 로그아웃
-		
 		var facebookCheck = "<c:out value='${sessionScope.facebookCheck}'/>";
 		
 		$('#logoutButton').click(function(){
