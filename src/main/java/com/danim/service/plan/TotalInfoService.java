@@ -154,7 +154,6 @@ public class TotalInfoService {
 				}
 			}
 			
-			
 			cityRouteDtoList.add(cityRouteDto);
 			
 			//선택한 도시 중에서도 명소를 선택한 곳만 landmark_plan에 입력
