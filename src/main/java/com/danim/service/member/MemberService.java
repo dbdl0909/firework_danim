@@ -78,7 +78,56 @@ public class MemberService {
 		}
 		return MemberListAll;
 	}
-	
+	//내부회원리스트 출력
+	public List<MemberDto> selectMemberT() {
+		logger.info("selectMemberT() MemberService.java");
+		
+		List<MemberDto> selectMemberTrue =  memberDao.selectMemberT();
+		for(int i=0; i<selectMemberTrue.size(); i++) {
+			logger.info("selectMemberTrue : {}", selectMemberTrue.get(i));
+		}
+		return selectMemberTrue;
+	}
+	//외부회원리스트 출력
+	public List<MemberDto> selectMemberF() {
+		logger.info("selectMemberF() MemberService.java");
+		
+		List<MemberDto> selectMemberFalse =  memberDao.selectMemberF();
+		for(int i=0; i<selectMemberFalse.size(); i++) {
+			logger.info("selectMemberFalse : {}", selectMemberFalse.get(i));
+		}
+		return selectMemberFalse;
+	}
+	//회원상태가 정상인 회원리스트 출력
+	public List<MemberDto> selectMemberNormal() {
+		logger.info("selectMemberNormal() MemberService.java");
+		
+		List<MemberDto> selectNormalMember =  memberDao.selectMemberNormal();
+		for(int i=0; i<selectNormalMember.size(); i++) {
+			logger.info("selectMemberNormal : {}", selectNormalMember.get(i));
+		}		
+		return selectNormalMember;
+	}
+	//회원상태가 정지인 회원리스트 출력
+	public List<MemberDto> selectMemberStop() {
+		logger.info("selectMemberStop() MemberService.java");
+		
+		List<MemberDto> selectStopMember =  memberDao.selectMemberStop();
+		for(int i=0; i<selectStopMember.size(); i++) {
+			logger.info("selectMemberStop : {}", selectStopMember.get(i));
+		}		
+		return selectStopMember;
+	}
+	//회원상태가 탈퇴인 회원리스트 출력
+	public List<MemberDto> selectMemberLeave() {
+		logger.info("selectMemberLeave() MemberService.java");
+		
+		List<MemberDto> selectLeaveMember =  memberDao.selectMemberLeave();
+		for(int i=0; i<selectLeaveMember.size(); i++) {
+			logger.info("selectLeaveMember : {}", selectLeaveMember.get(i));
+		}		
+		return selectLeaveMember;
+	}
 	//내부회원 가입 메서드 :total(모든회원)과 info(내부회원)로 나눈 후 각각 테이블에 get
 	public void insertMember(MemberDto memberDto) {
 		logger.info("insertMember() MemberService.java");

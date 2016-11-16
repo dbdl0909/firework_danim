@@ -6,6 +6,7 @@
 			parameterType="String">
 	
 	</update>
+	
 	<!-- 회원정보 조회 -->
 	<select id="memberSelectInfo"
 			resultType="com.danim.service.member.MemberSelectInfoDto"
@@ -89,6 +90,246 @@
 			member_info as info
 		ON
 			total.member_id = info.member_id;
+	</select>
+	
+	<!-- 내부회원 리스트 출력 -->
+	<select id="selectMemberT"
+			resultType="com.danim.service.member.MemberDto">
+	SELECT 
+		total.member_id as 'memberId',
+		total.member_level as 'memberLevel',
+		total.member_name as 'memberName',
+		total.member_status as 'memberStatus',
+		total.member_date as 'memberDate',
+		total.member_update as 'memberUpdate',
+		total.member_login_check as 'memberLoginCheck',
+		total.member_id_check as 'memberIdCheck',
+		info.member_info_password as 'memberInfoPassword',
+		info.member_info_birth as 'memberInfoBirth',
+		info.member_info_gender as 'memberInfoGender',
+		info.member_info_email as 'memberInfoEmail'
+	FROM
+		member_total as total
+	LEFT OUTER JOIN
+		member_info as info
+	ON
+		total.member_id = info.member_id
+	WHERE
+		total.member_id_check = 'T'
+	UNION
+	SELECT
+		total.member_id as 'memberId',
+		total.member_level as 'memberLevel',
+		total.member_name as 'memberName',
+		total.member_status as 'memberStatus',
+		total.member_date as 'memberDate',
+		total.member_update as 'memberUpdate',
+		total.member_login_check as 'memberLoginCheck',
+		total.member_id_check as 'memberIdCheck',
+		info.member_info_password as 'memberInfoPassword',
+		info.member_info_birth as 'memberInfoBirth',
+		info.member_info_gender as 'memberInfoGender',
+		info.member_info_email as 'memberInfoEmail'
+	FROM
+		member_total as total
+	RIGHT OUTER JOIN
+		member_info as info
+	ON
+		total.member_id = info.member_id
+	WHERE
+		total.member_id_check = 'T'
+	</select>
+		
+	<!-- 외부회원 리스트 출력 -->
+	<select id="selectMemberF"
+			resultType="com.danim.service.member.MemberDto">
+		SELECT 
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		LEFT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_id_check = 'F'
+		UNION
+		SELECT
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		RIGHT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_id_check = 'F'
+	</select>
+	
+	<!-- 회원상태가 정상인 회원리스트 출력 -->
+	<select id="selectMemberNormal"
+			resultType="com.danim.service.member.MemberDto">
+		SELECT 
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		LEFT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_status = '정상회원'
+		UNION
+		SELECT
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		RIGHT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_status = '정상회원'
+	</select>
+	
+	<!-- 회원상태가 정지인 회원리스트 출력 -->
+	<select id="selectMemberStop"
+			resultType="com.danim.service.member.MemberDto">
+		SELECT 
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		LEFT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_status = '정지회원'
+		UNION
+		SELECT
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		RIGHT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_status = '정지회원'
+	</select>
+	
+	<!-- 회원상태가 탈퇴인 회원리스트 출력 -->
+	<select id="selectMemberLeave"
+			resultType="com.danim.service.member.MemberDto">
+		SELECT 
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		LEFT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_status = '탈퇴회원'
+		UNION
+		SELECT
+			total.member_id as 'memberId',
+			total.member_level as 'memberLevel',
+			total.member_name as 'memberName',
+			total.member_status as 'memberStatus',
+			total.member_date as 'memberDate',
+			total.member_update as 'memberUpdate',
+			total.member_login_check as 'memberLoginCheck',
+			total.member_id_check as 'memberIdCheck',
+			info.member_info_password as 'memberInfoPassword',
+			info.member_info_birth as 'memberInfoBirth',
+			info.member_info_gender as 'memberInfoGender',
+			info.member_info_email as 'memberInfoEmail'
+		FROM
+			member_total as total
+		RIGHT OUTER JOIN
+			member_info as info
+		ON
+			total.member_id = info.member_id
+		WHERE
+			total.member_status = '탈퇴회원'
 	</select>
 	
 	<!-- MemberTotal 입력(내부, 연동 포함한 모든 회원) -->

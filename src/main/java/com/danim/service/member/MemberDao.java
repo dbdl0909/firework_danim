@@ -74,6 +74,31 @@ public class MemberDao {
 		logger.info("selectMemberAll() MemberDao.java");
 		return sessionTemplate.selectList(nameSpace+".selectMemberAll");
 	}
+	//내부회원 리스트 출력
+	public List<MemberDto> selectMemberT() {
+		logger.info("selectMemberT() MemberDao.java");
+		return sessionTemplate.selectList(nameSpace+".selectMemberT");
+	}
+	//외부회원 리스트 출력
+	public List<MemberDto> selectMemberF() {
+		logger.info("selectMemberF() MemberDao.java");
+		return sessionTemplate.selectList(nameSpace+".selectMemberF");
+	}
+	//회원상태가 정상인 회원 리스트 출력
+	public List<MemberDto> selectMemberNormal() {
+		logger.info("selectMemberNormal() MemberDao.java");
+		return sessionTemplate.selectList(nameSpace+".selectMemberNormal");
+	}
+	//회원상태가 정지인 회원 리스트 출력
+	public List<MemberDto> selectMemberStop() {
+		logger.info("selectMemberStop() MemberDao.java");
+		return sessionTemplate.selectList(nameSpace+".selectMemberStop");
+	}
+	//회원상태가 탈퇴인 회원 리스트 출력
+	public List<MemberDto> selectMemberLeave() {
+		logger.info("selectMemberLeave() MemberDao.java");
+		return sessionTemplate.selectList(nameSpace+".selectMemberLeave");
+	}
 	//회원 total 입력
 	public int insertMemberTotal(MemberTotalInsertDto memberTotalInsertDto) {
 		logger.info("insertMemberTotal() MemberDao.java");
@@ -84,6 +109,5 @@ public class MemberDao {
 	public int insertMemberInfo(MemberInfoDto memberInfoDto) {
 		logger.info("insertMemberInfo() MemberDao.java");
 		return sessionTemplate.insert(nameSpace + ".insertMemberInfo", memberInfoDto);
-	}
-	
+	}	
 }

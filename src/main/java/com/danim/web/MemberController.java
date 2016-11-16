@@ -123,9 +123,30 @@ public class MemberController {
 	}
 	//회원리스트
 	@RequestMapping(value="/member/memberListAll", method = RequestMethod.GET)
-	public String memberListAll(Model model) {
+	public String memberListAll(Model model,
+			@RequestParam(value="memberIdCheck", defaultValue = "") String memberIdCheck,
+			@RequestParam(value="memberStatus", defaultValue = "") String memberStatus) {
 		logger.info("memberListAll MemberController.java");
-		model.addAttribute("selectMemberAll", memberService.selectMemberAll());
+		logger.info("memberListAll MemberController memberIdCheck : {} ", memberIdCheck);
+		logger.info("memberListAll MemberController memberStatus : {} ", memberStatus);
+
+		if(memberIdCheck.equals("")) {		//연동여부 선택되지 않았을 때(전체회원)
+			if(memberStatus.equals("")) {	//회원상태가 선택되지 않았을 때(전체회원)
+				model.addAttribute("selectMemberAll", memberService.selectMemberAll());
+			} else if(memberStatus.equals("normalMember")) {		//회원상태가 정상일 때
+				model.addAttribute("selectMemberAll", memberService.selectMemberNormal());
+			} else if(memberStatus.equals("stopMember")) {			//회원상태가 정지일 때
+				model.addAttribute("selectMemberAll", memberService.selectMemberStop());
+			} else if(memberStatus.equals("leaveMember")) {			//회원상태가 탈퇴일 떄
+				model.addAttribute("selectMemberAll", memberService.selectMemberLeave());
+			}
+		} else if(memberStatus.equals("")) {
+			if(memberIdCheck.equals("T")) {		//연동여부가 내부회원(T)일 때
+				model.addAttribute("selectMemberAll", memberService.selectMemberT());
+			} else if(memberIdCheck.equals("F")) {		//연동여부가 외부회원(F)일 때
+				model.addAttribute("selectMemberAll", memberService.selectMemberF());
+			}
+		}
 		return "member/memberListAll";
 	}
 	//입력 폼
