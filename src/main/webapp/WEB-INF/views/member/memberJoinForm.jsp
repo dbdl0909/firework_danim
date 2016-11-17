@@ -41,7 +41,7 @@
 					//첫글자는 무조건 소문자, 5~15자, 특수기호 사용불가(-,_ 제외)
 					//특수기호(-,_)만으로 사용불가
 					// + 아이디 중복확인
-				var reMemberId = /^[a-z]{1}[a-z0-9_-]{3,16}$/;
+				/* var reMemberId = /^[a-z]{1}[a-z0-9_-]{3,16}$/;
 				//패스워드 검사
 	 			   	//6~16자, 영문, 숫자, 특수문자 조합
 					//숫자만으로는 사용불가
@@ -66,9 +66,9 @@
 					memberPassword2 = $('#memberInfoPassword2'),
 					memberName = $('#memberName'),
 					memberBirth = $('#memberInfoBirth'),
-					memberEmail = $('#memberInfoEmail');
+					memberEmail = $('#memberInfoEmail'); */
 	
-				memberJoinForm.submit(function() {
+				/* memberJoinForm.submit(function() {
 					if(reMemberId.test(memberId.val()) != true) {						//아이디검사
 						alert('아이디를 확인 후 입력하세요');
 						memberId.focus();
@@ -96,12 +96,12 @@
 					} else {
 						return true;
 					}
-				});
+				}); */
 		//});
 	});
 	</script>
 </head>
-<%-- <jsp:include page="../module/header.jsp"></jsp:include> --%>
+<jsp:include page="../module/header.jsp"></jsp:include>
 <body>
 	<div id="twitter">
 		<form class="memberJoinForm" action="/member/memberJoinSubmit" method="post"> 

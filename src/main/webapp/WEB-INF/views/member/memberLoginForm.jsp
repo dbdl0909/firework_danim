@@ -23,10 +23,11 @@
 	</style>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript">
-    <!-- 구글 연동 로그인 -->
-    var memberId;
-    var memberName;
-    var facebookCheck = false;
+	    var memberId = "";
+	    var memberName = "";
+	    //var facebookCheck = false;
+	    
+		//구글 연동 로그인
     	function onSignIn(googleUser) {
 	        // Useful data for your client-side scripts:
 	        var profile = googleUser.getBasicProfile();
@@ -56,20 +57,22 @@
 	        	return false;
 	        }
 		};
+		
 		//페이스북 연동로그인
-			function statusChangeCallback(response) {
-			memberId = response.authResponse.userID;				//연동회원아이디
-        	var accessToken = response.authResponse.accessToken;		//연동회원토큰
+		function statusChangeCallback(response) {
+			var accessToken = response.authResponse.accessToken;		//연동회원토큰
+        	memberId = response.authResponse.userID;					//연동회원아이디
 			console.log('facebook memberId: '+memberId);				//사용자 고유값
 			console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
 			console.log('statusChangeCallback');
 		    console.log(response);
+        	
 		    if (response.status === 'connected') {
-		      // 페이스북과 앱에 같이 로그인되어 있다.
-				/* var uid = response.authResponse.userID;
-				var accessToken = response.authResponse.accessToken;
-				console.log('uid: '+uid);//사용자 고유값
-				console.log('accessToken: '+accessToken);//권한 체크를 위한 값 일정 기간 마다 변경 됨 */
+				//페이스북과 앱에 같이 로그인되어 있다.
+				//var uid = response.authResponse.userID;
+				//var accessToken = response.authResponse.accessToken;
+				//console.log('uid: '+uid);//사용자 고유값
+				//console.log('accessToken: '+accessToken);//권한 체크를 위한 값 일정 기간 마다 변경 됨
 				testAPI();
 		    } else if (response.status === 'not_authorized') {
 				//페이스북에는 로그인 되어있으나, 앱에는 로그인 되어있지 않다.
@@ -83,12 +86,41 @@
 				return false;
 		    }
 		}
-		function checkLoginState() {
+		/* function checkLoginState() {
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response);
 		    });
+		} */
+		function fbLogin() {
+			FB.login(function(response) {
+				var accessToken = response.authResponse.accessToken;		//연동회원토큰
+	        	memberId = response.authResponse.userID;					//연동회원아이디
+				console.log('facebook memberId: '+memberId);				//사용자 고유값
+				console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
+				//console.log('statusChangeCallback');
+			    console.log(response);
+	        	
+			    if (response.status === 'connected') {
+					//페이스북과 앱에 같이 로그인되어 있다.
+					//var uid = response.authResponse.userID;
+					//var accessToken = response.authResponse.accessToken;
+					//console.log('uid: '+uid);//사용자 고유값
+					//console.log('accessToken: '+accessToken);//권한 체크를 위한 값 일정 기간 마다 변경 됨
+					testAPI();
+			    } else if (response.status === 'not_authorized') {
+					//페이스북에는 로그인 되어있으나, 앱에는 로그인 되어있지 않다.
+					document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+					//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
+					$('#memberLinkLoginForm').submit();
+			    } else {
+					//페이스북에 로그인이 되어있지 않아서, 앱에 로그인 되어있는지 불명확하다.
+					document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+					//로그인 안됨
+					return false;
+			    }
+			});
 		}
-		window.fbAsyncInit = function() {
+		/* window.fbAsyncInit = function() {
 			FB.init({
 				appId      : '1698844840441321',
 				cookie     : true,  // enable cookies to allow the server to access 
@@ -99,38 +131,41 @@
 			FB.getLoginStatus(function(response) {
 			    statusChangeCallback(response);
 			});
-		  };
-		  (function(d, s, id) {
-		    var js, fjs = d.getElementsByTagName(s)[0];
-		    if (d.getElementById(id)) return;
-		    js = d.createElement(s); js.id = id;
-		    js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.8";
-		    fjs.parentNode.insertBefore(js, fjs);
-		  }(document, 'script', 'facebook-jssdk'));
-		  function testAPI() {
-		    console.log('Welcome!  Fetching your information.... ');
-		    FB.api('/me', function(response) {
-		      console.log('Successful login for: ' + response.name);
-		      memberName = response.name;								//연동회원닉네임
-		      console.log('facebook memberId222: '+memberId);
-			  console.log('facebook memberName222: '+memberName);
-		      //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '! '+' id : '+response.id;
+		}; */
+		/* (function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.8";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk')); */
+		  
+		function testAPI() {
+			console.log('Welcome!  Fetching your information.... ');
+			FB.api('/me', function(response) {
+			console.log('Successful login for: ' + response.name);
+			memberName = response.name;								//연동회원닉네임
+			console.log('facebook memberId222: '+memberId);
+			console.log('facebook memberName222: '+memberName);
+			//document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '! '+' id : '+response.id;
 				if(memberId != null) {	//response에 값이 있으면(null값이 아니면)
 		        	$('#memberId').val(memberId);
 		        	$('#memberName').val(memberName);
 		        	console.log($('#memberId').val());
 		        	console.log($('#memberName').val());
 					//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-					facebookCheck = true;
+					//facebookCheck = true;
 					//console.log(facebookCheck);
+					$('#memberLinkLoginForm').submit();
 				} else {	//profile에 값이 없으면
 		        	//로그인 안됨
 		        	return false;
 		        }
-		    });
-		    if(facebookCheck == true) {
+			});
+		    /* if(facebookCheck == true) {
+		    	console.log('페이스북 로그인 OK');
 		    	$('#memberLinkLoginForm').submit();
-		    }
+		    } */
 		  };
     </script>
 </head>
@@ -148,10 +183,10 @@
 			</div>
 			<div class='clearfix'></div>
 			<div id='submit' class='outerDiv' style="float:left;">
-				<input type="submit" value="로그인" /> 
+				<input id="loginButton" type="submit" value="로그인" />
 			</div>
 			<div id='button' class='outerDiv' style="float:left;">
-				<input id="joinButton" type="button" value="회원가입" onclick="location.href='./member/memberJoinForm'"/> 
+				<input id="joinButton" type="button" value="회원가입" onclick="location.href='/member/memberJoinForm'"/> 
 			</div>
 		</form>
 		<!-- 연동로그인 -->
@@ -164,9 +199,9 @@
 					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 				</div>
 				<div id="facebook" style="float:left;">		<!-- 페이스북 연동로그인 -->
-					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" width="300px" height="75px;">
-					</fb:login-button>
-					</div>
+					<a onclick="fbLogin();"><img src="../../resources/images/facebook.png"></a>
+					<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="xlarge">
+					</fb:login-button> -->
 				</div>
 			</div>
 		</form>
