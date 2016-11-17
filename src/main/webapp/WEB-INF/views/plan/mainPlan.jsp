@@ -52,6 +52,43 @@
 		    	cityInfoList.push(cityInfo);
 		    </c:forEach>
 		    //console.log("cityInfoList.length : " + cityInfoList.length);
+		    
+		    //구글 지도 (현재위치 설정)
+			function initMap() {
+				//처음 지도 위치
+				var main = {lat: 36.337, lng: 127.402};
+				map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 7,
+					center: main,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+				
+				//cityInfoList의 length만큼 마커를 찍어준다.
+				for (var i=0; i<cityInfoList.length; i++) {
+					//console.log(i);
+					marker = new google.maps.Marker({
+						icon: markerIcon2,
+						position: {lat: Number(cityInfoList[i].latitude), lng: Number(cityInfoList[i].langitude)},
+					    				//위도와 경도를 Number 타입으로 바꾼다.
+						map: map,
+						title: cityInfoList[i].name,
+						//zIndex: cityInfoList[i][3],
+						index:i
+					});
+					marker.setVisible(false);
+					markerArray.push(marker);
+				}
+				
+				/* marker mouseover, mouseout function */
+				markerMouseEvent();
+				
+				/* zoom_changed function */
+				zoomEvent();
+			
+				/* infoWindow function */
+				infoWindowEvent();
+			}
+		    
 		    $(document).ready(function() {
 		    	document.getElementById('startDate').valueAsDate = new Date();
 		    	startDateInit = new Date(document.getElementById('startDate').valueAsDate);
