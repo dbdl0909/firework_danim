@@ -29,4 +29,9 @@ public class PlanDao {
     	
     	return sessionTemplate.selectList(namesPace + ".selectPlanDetailListByPlanNo",planNo);
     }
+	public List<CityInfoDto> selectGpsByPlanNo(int planNo) {
+    	logger.info("selectGpsByPlanNo :{} PlanDao.java",planNo);
+    	
+    	return sessionTemplate.selectList(namesPace + ".selectGpsByPlanNo",planNo);
+    }
 }

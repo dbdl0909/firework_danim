@@ -55,8 +55,10 @@ public class PlanController {
 		public String MemberPlanDetailList(Model model,@RequestParam(value="planNo") int planNo){
 			
 			List<PlanAllDto> PlanDetailList = planService.selectPlanDetailList(planNo);
+			List<CityInfoDto> PlanGpsList = planService.selectGpsList(planNo);
 			System.out.println(PlanDetailList);
 			model.addAttribute("PlanDetailList",PlanDetailList);
+			model.addAttribute("PlanGpsList",PlanGpsList);
 			
 			return "plan/planDetailList";
 		}

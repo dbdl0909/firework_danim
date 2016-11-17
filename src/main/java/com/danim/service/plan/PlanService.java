@@ -31,6 +31,14 @@ private static final Logger logger = LoggerFactory.getLogger(PlanService.class);
 		
 		return PlanDetailList;
 	}
+	public List<CityInfoDto> selectGpsList(int planNo) {
+		logger.info("gpsDtos() PlanService.java");
+		logger.info("planNo : {} selectGpsList Service.java", planNo);
+		List<CityInfoDto> PlanGpsList = planDao.selectGpsByPlanNo(planNo);
+		
+		
+		return PlanGpsList;
+	}
 }
 
 

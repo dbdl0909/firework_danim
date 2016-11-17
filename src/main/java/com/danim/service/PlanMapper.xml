@@ -55,4 +55,23 @@
 			WHERE 
 				p.plan_no = #{planNo};
     </select>
+    
+    <select id="selectGpsByPlanNo" 
+    		resultType="com.danim.service.plan.CityInfoDto"
+    		parameterType="int">
+     		SELECT 
+     			ci.city_info_langitude as 'cityInfoLangitude',
+     			ci.city_info_latitude as 'cityInfoLatitude'
+			FROM 
+				plan p
+			INNER JOIN
+				city_route cr 
+			INNER JOIN 
+				city_info ci
+			ON 
+				p.plan_no=cr.plan_no and city_info_no=cr.city_route_departure_city
+			WHERE 
+				p.plan_no = #{planNo};
+    
+    </select>
 </mapper>

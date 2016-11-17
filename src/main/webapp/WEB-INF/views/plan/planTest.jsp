@@ -11,12 +11,12 @@
     <meta charset="utf-8">
     <style>
       html, body {
-        height: 100%;
+        height: 50%;
         margin: 0;
         padding: 0;
       }
       #map {
-        height: 100%;
+        height: 50%;
       }
     </style><!-- 구글에 등록된 기본 맵 스타일-->
     <script>
