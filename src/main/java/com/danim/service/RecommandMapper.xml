@@ -195,5 +195,33 @@
 			route.city_route_departure_city
 		ORDER BY
 			COUNT(route.city_route_departure_city) DESC	
+	</select>
+	<!-- 성별로 구분한 전국 도 / 특별광역시 여행 순위 -->
+	<select id="selectCityAllByGender"
+			parameterType="String"
+			resultType="com.danim.service.recommand.RecommandDto">
+		SELECT
+			if(SUBSTRING(route.city_route_departure_city, 9) <![CDATA[ < ]]> 74, info.city_info_do_name, info.city_info_name) as 'cityRankName',
+			COUNT(route.city_route_departure_city) as 'cityRankCount'
+		FROM
+			plan as pl
+		JOIN
+			member_info as member
+		ON
+			pl.member_id = member.member_id
+		JOIN
+			city_route as route
+		ON
+			route.plan_no = pl.plan_no
+		JOIN
+			city_info as info
+		ON
+			info.city_info_no = route.city_route_departure_city
+		WHERE
+			member.member_info_gender = #{gender}
+		GROUP BY
+			cityRankName
+		ORDER BY
+			COUNT(route.city_route_departure_city) DESC
 	</select>		
 </mapper>

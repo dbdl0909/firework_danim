@@ -85,7 +85,7 @@
 				
 				var options = {
 					title: '여성이 선호하는 지역 TOP 5',
-					forceIFrame: false
+					forceIFrame: false,			
 				};
 				
 				var chart = new google.visualization.PieChart(document.getElementById('femaleChart'));
@@ -193,6 +193,20 @@
 				
 				}
 			
+			$('#maleChart').hide();
+			$('#femaleChart').hide();
+			
+			
+			$('#female').click(function(){
+				$('#femaleChart').show();
+				$('#maleChart').hide();
+			});
+			
+			$('#male').click(function(){
+				$('#maleChart').show();
+				$('#femaleChart').hide();
+			});
+			
 		});
 		</script>		
 		<title>다님 플래너</title>
@@ -200,15 +214,19 @@
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div id = "genderChart">
-			<div id="femaleChart" style="width: 750px; height: 400px;"></div>
-			<div id="maleChart" style="width: 750px; height: 400px;"></div>
+			<div class="btn-group">
+				<button id="female" type="button" class="btn btn-primary">여자</button>
+				<button id="male" type="button" class="btn btn-primary">남자</button>
+			</div> 
+			<div id="femaleChart" style="width: 700px; height: 400px;"></div>
+			<div id="maleChart" style="width: 700px; height: 400px;"></div>
 		</div>
-		<div>
+ 		<div>
 			<div id="popularityChart" style="width: 700px; height: 433px;"></div>
 		</div>
 		<div>
 			<div id="seasonTwentyChart" style="width: 750px; height: 400px;"></div>
-		</div>	
+		</div>
 	</body>
 	<jsp:include page="../module/footer.jsp"></jsp:include>
 </html>

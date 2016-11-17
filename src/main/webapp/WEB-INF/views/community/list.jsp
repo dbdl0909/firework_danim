@@ -171,7 +171,12 @@
 </body>
 <script type="text/javascript">
 var onWrite = function(){
-	location.href = '/community/write?communityCategoryNo='+'${param.communityCategoryNo}'+'&'+'boardCheck=C'; 
+	var memberId = "<c:out value='${sessionScope.memberId}' />";
+	if(memberId != "") {
+		location.href = '/community/write?communityCategoryNo='+'${param.communityCategoryNo}'+'&'+'boardCheck=C'; 		
+	}else if(memberId == "") {
+		alert('로그인을 해주세요');
+	}
 };
 var onList = function(){
 	location.href = '/community/list?communityCategoryNo='+'${param.communityCategoryNo}';

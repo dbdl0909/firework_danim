@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.plan.TotalInfoService;
+import com.danim.service.recommand.RecommandService;
 import com.danim.service.search.SearchMoreService;
 
 @Controller
@@ -19,7 +20,10 @@ public class RESTController {
     private TotalInfoService totalInfoService;
 	
 	@Autowired
-	private SearchMoreService searchMoreService;	
+	private SearchMoreService searchMoreService;
+	
+	@Autowired
+	private RecommandService recommandService;
 	
 	Model model;
 	
@@ -76,5 +80,17 @@ public class RESTController {
 		model.addAttribute("searchMore", searchMoreService.searchMore(search, moreView));
 	
 		return searchMore;
+	}
+	
+	@RequestMapping(value = "/recommand/recommandGender")
+	public String recommandGender(Model model, @RequestParam(value="gender") String gender) {
+		logger.info("recommandGender RecommandController.java");
+		logger.info("gender {} RecommandController.java", gender);
+		
+		model.addAttribute("selectCityForGender" , recommandService.selectCityForGender(gender));
+		model.addAttribute("selectCityAllByGender", recommandService.selectCityAllByGender(gender));
+		model.addAttribute("gender", gender);
+		
+		return "/recommand/recommandGender";
 	}
 }

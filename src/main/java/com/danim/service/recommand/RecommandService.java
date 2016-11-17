@@ -17,19 +17,22 @@ public class RecommandService {
 	private static final Logger logger = LoggerFactory.getLogger(RecommandService.class);
 	
 	// 성별 별 많이 여행가는 도시 top5
-    public Map<String, Object> selectCityForGender() {
+    public List<RecommandDto> selectCityForGender(String gender) {
     	logger.info("selectCityForGender() RecommandService.java");
     	
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	List<RecommandDto> selectCityForFemale = recommandDao.selectCityForGender("F");
-    	List<RecommandDto> selectCityForMale = recommandDao.selectCityForGender("M");
-
-		logger.info("selectCityForFemale {} RecommandController.java", selectCityForFemale);
+    	List<RecommandDto> selectCityForGender = recommandDao.selectCityForGender(gender);
+    	   	
+		return selectCityForGender;
     	
-    	map.put("selectCityForFemale", selectCityForFemale);
-    	map.put("selectCityForMale", selectCityForMale);
+    }
+    
+	// 성별 별 많이 여행가는 모든 도 / 특별광역시
+    public List<RecommandDto> selectCityAllByGender(String gender) {
+    	logger.info("selectCityAllByGender() RecommandService.java");
     	
-		return map;
+    	List<RecommandDto> selectCityAllByGender = recommandDao.selectCityAllByGender(gender);
+    	   	
+		return selectCityAllByGender;
     	
     }
     

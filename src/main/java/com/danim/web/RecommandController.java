@@ -20,10 +20,10 @@ public class RecommandController {
 	public String recommandMain(Model model) {
 		logger.info("recommandMain RecommandController.java");
 		
-		model.addAttribute("selectCityForGender" , recommandService.selectCityForGender());
+		//model.addAttribute("selectCityForGender" , recommandService.selectCityForGender());
 		model.addAttribute("selectPopularityCity", recommandService.selectPopularityCity());
 		model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCityTwenty());
 		
-		return "/recommand/recommandMain";
+		return "/recommand/recommandTest";
 	}
 }
