@@ -70,34 +70,38 @@ public class MemberDao {
 		return sessionTemplate.selectOne(nameSpace+".memberSelectLink", map);
 	}
 	//모든 회원 리스트 출력
-	public List<MemberDto> selectMemberAll() {
+	public List<MemberDto> selectMemberAll(Map<String, Object> map) {
 		logger.info("selectMemberAll() MemberDao.java");
-		return sessionTemplate.selectList(nameSpace+".selectMemberAll");
+		return sessionTemplate.selectList(nameSpace+".selectMemberAll", map);
 	}
 	//내부회원 리스트 출력
-	public List<MemberDto> selectMemberT() {
+	public List<MemberDto> selectMemberT(Map<String, Object> map) {
 		logger.info("selectMemberT() MemberDao.java");
-		return sessionTemplate.selectList(nameSpace+".selectMemberT");
+		return sessionTemplate.selectList(nameSpace+".selectMemberT", map);
 	}
 	//외부회원 리스트 출력
-	public List<MemberDto> selectMemberF() {
+	public List<MemberDto> selectMemberF(Map<String, Object> map) {
 		logger.info("selectMemberF() MemberDao.java");
-		return sessionTemplate.selectList(nameSpace+".selectMemberF");
+		return sessionTemplate.selectList(nameSpace+".selectMemberF", map);
 	}
 	//회원상태가 정상인 회원 리스트 출력
-	public List<MemberDto> selectMemberNormal() {
+	public List<MemberDto> selectMemberNormal(Map<String, Object> map) {
 		logger.info("selectMemberNormal() MemberDao.java");
-		return sessionTemplate.selectList(nameSpace+".selectMemberNormal");
+		return sessionTemplate.selectList(nameSpace+".selectMemberNormal", map);
 	}
 	//회원상태가 정지인 회원 리스트 출력
-	public List<MemberDto> selectMemberStop() {
+	public List<MemberDto> selectMemberStop(Map<String, Object> map) {
 		logger.info("selectMemberStop() MemberDao.java");
-		return sessionTemplate.selectList(nameSpace+".selectMemberStop");
+		return sessionTemplate.selectList(nameSpace+".selectMemberStop", map);
 	}
 	//회원상태가 탈퇴인 회원 리스트 출력
-	public List<MemberDto> selectMemberLeave() {
+	public List<MemberDto> selectMemberLeave(Map<String, Object> map) {
 		logger.info("selectMemberLeave() MemberDao.java");
-		return sessionTemplate.selectList(nameSpace+".selectMemberLeave");
+		return sessionTemplate.selectList(nameSpace+".selectMemberLeave", map);
+	}
+	//페이징
+	public int countMemberList(Map<String, Object> map){		
+		return sessionTemplate.selectOne(nameSpace+".countMemberList", map);
 	}
 	//회원 total 입력
 	public int insertMemberTotal(MemberTotalInsertDto memberTotalInsertDto) {

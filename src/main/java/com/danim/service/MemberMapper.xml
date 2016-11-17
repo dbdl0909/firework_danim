@@ -6,7 +6,15 @@
 			parameterType="String">
 	
 	</update>
-	
+	<!-- 총 회원수 -->
+	<select id="countMemberList" 
+			parameterType="java.util.Map"
+			resultType="Integer" >
+		SELECT 
+			COUNT(*) 
+		FROM 
+			member_total
+	</select>
 	<!-- 회원정보 조회 -->
 	<select id="memberSelectInfo"
 			resultType="com.danim.service.member.MemberSelectInfoDto"
@@ -89,7 +97,9 @@
 		RIGHT OUTER JOIN
 			member_info as info
 		ON
-			total.member_id = info.member_id;
+			total.member_id = info.member_id
+		ORDER BY memberDate ASC
+		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
 	</select>
 	
 	<!-- 내부회원 리스트 출력 -->
@@ -138,6 +148,8 @@
 		total.member_id = info.member_id
 	WHERE
 		total.member_id_check = 'T'
+	ORDER BY memberDate ASC
+	LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
 	</select>
 		
 	<!-- 외부회원 리스트 출력 -->
@@ -186,6 +198,8 @@
 			total.member_id = info.member_id
 		WHERE
 			total.member_id_check = 'F'
+		ORDER BY memberDate ASC
+		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
 	</select>
 	
 	<!-- 회원상태가 정상인 회원리스트 출력 -->
@@ -234,6 +248,8 @@
 			total.member_id = info.member_id
 		WHERE
 			total.member_status = '정상회원'
+		ORDER BY memberDate ASC
+		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
 	</select>
 	
 	<!-- 회원상태가 정지인 회원리스트 출력 -->
@@ -282,6 +298,8 @@
 			total.member_id = info.member_id
 		WHERE
 			total.member_status = '정지회원'
+		ORDER BY memberDate ASC
+		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
 	</select>
 	
 	<!-- 회원상태가 탈퇴인 회원리스트 출력 -->
@@ -330,6 +348,8 @@
 			total.member_id = info.member_id
 		WHERE
 			total.member_status = '탈퇴회원'
+		ORDER BY memberDate ASC
+		LIMIT #{pageNation.startRow} , #{pageNation.linePerPage};
 	</select>
 	
 	<!-- MemberTotal 입력(내부, 연동 포함한 모든 회원) -->

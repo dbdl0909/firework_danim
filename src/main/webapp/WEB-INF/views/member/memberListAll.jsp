@@ -4,20 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<title>다님플래너 :: 회원리스트</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+	<title>다님플래너 :: 회원리스트</title>
 </head>
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="../module/header.jsp" />
 	<h3 align="center">전체회원 리스트</h3>
-	<form class="memberList" action="" method="post">
+	<!-- <form class="memberList" action="" method="post"> -->
 		<table class="table table-hover">
 			<thead>
 				<ul>
@@ -51,7 +51,6 @@
 						</th>
 						<th>가입날짜</th>
 						<th>수정날짜</th>
-						
 					</tr>
 				</ul>
 			</thead>
@@ -73,33 +72,34 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<!-- 페이징 -->
 		<div id="paginationWrap">
 			<ul class="pagination">
-			<li>
-				<c:if test="${page>1}">
-					<a href="/member/memberListAll&page=${page-1}">&laquo;</a>
-				</c:if>
-			</li>
-			<c:forEach begin="${startPage}" end="${endPage}" var="i">
-			<li>
-				<c:choose>
-					<c:when test="${page == i}">
-						<a href="/member/memberListAll&page=${i}" style="background:#434343; color:#fff;">${i}</a>
-					</c:when>
-					<c:otherwise>
-						<a href="/member/memberListAll&page=${i}">${i}</a>
-					</c:otherwise>
-				</c:choose>
-			</li>
-			</c:forEach>
-			<li>
-				<c:if test="${page<lastPage}">
-					<a href="/member/memberListAll&page=${page+1}">&raquo;</a>
-				</c:if>
-			</li>
+				<li>
+					<c:if test="${page>1}">
+						<a href="/member/memberListAll?page=${page-1}">&laquo;</a>
+					</c:if>
+				</li>
+				<c:forEach begin="${startPage}" end="${endPage}" var="i">
+				<li>
+					<c:choose>
+						<c:when test="${page == i}">
+							<a href="/member/memberListAll?page=${i}" style="background:#434343; color:#fff;">${i}</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/member/memberListAll?page=${i}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				</c:forEach>
+				<li>
+					<c:if test="${page<lastPage}">
+						<a href="/member/memberListAll?page=${page+1}">&raquo;</a>
+					</c:if>
+				</li>
 			</ul>
 		</div>
-	</form>
+	<!-- </form> -->
 	<!-- 풋터 -->
 	<jsp:include page="../module/footer.jsp" />
 </body>

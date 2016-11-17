@@ -1,5 +1,6 @@
 package com.danim.service.member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.danim.util.Pagination;
 
 @Service
 @Transactional
@@ -23,7 +26,7 @@ public class MemberService {
 	MemberInfoDto memberInfoDto;
 	
 	private final int LINE_PER_PAGE = 15;	//한페이지에 보여줄 글 개수
-    private final int BLOCK_PER_PAGE = 5;	//하단 페이징 블록의 갯수
+    private final int BLOCK_PER_PAGE = 5;	//하단 페이징 블록의 개수
     int startPage;
     int endPage;
 	
@@ -55,6 +58,12 @@ public class MemberService {
 		}
 		return resultMap;
 	}
+	//모든 회원 수
+		public int countMemberList(String memberIdCheck){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("memberIdCheck", memberIdCheck);
+			return memberDao.countMemberList(map);
+		}
 	//연동로그인 아이디 체크
 	public MemberTotalDto memberLinkCheck(String memberId, String memberName) {
 		logger.info("memberLinkCheck() MemberService.java");
@@ -72,84 +81,110 @@ public class MemberService {
 		
 		return memberTotalDto;
 	}
+	//시작페이지를 정하기 위한 메소드
+    public int getStartPage(int page) {
+    	this.startPage = ((page - 1) / BLOCK_PER_PAGE) * BLOCK_PER_PAGE + 1;
+    	logger.info("getStartPage() MemberService.java");
+        return this.startPage;
+    }
+    //마지막 페이지 구하기
+    public int getEndPage(int startpage) {
+    	this.endPage = startpage+BLOCK_PER_PAGE-1;
+    	logger.info("getEndPage() MemberService.java");
+        return this.endPage;
+    }
+    
+    public int getLastPage(String memberIdCheck, int page) {
+    	int totalCount = countMemberList(memberIdCheck);
+		int lastPage = (int) Math.ceil((double)totalCount/LINE_PER_PAGE);
+    	logger.info("getLastPage() MemberService.java");
+		return lastPage;
+    }
 	//회원리스트 출력
-	public List<MemberDto> selectMemberAll() {
+	public List<MemberDto> selectMemberAll(int page) {
 		logger.info("selectMemberAll() MemberService.java");
 		
-		//Map<String, Object> map = new HashMap<String, Object>();
-		List<MemberDto> MemberListAll =  memberDao.selectMemberAll();
+		Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageNation", pageNation);
+		
+		List<MemberDto> MemberListAll =  memberDao.selectMemberAll(map);
 		for(int i=0; i<MemberListAll.size(); i++) {
 			logger.info("MemberListAll : {}", MemberListAll.get(i));
 		}
 		return MemberListAll;
 	}
 	//내부회원리스트 출력
-	public List<MemberDto> selectMemberT() {
+	public List<MemberDto> selectMemberT(int page) {
 		logger.info("selectMemberT() MemberService.java");
+
+		Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageNation", pageNation);
 		
-		List<MemberDto> selectMemberTrue =  memberDao.selectMemberT();
+		List<MemberDto> selectMemberTrue =  memberDao.selectMemberT(map);
 		for(int i=0; i<selectMemberTrue.size(); i++) {
 			logger.info("selectMemberTrue : {}", selectMemberTrue.get(i));
 		}
 		return selectMemberTrue;
 	}
 	//외부회원리스트 출력
-	public List<MemberDto> selectMemberF() {
+	public List<MemberDto> selectMemberF(int page) {
 		logger.info("selectMemberF() MemberService.java");
+
+		Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageNation", pageNation);
 		
-		List<MemberDto> selectMemberFalse =  memberDao.selectMemberF();
+		List<MemberDto> selectMemberFalse =  memberDao.selectMemberF(map);
 		for(int i=0; i<selectMemberFalse.size(); i++) {
 			logger.info("selectMemberFalse : {}", selectMemberFalse.get(i));
 		}
 		return selectMemberFalse;
 	}
 	//회원상태가 정상인 회원리스트 출력
-	public List<MemberDto> selectMemberNormal() {
+	public List<MemberDto> selectMemberNormal(int page) {
 		logger.info("selectMemberNormal() MemberService.java");
+
+		Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageNation", pageNation);
 		
-		List<MemberDto> selectNormalMember =  memberDao.selectMemberNormal();
+		List<MemberDto> selectNormalMember =  memberDao.selectMemberNormal(map);
 		for(int i=0; i<selectNormalMember.size(); i++) {
 			logger.info("selectMemberNormal : {}", selectNormalMember.get(i));
 		}		
 		return selectNormalMember;
 	}
 	//회원상태가 정지인 회원리스트 출력
-	public List<MemberDto> selectMemberStop() {
+	public List<MemberDto> selectMemberStop(int page) {
 		logger.info("selectMemberStop() MemberService.java");
+
+		Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageNation", pageNation);
 		
-		List<MemberDto> selectStopMember =  memberDao.selectMemberStop();
+		List<MemberDto> selectStopMember =  memberDao.selectMemberStop(map);
 		for(int i=0; i<selectStopMember.size(); i++) {
 			logger.info("selectMemberStop : {}", selectStopMember.get(i));
 		}		
 		return selectStopMember;
 	}
 	//회원상태가 탈퇴인 회원리스트 출력
-	public List<MemberDto> selectMemberLeave() {
+	public List<MemberDto> selectMemberLeave(int page) {
 		logger.info("selectMemberLeave() MemberService.java");
+
+		Pagination pageNation = new Pagination(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageNation", pageNation);
 		
-		List<MemberDto> selectLeaveMember =  memberDao.selectMemberLeave();
+		List<MemberDto> selectLeaveMember =  memberDao.selectMemberLeave(map);
 		for(int i=0; i<selectLeaveMember.size(); i++) {
 			logger.info("selectLeaveMember : {}", selectLeaveMember.get(i));
 		}		
 		return selectLeaveMember;
 	}
-	//시작페이지를 정하기 위한 메소드
-    public int getStartPage(int page) {
-    	this.startPage = ((page - 1) / BLOCK_PER_PAGE) * BLOCK_PER_PAGE + 1;
-        return this.startPage;        
-    }
-    //마지막 페이지 구하기
-    public int getEndPage(int startpage) {
-    	this.endPage = startpage+BLOCK_PER_PAGE-1;
-        return this.endPage;
-    }
-    
-    public int getLastPage(int page) {
-		int lastPage = (int) Math.ceil(LINE_PER_PAGE);
-		return lastPage;    	
-    }
-	
-	
+		
 	//내부회원 가입 메서드 :total(모든회원)과 info(내부회원)로 나눈 후 각각 테이블에 get
 	public void insertMember(MemberDto memberDto) {
 		logger.info("insertMember() MemberService.java");

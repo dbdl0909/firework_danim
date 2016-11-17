@@ -130,37 +130,40 @@ public class MemberController {
 		logger.info("memberListAll MemberController.java");
 		logger.info("memberListAll MemberController memberIdCheck : {} ", memberIdCheck);
 		logger.info("memberListAll MemberController memberStatus : {} ", memberStatus);
-		//페이징
-		int startPage = memberService.getStartPage(page);
-		int endPage = memberService.getEndPage(startPage);
-		int lastPage = memberService.getLastPage(page);
-		if(lastPage < endPage){
-			endPage = lastPage;			
-		}
-		
+	
 		if(memberIdCheck.equals("")) {		//연동여부 선택되지 않았을 때(전체회원)
 			if(memberStatus.equals("")) {	//회원상태가 선택되지 않았을 때(전체회원)
-				model.addAttribute("selectMemberAll", memberService.selectMemberAll());
+				model.addAttribute("selectMemberAll", memberService.selectMemberAll(page));
 			} else if(memberStatus.equals("normalMember")) {		//회원상태가 정상일 때
-				model.addAttribute("selectMemberAll", memberService.selectMemberNormal());
+				model.addAttribute("selectMemberAll", memberService.selectMemberNormal(page));
 			} else if(memberStatus.equals("stopMember")) {			//회원상태가 정지일 때
-				model.addAttribute("selectMemberAll", memberService.selectMemberStop());
+				model.addAttribute("selectMemberAll", memberService.selectMemberStop(page));
 			} else if(memberStatus.equals("leaveMember")) {			//회원상태가 탈퇴일 떄
-				model.addAttribute("selectMemberAll", memberService.selectMemberLeave());
+				model.addAttribute("selectMemberAll", memberService.selectMemberLeave(page));
 			}
 		} else if(memberStatus.equals("")) {
 			if(memberIdCheck.equals("T")) {		//연동여부가 내부회원(T)일 때
-				model.addAttribute("selectMemberAll", memberService.selectMemberT());
+				model.addAttribute("selectMemberAll", memberService.selectMemberT(page));
 			} else if(memberIdCheck.equals("F")) {		//연동여부가 외부회원(F)일 때
-				model.addAttribute("selectMemberAll", memberService.selectMemberF());
+				model.addAttribute("selectMemberAll", memberService.selectMemberF(page));
 			}
 		}
-		
+		//페이징
+		int startPage = memberService.getStartPage(page);
+		int endPage = memberService.getEndPage(startPage);
+		int lastPage = memberService.getLastPage(memberIdCheck, page);
+		if(lastPage < endPage){
+			endPage = lastPage;
+		}
+		logger.info("startPage{} MemberController.java", startPage);
+		logger.info("endPage{} MemberController.java", endPage);	
+		logger.info("totalPage{} MemberController.java", lastPage);
 		model.addAttribute("startPage", startPage);
         model.addAttribute("page", page);
         model.addAttribute("endPage", endPage);
         model.addAttribute("lastPage", lastPage);
-		return "member/memberListAll";
+        model.addAttribute("totalCount", memberService.countMemberList(memberIdCheck));
+		return "/member/memberListAll";
 	}
 	//입력 폼
 	@RequestMapping(value = "/member/memberJoinForm", method = RequestMethod.GET)
