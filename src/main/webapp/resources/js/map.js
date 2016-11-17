@@ -660,7 +660,7 @@ $(document).ready(function() {
     	
     	var zoomCity = {lat: zoomLatitude, lng: zoomLangitude};
     	map.setCenter(zoomCity);
-    	map.setZoom(10);
+    	map.setZoom(11);
     });
 	
 	//removeButton 이미지 태그를 클릭했을때 실행할 함수
@@ -974,7 +974,7 @@ $(document).ready(function() {
 		$('#clickCityName').text(clickCityName);
 		
 		map.setCenter(markerArray[clickCityNo].getPosition());
-		map.setZoom(12);
+		map.setZoom(13);
 		
 		clickIcon = "명소";
 		totalInfoList();
