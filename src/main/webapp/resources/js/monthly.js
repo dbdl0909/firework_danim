@@ -418,7 +418,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			// If there isn't a link, don't go anywhere
 			var i = $('.listed-event').index(this);
 			var evenId = $(this).attr('data-eventid');
-			alert(evenId)
+			//alert(evenId);
 			//alert(i);
 			$(this).find('button').attr('data-target','#planMemo'+evenId+'');
 			//alert($(this).find('button').attr('data-target'));			
