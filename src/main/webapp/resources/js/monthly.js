@@ -424,12 +424,12 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			//alert($(this).find('button').attr('data-target'));			
 			
 			var cityName = $(this).attr('title');
-			cityNameArray[i] = cityName;
+			/*cityNameArray[i] = cityName;
 			if(i >= 1) {
 				if(cityNameArray[i] != cityNameArray[i-1]) {
 					cityRouteMemoIndex++;
 				}
-			}
+			}*/
 			
 			if(!href) {
 				var modalHtml = '<div class="modal fade" id="planMemo'+evenId+'" role="dialog">'+
@@ -440,7 +440,7 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 								          '<h4 class="modal-title">메모입력</h4>'+
 								        '</div>'+
 								        '<div class="modal-body">'+
-								          '<input type="hidden" name="cityRouteMemoIndex" value="'+cityRouteMemoIndex+'"/>'+
+								          '<input type="hidden" name="cityRouteMemoIndex" value="'+evenId+'"/>'+
 								          '<textarea cols="77" rows="3" name="cityRouteMemo"></textarea>'+
 								        '</div>'+
 								        '<div class="modal-footer">'+

@@ -10,23 +10,23 @@ var pathArray = [];
 //클릭한 도시들의 pathLine(폴리라인을 그을 좌표값)을 담을 배열
 var lineArray = [];
 
-var map;
-var marker;
-var markerIndex;
-var addButton;
+var map = null;
+var marker = null;
+var markerIndex = null;
+var addButton = null;
 
 var lineRemoveIndex = 0;
 var count = 0;
 
 //map에서 가리킬 좌표를 담는 변수
-var zoomLocation;
+var zoomLocation = null;
 //map에서 가리킬 좌표의 zoom 값을 담는 변수
-var zoomSize;
+var zoomSize = null;
 
 var markerIcon1 = "../../resources/images/planIcon/placeholder.png";
 var markerIcon2 = "../../resources/images/planIcon/placeholder2.png";
 
-var $stayDay;
+var $stayDay = 0;
 
 //landmark 마커를 담은 배열
 var $landmarkMarkerArray = [];
