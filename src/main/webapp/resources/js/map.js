@@ -866,6 +866,16 @@ $(document).ready(function() {
 					landmarkHover($hoverTemp, $landmarkHoverIndex);*/
 				});
 				
+				function landmarkLiAppend() {
+					$('.landmarkRouteUl').eq(cityClickIndex).append(
+							"<li class='landmarkLi'>" +
+								"<span class='landmarkName'>" + clickLandmark + "</span>" +
+								"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
+								"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
+							"</li>"
+					);
+				}
+				
 				$('.clickLandmark').click(function() {
 					var clickLandmarkIndex = $('.clickLandmark').index(this);
 					console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
@@ -878,6 +888,8 @@ $(document).ready(function() {
 					
 					$('#landmarkInfoPopWrap').show();
 					
+					var landmarkSameCount = 0;
+					var landmarkDifferCount = 0;
 					$.ajax({
 						url:'/search/landmarkInfo',
 						data:{landmarkInfoNo:landmarkInfoNo, cityInfoName:clickCityName},
@@ -895,62 +907,59 @@ $(document).ready(function() {
 								$('#landmarkInfoPopWrap').hide();
 							});
 							
+							var landmarkLiLength = $('.landmarkLi').length;
 							//클릭한 명소 루트에 추가하기
 							$('#addToPlan').click(function() {
-								var  result = confirm(clickLandmark + '를 추가하시겠습니까?');
-								if (result == true) {
+								var result = confirm(clickLandmark + '를 추가하시겠습니까?');
+								if(result == true) {
 									//console.log('도시 클릭한 것' + cityClickIndex);
 									
-									alert(clickLandmark);
-									alert($('li').hasClass('landmarkLi'));
-									alert($('.landmarkName').length);
-									
-									for(i = 0; i < $('.landmarkName').length; i++){
-										if($('li').hasClass('landmarkLi') == true && $('.landmarkName').eq(i).text() == clickLandmark){
+									if(landmarkLiLength == 0) {
+										//console.log('landmarkLi.length == 0 : ' + landmarkLiLength);
+										landmarkLiAppend();
+										
+									} else if(landmarkLiLength >= 1) {
+										//console.log('landmarkLi.length >= 1 : ' + $('.landmarkLi').length);
+										for(i = 0; i < landmarkLiLength; i++){
+											console.log('i : ' + i);
+											if($('.landmarkName').eq(i).text() == clickLandmark){
+												//console.log($('.landmarkName').eq(i).text() + '==' + clickLandmark);
+												landmarkSameCount++;
+											} else if($('.landmarkName').eq(i).text() != clickLandmark) {
+												//console.log($('.landmarkName').eq(i).text() + '!=' + clickLandmark);
+												landmarkDifferCount++;
+												
+											}
+										}
+										//console.log('landmarkSameCount : ' + landmarkSameCount);
+										//console.log('landmarkDifferCount : ' + landmarkDifferCount);
+										if(landmarkSameCount > 0) {
 											alert('이미 선택한 명소입니다');
-										}else if($('li').hasClass('landmarkLi') == true && !($('.landmarkName').eq(i).text() == clickLandmark)) {
-											$('.landmarkRouteUl').eq(cityClickIndex).append(
-													"<li class='landmarkLi'>" +
-														"<span class='landmarkName'>" + clickLandmark + "</span>" +
-														"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
-														"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
-													"</li>"
-												);
+										} else if(landmarkDifferCount > 0) {
+											landmarkLiAppend();
 										}
 									}
-									
-									if($('li').hasClass('landmarkLi') == false) {
-									$('.landmarkRouteUl').eq(cityClickIndex).append(
-											"<li class='landmarkLi'>" +
-												"<span class='landmarkName'>" + clickLandmark + "</span>" +
-												"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
-												"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
-											"</li>"
-										);										
-									}
-									
-
-									
-
-									/*$('.landmarkRouteUl').eq(cityClickIndex).append(
-										"<li class='landmarkLi'>" +
-											"<span class='landmarkName'>" + clickLandmark + "</span>" +
-											"<input type='hidden' class='landmarkIndex' name='landmarkIndex' value='" + cityClickIndex +"'/>" +
-											"<input type='hidden' class='landmarkNo' name='landmarkInfoNo' value='" + landmarkInfoNo + "'/>" +
-										"</li>"
-									);*/
 									//$landmarkMarkerArray[clickLandmarkIndex].setIcon('../../resources/images/planIcon/landmarkPinClick.png');
 									$('#landmarkInfoPopWrap').hide();
 								}
 							});
 						}
-					})
-					
+					})					
 				});
 			}
 		})
 	}
 
+	//명소루트에서 명소 클릭하면 삭제하기
+	$('body').on('click', '.landmarkName', function() {
+		console.log('landmarkName click..');
+		var landmarkLiIndex = $('.landmarkName').index(this);
+		var clickLandmarkName = $('.landmarkName').eq(landmarkLiIndex).text();
+		var landmarkLiRemoveResult = confirm(clickLandmarkName + '를 삭제하시겠습니까?');
+		if(landmarkLiRemoveResult == true) {
+			$('.landmarkLi').eq(landmarkLiIndex).remove();
+		}
+	});
 	
 	//cityName li 태그를 클릭했을때 실행할 함수
 	$('body').on('click', '.cityName', function() {

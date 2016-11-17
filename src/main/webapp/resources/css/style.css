@@ -519,6 +519,12 @@ p {
 	z-index:10000;
 	width:53%;
 }
+.landmarkLi {
+	cursor:pointer;
+}
+.landmarkLi:hover {
+	background-color:#D2D2D2;
+}
 
 #mainPlanDivContent {
 	width:100%;
