@@ -73,7 +73,7 @@
 			</tbody>
 		</table>
 		<!-- 페이징 -->
-		<div id="paginationWrap">
+		<div id="paginationWrap" align="center">
 			<ul class="pagination">
 				<li>
 					<c:if test="${page>1}">
