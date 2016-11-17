@@ -54,7 +54,8 @@ function initMap() {
 	var main = {lat: 36.337, lng: 127.402};
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 7,
-		center: main
+		center: main,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
 	
 	//cityInfoList의 length만큼 마커를 찍어준다.
