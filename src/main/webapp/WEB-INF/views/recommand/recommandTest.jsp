@@ -34,24 +34,90 @@
 					});
 				}
 				
+				// 성별 탭
 				$('#male').click(function(){
-					url = "/recommand/recommandGender"
+					url = "/recommand/recommandGender";
 					data = {gender: "M"};
 					loadRecommand();
 				});
 				
 				$('#female').click(function(){
-					url = "/recommand/recommandGender"
+					url = "/recommand/recommandGender";
 					data = {gender: "F"};
 					loadRecommand();
 				});
 				
+				// 지역 탭
+				$('#korea').click(function(){
+					url = "/recommand/recommandPopularity";
+					loadRecommand();
+				});
+				
+				$('#kyungki').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "경기도"};
+					loadRecommand();
+				});
+				
+				$('#kangwon').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "강원도"};
+					loadRecommand();
+				});
+				
+				$('#chungbuk').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "충청북도"};
+					loadRecommand();
+				});
+				
+				$('#chungnam').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "충청남도"};
+					loadRecommand();
+				});
+				
+				$('#junbuk').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "전라북도"};
+					loadRecommand();
+				});
+				
+				$('#junnam').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "전라남도"};
+					loadRecommand();
+				});
+				
+				$('#kyungbuk').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "경상북도"};
+					loadRecommand();
+				});
+				
+				$('#kyungnam').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "경상남도"};
+					loadRecommand();
+				});
+				
+				$('#jeju').click(function(){
+					url = "/recommand/recommandProvince";
+					data = {province: "제주도"};
+					loadRecommand();
+				});
+				
 				$('#genderUl').hide();
-				$('#p').hide();
+				$('#popularityUl').hide();
 				$('#s').hide();
 				$('#t').hide();
+				
 				$('#gender').click(function(){
-					$('#genderUl').show();
+					$('#genderUl').toggle();
+				});
+				
+				$('#popularity').click(function(){
+					$('#popularityUl').toggle();
 				});
 				
 			});
@@ -59,8 +125,10 @@
 		<style type="text/css">
 			.container #recommandTab{float:left; width: 20%; height: 700px; border-right: 1px #CCC solid; text-align: center;}
 			.container #recommandView{float: right; width: 70%;}
-			.container #recommandTab div{cursor: pointer; border-bottom: 1px #CCC solid; font-size: 26px; margin: 7px;}
-			.container #recommandTab li{font-size: 20px; cursor: pointer;}			
+			.container #recommandTab div{cursor: pointer; font-size: 26px; margin: 18px;}
+			.container #recommandTab li{font-size: 18px; cursor: pointer; margin: 7px;}
+			.container #recommandView #popularityTitle{margin-left: 160px; margin-bottom: 30px; font-size: 26px;}	
+			.container #recommandView #popularityProvinceImage img{margin-left: 215px;}		
 		</style>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
@@ -72,8 +140,19 @@
 					<li id="male">남자</li>
 					<li id="female">여자</li>
 				</ul>
-				<div>인기</div>	
-				<ul id="p"></ul>
+				<div id="popularity">지역</div>	
+				<ul id="popularityUl">
+					<li id="korea">전국</li>
+					<li id="kyungki">경기도</li>
+					<li id="kangwon">강원도</li>
+					<li id="chungbuk">충청북도</li>
+					<li id="chungnam">충청남도</li>
+					<li id="junbuk">전라북도</li>
+					<li id="junnam">전라남도</li>
+					<li id="kyungbuk">경상북도</li>
+					<li id="kyungnam">경상남도</li>
+					<li id="jeju">제주도</li>											
+				</ul>
 				<div>계절</div>
 				<ul id="s"></ul>
 				<div>타입</div>

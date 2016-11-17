@@ -82,6 +82,7 @@ public class RESTController {
 		return searchMore;
 	}
 	
+	// 성별간 많이 가는 도시 top5 / 성별간 많이가는 도 특별광역시
 	@RequestMapping(value = "/recommand/recommandGender")
 	public String recommandGender(Model model, @RequestParam(value="gender") String gender) {
 		logger.info("recommandGender RecommandController.java");
@@ -92,5 +93,27 @@ public class RESTController {
 		model.addAttribute("gender", gender);
 		
 		return "/recommand/recommandGender";
+	}
+	
+	// 전체 회원 많이 여행 간 도시 지오차트
+	@RequestMapping(value = "/recommand/recommandPopularity")
+	public String recommandPopularity(Model model) {
+		logger.info("recommandPopularity RecommandController.java");
+		
+		model.addAttribute("selectPopularityCity", recommandService.selectPopularityCity());
+		
+		return "/recommand/recommandPopularity";
+	}
+	
+	// 전체 회원 많이 여행 간 도시 지오차트
+	@RequestMapping(value = "/recommand/recommandProvince")
+	public String recommandProvince(Model model, @RequestParam(value="province") String province) {
+		logger.info("recommandProvince RecommandController.java");
+		logger.info("province {} RecommandController.java", province);
+		
+		model.addAttribute("selectCityByProvince", recommandService.selectCityByProvince(province));
+		model.addAttribute("province", province);
+		
+		return "/recommand/recommandProvince";
 	}
 }

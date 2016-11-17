@@ -223,5 +223,33 @@
 			cityRankName
 		ORDER BY
 			COUNT(route.city_route_departure_city) DESC
-	</select>		
+	</select>
+	<!-- 도에서 인기있는 시  여행순위 -->		
+	<select id="selectCityByProvince"
+			parameterType="String"
+			resultType="com.danim.service.recommand.RecommandDto">
+	SELECT
+		info.city_info_name as 'cityRankName',
+		COUNT(route.city_route_departure_city) as 'cityRankCount'
+	FROM
+		plan as pl
+	JOIN
+		member_info as member
+	ON
+		pl.member_id = member.member_id
+	JOIN
+		city_route as route
+	ON
+		route.plan_no = pl.plan_no
+	JOIN
+		city_info as info
+	ON
+		info.city_info_no = route.city_route_departure_city
+	WHERE
+		info.city_info_do_name = #{province}
+	GROUP BY
+		cityRankName
+	ORDER BY
+		COUNT(route.city_route_departure_city) DESC
+	</select>
 </mapper>

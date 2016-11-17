@@ -53,4 +53,11 @@ public class RecommandDao {
 		return sessionTemplate.selectList(nameSpace + ".selectCityAllByGender", gender);
 	}
 	
+	// 도 안에서 많이찾은 시 순위
+	public List<RecommandDto> selectCityByProvince(String province) {
+		logger.info("selectCityByProvince RecommandDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectCityByProvince", province);
+	}
+	
 }

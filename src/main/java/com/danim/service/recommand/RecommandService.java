@@ -46,6 +46,16 @@ public class RecommandService {
     	
     }
     
+    // 도 안에서 많이찾은 시 순위
+    public List<RecommandDto> selectCityByProvince(String province) {
+    	logger.info("selectCityByProvince() RecommandService.java");
+		
+    	List<RecommandDto> selectCityByProvince = recommandDao.selectCityByProvince(province);
+    	
+    	return selectCityByProvince;
+    	
+    }
+    
     // 20대가 계절 별 많이 찾는 도시
     public Map<String, Object> selectSeasonCityTwenty() {
     	logger.info("selectSeasonCityTwenty() RecommandService.java");
