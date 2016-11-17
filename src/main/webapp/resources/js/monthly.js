@@ -417,8 +417,10 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			var href = $(this).attr('href');
 			// If there isn't a link, don't go anywhere
 			var i = $('.listed-event').index(this);
+			var evenId = $(this).attr('data-eventid');
+			alert(evenId)
 			//alert(i);
-			$(this).find('button').attr('data-target','#planMemo'+i+'');
+			$(this).find('button').attr('data-target','#planMemo'+evenId+'');
 			//alert($(this).find('button').attr('data-target'));			
 			
 			var cityName = $(this).attr('title');
@@ -430,23 +432,23 @@ Monthly 2.1.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			}
 			
 			if(!href) {
-				var modalHtml = '<div class="modal fade" id="planMemo'+i+'" role="dialog">'+
-			    '<div class="modal-dialog">'+
-			      '<div class="modal-content">'+
-			       '<div class="modal-header">'+
-			          '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
-			          '<h4 class="modal-title">메모입력</h4>'+
-			        '</div>'+
-			        '<div class="modal-body">'+
-			          '<input type="hidden" name="cityRouteMemoIndex" value="'+cityRouteMemoIndex+'"/>'+
-			          '<textarea cols="77" rows="3" name="cityRouteMemo"></textarea>'+
-			        '</div>'+
-			        '<div class="modal-footer">'+
-			          '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
-			       '</div>'+
-			      '</div>'+					      
-			    '</div>'+
-			 '</div>';
+				var modalHtml = '<div class="modal fade" id="planMemo'+evenId+'" role="dialog">'+
+								    '<div class="modal-dialog">'+
+								      '<div class="modal-content">'+
+								       '<div class="modal-header">'+
+								          '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+								          '<h4 class="modal-title">메모입력</h4>'+
+								        '</div>'+
+								        '<div class="modal-body">'+
+								          '<input type="hidden" name="cityRouteMemoIndex" value="'+cityRouteMemoIndex+'"/>'+
+								          '<textarea cols="77" rows="3" name="cityRouteMemo"></textarea>'+
+								        '</div>'+
+								        '<div class="modal-footer">'+
+								          '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+								       '</div>'+
+								      '</div>'+					      
+								    '</div>'+
+								 '</div>';
 				$('#mainPlanSubmit').append(modalHtml);
 				/*var fullRoute = $(this).find('span').text(),
 					routeArr = fullRoute.split(',');
