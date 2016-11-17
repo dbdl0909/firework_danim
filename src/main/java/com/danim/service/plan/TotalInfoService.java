@@ -76,6 +76,7 @@ public class TotalInfoService {
 	@Transactional
 	public void insertPlanTotal(MainPlanDto mainPlanDto) {
 		logger.info("insertPlan() TotalInfoService.java");
+		logger.info("mainPlanDto : {}", mainPlanDto);
 		
 		int resultIndex = 0;
 		int planNo = totalInfoDao.selectMaxPlanNo();
@@ -107,6 +108,7 @@ public class TotalInfoService {
 		List<CityRouteDto> cityRouteDtoList = new ArrayList<CityRouteDto>();
 		CityRouteDto cityRouteDto = null;
 		int i = 0;
+		int k = 0;
 		int cityRouteNo = totalInfoDao.selectMaxCityRouteNo();
 		logger.info("cityRouteNo : {}", cityRouteNo);
 		
@@ -146,11 +148,18 @@ public class TotalInfoService {
 			cityRouteDto.setCityRouteArrivalCity(cityRouteArrivalCity.get(i));
 			cityRouteDto.setCityRouteDepartureTime(cityRouteDepartureTime.get(i));
 			cityRouteDto.setCityRouteArrivalTime(cityRouteArrivalTime.get(i));
-			if(cityRouteMemoIndex != null && i < cityRouteMemo.size()) {
-				if(i == cityRouteMemoIndex.get(i)) {
-					logger.info("cityRouteMemoIndex : {}", cityRouteMemoIndex.get(i));
-					
-					cityRouteDto.setCityRouteMemo(cityRouteMemo.get(i));
+			//cityRouteMemoIndex not null 일 때
+			//cityRouteMemo.size()만큼 for문 돌려서
+			//i와 k번째 cityRouteMemoIndex가 같으면 메모 입력, 같지않으면 return
+			if(cityRouteMemoIndex != null) {
+				for(k=0; k<cityRouteMemoIndex.size(); k++) {
+					if(i == cityRouteMemoIndex.get(k)) {
+						if(!cityRouteMemo.get(k).equals("")) {
+							logger.info("cityRouteMemoIndex : {}", cityRouteMemoIndex.get(k));
+							logger.info("cityRouteMemo : {}", cityRouteMemo.get(k));
+							cityRouteDto.setCityRouteMemo(cityRouteMemo.get(k));
+						}
+					}
 				}
 			}
 			
