@@ -59,33 +59,6 @@
 		};
 		
 		//페이스북 연동로그인
-		function statusChangeCallback(response) {
-			var accessToken = response.authResponse.accessToken;		//연동회원토큰
-        	memberId = response.authResponse.userID;					//연동회원아이디
-			console.log('facebook memberId: '+memberId);				//사용자 고유값
-			console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
-			console.log('statusChangeCallback');
-		    console.log(response);
-        	
-		    if (response.status === 'connected') {
-				//페이스북과 앱에 같이 로그인되어 있다.
-				//var uid = response.authResponse.userID;
-				//var accessToken = response.authResponse.accessToken;
-				//console.log('uid: '+uid);//사용자 고유값
-				//console.log('accessToken: '+accessToken);//권한 체크를 위한 값 일정 기간 마다 변경 됨
-				testAPI();
-		    } else if (response.status === 'not_authorized') {
-				//페이스북에는 로그인 되어있으나, 앱에는 로그인 되어있지 않다.
-				document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-				//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
-					$('#memberLinkLoginForm').submit();
-		    } else {
-				//페이스북에 로그인이 되어있지 않아서, 앱에 로그인 되어있는지 불명확하다.
-				document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
-				//로그인 안됨
-				return false;
-		    }
-		}
 		/* function checkLoginState() {
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response);
@@ -95,7 +68,7 @@
 			FB.login(function(response) {
 				var accessToken = response.authResponse.accessToken;		//연동회원토큰
 	        	memberId = response.authResponse.userID;					//연동회원아이디
-				console.log('facebook memberId: '+memberId);				//사용자 고유값
+				//console.log('facebook memberId: '+memberId);				//사용자 고유값
 				console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
 				//console.log('statusChangeCallback');
 			    console.log(response);
@@ -142,11 +115,12 @@
 		  
 		function testAPI() {
 			console.log('Welcome!  Fetching your information.... ');
+			
 			FB.api('/me', function(response) {
 			console.log('Successful login for: ' + response.name);
 			memberName = response.name;								//연동회원닉네임
-			console.log('facebook memberId222: '+memberId);
-			console.log('facebook memberName222: '+memberName);
+			//console.log('facebook memberId: '+memberId);
+			//console.log('facebook memberName: '+memberName);
 			//document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '! '+' id : '+response.id;
 				if(memberId != null) {	//response에 값이 있으면(null값이 아니면)
 		        	$('#memberId').val(memberId);
@@ -166,7 +140,7 @@
 		    	console.log('페이스북 로그인 OK');
 		    	$('#memberLinkLoginForm').submit();
 		    } */
-		  };
+		};
     </script>
 </head>
 <body>

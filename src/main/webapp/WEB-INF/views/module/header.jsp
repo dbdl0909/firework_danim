@@ -152,6 +152,32 @@
 			}
 	    });
 		//페이스북 로그아웃
+		function statusChangeCallback(response) {
+			var accessToken = response.authResponse.accessToken;		//연동회원토큰
+        	//memberId = response.authResponse.userID;					//연동회원아이디
+			//console.log('facebook memberId: '+memberId);				//사용자 고유값
+			console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
+		    console.log(response);
+        	
+		    if (response.status === 'connected') {
+				//페이스북과 앱에 같이 로그인되어 있다.
+				//var uid = response.authResponse.userID;
+				//var accessToken = response.authResponse.accessToken;
+				//console.log('uid: '+uid);//사용자 고유값
+				//console.log('accessToken: '+accessToken);//권한 체크를 위한 값 일정 기간 마다 변경 됨
+				//testAPI();
+		    } else if (response.status === 'not_authorized') {
+				//페이스북에는 로그인 되어있으나, 앱에는 로그인 되어있지 않다.
+				document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+				//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
+				$('#memberLinkLoginForm').submit();
+		    } else {
+				//페이스북에 로그인이 되어있지 않아서, 앱에 로그인 되어있는지 불명확하다.
+				document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+				//로그인 안됨
+				return false;
+		    }
+		}
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId      : '1698844840441321',
