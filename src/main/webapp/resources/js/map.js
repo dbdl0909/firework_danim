@@ -1049,6 +1049,15 @@ $(document).ready(function() {
 			}*/
 		}
 		
-		$('#mainPlanSubmit').submit();
+		var valueNumber = /^[0-9]*$/;
+		if($('.leftMenuLi').length == 0) {
+			alert('선택한 도시가 없습니다');
+		} else if($('#planName').val() == '') {
+			alert('플랜명을 입력해주세요');
+		} else if(($('#planHeadcount').val() == '') || !valueNumber.test($('#planHeadcount').val())) {
+			alert('인원수를 입력해주세요(숫자만 입력 가능)');
+		} else {
+			$('#mainPlanSubmit').submit();
+		}		
 	});
 });

@@ -288,128 +288,36 @@ p {
 }
 
 /* 지도전용 css */
-#map {
-	height: 100%;
-}
-#mainPlanCityInfo {
-	display:inline-block;
-	width:300px;
-}
-#mainPlanCityInfoImage {
-	float:left;
-}
+#map {height: 100%;}
+#mainPlanCityInfo {display:inline-block; width:300px;}
+#mainPlanCityInfoImage {float:left;}
 
-#mainPlanDivRoot {
-	margin:auto;
-	width:100%;
-}
-#mainPlanDivTop {
-	width:100%;
-	height:50px;
-	text-align:center;
-}
+#mainPlanDivRoot {margin:auto; width:100%;}
+#mainPlanDivTop {width:100%; height:50px; text-align:center;}
 
-#mainPlanWrap {
-	position:absolute;
-	left:0;
-	z-index:2;
-	background:#ffffff;
-	width:320px;
-}
-#mainPlanDivLeft {
-	width:40%;
-	height:650px;
-	float:left;
-	text-align:left;
-}
-#mainPlanDivLeft2 {
-	width:60%;
-	height:650px;
-	float:left;
-	text-align:left;
-}
-#mainPlanDivLeft3 {
-	z-index:1;
-	display:none;
-	position:absolute;
-	width:320px;
-	height:650px;
-	float:left;
-	text-align:left;
-	background:#fff;
-}
+#mainPlanWrap {position:absolute; left:0; z-index:2; background:#ffffff; width:320px;}
+#mainPlanDivLeft {width:40%; height:650px; float:left; text-align:left;}
+#mainPlanDivLeft2 {width:60%; height:650px;	float:left;	text-align:left;}
+#mainPlanDivLeft3 {z-index:1; display:none;	position:absolute; width:320px;	height:650px; float:left; text-align:left; background:#fff;}
 
-#mainPlanDivLeftCityList {
-	text-align:center;
-	color:#ffffff;
-	background-color:#093B78;
-	padding-top:5px;
-	padding-bottom:5px;
-}
-#leftMenuCityList {
-	height:615px;
-	overflow-y:scroll;
-}
-#mainPlanDivLeftLabel {
-	text-align:center;
-	color:#ffffff;
-	background-color:#115DBF;
-	padding-top:5px;
-	padding-bottom:5px;
-}
-#mainPlanDivLeftLabel2 {
-	text-align:center;
-	color:#ffffff;
-	background-color:#17A0FF;
-	padding-top:5px;
-	padding-bottom:5px;
-}
+#mainPlanDivLeftCityList {text-align:center; color:#ffffff; background-color:#093B78; padding-top:5px; padding-bottom:5px;}
+#leftMenuCityList {height:615px; overflow-y:scroll;}
+#mainPlanDivLeftLabel {text-align:center; color:#ffffff; background-color:#115DBF; padding-top:5px;	padding-bottom:5px;}
+#mainPlanDivLeftLabel2 {text-align:center; color:#ffffff; background-color:#17A0FF;	padding-top:5px; padding-bottom:5px;}
 
-#leftMenuRouteList {
-	height:615px;
-	overflow-y:scroll;
-}
+#leftMenuCityList ul li {cursor:pointer; padding:10px; list-style:none;}
+#leftMenuCityList ul li:hover {background:#434343; color:#fff;}
 
-#leftMenuCityList ul li {
-	cursor:pointer;
-	padding:10px;
-	list-style:none;
-}
-#leftMenuCityList ul li:hover {
-	background:#434343;
-	color:#fff;
-}
-#leftMenuRouteList #mainPlanUl .leftMenuLi {
-	height:200px;
-	list-style:none;
-	width: 168px;
-}
+#leftMenuRouteList {height:615px; overflow-y:scroll;}
+#leftMenuRouteList #mainPlanUl .leftMenuLi {height:200px; list-style:none; width: 168px;}
 
-#mainPlanTotalInfoUl .clickLandmark:hover {
-	cursor:pointer;
-	list-style:none;
-	color:#ff8040;
-	font-weight:bold;
-}
+#mainPlanTotalInfoUl .clickLandmark:hover {cursor:pointer; list-style:none; color:#ff8040; font-weight:bold;}
 
-.leftMenuLi  {
-	margin-left:5px;
-}
-.leftMenuLi .cityName:hover {
-	cursor:pointer;
-	background:#434343;
-	color:#fff;
-}
+.leftMenuLi  {margin-left:5px;}
+.leftMenuLi .cityName:hover {cursor:pointer; background:#434343; color:#fff;}
 
-#mainPlanDivLeft3Close {
-	cursor:pointer;
-	float:right;
-	margin-right:10px;
-	margin-top:1px;
-}
-#mainPlanDivLeftTab {
-	width:100%;
-}
+#mainPlanDivLeft3Close {cursor:pointer;	float:right; margin-right:10px;	margin-top:1px;}
+#mainPlanDivLeftTab {width:100%;}
 #mainPlanDivLeftTab #mainPlanlandmarkIcon{
 	width:60px;
 	height:60px;
@@ -418,9 +326,7 @@ p {
 	background-image: url(../images/planIcon/landmarkIcon.png);
 	background-size:cover;	
 }
-#mainPlanDivLeftTab #mainPlanlandmarkIcon:hover{
-	background-image: url(../images/planIcon/landmarkIconClick.png);	
-}
+#mainPlanDivLeftTab #mainPlanlandmarkIcon:hover{background-image: url(../images/planIcon/landmarkIconClick.png);}
 #mainPlanDivLeftTab #mainPlanlandmarkIcon.onIcon{
 	width:60px;
 	height:60px;	
@@ -435,9 +341,7 @@ p {
 	background-image: url(../images/planIcon/eateryIcon.png);
 	background-size:cover;	
 }
-#mainPlanDivLeftTab #mainPlanEateryIcon:hover{
-	background-image: url(../images/planIcon/eateryIconClick.png);
-}
+#mainPlanDivLeftTab #mainPlanEateryIcon:hover{background-image: url(../images/planIcon/eateryIconClick.png);}
 #mainPlanDivLeftTab #mainPlanEateryIcon.onIcon{
 	width:60px;
 	height:60px;	
@@ -452,12 +356,8 @@ p {
 	background-image: url(../images/planIcon/stayIcon.png);
 	background-size:cover;	
 }
-#mainPlanDivLeftTab #mainPlanStayIcon{
-	background-image: url(../images/planIcon/stayIcon.png);
-}
-#mainPlanDivLeftTab #mainPlanStayIcon:hover{
-	background-image: url(../images/planIcon/stayIconClick.png);
-}
+#mainPlanDivLeftTab #mainPlanStayIcon{background-image: url(../images/planIcon/stayIcon.png);}
+#mainPlanDivLeftTab #mainPlanStayIcon:hover{background-image: url(../images/planIcon/stayIconClick.png);}
 #mainPlanDivLeftTab #mainPlanStayIcon.onIcon{
 	width:60px;
 	height:60px;	
@@ -472,32 +372,17 @@ p {
 	background-image: url(../images/planIcon/eventIcon.png);
 	background-size:cover;	
 }
-#mainPlanDivLeftTab #mainPlanEventIcon:hover{
-	background-image: url(../images/planIcon/eventIconClick.png);	
-}
+#mainPlanDivLeftTab #mainPlanEventIcon:hover{background-image: url(../images/planIcon/eventIconClick.png);}
 #mainPlanDivLeftTab #mainPlanEventIcon.onIcon{
 	width:60px;
 	height:60px;	
 	background-image: url(../images/planIcon/eventIconClick.png);
 	background-size:cover;	
 }
-#mainPlanDivLeftTab div {
-	float:left;
-}
-#mainPlanDivLeftTab img {
-	cursor:pointer;
-	margin:5px 10px 5px 10px;
-	width:60px;
-	height:60px;
-}
-#mainPlanDivLeftTabMenu {
-	clear:none;
-}
-#leftMenuLandmarkList ul li{
-	cursor:pointer;
-	padding:10px;
-	list-style:none;
-}
+#mainPlanDivLeftTab div {float:left;}
+#mainPlanDivLeftTab img {cursor:pointer; margin:5px 10px 5px 10px; width:60px; height:60px;}
+#mainPlanDivLeftTabMenu {clear:none;}
+#leftMenuLandmarkList ul li{cursor:pointer;	padding:10px; list-style:none;}
 
 #mainPlanTotalInfoUl {
 	position: absolute;
@@ -508,23 +393,12 @@ p {
     margin-bottom: 0px;
 }
 
-#leftMenuList .landmarkInfoImage {
-	width:100px;
-	height:70px;
-}
+#leftMenuList .landmarkInfoImage {width:100px; height:70px;}
 
-.startTime, .endTime {
-	width:100%;
-}
+.startTime, .endTime {width:100%;}
 
-.landmarkListDiv {
-	cursor:pointer;
-	background-color:#CBC7C7;
-}
-.landmarkListSlideCheck {
-	float:right;
-	margin-right:5px;
-}
+.landmarkListDiv {cursor:pointer; background-color:#CBC7C7;}
+.landmarkListSlideCheck {float:right; margin-right:5px;}
 .landmarkListSlide {
 	display:none;
 	border-radius:5px;
@@ -534,35 +408,76 @@ p {
 	z-index:10000;
 	width:53%;
 }
-.landmarkLi {
-	cursor:pointer;
-}
-.landmarkLi:hover {
-	background-color:#D2D2D2;
-}
+.landmarkLi {cursor:pointer;}
+.landmarkLi:hover {background-color:#D2D2D2;}
 
-#mainPlanDivContent {
-	width:100%;
-	height:650px;
+#mainPlanDivContent {width:100%; height:650px;}
+#mainPlanAddButton {clear:left; text-align:right;}
+#mainPlanRemoveButton {clear:left; float:right; padding-top:5px; padding-right:10px;}
+.cityChooseMenu {clear:none; text-align:center;}
+.stayCount {display:inline-block; width:20px;}
+#planTabList{padding-top:10px;}
+#planTabList li{width:150px; float:left; line-height:2em; cursor:pointer; list-style:none;}
+.hiddenPlan{display:none;}
+.hiddenPlan.on{display:block;}
+#planType{height:26px;}
+.modal-body{width:100%;} 
+.modal-body div{width:100%; height:40px;}
+.modal-body div label{float:left; margin-left:20%;}
+.modal-body div textarea{height:50px;}
+#myModal .modal-content .outerDiv {width:100%;}
+#myModal .modal-content .modalInput {width:220px;}
+#myModal .modal-content label {width:70px; margin-left:10px;}
+#myModal div input, #myModal div select, #myModal div textarea {
+	width:220px; float:left;
+	background-color:#fff;
+	border:1px solid #ccc;
+	font-size:15px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }
-
-#mainPlanAddButton {
-	clear:left;
-	text-align:right;
+#myModal div input:hover, #myModal div textarea:hover {
+	border-color:inherit !important;
+	background-color:#EfEfEf;
+	-webkit-border-radius:5px 0 0 5px;
+	-moz-border-radius:5px 0 0 5px;
+	border-radius:5px 0 0 5px;
 }
-#mainPlanRemoveButton {
-	clear:left;
-	float:right;
-	padding-top:5px;
-	padding-right:10px;
+#myModal div input:not(:focus), #myModal div textarea:not(:focus) {
+	opacity:0.6;
 }
-.cityChooseMenu {
-	clear:none;
-	text-align:center;
+#myModal div input:required{
 }
-.stayCount {
-	display:inline-block;
-	width:20px;
+#myModal div input:valid, #myModal div textarea:valid {
+	opacity:0.8;
+}
+#myModal div input:focus:invalid {
+	border:1px solid red;
+	background-color:#FFEFF0;
+}
+#myModal .modal-content .outerDiv:hover .message{
+	opacity:1;
+	display:block;
+}
+#myModal .modal-content .message {
+	width:260px;
+	height:25px;
+	float:left;
+	opacity:0;
+	-moz-border-radius:0 10px 10px 0;
+	-webkit-border-radius:0 10px 10px 0;
+	border-radius-bottomright:0 10px 10px 0;
+	background:url("https://s3.amazonaws.com/twitter_production/a/1274739546/images/signup_info.gif") no-repeat scroll 13px 50% #F2F2F2;
+	border-color:#DBDBDB;
+	border-style:solid;
+	border-width:1px 1px 1px 2px;
+	color:#666666;
+	display:none;
+	text-transform:lowercase;
 }
 
 /* 헤더 css */

@@ -18,19 +18,6 @@
 				margin: 0;
 				padding: 0;
 			}
-			#planTabList{padding-top:10px;}
-			#planTabList li{width:150px; float:left; line-height:2em; cursor:pointer; list-style:none;}
-			.hiddenPlan{display:none;}
-			.hiddenPlan.on{display:block;}
-			#planType{height:26px;}
-			.modal-body{width:100%;} 
-			.modal-body div{width:100%; height:40px;}
-			.modal-body div label{float:left; margin-left:20%;}
-			.modal-body div input,
-			.modal-body div select,
-			.modal-body div textarea{float:right; margin-right:20%; width:250px;}
-			.modal-body div textarea{height:50px;}
-
 	    </style><!-- 구글에 등록된 기본 맵 스타일 -->
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
    		<script src="../../resources/js/monthly.js"></script>
@@ -147,7 +134,20 @@
 				$('#mycalendar').monthly({
 					mode: 'event'
 				});
-				
+		    	
+		    	//유효성 검사
+		    	$('#planName').blur(function() {
+		    		if($('#planName').val() == '') {
+		    			$('#planName').focus();
+		    		}
+		    	});
+		    	var valueNumber = /^[0-9]*$/;
+		    	$('#planHeadcount').blur(function() {
+		    		//숫자가 아니면 focus 떠나지 않게 하기
+		    		if(!valueNumber.test($('#planHeadcount').val()) || ($('#planHeadcount').val() == '')) {
+		    			$('#planHeadcount').focus();
+		    		}
+		    	});
 			});
 	    </script>
 	    <script src="../../../resources/js/map.js"></script>
@@ -322,28 +322,37 @@
 						</div>
 						<div class="modal-body">
 							<div class="clearfix">
-								<label>플랜명</label>
-								<input type="text" id="planName" name="planName" />
+								<div id="planNameDiv" class="outerDiv">
+									<label for="planName">플랜명</label>
+									<input type="text" maxlength="49" id="planName" name="planName" class="modalInput" placeholder="50글자까지 입력 가능합니다" required/>
+									<div class="message">플랜명을 입력해주세요</div>
+								</div>
 							</div>
 							<div class="clearfix">
-								<label>인원수</label>
-								<input type="text" id="planHeadcount" name="planHeadcount" />
+								<div id="planHeadcountDiv" class="outerDiv">
+									<label>인원수</label>
+									<input type="text" maxlength="3" id="planHeadcount" name="planHeadcount" class="modalInput" placeholder="숫자만 입력 가능합니다" required/>
+									<div class="message">인원수를 입력해주세요(최대 999명)</div>
+								</div>
 							</div>
 							<div class="clearfix">
-								<label>여행종류</label>
-								<select id="planType" name="planType">
-									<option value="배낭">배낭</option>
-									<option value="신혼">신혼</option>
-									<option value="가족">가족</option>
-									<option value="비즈니스">비즈니스</option>
-									<option value="커플">커플</option>
-									<option value="솔로">솔로</option>
-									<option value="단체">단체</option>
-								</select>
+								<div id="planTypeDiv" class="outerDiv">
+									<label>여행종류</label>
+									<select id="planType" name="planType" class="modalInput">
+										<option value="배낭">배낭</option>
+										<option value="신혼">신혼</option>
+										<option value="가족">가족</option>
+										<option value="비즈니스">비즈니스</option>
+										<option value="커플">커플</option>
+										<option value="솔로">솔로</option>
+										<option value="단체">단체</option>
+									</select>
+									<div class="message">여행종류를 선택해주세요</div>
+								</div>
 							</div>
 							<div class="clearfix">
-								<label for="memo">메모 : </label>
-								<textarea name="planMemo"></textarea>
+								<label for="memo">메모</label>
+								<textarea name="planMemo" class="modalInput"></textarea>
 							</div>
 		 				</div>
 						<div class="modal-footer">
