@@ -1,5 +1,7 @@
 package com.danim.web;
 
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,5 +129,45 @@ public class RESTController {
 		model.addAttribute("planType", planType);
 		
 		return "/recommand/recommandType";
+	}
+	
+	// 2030 꼐절 순위
+	@RequestMapping(value = "/recommand/recommandSeason2030")
+	public String recommandSeason2030(Model model) {
+		logger.info("recommandSeason2030 RecommandController.java");
+		
+		model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCity2030());
+		
+		return "/recommand/recommandSeason2030";
+	}
+	
+	// 타입 간 순위
+	@RequestMapping(value = "/recommand/recommandTypeRank")
+	public String recommandTypeRank(Model model) {
+		logger.info("recommandTypeRank RecommandController.java");
+		
+		model.addAttribute("recommandTypeRank", recommandService.selectTypeRank());
+		
+		return "/recommand/recommandTypeRank";
+	}
+		
+	// 년도별 계절 인기 도시 순위
+	@RequestMapping(value = "/recommand/recommandSeasonYear")
+	public String recommandSeasonYear(Model model,
+									@RequestParam(value = "year", defaultValue = "0") int year, 
+									@RequestParam(value = "season") String season) {
+		logger.info("recommandSeasonYear RecommandController.java");
+		
+		if(year == 0) {
+			year = Calendar.getInstance().get(Calendar.YEAR);
+		}
+		
+		logger.info("year {} RecommandController.java", year);
+		
+		model.addAttribute("recommandSeasonYear", recommandService.selectSeasonCityByYear(year, season));
+		model.addAttribute("season",season);
+		model.addAttribute("year",year);
+		
+		return "/recommand/recommandSeasonYear";
 	}
 }

@@ -1,6 +1,7 @@
 package com.danim.service.recommand;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -39,6 +40,14 @@ public class RecommandDao {
 		return sessionTemplate.selectOne(nameSpace + ".selectSeasonCityTwenty", season);
 	}
 	
+	// 30대 계절별 많이 여행하는 도시
+	public int selectSeasonCityThirty(String season) {
+		logger.info("selectSeasonCityThirty RecommandDao.java");
+		logger.info("selectSeasonCityThirty season {} RecommandDao.java", season);
+		
+		return sessionTemplate.selectOne(nameSpace + ".selectSeasonCityThirty", season);
+	}
+	
 	// 여행 타입 별 선호하는 도시
 	public List<RecommandDto> selectCityByPlanType(String planType) {
 		logger.info("selectCityByPlanType RecommandDao.java");
@@ -58,6 +67,19 @@ public class RecommandDao {
 		logger.info("selectCityByProvince RecommandDao.java");
 		
 		return sessionTemplate.selectList(nameSpace + ".selectCityByProvince", province);
+	}
+	
+	// 여행 타입별 인기 순위
+	public List<RecommandDto> selectTypeRank() {
+		logger.info("selectTypeRank RecommandDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectTypeRank");
+	}
+	
+	public List<RecommandDto> selectSeasonCityByYear(Map<String, Object> map) {
+		logger.info("selectSeasonCityByYear RecommandDao.java");
+	
+		return sessionTemplate.selectList(nameSpace + ".selectSeasonCityByYear", map);		
 	}
 	
 }

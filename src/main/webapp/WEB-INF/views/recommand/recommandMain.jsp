@@ -191,7 +191,7 @@
 				
 				chart.draw(data, options);
 				
-				}
+			}
 			
 			$('#maleChart').hide();
 			$('#femaleChart').hide();

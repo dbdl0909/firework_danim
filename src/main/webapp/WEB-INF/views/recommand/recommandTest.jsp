@@ -48,7 +48,7 @@
 				});
 				
 				// 지역 탭
-				$('#korea').click(function(){
+				$('#popularity').click(function(){
 					url = "/recommand/recommandPopularity";
 					loadRecommand();
 				});
@@ -109,6 +109,11 @@
 				
 				// 타입별
 				
+				$('#type').click(function(){
+					url = "/recommand/recommandTypeRank"
+					loadRecommand();
+				});
+				
 				$('#backpacking').click(function(){
 					url = "/recommand/recommandType";
 					data = {planType: "배낭"};
@@ -148,6 +153,37 @@
 				$('#group').click(function(){
 					url = "/recommand/recommandType";
 					data = {planType: "단체"};
+					loadRecommand();
+				});
+				
+				// 계절탭
+				
+				$('#season').click(function(){
+					url = "/recommand/recommandSeason2030";
+					loadRecommand();
+				});
+				
+				$('#spring').click(function(){
+					url = "/recommand/recommandSeasonYear";
+					data = {season: "spring"};
+					loadRecommand();
+				});
+				
+				$('#summer').click(function(){
+					url = "/recommand/recommandSeasonYear";
+					data = {season: "summer"};
+					loadRecommand();
+				});	
+				
+				$('#fall').click(function(){
+					url = "/recommand/recommandSeasonYear";
+					data = {season: "fall"};
+					loadRecommand();
+				});	
+				
+				$('#winter').click(function(){
+					url = "/recommand/recommandSeasonYear";
+					data = {season: "winter"};
 					loadRecommand();
 				});	
 				
@@ -192,7 +228,9 @@
 			.container #recommandTab div{cursor: pointer; font-size: 26px; margin: 18px;}
 			.container #recommandTab li{font-size: 18px; cursor: pointer; margin: 7px;}
 			.container #recommandView #popularityTitle{margin-left: 160px; margin-bottom: 30px; font-size: 26px;}	
-			.container #recommandView #popularityProvinceImage img{margin-left: 215px;}		
+			.container #recommandView #popularityProvinceImage img{margin-left: 215px;}	
+			.container #recommandView #typeRank li{text-align: center; font-size: 20px; margin-top: 8px; border-bottom: 1px;}	
+			.container #recommandView #typeRankTitle{text-align: center; font-size: 26px;}
 		</style>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
@@ -206,7 +244,6 @@
 				</ul>
 				<div id="popularity">지역</div>	
 				<ul id="popularityUl">
-					<li id="korea">전국</li>
 					<li id="kyungki">경기도</li>
 					<li id="kangwon">강원도</li>
 					<li id="chungbuk">충청북도</li>
@@ -219,10 +256,10 @@
 				</ul>
 				<div id="season">계절</div>
 				<ul id="seasonUl">
-					<li>봄</li>
-					<li>여름</li>
-					<li>가을</li>
-					<li>겨울</li>
+					<li id="spring">봄</li>
+					<li id="summer">여름</li>
+					<li id="fall">가을</li>
+					<li id="winter">겨울</li>
 				</ul>
 				<div id="type">타입</div>
 				<ul id="typeUl">

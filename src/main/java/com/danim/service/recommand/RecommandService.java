@@ -56,8 +56,8 @@ public class RecommandService {
     	
     }
     
-    // 20대가 계절 별 많이 찾는 도시
-    public Map<String, Object> selectSeasonCityTwenty() {
+    // 2030 계절 별 많이 찾는 도시
+    public Map<String, Object> selectSeasonCity2030() {
     	logger.info("selectSeasonCityTwenty() RecommandService.java");
     	
     	Map<String, Object> map = new HashMap<String, Object>();
@@ -67,10 +67,20 @@ public class RecommandService {
     	int selectFallCityTwenty = recommandDao.selectSeasonCityTwenty("fall");
     	int selectWinterCityTwenty = recommandDao.selectSeasonCityTwenty("winter");
     	
+    	int selectSpringCityThirty = recommandDao.selectSeasonCityThirty("spring");
+    	int selectSummerCityThirty = recommandDao.selectSeasonCityThirty("summer");		
+    	int selectFallCityThirty = recommandDao.selectSeasonCityThirty("fall");
+    	int selectWinterCityThirty = recommandDao.selectSeasonCityThirty("winter");
+    	
     	map.put("selectSpringCityTwenty", selectSpringCityTwenty);
     	map.put("selectSummerCityTwenty", selectSummerCityTwenty);
     	map.put("selectFallCityTwenty", selectFallCityTwenty);
     	map.put("selectWinterCityTwenty", selectWinterCityTwenty);
+    	
+    	map.put("selectSpringCityThirty", selectSpringCityThirty);
+    	map.put("selectSummerCityThirty", selectSummerCityThirty);
+    	map.put("selectFallCityThirty", selectFallCityThirty);
+    	map.put("selectWinterCityThirty", selectWinterCityThirty);
   	
     	return map;
     	
@@ -84,6 +94,27 @@ public class RecommandService {
     	
 		return selectCityByPlanType;
     	
-    }    
-
+    }
+    
+    // 여행 타입별 인기 순위
+    public List<RecommandDto> selectTypeRank() {
+    	logger.info("selectTypeRank() RecommandService.java");  
+    	
+    	List<RecommandDto> selectTypeRank = recommandDao.selectTypeRank();
+    	
+    	return selectTypeRank;
+    }
+    
+    // 년도별 계절 인기 도시 순위
+    public List<RecommandDto> selectSeasonCityByYear(int year, String season) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	
+    	map.put("year", year);
+    	map.put("season", season);
+    	
+    	List<RecommandDto> selectSeasonCityByYear = recommandDao.selectSeasonCityByYear(map);
+    	
+    	return selectSeasonCityByYear;
+    }
+    
 }

@@ -82,10 +82,6 @@
 		ORDER BY
 			COUNT(route.city_route_departure_city) DESC
 	</select>
-	<!-- 계절 별  -->
-	<select id="">
-		
-	</select>
 	<!-- 20대 계절 별 여행 순위 -->
 	<select id="selectSeasonCityTwenty"
 			parameterType="hashMap"
@@ -198,7 +194,9 @@
 		GROUP BY
 			route.city_route_departure_city
 		ORDER BY
-			COUNT(route.city_route_departure_city) DESC	
+			COUNT(route.city_route_departure_city) DESC
+		LIMIT
+			10		
 	</select>
 	<!-- 성별로 구분한 전국 도 / 특별광역시 여행 순위 -->
 	<select id="selectCityAllByGender"
@@ -255,5 +253,87 @@
 		cityRankName
 	ORDER BY
 		COUNT(route.city_route_departure_city) DESC
+	</select>
+	<!-- 플랜 타입간 순위 -->
+	<select id="selectTypeRank"
+			resultType="com.danim.service.recommand.RecommandDto">
+	SELECT
+		pl.plan_type as 'cityRankName',
+		COUNT(pl.plan_type) as 'cityRankCount'
+	FROM
+		plan as pl
+	JOIN
+		member_info as member
+	ON
+		pl.member_id = member.member_id
+	JOIN
+		city_route as route
+	ON
+		route.plan_no = pl.plan_no
+	JOIN
+		city_info as info
+	ON
+		info.city_info_no = route.city_route_departure_city
+	GROUP BY
+		pl.plan_type
+	ORDER BY
+		COUNT(route.city_route_departure_city) DESC				
+	</select>
+	<!-- 년도별 계절 여행 도시 순위 -->
+	<select id="selectSeasonCityByYear"
+			parameterType="hashmap"
+			resultType="com.danim.service.recommand.RecommandDto">
+	SELECT
+		info.city_info_name as 'cityRankName',
+		COUNT(route.city_route_departure_city) as 'cityRankCount'
+	FROM
+		plan as pl
+	JOIN
+		member_info as member
+	ON
+		pl.member_id = member.member_id
+	JOIN
+		city_route as route
+	ON
+		route.plan_no = pl.plan_no
+	JOIN
+		city_info as info
+	ON
+		info.city_info_no = route.city_route_departure_city
+	WHERE
+		DATE_FORMAT(pl.plan_departure, '%Y') = #{year}
+	<choose>
+		<when test="season.equals('spring')">
+			AND
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 6
+			AND
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 2			
+		</when>
+		<when test="season.equals('summer')">
+			AND
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 9
+			AND
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 5				
+		</when>
+		<when test="season.equals('fall')">
+			AND
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 12
+			AND
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 8			
+		</when>
+		<when test="season.equals('winter')">
+			AND
+				(
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ < ]]> 3
+			OR
+				DATE_FORMAT(pl.plan_departure, '%c') <![CDATA[ > ]]> 11		
+				)		
+		</when>									
+	</choose>
+	GROUP BY
+		route.city_route_departure_city
+	ORDER BY
+		COUNT(route.city_route_departure_city) DESC
+	LIMIT 10	
 	</select>
 </mapper>

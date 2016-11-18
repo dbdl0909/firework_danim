@@ -19,7 +19,7 @@
 		<div class="container">
 			<p class="infoButton">
 				<a href="/" role="button" class="btn btn-info">홈으로</a>
-				<a href="" role="button" class="btn btn-info">버튼2</a>
+				<a href="/" role="button" class="btn btn-info">다음</a>
 				<!-- <a id="addToPlan" role="button" class="btn btn-info">일정에 추가</a> -->
 			</p>
 			

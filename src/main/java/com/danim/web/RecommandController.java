@@ -22,7 +22,7 @@ public class RecommandController {
 		
 		//model.addAttribute("selectCityForGender" , recommandService.selectCityForGender());
 		//model.addAttribute("selectPopularityCity", recommandService.selectPopularityCity());
-		model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCityTwenty());
+		model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCity2030());
 		
 		return "/recommand/recommandTest";
 	}
