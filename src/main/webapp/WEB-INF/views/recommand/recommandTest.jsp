@@ -107,17 +107,81 @@
 					loadRecommand();
 				});
 				
+				// 타입별
+				
+				$('#backpacking').click(function(){
+					url = "/recommand/recommandType";
+					data = {planType: "배낭"};
+					loadRecommand();
+				});
+				
+				$('#honeymoon').click(function(){
+					url = "/recommand/recommandType";
+					data = {planType: "신혼"};
+					loadRecommand();
+				});	
+				
+				$('#family').click(function(){
+					url = "/recommand/recommandType";
+					data = {planType: "가족"};
+					loadRecommand();
+				});	
+				
+				$('#business').click(function(){
+					url = "/recommand/recommandType";
+					data = {planType: "비즈니스"};
+					loadRecommand();
+				});	
+				
+				$('#couple').click(function(){
+					url = "/recommand/recommandType";
+					data = {planType: "커플"};
+					loadRecommand();
+				});	
+				
+				$('#solo').click(function(){
+					url = "/recommand/recommandType";
+					data = {planType: "솔로"};
+					loadRecommand();
+				});	
+				
+				$('#group').click(function(){
+					url = "/recommand/recommandType";
+					data = {planType: "단체"};
+					loadRecommand();
+				});	
+				
 				$('#genderUl').hide();
 				$('#popularityUl').hide();
-				$('#s').hide();
-				$('#t').hide();
+				$('#seasonUl').hide();
+				$('#typeUl').hide();
 				
 				$('#gender').click(function(){
 					$('#genderUl').toggle();
+					$('#popularityUl').hide();
+					$('#seasonUl').hide();
+					$('#typeUl').hide();
 				});
 				
 				$('#popularity').click(function(){
 					$('#popularityUl').toggle();
+					$('#genderUl').hide();
+					$('#seasonUl').hide();
+					$('#typeUl').hide();
+				});
+				
+				$('#season').click(function(){
+					$('#seasonUl').toggle();
+					$('#popularityUl').hide();
+					$('#genderUl').hide();
+					$('#typeUl').hide();
+				});
+				
+				$('#type').click(function(){
+					$('#typeUl').toggle();
+					$('#popularityUl').hide();
+					$('#seasonUl').hide();
+					$('#genderUl').hide();
 				});
 				
 			});
@@ -153,10 +217,23 @@
 					<li id="kyungnam">경상남도</li>
 					<li id="jeju">제주도</li>											
 				</ul>
-				<div>계절</div>
-				<ul id="s"></ul>
-				<div>타입</div>
-				<ul id="t"></ul>
+				<div id="season">계절</div>
+				<ul id="seasonUl">
+					<li>봄</li>
+					<li>여름</li>
+					<li>가을</li>
+					<li>겨울</li>
+				</ul>
+				<div id="type">타입</div>
+				<ul id="typeUl">
+					<li id="backpacking">배낭</li>
+					<li id="honeymoon">신혼</li>
+					<li id="family">가족</li>
+					<li id="business">비즈니스</li>
+					<li id="couple">커플</li>
+					<li id="solo">솔로</li>
+					<li id="group">단체</li>
+				</ul>
 			</div>
 			<div id="recommandView">
 			

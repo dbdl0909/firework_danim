@@ -95,7 +95,7 @@ public class RESTController {
 		return "/recommand/recommandGender";
 	}
 	
-	// 전체 회원 많이 여행 간 도시 지오차트
+	// 전체 회원 많이 여행 간 전국 도시 지오차트
 	@RequestMapping(value = "/recommand/recommandPopularity")
 	public String recommandPopularity(Model model) {
 		logger.info("recommandPopularity RecommandController.java");
@@ -105,7 +105,7 @@ public class RESTController {
 		return "/recommand/recommandPopularity";
 	}
 	
-	// 전체 회원 많이 여행 간 도시 지오차트
+	// 전체 회원 많이 여행 간 도 단위 도시 지오차트
 	@RequestMapping(value = "/recommand/recommandProvince")
 	public String recommandProvince(Model model, @RequestParam(value="province") String province) {
 		logger.info("recommandProvince RecommandController.java");
@@ -115,5 +115,17 @@ public class RESTController {
 		model.addAttribute("province", province);
 		
 		return "/recommand/recommandProvince";
+	}
+	
+	// 전체회원 플랜 타입별 여행 간 도시 순위
+	@RequestMapping(value = "/recommand/recommandType")
+	public String recommandType(Model model, @RequestParam(value="planType") String planType) {
+		logger.info("recommandType RecommandController.java");
+		logger.info("planType {} RecommandController.java", planType);
+		
+		model.addAttribute("selectCityByPlanType", recommandService.selectCityByPlanType(planType));
+		model.addAttribute("planType", planType);
+		
+		return "/recommand/recommandType";
 	}
 }

@@ -82,6 +82,10 @@
 		ORDER BY
 			COUNT(route.city_route_departure_city) DESC
 	</select>
+	<!-- 계절 별  -->
+	<select id="">
+		
+	</select>
 	<!-- 20대 계절 별 여행 순위 -->
 	<select id="selectSeasonCityTwenty"
 			parameterType="hashMap"
@@ -125,7 +129,7 @@
 			</when>									
 		</choose>	
 	</select>
-	<!-- 20대 계절 별 여행 순위 -->
+	<!-- 30대 계절 별 여행 순위 -->
 	<select id="selectSeasonCityThirty"
 			parameterType="hashMap"
 			resultType="Integer">

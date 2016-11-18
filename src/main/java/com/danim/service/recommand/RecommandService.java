@@ -77,12 +77,12 @@ public class RecommandService {
     }
     
     // 여행 타입 별 많이 여행가는 도시
-    public Map<String, Object> selectCityByPlanType() {
+    public List<RecommandDto> selectCityByPlanType(String planType) {
     	logger.info("selectCityByPlanType() RecommandService.java");
     	
-    	Map<String, Object> map = new HashMap<String, Object>();
+    	List<RecommandDto> selectCityByPlanType = recommandDao.selectCityByPlanType(planType);
     	
-		return map;
+		return selectCityByPlanType;
     	
     }    
 
