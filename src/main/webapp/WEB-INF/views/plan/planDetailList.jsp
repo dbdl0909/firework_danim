@@ -88,7 +88,6 @@
 
 <jsp:include page="../module/header.jsp" />
 	<div class="table-responsive"></div>
-	${PlanGpsList}
 		<table class="table table-striped">
 			<thead>
 				<c:forEach end="0" items="${PlanDetailList}" var="PlanDetailList">
