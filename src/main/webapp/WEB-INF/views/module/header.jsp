@@ -156,8 +156,8 @@
 			var accessToken = response.authResponse.accessToken;		//연동회원토큰
         	//memberId = response.authResponse.userID;					//연동회원아이디
 			//console.log('facebook memberId: '+memberId);				//사용자 고유값
-			console.log('facebook accessToken: '+accessToken);			//권한 체크를 위한 값 일정 기간 마다 변경 됨
-		    console.log(response);
+			//console.log('facebook accessToken: '+accessToken);		//권한 체크를 위한 값 일정 기간 마다 변경 됨
+		    //console.log(response);
         	
 		    if (response.status === 'connected') {
 				//페이스북과 앱에 같이 로그인되어 있다.
@@ -201,17 +201,15 @@
 		var facebookCheck = "<c:out value='${sessionScope.facebookCheck}'/>";
 		
 		$('#logoutButton').click(function(){
-			console.log('페이스북체크');
-			/* console.log('페북체크값 : '+ facebookCheck);
+			//console.log('로그아웃');
+			//console.log('페북체크값 : '+ facebookCheck);
 			if(facebookCheck == "true") {
-				console.log('페북로그아웃');
+				//console.log('페북로그아웃');
 				FB.logout(function(response) {
 			        // 사용자 로그아웃
+					FB.Auth.setAuthResponse(null, 'unknown');
 			    });
-			} */
-            FB.logout(function(response) {
-            	FB.Auth.setAuthResponse(null, 'unknown');
-            });
+			}
 			location.href="/member/memberLogout";
 		});
 	})

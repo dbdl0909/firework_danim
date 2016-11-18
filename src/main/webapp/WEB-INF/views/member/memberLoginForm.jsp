@@ -21,14 +21,50 @@
 	        padding-top: 7px;
 	    }
 	</style>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadGoogleCallback" async defer></script>
     <script type="text/javascript">
 	    var memberId = "";
 	    var memberName = "";
 	    //var facebookCheck = false;
 	    
 		//구글 연동 로그인
-    	function onSignIn(googleUser) {
+		function onLoadGoogleCallback(){
+			gapi.load('auth2', function() {
+				auth2 = gapi.auth2.init({
+					client_id: '80503028481-21rlost0fsm884c0e6qm1ptd9ulj535m.apps.googleusercontent.com',
+					cookiepolicy: 'single_host_origin',
+					scope: 'profile'
+				});
+
+				auth2.attachClickHandler(element, {},
+					function(googleUser) {
+						//로그인 성공
+						var profile = googleUser.getBasicProfile();
+						memberId = profile.getId();			//연동회원아이디
+						memberName = profile.getName();		//연동회원닉네임
+						console.log('google ID: ' + memberId);
+						console.log('google Full Name: ' + memberName);
+						
+						$('#memberId').val(memberId);
+			        	$('#memberName').val(memberName);
+			        	console.log('memberId : ' + $('#memberId').val());
+			        	console.log('memberName : ' + $('#memberName').val());
+			        	
+			        	//로그인을 한 순간 DB에 다녀와야 합니다(회원테이블에 등록이 되어있는지 확인!)
+			        	$('#memberLinkLoginForm').submit();
+			        	
+					}, function(error) {
+						//로그인 실패
+						console.log('google Sign In error : ' + error);
+						return false;
+					}
+				);
+			});
+			element = document.getElementById('googleSignIn');
+		}
+		
+    	/* function onSignIn(googleUser) {
 	        // Useful data for your client-side scripts:
 	        var profile = googleUser.getBasicProfile();
 	       	memberId = profile.getId();			//연동회원아이디
@@ -56,7 +92,8 @@
 	        	//로그인 안됨
 	        	return false;
 	        }
-		};
+		}; */
+		
 		
 		//페이스북 연동로그인
 		/* function checkLoginState() {
@@ -93,6 +130,7 @@
 			    }
 			});
 		}
+		//header.jsp 로 옮김
 		/* window.fbAsyncInit = function() {
 			FB.init({
 				appId      : '1698844840441321',
@@ -142,68 +180,6 @@
 		    } */
 		};
 	    </script>
-	    <script>
-			var googleUser = {};
-			  var startApp = function() {
-			    gapi.load('auth2', function(){
-			      // Retrieve the singleton for the GoogleAuth library and set up the client.
-			      auth2 = gapi.auth2.init({
-			        client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-			        cookiepolicy: 'single_host_origin',
-			        // Request scopes in addition to 'profile' and 'email'
-			        //scope: 'additional_scope'
-			      });
-			      attachSignin(document.getElementById('customBtn'));
-			    });
-			  };
-
-			  function attachSignin(element) {
-			    console.log(element.id);
-			    auth2.attachClickHandler(element, {},
-			        function(googleUser) {
-			          document.getElementById('name').innerText = "Signed in: " +
-			              googleUser.getBasicProfile().getName();
-			        }, function(error) {
-			          alert(JSON.stringify(error, undefined, 2));
-			        });
-			  }
-		  </script>
-		  <style type="text/css">
-		    #customBtn {
-		      display: inline-block;
-		      background: white;
-		      color: #444;
-		      width: 190px;
-		      border-radius: 5px;
-		      border: thin solid #888;
-		      box-shadow: 1px 1px 1px grey;
-		      white-space: nowrap;
-		    }
-		    #customBtn:hover {
-		      cursor: pointer;
-		    }
-		    span.label {
-		      font-family: serif;
-		      font-weight: normal;
-		    }
-		    span.icon {
-		      background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
-		      display: inline-block;
-		      vertical-align: middle;
-		      width: 42px;
-		      height: 42px;
-		    }
-		    span.buttonText {
-		      display: inline-block;
-		      vertical-align: middle;
-		      padding-left: 42px;
-		      padding-right: 42px;
-		      font-size: 14px;
-		      font-weight: bold;
-		      /* Use the Roboto font that is loaded in the <head> */
-		      font-family: 'Roboto', sans-serif;
-		    }
-		  </style>
 </head>
 <body>
 	<div id="twitter" class="loginFormCss" style="height:170px;">
@@ -231,17 +207,11 @@
 			<input type="hidden" id="memberName" name="memberName"/>
 			<input type="hidden" id="facebookCheck" name="facebookCheck" value="true"/>
 			<div>
-				<div id="google" style="clear:none; cursor:pointer; margin-left:70px;">		<!-- 구글 연동로그인 -->
-					<!-- <div id="gSignInWrapper">
-					    <div id="customBtn" class="customGPlusSignIn">
-					      <span class="icon"></span>
-					      <span class="buttonText">Google</span>
-					    </div>
-					</div> -->
-					<!-- <img id="googleButton" class="g-signin2" src="../../resources/images/google.png"> -->
-					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-					
-				<div id="facebook" style="clear:none; cursor:pointer; margin-left:70px;">		<!-- 페이스북 연동로그인 -->
+				<div id="google" style="clear:none; cursor:pointer; margin-left:40px;">		<!-- 구글 연동로그인 -->
+					<img id="googleSignIn" src="../../resources/images/google.png">
+					<!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> -->
+				</div>
+				<div id="facebook" style="clear:none; cursor:pointer; margin-left:40px;">		<!-- 페이스북 연동로그인 -->
 					<a onclick="fbLogin();"><img src="../../resources/images/facebook.png"></a>
 					<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="xlarge">
 					</fb:login-button> -->
