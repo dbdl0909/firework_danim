@@ -141,7 +141,69 @@
 		    	$('#memberLinkLoginForm').submit();
 		    } */
 		};
-    </script>
+	    </script>
+	    <script>
+			var googleUser = {};
+			  var startApp = function() {
+			    gapi.load('auth2', function(){
+			      // Retrieve the singleton for the GoogleAuth library and set up the client.
+			      auth2 = gapi.auth2.init({
+			        client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+			        cookiepolicy: 'single_host_origin',
+			        // Request scopes in addition to 'profile' and 'email'
+			        //scope: 'additional_scope'
+			      });
+			      attachSignin(document.getElementById('customBtn'));
+			    });
+			  };
+
+			  function attachSignin(element) {
+			    console.log(element.id);
+			    auth2.attachClickHandler(element, {},
+			        function(googleUser) {
+			          document.getElementById('name').innerText = "Signed in: " +
+			              googleUser.getBasicProfile().getName();
+			        }, function(error) {
+			          alert(JSON.stringify(error, undefined, 2));
+			        });
+			  }
+		  </script>
+		  <style type="text/css">
+		    #customBtn {
+		      display: inline-block;
+		      background: white;
+		      color: #444;
+		      width: 190px;
+		      border-radius: 5px;
+		      border: thin solid #888;
+		      box-shadow: 1px 1px 1px grey;
+		      white-space: nowrap;
+		    }
+		    #customBtn:hover {
+		      cursor: pointer;
+		    }
+		    span.label {
+		      font-family: serif;
+		      font-weight: normal;
+		    }
+		    span.icon {
+		      background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+		      display: inline-block;
+		      vertical-align: middle;
+		      width: 42px;
+		      height: 42px;
+		    }
+		    span.buttonText {
+		      display: inline-block;
+		      vertical-align: middle;
+		      padding-left: 42px;
+		      padding-right: 42px;
+		      font-size: 14px;
+		      font-weight: bold;
+		      /* Use the Roboto font that is loaded in the <head> */
+		      font-family: 'Roboto', sans-serif;
+		    }
+		  </style>
 </head>
 <body>
 	<div id="twitter" class="loginFormCss" style="height:170px;">
@@ -169,10 +231,17 @@
 			<input type="hidden" id="memberName" name="memberName"/>
 			<input type="hidden" id="facebookCheck" name="facebookCheck" value="true"/>
 			<div>
-				<div id="google" style="float:left;">		<!-- 구글 연동로그인 -->
+				<div id="google" style="clear:none; cursor:pointer; margin-left:70px;">		<!-- 구글 연동로그인 -->
+					<!-- <div id="gSignInWrapper">
+					    <div id="customBtn" class="customGPlusSignIn">
+					      <span class="icon"></span>
+					      <span class="buttonText">Google</span>
+					    </div>
+					</div> -->
+					<!-- <img id="googleButton" class="g-signin2" src="../../resources/images/google.png"> -->
 					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-				</div>
-				<div id="facebook" style="float:left;">		<!-- 페이스북 연동로그인 -->
+					
+				<div id="facebook" style="clear:none; cursor:pointer; margin-left:70px;">		<!-- 페이스북 연동로그인 -->
 					<a onclick="fbLogin();"><img src="../../resources/images/facebook.png"></a>
 					<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="xlarge">
 					</fb:login-button> -->
