@@ -100,7 +100,7 @@
 			</div>
 			<div class='clearfix'></div>
 			
-			<div id='submit' class='outerDiv'>
+			<div id='joinSubmitButton' class='outerDiv'>
 				<input type="submit" value="가입하기" /> 
 			</div>				
 		</form>
