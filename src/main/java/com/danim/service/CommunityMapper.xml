@@ -433,4 +433,27 @@
 				CURDATE()
 			)
 	</insert>
+	<!-- 신고리스트 출력 -->
+	<select id="selectReportList"
+			resultType="com.danim.service.community.ReportDto">
+		SELECT
+			report_no as 'reportNo',
+			member_id as 'memberId',
+			community_no as 'communityNo',
+			reply_no as 'replyNo',
+			report_reason as 'reportReason',
+			report_date as 'reportDate'
+		FROM
+			report
+	</select>
+	<!-- 신고 누적 횟수
+	<select  id="ReportCount"
+			 resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			report
+		WHERE
+			community_no= #{communityNo}
+	</select> -->
 </mapper>	

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
-import com.danim.service.community.CommunityDao;
 import com.danim.service.community.CommunityDto;
 import com.danim.service.community.CommunityReplyDto;
 import com.danim.service.community.CommunityService;
@@ -32,7 +31,29 @@ public class CommunityController {
 
 	@Autowired
 	private CommunityService communityService;
-	
+
+	//신고리스트 출력
+	@RequestMapping(value="/community/reportList", method = RequestMethod.GET)
+	public String reportList(Model model) {
+		logger.info("reportList CommunityController.java");
+		model.addAttribute("reportListAll", communityService.selectReportList());
+        return "/community/reportList";
+	}
+	//신고횟수 누적
+	@RequestMapping(value = "/community/reportList", method = RequestMethod.POST)
+	public String detailRating(Model model,
+							   @RequestParam(value="communityNo") int communityNo,
+							   @RequestParam(value="replyNo") int replyNo){
+
+		logger.info("communityNo {} reportCount() CommunityController.java", communityNo);
+		logger.info("replyNo {} reportCount() CommunityController.java", replyNo);
+		
+		String reportCountCheck = communityService.CheckReportCount(communityNo, replyNo);
+		model.addAttribute("reportCountCheck", reportCountCheck);
+		//return "redirect:/community/communityDetail?communityCategoryNo="+communityCategoryNo+"&communityNo="+communityNo;
+		return "/community/reportList";
+	}
+
 	@RequestMapping(value = "/community/list", method = RequestMethod.GET)
 	public String communityList(Model model,
 			@RequestParam(value="communityCategoryNo", defaultValue="community_category_01") String communityCategoryNo,
@@ -171,7 +192,7 @@ public class CommunityController {
 	@RequestMapping(value = "/community/communityDetail", method = RequestMethod.GET)
 	public String communityDetailView(Model model, 
 									@RequestParam(value="communityNo") int communityNo,
-									@RequestParam(value="communityCategoryNo") String communityCategoryNo) {
+									@RequestParam(value="communityCategoryNo", defaultValue="community_category_01") String communityCategoryNo) {
 		logger.info("communityNo {} CommunityController.java", communityNo);
 		logger.info("communityCategoryNo {} CommunityController.java", communityCategoryNo);
 		model.addAttribute("detailViewReply", communityService.selectDetailViewReplyByCommunityNo(communityNo));

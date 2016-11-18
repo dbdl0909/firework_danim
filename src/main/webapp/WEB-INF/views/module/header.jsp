@@ -278,16 +278,13 @@
 							<dd><a href="/member/memberInfo?memberLoginId=${sessionScope.memberId}">내 정보</a></dd>
 							<c:if test="${sessionScope.memberLevel=='관리자'}">
 								<dd><a href="/member/memberListAll">회원리스트</a></dd>
-							</c:if>
-							<c:if test="${sessionScope.memberLevel=='유저'}">
-								<dd><a href="/plan/planList?memberId=${sessionScope.memberId}">내 여행</a></dd>
-							</c:if>
-							<c:if test="${sessionScope.memberLevel=='관리자'}">
+								<dd><a href="/community/reportList">신고리스트</a></dd>
 								<dd><a href="/community/qnaListAll">Q&A</a></dd>
 							</c:if>
 							<c:if test="${sessionScope.memberLevel=='유저'}">
+								<dd><a href="/plan/planList?memberId=${sessionScope.memberId}">내 여행</a></dd>
 								<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
-							</c:if>					
+							</c:if>		
 							<dd><a id="logoutButton">로그아웃</a></dd>
 						</dl>
 					</div>

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.danim.util.Pagination;
 
-
- 
 @Service 
 public class CommunityService {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityService.class);
@@ -193,5 +191,42 @@ public class CommunityService {
         List<QnaDto> selectQnaForAdmin = communityDao.selectQnaForAdmin(map);
     	
     	return selectQnaForAdmin;
-    }   
+    }
+    
+    //신고리스트 출력
+	public List<ReportDto> selectReportList() {
+		logger.info("selectReportList() CommunityService.java");
+		List<ReportDto> SelectReportList =  communityDao.selectReportList();
+		for(int i=0; i<SelectReportList.size(); i++) {
+			logger.info("MemberListAll : {}", SelectReportList.get(i));
+		}
+		return SelectReportList;
+	}
+	/*//신고횟수
+    public String CheckReportCount(int communityNo, int replyNo){
+    	int result = 0;
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("communityNo", communityNo);
+    	map.put("replyNo", replyNo);
+    	int reportCheckCount = communityDao.selectReportCheckCount(map);
+    	logger.info("reportCheckCount {} CommunityController.java", reportCheckCount);
+			CommunityDto communityDto= communityDao.selectReportCheckCount(communityNo);
+	    	communityDao.insertCountReport(map);
+	    	communityDao.updateCountReport(communityDto);
+	    	
+    	return result;
+    }*/
+    public String CheckReportCount(int communityNo, int replyNo){
+    	String result = null;
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("communityNo", communityNo);
+    	map.put("replyNo", replyNo);
+    	int checkVoted = communityDao.selectRatingForVotedCheck(map);
+    	logger.info("checkVoted {} CommunityController.java", checkVoted);
+		CommunityDto communityDto= communityDao.selectDetailViewByCommunityNo(communityNo);
+    	communityDao.insertCommunityVote(map);
+    	communityDao.updateRatingCount(communityDto);
+    	result = "voted";
+    	return result;
+    }
 }

@@ -32,24 +32,26 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th> </th>
 						<th>#</th>
 						<th>신고자</th>
 						<th>글번호</th>
 						<th>리플번호</th>
-						<th>사유</th>
 						<th>신고날짜</th>
+						<th>사유</th>
+						<th>신고횟수</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach varStatus="status" items="${qnaListAll}" var="qnaListAll">				
+					<c:forEach varStatus="status" items="${reportListAll}" var="reportListAll">				
 						<tr>
-							<td><input type="checkbox"></td>
-							<td>${(totalCount-status.index)-((page-1)*10)}</td>					
-							<td><a href="/community/communityDetail?communityCategoryNo=${qnaListAll.communityCategoryNo}&communityNo=${qnaListAll.communityNo}">${qnaListAll.communitySubject}</a><span style="padding-left:10px; color:#ccc">[${qnaListAll.communityReplyCount}]</span></td>
-							<td>${qnaListAll.memberId}</td>
-							<td>${qnaListAll.communityUpdate}</td>
-							<td>${qnaListAll.communityReadcount}</td>	
+							<td><input type="checkbox"></td>			
+							<td>${reportListAll.memberId}</td>
+							<td>${reportListAll.communityNo}</td>
+							<td>${reportListAll.replyNo}</td>
+							<td>${reportListAll.reportDate}</td>
+							<td><a href="/community/communityDetail?communityNo=${reportListAll.communityNo}">${reportListAll.reportReason}</a><span style="padding-left:10px; color:#ccc"></span></td>	
+							<%-- <td>${reportListAll.reportCount}</td> --%>	
+							<td>1</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -58,28 +60,28 @@
 			<!-- 페이징 -->
 		<div id="paginationWrap">
 			<ul class="pagination">
-			<li>
-				<c:if test="${page>1}">
-					<a href="/community/qnaListAll?communityCategoryNo=${param.communityCategoryNo}&page=${page-1}&searchOption=${param.searchOption}&searchInput=${param.searchInput}">&laquo;</a>
-				</c:if>
-			</li>
-			<c:forEach begin="${startPage}" end="${endPage}" var="i">
-			<li>
-				<c:choose>
-					<c:when test="${page == i}">
-						<a href="/community/qnaListAll?communityCategoryNo=${param.communityCategoryNo}&page=${i}&searchOption=${param.searchOption}&searchInput=${param.searchInput}" style="background:#434343; color:#fff;">${i}</a>
-					</c:when>
-					<c:otherwise>
-						<a href="/community/qnaListAll?communityCategoryNo=${param.communityCategoryNo}&page=${i}&searchOption=${param.searchOption}&searchInput=${param.searchInput}">${i}</a>
-					</c:otherwise>
-				</c:choose>
-			</li>
-			</c:forEach>
-			<li>
-				<c:if test="${page<lastPage}">
-					<a href="/community/qnaListAll?communityCategoryNo=${param.communityCategoryNo}&page=${page+1}&searchOption=${param.searchOption}&searchInput=${param.searchInput}">&raquo;</a>
-				</c:if>
-			</li>
+				<li>
+					<c:if test="${page>1}">
+						<a href="/community/reportList?page=${page-1}">&laquo;</a>
+					</c:if>
+				</li>
+				<c:forEach begin="${startPage}" end="${endPage}" var="i">
+				<li>
+					<c:choose>
+						<c:when test="${page == i}">
+							<a href="/community/reportList?page=${i}" style="background:#434343; color:#fff;">${i}</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/community/reportList?page=${i}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				</c:forEach>
+				<li>
+					<c:if test="${page<lastPage}">
+						<a href="/community/reportList?page=${page+1}">&raquo;</a>
+					</c:if>
+				</li>
 			</ul>
 		</div>
 	</body>
