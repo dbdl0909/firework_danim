@@ -259,7 +259,7 @@
 					</div>
 				</li>
 				<li class="hiddenNavWrap">
-					<a href="/recommand/recommandMain">추천여행</a>
+					<a href="/recommand/recommandMain?memberId=${sessionScope.memberId}">추천여행</a>
 				</li>
 				<li class="hiddenNavWrap">
 					<c:if test="${empty sessionScope.memberId}">

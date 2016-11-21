@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.danim.service.recommand.RecommandService;
 
@@ -17,13 +18,15 @@ public class RecommandController {
 	RecommandService recommandService;
 	
 	@RequestMapping(value = "/recommand/recommandMain")
-	public String recommandMain(Model model) {
+	public String recommandMain(Model model, @RequestParam(value = "memberId") String memberId) {
 		logger.info("recommandMain RecommandController.java");
+		logger.info("memberId {} RecommandController.java", memberId);
 		
 		//model.addAttribute("selectCityForGender" , recommandService.selectCityForGender());
 		//model.addAttribute("selectPopularityCity", recommandService.selectPopularityCity());
-		model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCity2030());
+		//model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCity2030());
+		model.addAttribute(arg0);
 		
-		return "/recommand/recommandTest";
+		return "/recommand/recommandMain";
 	}
 }
