@@ -12,6 +12,10 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- jQuery library (served from Google) -->
+		<!-- bxSlider Javascript file -->
+		<script src="../../../resources/js/jquery.bxslider.js"></script>
+		<!-- bxSlider CSS file -->
 	    <style>
 			html, body {
 				height: 100%;
@@ -77,6 +81,7 @@
 			}
 		    
 		    $(document).ready(function() {
+		    	
 		    	document.getElementById('startDate').valueAsDate = new Date();
 		    	startDateInit = new Date(document.getElementById('startDate').valueAsDate);
 		    	
@@ -148,10 +153,23 @@
 		    			$('#planHeadcount').focus();
 		    		}
 		    	});
+		    	
+		    	$('#closeMenual').click(function(){
+					$('#menualWrap').remove();
+				});
+		    	
+		    	if($('#menualWrap').show()){
+		    		$('.menualSlider').bxSlider();
+		    	}
+
 			});
 	    </script>
 	    <script src="../../../resources/js/map.js"></script>
-	    <style> 
+	    <style>
+	    	#menualWrap{width:100%; height:1000px; position:absolute; top:0; z-index:99999999; background:#000; margin:0 auto; text-align:center;} 
+	    	#menual{margin:0 auto; text-align:center;}
+	    	.bxslider li{margin:0 auto; text-align:center; margin-left:20px;}
+	    	#closeMenual{color:#fff; font-size:20px; position:absolute; right:0; font-weight:bold; right:0; margin-right:50px; margin-top:30px; cursor:pointer;}
 	    	#logoWrap{height:80px;}
 	    	#logoWrap img{margin-top:20px; margin-left:30px;}
 	    	#tabWrapt{float:right;}
@@ -169,6 +187,17 @@
 	    </style>
 	</head>
 	<body>
+		<div id="menualWrap">
+			<span id="closeMenual">매뉴얼 닫기</span>
+			<div id="menual">
+				<ul class="menualSlider">
+					<li><img src="../../resources/images/menual/menual1.jpg" /></li>
+					<li><img src="../../resources/images/menual/menual2.jpg" /></li>
+					<li><img src="../../resources/images/menual/menual3.jpg" /></li>
+					<li><img src="../../resources/images/menual/menual4.jpg" /></li>
+				</ul>
+			</div>
+		</div>
 		<form id="mainPlanSubmit" method="post" action="/plan/planInfo">
 		    <div id="mainPlanDivRoot" class="clearfix">
 			    <div id="logoWrap">
@@ -364,5 +393,6 @@
 				</div>
 			</div>
 		</form>
+		
 	</body>
 </html>
