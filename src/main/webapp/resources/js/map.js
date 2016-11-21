@@ -228,10 +228,8 @@ function cityRouteDateSet() {
 				document.getElementsByClassName('cityRouteEndDate')[i].valueAsDate = cityEndDateTemp;
 				//console.log(i + '번째 도시 종료일 : ' + document.getElementsByClassName('cityRouteEndDate')[i].value);
 			}
-		}
-		
+		}	
 	}
-	
 }
 
 function infoWindowEvent() {
@@ -277,6 +275,13 @@ function infoWindowEvent() {
 			
 			google.maps.event.addListener(infowindow, 'domready', function() {
 		    	document.getElementById('addButton').addEventListener('click', function(event) {
+		    		//도시 주변 정보 탭 숨기기
+		    		$('#mainPlanDivLeft3').animate({"left":"0px"});
+		    		for(var i=0; i<$landmarkMarkerArray.length; i++) {
+		    			$landmarkMarkerArray[i].setVisible(false);		    			
+		    		}
+		    		$landmarkMarkerArray = [];
+		    		
 		    		var startDate = document.getElementById('startDate').value;
 					//console.log('startDate : ' + startDate);
 					if(startDate == '') {
@@ -316,7 +321,7 @@ function infoWindowEvent() {
 									"</ul>" +
 								"</div>" +
 								"<div>" +
-/*날짜넘기기*/						"<input type='date' class='cityRouteStartDate' name='cityRouteStartDate' style='display:none;width:100%'/>" +
+									"<input type='date' class='cityRouteStartDate' name='cityRouteStartDate' style='display:none;width:100%'/>" +
 									"<input type='date' class='cityRouteEndDate' style='display:none;width:100%'/>" +
 								"</div>" +
 							"</li>"
@@ -475,9 +480,9 @@ function markerMouseEvent() {
 var j=0;
 var maxLength = 0;
 function poly(pathArray) {
-	//console.log('-------poly on-------');
+	console.log('-------poly on-------');
 	for(var k=0; k<pathArray.length; k++) {
-		//console.log(pathArray[k].lat + ', ' + pathArray[k].lng);
+		console.log(pathArray[k].lat + ', ' + pathArray[k].lng);
 	}
 	
 	//polyline 끝을 화살표 모양으로 표시하기 위한 코드
@@ -498,27 +503,27 @@ function poly(pathArray) {
 	});
 	pathLine.setMap(map);
 	lineArray.push(pathLine);
-	//console.log('getPath : ' + pathLine.getPath().getArray().toString());
+	console.log('getPath : ' + pathLine.getPath().getArray().toString());
 	
 	maxLength = lineArray.length;
-	//console.log('maxLength 길이 : ' + maxLength);
+	console.log('maxLength 길이 : ' + maxLength);
 }
 
 //이동경로를 찍거나 제거하기 위한 함수
 function lineFunction(pathArray, flag){
-	//console.log('-------lineFunction on-------');
-	//console.log('pathArray 길이 : ' + pathArray.length);
-	//console.log('flag : ' + flag);
+	console.log('-------lineFunction on-------');
+	console.log('pathArray 길이 : ' + pathArray.length);
+	console.log('flag : ' + flag);
 	
 	if(flag == true) {
 		poly(pathArray);
-		//console.log('pathArray 길이 : ' + pathArray.length);
+		console.log('pathArray 길이 : ' + pathArray.length);
 		
 	} else if(flag == false) {
-		//console.log('lineRemoveIndex : ' + lineRemoveIndex);
+		console.log('lineRemoveIndex : ' + lineRemoveIndex);
 		pathArray.splice(lineRemoveIndex, 1);
-		//console.log('pathArray 길이 : ' + pathArray.length);
-		//console.log('lineArray 길이 : ' + lineArray.length);
+		console.log('pathArray 길이 : ' + pathArray.length);
+		console.log('lineArray 길이 : ' + lineArray.length);
 		
 		if(lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2) {
 			//선택한 도시가 2개 이상일때 처음과 끝 제외한 모든 중간 요소 제거
@@ -532,29 +537,19 @@ function lineFunction(pathArray, flag){
 			for(var j=0; j<pathArray.length; j++) {
 				if(pathArray.length >= 2) {
 					//console.log(pathArray[j]);
-					//console.log(pathArray[j].lat + ', ' + pathArray[j].lng);
+					console.log(pathArray[j].lat + ', ' + pathArray[j].lng);
 					poly(pathArray);
 				}
 			}
-			//maxLength = lineArray.length;
-			/*for(var i=0; i<2; i++) {
-				lineArray[lineRemoveIndex-1].setMap(null);
-				lineArray.splice(lineRemoveIndex-1, 1);
-			}
-			lineArray[lineRemoveIndex].setMap(null);
-			lineArray.splice(lineRemoveIndex, 1);
-			lineArray[lineRemoveIndex-1].setMap(null);
-			lineArray.splice(lineRemoveIndex-1, 1);
-			poly(pathArray);*/
 			
 		} else if(maxLength == lineRemoveIndex && maxLength >= 1) {
 			//선택한 도시가 1개 이상일때 마지막 요소 제거
-			//console.log('maxLength == lineRemoveIndex && maxLength >= 1');
+			console.log('maxLength == lineRemoveIndex && maxLength >= 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
-		} else if(lineRemoveIndex == 0 && maxLength >= 1) {
+		} else if(lineRemoveIndex == 0 && maxLength >= 2) {
 			//선택한 도시 1개 이상일때 첫번째 요소 제거
-			//console.log('lineRemoveIndex == 0 && maxLength >= 1');
+			console.log('lineRemoveIndex == 0 && maxLength >= 2');
 			
 			for(var i=0; i<maxLength; i++) {
 				lineArray[i].setMap(null);
@@ -564,7 +559,7 @@ function lineFunction(pathArray, flag){
 			for(var j=0; j<pathArray.length; j++) {
 				if(pathArray.length >= 2) {
 					//console.log(pathArray[j]);
-					//console.log(pathArray[j].lat + ', ' + pathArray[j].lng);
+					console.log(pathArray[j].lat + ', ' + pathArray[j].lng);
 					poly(pathArray);
 				}
 			}
@@ -573,7 +568,7 @@ function lineFunction(pathArray, flag){
 			lineArray.splice(lineRemoveIndex, 1);*/
 		} else if(maxLength < 1 && lineRemoveIndex == 0) {
 			//선택한 도시 하나일때 그 요소 제거
-			//console.log('lineRemoveIndex == 0 && maxLength < 1');
+			console.log('lineRemoveIndex == 0 && maxLength < 1');
 			lineArray.splice(lineRemoveIndex, 1);
 		}
 	}
@@ -581,19 +576,19 @@ function lineFunction(pathArray, flag){
 
 //이동경로에서 클릭한 도시를 제거하기 위한 함수
 function lineRemoveFunction(removeButtonIndex) {
-	//console.log('-------lineRemoveFunction on-------');
-	//console.log('removeButtonIndex : ' + removeButtonIndex);
+	console.log('-------lineRemoveFunction on-------');
+	console.log('removeButtonIndex : ' + removeButtonIndex);
 	lineRemoveIndex = removeButtonIndex;
 	
 	//pathArray 배열에서 선택한 도시의 좌표를 제거한다.
 	var markerIndexTemp = markerIndexArray[removeButtonIndex];
-	//console.log(markerIndexArray + ' 중 제거할 도시번호 : ' + markerIndexTemp);
+	console.log(markerIndexArray + ' 중 제거할 도시번호 : ' + markerIndexTemp);
 	markerIndexArray.splice(removeButtonIndex, 1);
 	markerArray[markerIndexTemp].setIcon(markerIcon2);
 	
 	var removeLatitude = Number(cityInfoList[markerIndexTemp].latitude);
 	var removeLangitude = Number(cityInfoList[markerIndexTemp].langitude);
-	//console.log(markerIndexTemp + ' : ' + removeLatitude + ', ' + removeLangitude);
+	console.log(markerIndexTemp + ' : ' + removeLatitude + ', ' + removeLangitude);
 	
 	//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
 	//console.log('pathArray 길이 : ' + pathArray.length);
@@ -617,6 +612,7 @@ function lineRemoveFunction(removeButtonIndex) {
 
 $(document).ready(function() {
 	var $stayCount = 0;
+	//전체 도시 목록 출력하는 함수
 	$('.cityInfoLi').click(function() {
 		cityInfoIndex = $('.cityInfoLi').index(this);
     	//console.log('클릭한 도시 번호 : ' + cityInfoIndex + ', 도시 이름 : ' + cityInfoList[cityInfoIndex].name);
@@ -666,7 +662,7 @@ $(document).ready(function() {
 		liIndex = $('.arrowLeft').index(this);
 		//console.log(liIndex);
 		$stayCount = Number($('.stayCount').eq(liIndex).val());
-		console.log('$stayCount : ' + $stayCount);
+		//console.log('$stayCount : ' + $stayCount);
 		if($stayCount > 1) {
 			if($stayDay > 0) {
 				$stayCount-=1;
@@ -689,7 +685,7 @@ $(document).ready(function() {
 		liIndex = $('.arrowRight').index(this);
 		//console.log(liIndex);
 		$stayCount = Number($('.stayCount').eq(liIndex).val());
-		console.log('$stayCount : ' + $stayCount);
+		//console.log('$stayCount : ' + $stayCount);
 		if($stayCount >= 1) {
 			$stayCount+=1;
 			$('.stayCount').eq(liIndex).val($stayCount);
@@ -717,12 +713,12 @@ $(document).ready(function() {
 		
 		//해당 도시의 명소 마커들 제거
 		for(var i=0; i<$landmarkMarkerArray.length; i++) {
-			$landmarkMarkerArray[i].setMap(null);
+			$landmarkMarkerArray[i].setVisible(false);
 		}
 	});
 	
 	//어떤 이미지를 클릭했는지 담을 변수(명소, 식당, 숙소, 축제)
-	var clickIcon;
+	var clickIcon = "";
 	//얼만큼 보여줄 것인지 index를 담을 변수
 	var totalMoreView = 0;
 	var eateryMoreView = 0;
@@ -843,11 +839,11 @@ $(document).ready(function() {
 				
 				$('.clickLandmark').click(function() {
 					var clickLandmarkIndex = $('.clickLandmark').index(this);
-					console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
+					//console.log(clickCityName + '--> clickLandmarkIndex : ' + clickLandmarkIndex);
 					
 					landmarkInfoNo = landmarkNo[clickLandmarkIndex];
 					clickLandmark = landmarkName[clickLandmarkIndex];
-					console.log(clickCityName + ', ' + landmarkInfoNo + ', ' + clickLandmark);
+					//console.log(clickCityName + ', ' + landmarkInfoNo + ', ' + clickLandmark);
 					//console.log($('.landmarkInfoLangitude').eq(clickLandmarkIndex).val());
 					//console.log($('.landmarkInfoLatitude').eq(clickLandmarkIndex).val());			
 					
@@ -860,7 +856,7 @@ $(document).ready(function() {
 						data:{landmarkInfoNo:landmarkInfoNo, cityInfoName:clickCityName},
 						type:'GET',
 						success:function(data){
-							console.log(clickCityName);
+							//console.log(clickCityName);
 							var $body = $(data).filter('.container');
 							//console.log($body);
 							$('#landmarkInfoPopContent').html($body);
@@ -886,7 +882,7 @@ $(document).ready(function() {
 									} else if(landmarkLiLength >= 1) {
 										//console.log('landmarkLi.length >= 1 : ' + $('.landmarkLi').length);
 										for(i = 0; i < landmarkLiLength; i++){
-											console.log('i : ' + i);
+											//console.log('i : ' + i);
 											if($('.landmarkName').eq(i).text() == clickLandmark){
 												//console.log($('.landmarkName').eq(i).text() + '==' + clickLandmark);
 												landmarkSameCount++;
@@ -917,7 +913,7 @@ $(document).ready(function() {
 
 	//명소루트에서 명소 클릭하면 삭제하기
 	$('body').on('click', '.landmarkName', function() {
-		console.log('landmarkName click..');
+		//console.log('landmarkName click..');
 		var landmarkLiIndex = $('.landmarkName').index(this);
 		var clickLandmarkName = $('.landmarkName').eq(landmarkLiIndex).text();
 		var landmarkLiRemoveResult = confirm(clickLandmarkName + '를 삭제하시겠습니까?');
@@ -1013,17 +1009,17 @@ $(document).ready(function() {
 	
 	//plan에 저장할 데이터들을 보내는 함수
 	$('#planInfoSubmit').click(function() {
-		console.log('플랜명 : ' + $('#planName').val());		//planName
-		console.log('인원수 : ' + $('#planHeadcount').val());	//planHeadcount
-		console.log('플랜타입 : ' + $('#planType').val());		//planType
+		//console.log('플랜명 : ' + $('#planName').val());		//planName
+		//console.log('인원수 : ' + $('#planHeadcount').val());	//planHeadcount
+		//console.log('플랜타입 : ' + $('#planType').val());		//planType
 		
-		console.log('출발일 : ' + $('#startDate').val());		//startDate
-		console.log('종료일 : ' + $('#endDate').val());			//endDate
-		console.log('숙박일 : ' + $('#stayDay').val());			//stayDay
+		//console.log('출발일 : ' + $('#startDate').val());		//startDate
+		//console.log('종료일 : ' + $('#endDate').val());			//endDate
+		//console.log('숙박일 : ' + $('#stayDay').val());			//stayDay
 		
-		console.log('도시 루트');
+		//console.log('도시 루트');
 		for(var i=0; i<$('.leftMenuLi').length; i++) {
-			console.log($('.cityInfoNo').eq(i).val());
+			//console.log($('.cityInfoNo').eq(i).val());
 			if(i == ($('.leftMenuLi').length-1)) {
 				$('.cityRouteDepartureCity').eq(i).val($('.cityInfoNo').eq(i).val());
 				$('.cityRouteArrivalCity').eq(i).val($('.cityInfoNo').eq(i).val());
@@ -1032,18 +1028,18 @@ $(document).ready(function() {
 				$('.cityRouteArrivalCity').eq(i).val($('.cityInfoNo').eq(i+1).val());
 			}
 			
-			console.log(i + '번째 도시 출발날짜 : ' + $('.cityRouteStartDate').eq(i).val());	//cityRouteStartDate
+			//console.log(i + '번째 도시 출발날짜 : ' + $('.cityRouteStartDate').eq(i).val());	//cityRouteStartDate
 			
-			console.log(i + '번째 출발 도시 : ' + $('.cityRouteDepartureCity').eq(i).val());	//cityRouteDepartureCity
-			console.log(i + '번째 도착 도시 : ' + $('.cityRouteArrivalCity').eq(i).val());		//cityRouteArrivalCity
+			//console.log(i + '번째 출발 도시 : ' + $('.cityRouteDepartureCity').eq(i).val());	//cityRouteDepartureCity
+			//console.log(i + '번째 도착 도시 : ' + $('.cityRouteArrivalCity').eq(i).val());		//cityRouteArrivalCity
 			
-			console.log(i + '번째 도시 출발시각 : ' + $('.startTime').eq(i).val());				//cityRouteDepartureTime
-			console.log(i + '번째 도시 도착시각 : ' + $('.endTime').eq(i).val());				//cityRouteArrivalTime
+			//console.log(i + '번째 도시 출발시각 : ' + $('.startTime').eq(i).val());				//cityRouteDepartureTime
+			//console.log(i + '번째 도시 도착시각 : ' + $('.endTime').eq(i).val());				//cityRouteArrivalTime
 		}
 		
 		for(var j=0; j<$('.landmarkLi').length; j++){											//landmarkIndex, landmarkInfoNo
-			console.log($('.landmarkIndex').eq(j).val());
-			console.log($('.landmarkNo').eq(j).val());
+			//console.log($('.landmarkIndex').eq(j).val());
+			//console.log($('.landmarkNo').eq(j).val());
 			/*if(j == $('.landmarkIndex').eq(j).val()) {
 				console.log(j + '번째 도시의 ' + '명소 : ' + $('.landmarkNo').eq(j).val());
 			}*/
