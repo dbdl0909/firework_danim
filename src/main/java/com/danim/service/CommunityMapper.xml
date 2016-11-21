@@ -437,23 +437,25 @@
 	<select id="selectReportList"
 			resultType="com.danim.service.community.ReportDto">
 		SELECT
-			report_no as 'reportNo',
-			member_id as 'memberId',
-			community_no as 'communityNo',
-			reply_no as 'replyNo',
-			report_reason as 'reportReason',
-			report_date as 'reportDate'
+			re.report_no as 'reportNo',
+			re.member_id as 'memberId',
+			re.community_no as 'communityNo',
+			re.reply_no as 'replyNo',
+			re.report_reason as 'reportReason',
+			re.report_date as 'reportDate',
+			(
+				SELECT
+					COUNT(community_no)
+				FROM
+					report
+				WHERE
+					community_no = re.community_no
+			) as 'reportCount'
 		FROM
-			report
+			report re
+		ORDER BY
+			reportCount DESC,
+			communityNo DESC
+
 	</select>
-	<!-- 신고 누적 횟수
-	<select  id="ReportCount"
-			 resultType="Integer">
-		SELECT
-			COUNT(*)
-		FROM
-			report
-		WHERE
-			community_no= #{communityNo}
-	</select> -->
 </mapper>	

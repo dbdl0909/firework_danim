@@ -70,15 +70,6 @@ public class CommunityController {
         model.addAttribute("lastPage", lastPage);
 		return "/community/list";
 	}
-	//신고카운트
-	@RequestMapping(value="/community/reportList", method = RequestMethod.POST)
-	public String reportCount(Model model,
-							@RequestParam(value="communityNo", defaultValue="") String communityNo ) {
-		logger.info("communityNo {} CommunityController.java", communityNo);
-		String reportCheckCount = communityService.countReport(communityNo);
-		model.addAttribute("reportCheckCount", reportCheckCount);
-		return "redirect:/community/reportList";
-	}	
 	// 나의 QNA 리스트 조회
 	@RequestMapping(value="/community/myQnaList")
 	public String myQnaList(Model model,

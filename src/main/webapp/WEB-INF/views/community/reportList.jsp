@@ -15,11 +15,6 @@
 		<link rel="stylesheet" href="../../../resources/css/style.css">
 		<style type="text/css">
 			thead>tr>th{text-align: center;}
-			tbody>tr>td:nth-child(1){width:80px; text-align: center;}
-			tbody>tr>td:nth-child(3){width:110px; text-align: center;}
-			tbody>tr>td:nth-child(4){width:130px; text-align: center;}
-			tbody>tr>td:nth-child(5){width:70px; text-align: center;}
-			tbody>tr>td:nth-child(6){width:70px; text-align: center;}
 			tbody>tr:HOVER{color:#da8c92;cursor: pointer;}
 			.menu-wrap{text-align: right;}
 			.form-wrap{text-align: center;}
@@ -50,8 +45,7 @@
 							<td>${reportListAll.replyNo}</td>
 							<td>${reportListAll.reportDate}</td>
 							<td><a href="/community/communityDetail?communityNo=${reportListAll.communityNo}">${reportListAll.reportReason}</a><span style="padding-left:10px; color:#ccc"></span></td>	
-							<%-- <td>${reportListAll.reportCount}</td> --%>	
-							<td>1</td>
+							<td>${reportListAll.reportCount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
