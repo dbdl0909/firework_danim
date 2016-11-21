@@ -25,7 +25,7 @@ public class RecommandController {
 		//model.addAttribute("selectCityForGender" , recommandService.selectCityForGender());
 		//model.addAttribute("selectPopularityCity", recommandService.selectPopularityCity());
 		//model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCity2030());
-		model.addAttribute(arg0);
+		model.addAttribute("selectMemberInfo", recommandService.selectMemberInfo(memberId));
 		
 		return "/recommand/recommandMain";
 	}

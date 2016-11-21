@@ -82,4 +82,10 @@ public class RecommandDao {
 		return sessionTemplate.selectList(nameSpace + ".selectSeasonCityByYear", map);		
 	}
 	
+	public List<String> selectMemberInfo(String memberId) {
+		logger.info("selectMemberInfo RecommandDao.java");
+		
+		return sessionTemplate.selectOne(nameSpace + ".selectMemberInfo", memberId);
+	}
+	
 }

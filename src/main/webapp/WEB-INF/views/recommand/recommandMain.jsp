@@ -36,9 +36,11 @@
 				}
 				
 				// 로그인 사용자의 정보를 받아서 추천 통계 출력
-				url = "/recommand/recommandMember"
-				data = {gender: , age:}
-				loadRecommand();
+				//url = "/recommand/recommandMember"
+				//data = {gender: , age:}
+				//loadRecommand();
+				var a = "<c:out value='${selectMemberInfo.memberAge}' />";
+				console.log(a);
 				
 				// 성별 탭
 				$('#male').click(function(){
