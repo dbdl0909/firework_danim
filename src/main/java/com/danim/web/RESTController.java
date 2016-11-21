@@ -170,4 +170,18 @@ public class RESTController {
 		
 		return "/recommand/recommandSeasonYear";
 	}
+	
+	// 해당 회원 정보에 맞는 통계 출력
+	@RequestMapping(value = "/recommand/recommandMember")
+	public String recommandMember(Model model,
+								@RequestParam(value = "age") int age,
+								@RequestParam(value = "gender") String gender) {
+		logger.info("recommandMember RecommandController.java");
+		
+		model.addAttribute("selectCityForMember", recommandService.selectCityForMember(age, gender));
+		model.addAttribute("age", age);
+		model.addAttribute("gender", gender);
+		
+		return "/recommand/recommandMember";
+	}
 }

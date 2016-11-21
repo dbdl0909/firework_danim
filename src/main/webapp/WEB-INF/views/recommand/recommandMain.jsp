@@ -14,6 +14,8 @@
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 		<!-- 구글차트 -->
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>		
+		<!-- 자체 CSS -->
+		<link rel="stylesheet" href="../../../resources/css/style.css">
 		<title>Insert title here</title>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -36,12 +38,20 @@
 				}
 				
 				// 로그인 사용자의 정보를 받아서 추천 통계 출력
-				//url = "/recommand/recommandMember"
-				//data = {gender: , age:}
-				//loadRecommand();
-				<c:out var='selectMemberInfo' value='${selectMemberInfo.selectMemberInfo}' />
-				var a = "${seelctMemberInfo.memberGender}";
-				console.log(a);
+				
+				var memberId = "<c:out value='${memberId}' />";
+				
+				if(memberId != "guest") {
+					var gender = "<c:out value='${selectMemberInfo.memberGender}' />";
+					var age = <c:out value="${selectMemberInfo.memberAge}" />
+					console.log(gender);
+					console.log(age);
+					
+					url = "/recommand/recommandMember"
+					data = {gender: gender, age: age}
+					loadRecommand();
+				}
+
 				
 				// 성별 탭
 				$('#male').click(function(){
@@ -240,50 +250,55 @@
 			.container #recommandView #popularityProvinceImage img{margin-left: 215px;}	
 			.container #recommandView #typeRank li{text-align: center; font-size: 20px; margin-top: 8px; border-bottom: 1px;}	
 			.container #recommandView #typeRankTitle{text-align: center; font-size: 26px;}
+			.container {text-align: center;}
+			.container #phraseImg{margin: 150px;}
 		</style>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
-			<div id = "recommandTab">
-				<div id="gender">성별</div>
-				<ul id="genderUl">
-					<li id="male">남자</li>
-					<li id="female">여자</li>
-				</ul>
-				<div id="popularity">지역</div>	
-				<ul id="popularityUl">
-					<li id="kyungki">경기도</li>
-					<li id="kangwon">강원도</li>
-					<li id="chungbuk">충청북도</li>
-					<li id="chungnam">충청남도</li>
-					<li id="junbuk">전라북도</li>
-					<li id="junnam">전라남도</li>
-					<li id="kyungbuk">경상북도</li>
-					<li id="kyungnam">경상남도</li>
-					<li id="jeju">제주도</li>											
-				</ul>
-				<div id="season">계절</div>
-				<ul id="seasonUl">
-					<li id="spring">봄</li>
-					<li id="summer">여름</li>
-					<li id="fall">가을</li>
-					<li id="winter">겨울</li>
-				</ul>
-				<div id="type">타입</div>
-				<ul id="typeUl">
-					<li id="backpacking">배낭</li>
-					<li id="honeymoon">신혼</li>
-					<li id="family">가족</li>
-					<li id="business">비즈니스</li>
-					<li id="couple">커플</li>
-					<li id="solo">솔로</li>
-					<li id="group">단체</li>
-				</ul>
-			</div>
+			<c:if test="${memberId ne 'guest'}">
+				<div id = "recommandTab">
+					<div id="gender">성별</div>
+					<ul id="genderUl">
+						<li id="male">남자</li>
+						<li id="female">여자</li>
+					</ul>
+					<div id="popularity">지역</div>	
+					<ul id="popularityUl">
+						<li id="kyungki">경기도</li>
+						<li id="kangwon">강원도</li>
+						<li id="chungbuk">충청북도</li>
+						<li id="chungnam">충청남도</li>
+						<li id="junbuk">전라북도</li>
+						<li id="junnam">전라남도</li>
+						<li id="kyungbuk">경상북도</li>
+						<li id="kyungnam">경상남도</li>
+						<li id="jeju">제주도</li>											
+					</ul>
+					<div id="season">계절</div>
+					<ul id="seasonUl">
+						<li id="spring">봄</li>
+						<li id="summer">여름</li>
+						<li id="fall">가을</li>
+						<li id="winter">겨울</li>
+					</ul>
+					<div id="type">타입</div>
+					<ul id="typeUl">
+						<li id="backpacking">배낭</li>
+						<li id="honeymoon">신혼</li>
+						<li id="family">가족</li>
+						<li id="business">비즈니스</li>
+						<li id="couple">커플</li>
+						<li id="solo">솔로</li>
+						<li id="group">단체</li>
+					</ul>
+				</div>
+			</c:if>
 			<div id="recommandView">
 				
 			</div>
+			<img id="phraseImg" src="../../resources/images/phrase.png"/>
 		</div>
 	</body>
 	<jsp:include page="../module/footer.jsp"></jsp:include>

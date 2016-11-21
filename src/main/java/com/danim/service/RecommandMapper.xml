@@ -339,7 +339,7 @@
 	<!-- 로그인 회원 성별, 나이 정보 조회 -->
 	<select id="selectMemberInfo"
 			parameterType="String"
-			resultType="com.danim.service.recommand.RecommandMemberDto">	
+			resultType="java.util.Map">	
 	SELECT
 		FLOOR((TO_DAYS(CURDATE())-(TO_DAYS(member_info_birth)))/365) as 'memberAge',
 		member_info_gender as 'memberGender'
@@ -347,5 +347,37 @@
 		member_info
 	WHERE
 		member_id = #{memberId}
-	</select>	
+	</select>
+	<!-- 로그인 회원과 비슷한 정보를 가진 회원에게 추천하는 도시 -->
+	<select id="selectCityForMember"
+			parameterType="hashmap"
+			resultType="com.danim.service.recommand.RecommandDto">
+	SELECT
+		info.city_info_name as 'cityRankName',
+		COUNT(route.city_route_departure_city) as 'cityRankCount'
+	FROM
+		plan as pl
+	JOIN
+		member_info as member
+	ON
+		pl.member_id = member.member_id
+	JOIN
+		city_route as route
+	ON
+		route.plan_no = pl.plan_no
+	JOIN
+		city_info as info
+	ON
+		info.city_info_no = route.city_route_departure_city	
+	WHERE
+		SUBSTRING(#{age}, 1, 1) = SUBSTRING((FLOOR((TO_DAYS(CURDATE())-(TO_DAYS(member_info_birth)))/365)), 1, 1)
+	AND
+		member.member_info_gender = #{gender}	
+	GROUP BY
+		route.city_route_departure_city
+	ORDER BY
+		COUNT(route.city_route_departure_city) DESC
+	LIMIT
+		5	
+	</select>
 </mapper>

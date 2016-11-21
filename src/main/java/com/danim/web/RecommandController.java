@@ -18,7 +18,7 @@ public class RecommandController {
 	RecommandService recommandService;
 	
 	@RequestMapping(value = "/recommand/recommandMain")
-	public String recommandMain(Model model, @RequestParam(value = "memberId") String memberId) {
+	public String recommandMain(Model model, @RequestParam(value = "memberId", defaultValue = "guest") String memberId) {
 		logger.info("recommandMain RecommandController.java");
 		logger.info("memberId {} RecommandController.java", memberId);
 		
@@ -26,6 +26,7 @@ public class RecommandController {
 		//model.addAttribute("selectPopularityCity", recommandService.selectPopularityCity());
 		//model.addAttribute("selectSeasonCityTwenty", recommandService.selectSeasonCity2030());
 		model.addAttribute("selectMemberInfo", recommandService.selectMemberInfo(memberId));
+		model.addAttribute("memberId", memberId);
 		
 		return "/recommand/recommandMain";
 	}

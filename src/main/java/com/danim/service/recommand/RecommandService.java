@@ -117,11 +117,25 @@ public class RecommandService {
     	return selectSeasonCityByYear;
     }
     
-    public List<RecommandMemberDto> selectMemberInfo(String memberId) {
+    // 로그인 중인 회원의 정보를 가져온다
+    public Map<String, Object> selectMemberInfo(String memberId) {
     	
-    	List<RecommandMemberDto> selectMemberInfo = recommandDao.selectMemberInfo(memberId);
+    	Map<String, Object> selectMemberInfo = recommandDao.selectMemberInfo(memberId);
     	
     	return selectMemberInfo;
+    }
+    
+    // 로그인 회원과 비슷한 정보를 가진 회원에게 추천하는 도시
+    
+    public List<RecommandDto> selectCityForMember(int age, String gender) {
+    	
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("age", age);
+    	map.put("gender", gender);
+    	
+    	List<RecommandDto> selectCityForMember = recommandDao.selectCityForMember(map);
+    	
+    	return selectCityForMember;
     }
     
 }

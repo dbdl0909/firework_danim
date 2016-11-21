@@ -82,10 +82,17 @@ public class RecommandDao {
 		return sessionTemplate.selectList(nameSpace + ".selectSeasonCityByYear", map);		
 	}
 	
-	public List<RecommandMemberDto> selectMemberInfo(String memberId) {
+	public Map<String, Object> selectMemberInfo(String memberId) {
 		logger.info("selectMemberInfo RecommandDao.java");
 		
 		return sessionTemplate.selectOne(nameSpace + ".selectMemberInfo", memberId);
+	}
+	
+	// 로그인 회원과 비슷한 정보를 가진 회원에게 추천하는 도시
+	public List<RecommandDto> selectCityForMember(Map<String, Object> map) {
+		logger.info("selectCityForMember RecommandDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectCityForMember", map);
 	}
 	
 }
