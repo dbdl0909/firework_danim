@@ -43,10 +43,10 @@
 		    //구글 지도 (현재위치 설정)
 			function initMap() {
 				//처음 지도 위치
-				var main = {lat: 36.337, lng: 127.402};
+				//var main = {lat: 36.337, lng: 127.402};
 				map = new google.maps.Map(document.getElementById('map'), {
 					zoom: 7,
-					center: main,
+					center: {lat: 36.337, lng: 127.402},
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				});
 				
