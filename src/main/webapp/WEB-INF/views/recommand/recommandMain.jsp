@@ -39,7 +39,8 @@
 				//url = "/recommand/recommandMember"
 				//data = {gender: , age:}
 				//loadRecommand();
-				var a = "<c:out value='${selectMemberInfo.memberAge}' />";
+				<c:out var='selectMemberInfo' value='${selectMemberInfo.selectMemberInfo}' />
+				var a = "${seelctMemberInfo.memberGender}";
 				console.log(a);
 				
 				// 성별 탭

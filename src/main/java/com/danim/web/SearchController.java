@@ -22,7 +22,7 @@ public class SearchController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 	
 //****매핑 value search 앞에 '/' 붙이기!
-	@RequestMapping(value="search/infoSearch")
+	@RequestMapping(value="/search/infoSearch")
 	public String infoSearch(Model model, String search, @RequestParam(value="moreView", defaultValue="0") int moreView) {
 		// search : 검색어(도시이름)
 		logger.info("search {} 값 입니다", search);
@@ -46,7 +46,7 @@ public class SearchController {
 		return "/search/infoSearch";
 	}
 	
-	@RequestMapping(value="search/landmarkInfo")
+	@RequestMapping(value="/search/landmarkInfo")
 	public String landmarkInfo(Model model, @RequestParam(value="landmarkInfoNo") String landmarkInfoNo, @RequestParam(value="cityInfoName") String cityInfoName) {
 		// landmarkInfoNo(명소정보번호) : infoSearch(검색화면)에서 검색된 해당 지역 명소의 가이드북을 클릭할 때 넘겨주는 명소번호
 		logger.info("landmarkInfoNo 값 {} 입니다", landmarkInfoNo);
@@ -59,7 +59,7 @@ public class SearchController {
 		return "/search/landmarkInformation";
 	}
 	
-	@RequestMapping(value="search/eateryInfo")
+	@RequestMapping(value="/search/eateryInfo")
 	public String eateryInfo(Model model, @RequestParam(value="eateryNo") String eateryNo, @RequestParam(value="cityInfoName") String cityInfoName) {
 		// eateryNo(음식점번호) : infoSearch(검색화면)에서 검색된 해당 지역 음식점의 가이드북을 클릭할 때 넘겨주는 음식점번호
 		logger.info("eateryNo 값 {} 입니다", eateryNo);
@@ -72,7 +72,7 @@ public class SearchController {
 		return "/search/eateryInformation";
 	}
 	
-	@RequestMapping(value="search/eventInfo")
+	@RequestMapping(value="/search/eventInfo")
 	public String eventInfo(Model model, @RequestParam(value="eventInfoName") String eventInfoName, @RequestParam(value="cityInfoName") String cityInfoName) {
 		// eventInfoName(축제정보이름) : infoSearch(검색화면)에서 검색된 해당 지역 축제의 가이드북을 클릭할 때 넘겨주는 축제이름
 		logger.info("eventInfoName 값 {} 입니다", eventInfoName);
@@ -85,7 +85,7 @@ public class SearchController {
 		return "/search/eventInformation";
 	}
 	
-	@RequestMapping(value="search/stayInfo")
+	@RequestMapping(value="/search/stayInfo")
 	public String stayInfo(Model model, @RequestParam(value="stayInfoNo") String stayInfoNo, @RequestParam(value="cityInfoName") String cityInfoName) {
 		// eventInfoName(축제정보이름) : infoSearch(검색화면)에서 검색된 해당 지역 축제의 가이드북을 클릭할 때 넘겨주는 축제이름
 		logger.info("stayInfoNo 값 {} 입니다", stayInfoNo);

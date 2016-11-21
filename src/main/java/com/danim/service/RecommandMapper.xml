@@ -339,7 +339,7 @@
 	<!-- 로그인 회원 성별, 나이 정보 조회 -->
 	<select id="selectMemberInfo"
 			parameterType="String"
-			resultType="String">	
+			resultType="com.danim.service.recommand.RecommandMemberDto">	
 	SELECT
 		FLOOR((TO_DAYS(CURDATE())-(TO_DAYS(member_info_birth)))/365) as 'memberAge',
 		member_info_gender as 'memberGender'

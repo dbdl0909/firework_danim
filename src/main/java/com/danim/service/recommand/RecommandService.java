@@ -117,9 +117,9 @@ public class RecommandService {
     	return selectSeasonCityByYear;
     }
     
-    public List<String> selectMemberInfo(String memberId) {
+    public List<RecommandMemberDto> selectMemberInfo(String memberId) {
     	
-    	List<String> selectMemberInfo = recommandDao.selectMemberInfo(memberId);
+    	List<RecommandMemberDto> selectMemberInfo = recommandDao.selectMemberInfo(memberId);
     	
     	return selectMemberInfo;
     }
