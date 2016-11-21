@@ -132,14 +132,17 @@
 			$(this).slideUp();
 		});	
 		
+		//플래너
 		$('#memberIdCheckForPlan').click(function() {
 			if($('#sessionMemberId').val() != '') {
-				var memberId = $('#sessionMemberId').val();
-				$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan?memberId=' + memberId);
+				$('#plannerSubmit').submit();
+				//var memberId = $('#sessionMemberId').val();
+				//$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan?memberId=' + memberId);
 			} else {
 				alert('로그인을 해주세요');
 			}
 		});
+		
 		//로그인 슬라이드
 		var slideCheck = false;
 		$("#loginButton").click(function(){
@@ -233,9 +236,9 @@
 	<div id="headerWrap" class="clearFix">
 		<div id="searchWrap">
 			<span class="glyphicon glyphicon-search"></span>
-			<span class="searchCityNameSpan"> 
+			<span class="searchCityNameSpan">
 				가고싶은 도시를 검색해주세요!
-			</span> 
+			</span>
 		</div>
 		<div id="headerLogo">
 			<a href="/"><img src="../../resources/images/logo.png" ></a>
@@ -243,8 +246,10 @@
 		<div id="headerNavWrap">
 			<ul id="headerNav">
 				<li class="hiddenNavWrap">
-					<input id="sessionMemberId" type="hidden" value="${sessionScope.memberId}"/>
-					<a id="memberIdCheckForPlan">플래너</a>							
+					<form id="plannerSubmit" action="/plan/mainPlan" method="post">
+						<input id="sessionMemberId" name="memberId" type="hidden" value="${sessionScope.memberId}"/>
+					</form>
+					<a id="memberIdCheckForPlan">플래너</a>
 				</li>
 				<li class="hiddenNavWrap">
 					<a href="/community/list">광장</a>

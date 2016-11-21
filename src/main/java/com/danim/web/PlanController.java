@@ -62,9 +62,10 @@ public class PlanController {
 			
 			return "plan/planDetailList";
 		}
-	@RequestMapping(value = "/plan/mainPlan")
-	public String mainPlan(Model model, @RequestParam(value="memberId")String memberId) {
+	@RequestMapping(value = "/plan/mainPlan", method = RequestMethod.POST)
+	public String mainPlan(Model model, @RequestParam(value="memberId", defaultValue="null") String memberId) {
 		logger.info("mainPlan() PlanController.java");
+		logger.info("memberId : {}", memberId);
 		/*//지도 그림에서 도를 클릭했을때 do 담겨진 값을 doArea에 담는다.
 		logger.info("doArea(도 이름) : {} <-- mainPlan() PlanController.java", doArea);
 		

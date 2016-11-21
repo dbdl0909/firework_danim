@@ -24,10 +24,10 @@
 	$(document).ready(function(){
 		$('.galleryList li:first-child').addClass('galleryTitleImage');
 		$('.goPlan').click(function(){
-			//console.log($('#sessionMemberId').val());
 			if($('#sessionMemberId').val() != '') {
-				var memberId = $('#sessionMemberId').val();
-				location.href = '/plan/mainPlan?memberId=' + memberId;
+				$('#plannerSubmit').submit();
+				//var memberId = $('#sessionMemberId').val();
+				//$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan?memberId=' + memberId);
 			} else {
 				alert('로그인을 해주세요');
 			}
