@@ -298,7 +298,9 @@
 			<div id="recommandView">
 				
 			</div>
-			<img id="phraseImg" src="../../resources/images/phrase.png"/>
+			<c:if test="${memberId eq 'guest'}">
+				<img id="phraseImg" src="../../resources/images/phrase.png"/>
+			</c:if>
 		</div>
 	</body>
 	<jsp:include page="../module/footer.jsp"></jsp:include>

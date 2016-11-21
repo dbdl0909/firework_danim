@@ -305,6 +305,7 @@
 						<a>${sessionScope.memberName} ▼</a>
 						<div class="hiddenNav">
 						<dl>
+							<dt>회원정보</dt>
 							<dd><a id="memberInfoMemberIdCheck">내 정보</a></dd>
 							<c:if test="${sessionScope.memberLevel=='관리자'}">
 								<dd><a href="/member/memberListAll">회원리스트</a></dd>
