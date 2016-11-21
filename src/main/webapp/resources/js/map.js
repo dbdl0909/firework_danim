@@ -355,7 +355,7 @@ function infoWindowEvent() {
 						//console.log('pathArray 길이 : ' + pathArray.length);
 			    		
 						//도시를 2개 이상 선택했을때, 이동경로를 찍기 위한 함수를 호출한다.
-						if(pathArray.length >= 2) {
+						if(pathArray.length >= 1) {
 							flag = true;
 			    			lineFunction(pathArray, flag);
 						}
@@ -524,7 +524,7 @@ function lineFunction(pathArray, flag){
 		pathArray.splice(lineRemoveIndex, 1);
 		console.log('pathArray 길이 : ' + pathArray.length);
 		console.log('lineArray 길이 : ' + lineArray.length);
-		
+		maxLength = lineArray.length;
 		if(lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2) {
 			//선택한 도시가 2개 이상일때 처음과 끝 제외한 모든 중간 요소 제거
 			console.log('lineRemoveIndex > 0 && lineRemoveIndex < maxLength && maxLength >= 2');
@@ -541,14 +541,15 @@ function lineFunction(pathArray, flag){
 					poly(pathArray);
 				}
 			}
-			
-		} else if(maxLength == lineRemoveIndex && maxLength >= 1) {
-			//선택한 도시가 1개 이상일때 마지막 요소 제거
+			maxLength = lineArray.length;
+		} else if(maxLength == lineRemoveIndex && maxLength >= 2) {
+			//선택한 도시가 2개 이상일때 마지막 요소 제거
 			console.log('maxLength == lineRemoveIndex && maxLength >= 1');
 			lineArray[lineRemoveIndex-1].setMap(null);
 			lineArray.splice(lineRemoveIndex-1, 1);
+			maxLength = lineArray.length;
 		} else if(lineRemoveIndex == 0 && maxLength >= 2) {
-			//선택한 도시 1개 이상일때 첫번째 요소 제거
+			//선택한 도시 2개 이상일때 첫번째 요소 제거
 			console.log('lineRemoveIndex == 0 && maxLength >= 2');
 			
 			for(var i=0; i<maxLength; i++) {
@@ -570,6 +571,7 @@ function lineFunction(pathArray, flag){
 			//선택한 도시 하나일때 그 요소 제거
 			console.log('lineRemoveIndex == 0 && maxLength < 1');
 			lineArray.splice(lineRemoveIndex, 1);
+			maxLength = lineArray.length;
 		}
 	}
 };
@@ -591,10 +593,10 @@ function lineRemoveFunction(removeButtonIndex) {
 	console.log(markerIndexTemp + ' : ' + removeLatitude + ', ' + removeLangitude);
 	
 	//pathArray.pop({lat: removeLatitude, lng: removeLangitude});
-	//console.log('pathArray 길이 : ' + pathArray.length);
-	/*for(var i=0; i<pathArray.length; i++) {
+	console.log('pathArray 길이 : ' + pathArray.length);
+	for(var i=0; i<pathArray.length; i++) {
 		console.log(pathArray[i].lat + ', ' + pathArray[i].lng);
-	}*/
+	}
 	
 	if(pathArray.length >= 1) {
 		flag = false;
