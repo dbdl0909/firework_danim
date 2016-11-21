@@ -130,17 +130,6 @@
 		});
 		$('#introWrap').click(function(){			
 			$(this).slideUp();
-		});	
-		
-		//플래너
-		$('#memberIdCheckForPlan').click(function() {
-			if($('#sessionMemberId').val() != '') {
-				$('#plannerSubmit').submit();
-				//var memberId = $('#sessionMemberId').val();
-				//$('#memberIdCheckForPlan').attr('href', '/plan/mainPlan?memberId=' + memberId);
-			} else {
-				alert('로그인을 해주세요');
-			}
 		});
 		
 		//로그인 슬라이드
@@ -214,8 +203,42 @@
 			    });
 			}
 			location.href="/member/memberLogout";
+		});		
+		
+		//플래너
+		$('#memberIdCheckForPlan').click(function() {
+			$("#AllformSubmit").attr("action", "/plan/mainPlan");
+			if($('#sessionMemberId').val() != '') {
+				$('#AllformSubmit').submit();
+			} else {
+				alert('로그인을 해주세요');
+			}
 		});
-	})
+		
+		//추천여행
+		$('#recommandMainMemberIdCheck').click(function() {
+			$("#AllformSubmit").attr("action", "/recommand/recommandMain");
+			$('#AllformSubmit').submit();
+		});
+		
+		//내정보
+		$('#memberInfoMemberIdCheck').click(function() {
+			$("#AllformSubmit").attr("action", "/member/memberInfo");
+			$('#AllformSubmit').submit();
+		});
+		
+		//내여행
+		$('#planListMemberIdCheck').click(function() {
+			$("#AllformSubmit").attr("action", "/plan/planList");
+			$('#AllformSubmit').submit();
+		});
+		
+		//Q&A
+		$('#myQnaListMemberIdCheck').click(function() {
+			$("#AllformSubmit").attr("action", "/community/myQnaList");
+			$('#AllformSubmit').submit();
+		});
+	});
 
 </script>
 </head>
@@ -245,10 +268,12 @@
 		</div>
 		<div id="headerNavWrap">
 			<ul id="headerNav">
-				<li class="hiddenNavWrap">
-					<form id="plannerSubmit" action="/plan/mainPlan" method="post">
+				<li id="memberIdFromCheck">
+					<form id="AllformSubmit" action="" method="post">
 						<input id="sessionMemberId" name="memberId" type="hidden" value="${sessionScope.memberId}"/>
 					</form>
+				</li>
+				<li class="hiddenNavWrap">
 					<a id="memberIdCheckForPlan">플래너</a>
 				</li>
 				<li class="hiddenNavWrap">
@@ -264,7 +289,7 @@
 					</div>
 				</li>
 				<li class="hiddenNavWrap">
-					<a href="/recommand/recommandMain?memberId=${sessionScope.memberId}">추천여행</a>
+					<a id="recommandMainMemberIdCheck">추천여행</a>
 				</li>
 				<li class="hiddenNavWrap">
 					<c:if test="${empty sessionScope.memberId}">
@@ -277,18 +302,18 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty sessionScope.memberId}">
-						<a href="">${sessionScope.memberName} ▼</a>
+						<a>${sessionScope.memberName} ▼</a>
 						<div class="hiddenNav">
 						<dl>
-							<dd><a href="/member/memberInfo?memberLoginId=${sessionScope.memberId}">내 정보</a></dd>
+							<dd><a id="memberInfoMemberIdCheck">내 정보</a></dd>
 							<c:if test="${sessionScope.memberLevel=='관리자'}">
 								<dd><a href="/member/memberListAll">회원리스트</a></dd>
 								<dd><a href="/community/reportList">신고리스트</a></dd>
 								<dd><a href="/community/qnaListAll">Q&A</a></dd>
 							</c:if>
 							<c:if test="${sessionScope.memberLevel=='유저'}">
-								<dd><a href="/plan/planList?memberId=${sessionScope.memberId}">내 여행</a></dd>
-								<dd><a href="/community/myQnaList?memberId=${sessionScope.memberId}">Q&A</a></dd>
+								<dd><a id="planListMemberIdCheck">내 여행</a></dd>
+								<dd><a id="myQnaListMemberIdCheck">Q&A</a></dd>
 							</c:if>		
 							<dd><a id="logoutButton">로그아웃</a></dd>
 						</dl>

@@ -87,7 +87,7 @@ public class CommunityController {
 	}
 	
 	// 나의 QNA 리스트 조회
-	@RequestMapping(value="/community/myQnaList", method = RequestMethod.GET)
+	@RequestMapping(value="/community/myQnaList")
 	public String myQnaList(Model model,
 			@RequestParam(value="communityCategoryNo", defaultValue="community_category_05") String communityCategoryNo,
 			@RequestParam(value="page", defaultValue="1") int page,

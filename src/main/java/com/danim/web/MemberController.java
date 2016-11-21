@@ -44,8 +44,8 @@ public class MemberController {
 		return"/member/memberInfo";
 	}
 	//회원정보보기
-	@RequestMapping(value="/member/memberInfo", method = RequestMethod.GET)
-	public String memberInfo(Model model, @RequestParam(value="memberLoginId") String memberId) {
+	@RequestMapping(value="/member/memberInfo", method = RequestMethod.POST)
+	public String memberInfo(Model model, @RequestParam(value="memberId") String memberId) {
 		logger.info("memberInfo MemberController.java");
 		logger.info("memberId : {} MemberController.java", memberId);
 		model.addAttribute("memberInfo", memberService.memberinfo(memberId));
