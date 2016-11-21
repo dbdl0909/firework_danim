@@ -105,14 +105,4 @@ public class CommunityDao {
 		logger.info("selectReportList CommunityDao.java");
 		return sqlSession.selectList(NS + ".selectReportList");
 	}
-	/*//신고누적횟수
-	public CommunityDto selectReportCheckCount(int communityNo){	
-		return sqlSession.selectOne(NS+".selectReportCheckCount", communityNo);		
-	}
-	public void insertCountReport(Map<String, Object> map) {
-		sqlSession.insert(NS+".insertCountReport", map);
-	}
-	public void updateCountReport(CommunityDto communityDto){		
-		sqlSession.update(NS+".updateCountReport", communityDto);
-	}*/
 }

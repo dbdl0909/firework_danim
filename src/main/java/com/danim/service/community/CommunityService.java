@@ -202,31 +202,30 @@ public class CommunityService {
 		}
 		return SelectReportList;
 	}
-	/*//신고횟수
-    public String CheckReportCount(int communityNo, int replyNo){
-    	int result = 0;
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	map.put("communityNo", communityNo);
-    	map.put("replyNo", replyNo);
-    	int reportCheckCount = communityDao.selectReportCheckCount(map);
-    	logger.info("reportCheckCount {} CommunityController.java", reportCheckCount);
-			CommunityDto communityDto= communityDao.selectReportCheckCount(communityNo);
-	    	communityDao.insertCountReport(map);
-	    	communityDao.updateCountReport(communityDto);
-	    	
-    	return result;
-    }*/
-    public String CheckReportCount(int communityNo, int replyNo){
+	//신고누적횟수
+	public String countReport(String communityNo) {
+		
+		return null;
+	}
+    /*public String insertCommunityVote(String votedId, int communityNo, String communityCategoryNo){
     	String result = null;
     	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("votedId", votedId);
     	map.put("communityNo", communityNo);
-    	map.put("replyNo", replyNo);
+    	map.put("communityCategoryNo", communityCategoryNo);
     	int checkVoted = communityDao.selectRatingForVotedCheck(map);
     	logger.info("checkVoted {} CommunityController.java", checkVoted);
-		CommunityDto communityDto= communityDao.selectDetailViewByCommunityNo(communityNo);
-    	communityDao.insertCommunityVote(map);
-    	communityDao.updateRatingCount(communityDto);
-    	result = "voted";
+    	if(checkVoted == 0) {
+			CommunityDto communityDto= communityDao.selectDetailViewByCommunityNo(communityNo);
+			int ratingCount = communityDto.getCommunityRating();
+			ratingCount++;
+			//communityDto.setCommunityRating(communityNo);
+	    	communityDao.insertCommunityVote(map);
+	    	communityDao.updateRatingCount(communityDto);
+	    	result = "voted";
+    	}else if(checkVoted == 1){
+    		result = "failed";
+    	}
     	return result;
-    }
+    }*/
 }

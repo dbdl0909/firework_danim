@@ -39,21 +39,6 @@ public class CommunityController {
 		model.addAttribute("reportListAll", communityService.selectReportList());
         return "/community/reportList";
 	}
-	//신고횟수 누적
-	@RequestMapping(value = "/community/reportList", method = RequestMethod.POST)
-	public String detailRating(Model model,
-							   @RequestParam(value="communityNo") int communityNo,
-							   @RequestParam(value="replyNo") int replyNo){
-
-		logger.info("communityNo {} reportCount() CommunityController.java", communityNo);
-		logger.info("replyNo {} reportCount() CommunityController.java", replyNo);
-		
-		String reportCountCheck = communityService.CheckReportCount(communityNo, replyNo);
-		model.addAttribute("reportCountCheck", reportCountCheck);
-		//return "redirect:/community/communityDetail?communityCategoryNo="+communityCategoryNo+"&communityNo="+communityNo;
-		return "/community/reportList";
-	}
-
 	@RequestMapping(value = "/community/list", method = RequestMethod.GET)
 	public String communityList(Model model,
 			@RequestParam(value="communityCategoryNo", defaultValue="community_category_01") String communityCategoryNo,
@@ -85,7 +70,15 @@ public class CommunityController {
         model.addAttribute("lastPage", lastPage);
 		return "/community/list";
 	}
-	
+	//신고카운트
+	@RequestMapping(value="/community/reportList", method = RequestMethod.POST)
+	public String reportCount(Model model,
+							@RequestParam(value="communityNo", defaultValue="") String communityNo ) {
+		logger.info("communityNo {} CommunityController.java", communityNo);
+		String reportCheckCount = communityService.countReport(communityNo);
+		model.addAttribute("reportCheckCount", reportCheckCount);
+		return "redirect:/community/reportList";
+	}	
 	// 나의 QNA 리스트 조회
 	@RequestMapping(value="/community/myQnaList")
 	public String myQnaList(Model model,
