@@ -153,14 +153,17 @@
 		    			$('#planHeadcount').focus();
 		    		}
 		    	});
-		    	
+		    	$('#planMenual').click(function(){
+		    		$('#menualWrap').show();
+		    		if($('#menualWrap').show() && $('.bx-wrapper').length == 0){
+			    		$('.menualSlider').bxSlider();
+			    	}
+		    	})
 		    	$('#closeMenual').click(function(){
-					$('#menualWrap').remove();
+					$('#menualWrap').hide();
 				});
 		    	
-		    	if($('#menualWrap').show()){
-		    		$('.menualSlider').bxSlider();
-		    	}
+		    	
 
 			});
 	    </script>
@@ -168,7 +171,6 @@
 	    <style>
 	    	#menualWrap{width:100%; height:1000px; position:absolute; top:0; z-index:99999999; background:#000; margin:0 auto; text-align:center;} 
 	    	#menual{margin:0 auto; text-align:center;}
-	    	.bxslider li{margin:0 auto; text-align:center; margin-left:20px;}
 	    	#closeMenual{color:#fff; font-size:20px; position:absolute; right:0; font-weight:bold; right:0; margin-right:50px; margin-top:30px; cursor:pointer;}
 	    	#logoWrap{height:80px;}
 	    	#logoWrap img{margin-top:20px; margin-left:30px;}
@@ -187,7 +189,7 @@
 	    </style>
 	</head>
 	<body>
-		<div id="menualWrap">
+		<div id="menualWrap" style="display:none;">
 			<span id="closeMenual">매뉴얼 닫기</span>
 			<div id="menual">
 				<ul class="menualSlider">
@@ -227,6 +229,9 @@
 							</li>
 							<li>
 								<input type="button" id="planInfoSet" value="플래너 저장" class="btn btn-default" data-toggle="modal" data-target="#myModal"/>
+							</li>
+							<li>
+								<input type="button" id="planMenual" value="매뉴얼" class="btn btn-default" />
 							</li>
 						</ul>
 					</div>
