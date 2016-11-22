@@ -47,9 +47,12 @@ var $temp = 0;
 var cityStayDayChange = false;
 //도시에 머물 일 수가 변경된 태그가 몇번째인지 담는 변수
 //var $stayCountIndex = 0;
+//도시에 머물 일 수 담는 변수
+var cityStayCount = 0;
+//도시에 머무는 종료일을 담는 변수
+var cityEndDateTemp = new Date();
 
-/*function dateSetting() {
-	var index = 0;
+function dateSetting() {
 	var cityStartDateTemp = new Date(document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate);
 	var yearTemp = cityStartDateTemp.getFullYear();
 	var monthTemp = cityStartDateTemp.getMonth()+1;
@@ -58,12 +61,11 @@ var cityStayDayChange = false;
 	cityEndDateTemp.setFullYear(yearTemp);
 	cityEndDateTemp.setMonth(monthTemp-1);
 	cityEndDateTemp.setDate(dateTemp+cityStayCount);
-}*/
+}
 
 //날짜 수정될때마다 도시루트 시작날짜, 종료날짜 셋팅(일정표에 담을것)
 function cityRouteDateSet() {
 	//console.log('종료일 셋팅 후 hidden에 값 넣기!');
-	//console.log('cityRouteLiIndex(li) : ' + cityRouteLiIndex);
 	
 	//mainPlan페이지에 처음 들어왔을때의 출발일
 	//console.log('출발일 init : ' + startDateInit);
@@ -72,10 +74,6 @@ function cityRouteDateSet() {
 	//console.log('cityStartDate : ' + cityStartDate);
 	var cityEndDate = document.getElementById('endDate').valueAsDate;
 	//console.log('cityEndDate : ' + cityEndDate);
-	
-	var cityEndDateTemp = new Date();
-	
-	//console.log('cityRouteLiIndex : ' + cityRouteLiIndex);
 	
 	if(startDateInit.toString() == cityStartDate.toString()) {			//출발일이 변경되지 않았을 경우
 		//console.log('출발일이 변경되지 않았을 경우');
@@ -92,14 +90,7 @@ function cityRouteDateSet() {
 				document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate = cityStartDate;
 				//console.log(cityRouteLiIndex + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].value);
 				
-				var cityStartDateTemp = new Date(document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate);
-				var yearTemp = cityStartDateTemp.getFullYear();
-				var monthTemp = cityStartDateTemp.getMonth()+1;
-				var dateTemp = cityStartDateTemp.getDate();
-				
-				cityEndDateTemp.setFullYear(yearTemp);
-				cityEndDateTemp.setMonth(monthTemp-1);
-				cityEndDateTemp.setDate(dateTemp+cityStayCount);
+				dateSetting();
 				
 				//처음 루트에 도시가 추가되었을때 0번째(li)의 endDate에 종료일 담는다.
 				document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].valueAsDate = cityEndDateTemp;
@@ -113,14 +104,7 @@ function cityRouteDateSet() {
 				document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate = document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex-1].valueAsDate;
 				//console.log(cityRouteLiIndex + '번째 도시 출발일 : ' + document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].value);
 				
-				var cityStartDateTemp = new Date(document.getElementsByClassName('cityRouteStartDate')[cityRouteLiIndex].valueAsDate);
-				var yearTemp = cityStartDateTemp.getFullYear();
-				var monthTemp = cityStartDateTemp.getMonth()+1;
-				var dateTemp = cityStartDateTemp.getDate();
-				
-				cityEndDateTemp.setFullYear(yearTemp);
-				cityEndDateTemp.setMonth(monthTemp-1);
-				cityEndDateTemp.setDate(dateTemp+cityStayCount);
+				dateSetting();
 				
 				//처음 루트에 도시가 추가되었을때 cityRouteLiIndex번째(li)의 endDate에 종료일 담는다.
 				document.getElementsByClassName('cityRouteEndDate')[cityRouteLiIndex].valueAsDate = cityEndDateTemp;
