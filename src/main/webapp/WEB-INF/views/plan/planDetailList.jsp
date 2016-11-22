@@ -33,7 +33,11 @@
     	var pathArray = [];
     	var markerArray = [];
 		var marker;
-		var line
+		var line;
+		var lineSymbol = {
+			    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+			  };
+		
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 7,
 			center: {lat: 36.337, lng: 127.402}
@@ -66,15 +70,20 @@
 			
 		}
 		for (var i = 0; i < cityInfoList.length; i++) {
-			line = new google.maps.Polyline({
-			    path: [{lat: Number(cityInfoList[i].cityInfoLatitude), lng: Number(cityInfoList[i].cityInfoLangitude)}],
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-			    strokeWeight: 2
-			  });
-			flightPath.setMap(map);
+			 pathArray.push({lat: Number(cityInfoList[i].cityInfoLatitude), lng: Number(cityInfoList[i].cityInfoLangitude)})
+			 
 		}
-
+		line = new google.maps.Polyline({
+		    path: pathArray,
+		    icons: [{
+		        icon: lineSymbol,
+		        offset: '100%'
+		      }],
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 1.0,
+		    strokeWeight: 2
+		  });
+		line.setMap(map);
      };
 
 		
