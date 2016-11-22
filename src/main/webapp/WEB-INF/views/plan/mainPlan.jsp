@@ -22,8 +22,7 @@
 				margin: 0;
 				padding: 0;
 			}
-	    </style><!-- 구글에 등록된 기본 맵 스타일 -->
-	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
+	    </style>
    		<script src="../../resources/js/monthly.js"></script>
 	    <script>
 	    	var cityInfoList = [];
@@ -398,6 +397,7 @@
 				</div>
 			</div>
 		</form>
-		
+		<!-- 구글에 등록된 기본 맵 스타일 -->
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8BIEwXt8NNPFQrxBdrh3Eg4_awvKCUN8&callback=initMap" async defer></script>
 	</body>
 </html>
