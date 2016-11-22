@@ -15,25 +15,40 @@
 		<title>다님 플래너</title>
 		<script type="text/javascript">
 		$(document).ready(function(){
+			
+			var bookmarkInfo = "${selectLandmarkInfoOne.landmarkInfoNo}";
+			var memberId = "${sessionScope.memberId}";
+			
+			function bookmarkAjax(){
+				$.ajax({
+					type:"POST",  
+					url:"/search/insertBookmark",    
+					data:{bookmarkInfo: bookmarkInfo, memberId: memberId},     
+					success:function(data){
+						alert('즐겨찾기에 추가했습니다');
+					},
+					error:function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+				});
+			};
+			
 			$('#bookmarkButton').click(function() {
-				console.log('왜안되지');
-				console.log($('#a').val());
-				$("#AllformSubmit").attr("action", "/search/insertBookmark");
-				$('#AllformSubmit').submit();
-			});			
+				if(memberId != "") {
+					bookmarkAjax();
+				}else if(memberId == "") {
+					alert('로그인이 필요한 서비스입니다');
+				}
+			});
 		});
 		</script>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
-		<form id="AllformSubmit" action="" method="post">
-			<input id="a" name="bookmarkInfo" type="hidden" value="${selectLandmarkInfoOne.landmarkInfoNo}"/>
-			<input name="memberId" type="hidden" value="${sessionScope.memberId}"/>
-		</form>
 		<div class="container">
 			<p class="infoButton">
 				<!-- <a href="/" role="button" class="btn btn-info">홈으로</a> -->
-				<a id="bookmarkButton" class="btn btn-info">관심목록에 추가</a>
+				<a id="bookmarkButton" class="btn btn-info">즐겨찾기에 추가</a>
 				<!-- <a id="addToPlan" role="button" class="btn btn-info">일정에 추가</a> -->
 			</p>
 			

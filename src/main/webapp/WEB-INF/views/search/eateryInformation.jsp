@@ -13,10 +13,42 @@
 		<!-- 자체 css -->
 		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">		
 		<title>다님 플래너</title>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			
+			var bookmarkInfo = "${selectEateryInfoOne.eateryNo}";
+			var memberId = "${sessionScope.memberId}";
+			
+			function bookmarkAjax(){
+				$.ajax({
+					type:"POST",  
+					url:"/search/insertBookmark",    
+					data:{bookmarkInfo: bookmarkInfo, memberId: memberId},     
+					success:function(data){
+						alert('즐겨찾기에 추가했습니다');
+					}					
+				});
+			};
+			
+			$('#bookmarkButton').click(function() {
+				if(memberId != "") {
+					bookmarkAjax();
+				}else if(memberId == "") {
+					alert('로그인이 필요한 서비스입니다');
+				}
+			});
+		});
+		</script>		
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
+			<p class="infoButton">
+				<!-- <a href="/" role="button" class="btn btn-info">홈으로</a> -->
+				<a id="bookmarkButton" class="btn btn-info">즐겨찾기에 추가</a>
+				<!-- <a id="addToPlan" role="button" class="btn btn-info">일정에 추가</a> -->
+			</p>
+		
 			<h1>${selectEateryInfoOne.eateryName}</h1>
 			<p>${cityInfoName} > 먹을만한 곳</p>
 			<div class="infoImage">
@@ -36,11 +68,6 @@
 						<li>음식점명 : ${selectEateryInfoOne.eateryName}</li>
 						<li>분류 : ${selectEateryInfoOne.eateryCategory}</li>
 					</ul>
-				</p>
-				<p class="infoButton">
-					<a href="/" role="button" class="btn btn-info">홈으로</a>
-					<a href="" role="button" class="btn btn-info">버튼2</a>
-					<a href="" role="button" class="btn btn-info">버튼3</a>
 				</p>
 			</div>
 		</div>
