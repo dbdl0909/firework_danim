@@ -94,6 +94,41 @@ public class SearchDao {
 		logger.info("selectCityAll() SearchDao.java");
 		
 		return sessionTemplate.selectList(nameSpace + ".selectCityAll");
-	}	
+	}
+	
+	// 즐겨찾기 추가
+	public void insertBookmark(Map<String, Object> map) {
+		logger.info("insertBookmark() SearchDao.java");
+		
+		sessionTemplate.insert(nameSpace + ".insertBookmark", map);
+	}
+	
+	// 명소 즐겨찾기
+	public List<SearchDto> selectLandmarkBookmark(String memberId) {
+		logger.info("selectLandmarkBookmark() SearchDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectLandmarkBookmark", memberId);
+	}
+	
+	// 음식점 즐겨찾기
+	public List<SearchDto> selectEateryBookmark(String memberId) {
+		logger.info("selectEateryBookmark() SearchDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectEateryBookmark", memberId);
+	}
+	
+	// 행사 즐겨찾기
+	public List<SearchDto> selectEventBookmark(String memberId) {
+		logger.info("selectEventBookmark() SearchDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectEventBookmark", memberId);
+	}
+	
+	// 숙소 즐겨찾기
+	public List<SearchDto> selectStayBookmark(String memberId) {
+		logger.info("selectStayBookmark() SearchDao.java");
+		
+		return sessionTemplate.selectList(nameSpace + ".selectStayBookmark", memberId);
+	}
 	
 }

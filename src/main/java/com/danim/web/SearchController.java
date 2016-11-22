@@ -97,5 +97,26 @@ public class SearchController {
 		
 		return "/search/stayInformation";
 	}
+	
+	@RequestMapping(value="/search/insertBookmark")
+	public String insertBookmark(@RequestParam(value="bookmarkInfo") String bookmarkInfo,
+						@RequestParam(value="memberId") String memberId) {
+		logger.info("bookmarkInfo 값 {} 입니다", bookmarkInfo);
+		logger.info("memberId 값 {} 입니다", memberId);
+		
+		searchService.getInsertBookmark(bookmarkInfo, memberId);
+		
+		return "redirect:/search/selectBookmark?memberId="+memberId;
+		
+	}
+	
+	@RequestMapping(value="/search/selectBookmark")
+	public String selectBookmark(Model model, @RequestParam(value="memberId") String memberId) {
+		logger.info("memberId 값 {} 입니다", memberId);
+		
+		model.addAttribute("selectBookmark", searchService.selectBookmark(memberId));
+				
+		return "/search/selectBookmark";
+	}
 
 }

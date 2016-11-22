@@ -341,7 +341,7 @@
 					
 				</div>
 			</div>
-			<div id="jsonContainer">
+			<div id="jsonContainer" style="display: none;">
 			
 			</div>
 			<!-- 플래너 저장 버튼 누르면 나오는 Modal -->

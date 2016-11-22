@@ -120,4 +120,28 @@ public class SearchService {
 		return selectCityAll;
 	}
 	
+	// 즐겨찾기 추가
+	public void getInsertBookmark(String bookmarkInfo, String memberId) {
+		logger.info("getInsertBookmark() SearchService.java");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("bookmarkInfo", bookmarkInfo);
+		map.put("memberId", memberId);
+		
+		searchDao.insertBookmark(map);
+	}
+	
+	// 즐겨찾기 화면페이지
+	public Map<String, Object> selectBookmark(String memberId) {
+		logger.info("selectBookmark() SearchService.java");
+		
+		Map<String, Object> selectBookmark = new HashMap<String, Object>();
+		selectBookmark.put("landmarkBookmark", searchDao.selectLandmarkBookmark(memberId));
+		selectBookmark.put("eateryBookmark", searchDao.selectEateryBookmark(memberId));
+		selectBookmark.put("eventBookmark", searchDao.selectEventBookmark(memberId));
+		selectBookmark.put("stayBookmark", searchDao.selectStayBookmark(memberId));
+		
+		return selectBookmark;
+	}
+	
 }

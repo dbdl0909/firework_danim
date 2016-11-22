@@ -193,4 +193,128 @@
 		FROM
 			city_info	
 	</select>
+	
+	<!-- 즐겨찾기에 내가 맘에든 명소, 음식점, 행사, 숙소 추가 -->
+	<insert id="insertBookmark"
+			parameterType="java.util.Map">
+		INSERT INTO 
+			bookmark(
+				bookmark_info,
+				member_id
+			)VALUES(
+				#{bookmarkInfo},
+				#{memberId}
+			)		
+	</insert>
+	
+	<!-- 즐겨찾기 정보가 명소일 경우 -->
+	<select id="selectLandmarkBookmark"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT
+			land.landmark_info_no as 'landmarkInfoNo',
+			land.landmark_info_name as 'landmarkInfoName',
+			city.city_info_do_name as 'cityInfoDoName',
+			city.city_info_name as 'cityInfoName'
+		FROM
+			landmark_info as land
+		JOIN
+			city_info as city
+		ON
+			land.city_info_no = city.city_info_no
+		WHERE 
+			landmark_info_no = 
+		ANY
+		(
+		SELECT
+			bookmark_info
+		FROM
+			bookmark
+		WHERE
+			member_id = #{memberId}
+		)	
+	</select>
+	
+	<!-- 즐겨찾기 정보가 음식점일 경우 -->
+	<select id="selectEateryBookmark"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT
+			eat.eatery_no as 'eateryNo',
+			eat.eatery_name as 'eateryName',
+			city.city_info_do_name as 'cityInfoDoName',
+			city.city_info_name as 'cityInfoName'
+		FROM
+			eatery_info as eat
+		JOIN
+			city_info as city
+		ON
+			eat.city_info_no = city.city_info_no
+		WHERE
+			eatery_no = 
+		ANY		
+		(
+		SELECT
+			bookmark_info
+		FROM
+			bookmark
+		WHERE
+			member_id = #{memberId}
+		)	
+	</select>
+	
+	<!-- 즐겨찾기 정보가 행사일 경우 -->
+	<select id="selectEventBookmark"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT
+			eve.event_info_name as 'eventInfoName',
+			city.city_info_do_name as 'cityInfoDoName',
+			city.city_info_name as 'cityInfoName'
+		FROM
+			event_info as eve
+		JOIN
+			city_info as city
+		ON
+			eve.city_info_no = city.city_info_no
+		WHERE
+			event_info_name = 
+		ANY		
+		(
+		SELECT
+			bookmark_info
+		FROM
+			bookmark
+		WHERE
+			member_id = #{memberId}
+		)	
+	</select>
+	
+	<!-- 즐겨찾기 정보가 숙소일 경우 -->
+	<select id="selectStayBookmark"
+			resultType="com.danim.service.search.SearchDto"
+			parameterType="String">
+		SELECT
+			stay.stay_info_no as 'stayInfoNo',
+			stay.stay_info_name as 'stayInfoName',
+			city.city_info_do_name as 'cityInfoDoName',
+			city.city_info_name as 'cityInfoName'
+		FROM
+			stay_info as stay
+		JOIN
+			city_info as city
+		ON
+			stay.city_info_no = city.city_info_no
+		WHERE
+			stay_info_no = 
+		ANY	
+		(
+		SELECT
+			bookmark_info
+		FROM
+			bookmark
+		WHERE
+			member_id = #{memberId}
+		)	
+	</select>		
 </mapper>		
