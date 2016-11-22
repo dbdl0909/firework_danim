@@ -29,37 +29,54 @@
     
     //console.log("cityInfoList.length : " + cityInfoList.length);
      function itMap() {
-    	 var cityInfoList = [];
-    		var dateCheckTemp = 0;
-    		
-    	    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */
-    	    <c:forEach var="PlanGpsList" items="${PlanGpsList}">
-    	    	var PlanGps = new Object();
-    	    	PlanGps.cityInfoLangitude = "${PlanGpsList.cityInfoLangitude}";
-    	    	PlanGps.cityInfoLatitude = "${PlanGpsList.cityInfoLatitude}";
-    	    	
-    	    	/* 담은 정보들을 cityInfoList에 담는다. */
-    	    	cityInfoList.push(PlanGps);
-    	    </c:forEach>
-    	var main = {lat: 36.337, lng: 127.402};
-    	
+    	var cityInfoList = [];
+    	var pathArray = [];
+    	var markerArray = [];
+		var marker;
+		var line
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 7,
-			center: main
+			center: {lat: 36.337, lng: 127.402}
+			
 		});//처음 지도 위치.
+    		//클릭한 도시들의 pathLine(폴리라인을 그을 좌표값)을 담을 배열
+
+    	    /* javascript 에서 jstl 사용해 리스트에 담겨있는 전체 도시 리스트를 가져온다. */
+  	    <c:forEach var="PlanGpsList" items="${PlanGpsList}">
+  	    	var PlanGps = new Object();
+  	    	PlanGps.cityInfoLangitude = "${PlanGpsList.cityInfoLangitude}";
+  	    	PlanGps.cityInfoLatitude = "${PlanGpsList.cityInfoLatitude}";
+  	    	/* 담은 정보들을 cityInfoList에 담는다. */
+  	    	cityInfoList.push(PlanGps);
+  	    </c:forEach>
 		
-		var markerArray = [];
-		var marker;
+		//alert(cityInfoList[0].cityInfoLangitude);
+   	
 		for (var i = 0; i < cityInfoList.length; i++) {
 			marker = new google.maps.Marker({
-			      position: {lat: cityInfoList[i][0], lng: cityInfoList[i][1]},
+			      position: {lat: Number(cityInfoList[i].cityInfoLatitude), lng: Number(cityInfoList[i].cityInfoLangitude)},
 			      map: map,
-			      index:i
+			      index:i	      
+			      
 			      
 			});//반복할때마다 마커를 찍어준다
 			markerArray.push(marker);
+			markerArray[i].setVisible(true);
+			
+			
 		}
-     }
+		for (var i = 0; i < cityInfoList.length; i++) {
+			line = new google.maps.Polyline({
+			    path: [{lat: Number(cityInfoList[i].cityInfoLatitude), lng: Number(cityInfoList[i].cityInfoLangitude)}],
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+			    strokeWeight: 2
+			  });
+			flightPath.setMap(map);
+		}
+
+     };
+
 		
     </script>
     
