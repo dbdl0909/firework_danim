@@ -111,8 +111,8 @@
 						</tr>
 					</thead>
 					<tbody id="landmarkTbody">
-						<c:set var="landmarkBookmark" value="${selectBookmark.landmarkBookmark}"/>	
-						<c:if test="${landmarkBookmark != ''}">			
+						<c:set var="landmarkBookmark" value="${selectBookmark.landmarkBookmark}"/>
+						<c:if test="${!empty selectBookmark.landmarkBookmark}">			
 							<c:forEach var="landmarkBookmark" items="${landmarkBookmark}">
 								<tr>
 									<td>${landmarkBookmark.cityInfoDoName} > ${landmarkBookmark.cityInfoName} > ${landmarkBookmark.landmarkInfoName}</td>
@@ -120,7 +120,7 @@
 								</tr>	
 							</c:forEach>
 						</c:if>
-						<c:if test="${empty landmarkBookmark}">
+						<c:if test="${empty selectBookmark.landmarkBookmark}">
 							<tr>
 								<td>
 									추가된 관심 리스트가 없습니다

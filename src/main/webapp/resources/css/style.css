@@ -498,7 +498,7 @@ display:none; margin-left:-130px; top:130px;}
 #header #headerWrap #headerNav .hiddenNavWrap .hiddenNav dl dt,
 #header #headerWrap #headerNav .hiddenNavWrap .hiddenNav dl dd{float:none; display:block; padding:10px 0;}
 #header #headerWrap #headerNav .hiddenNavWrap .hiddenNav dl dt{ width:150px; border-bottom:1px solid #ccc; color:#434343; font-size:14px;}
-#header #headerWrap #headerNav .hiddenNavWrap .hiddenNav dl dd a{margin-left:10%; color:#687074; font-size:12px;}
+#header #headerWrap #headerNav .hiddenNavWrap .hiddenNav dl dd a{margin-left:10%; color:#687074; font-size:12px; cursor: pointer;}
 #header #headerWrap #headerNav .hiddenNavWrap #memberIdCheckForPlan{cursor:pointer;}
 /* #header #loginNav{float:right;  padding-top:22px;}
 #header #loginNav span a{ color:#687074; font-size:16px;} */

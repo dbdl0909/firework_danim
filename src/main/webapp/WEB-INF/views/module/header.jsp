@@ -238,6 +238,12 @@
 			$("#AllformSubmit").attr("action", "/community/myQnaList");
 			$('#AllformSubmit').submit();
 		});
+		
+		//즐겨찾기
+		$('#bookmark').click(function() {
+			$("#AllformSubmit").attr("action", "/search/selectBookmark");
+			$('#AllformSubmit').submit();
+		});
 	});
 
 </script>
@@ -304,21 +310,22 @@
 					<c:if test="${not empty sessionScope.memberId}">
 						<a>${sessionScope.memberName} ▼</a>
 						<div class="hiddenNav">
-						<dl>
-							<dt>회원정보</dt>
-							<dd><a id="memberInfoMemberIdCheck">내 정보</a></dd>
-							<c:if test="${sessionScope.memberLevel=='관리자'}">
-								<dd><a href="/member/memberListAll">회원리스트</a></dd>
-								<dd><a href="/community/reportList">신고리스트</a></dd>
-								<dd><a href="/community/qnaListAll">Q&A</a></dd>
-							</c:if>
-							<c:if test="${sessionScope.memberLevel=='유저'}">
-								<dd><a id="planListMemberIdCheck">내 여행</a></dd>
-								<dd><a id="myQnaListMemberIdCheck">Q&A</a></dd>
-							</c:if>		
-							<dd><a id="logoutButton">로그아웃</a></dd>
-						</dl>
-					</div>
+							<dl>
+								<dt>회원정보</dt>
+								<dd><a id="memberInfoMemberIdCheck">내 정보</a></dd>
+								<c:if test="${sessionScope.memberLevel=='관리자'}">
+									<dd><a href="/member/memberListAll">회원리스트</a></dd>
+									<dd><a href="/community/reportList">신고리스트</a></dd>
+									<dd><a href="/community/qnaListAll">Q&A</a></dd>
+								</c:if>
+								<c:if test="${sessionScope.memberLevel=='유저'}">
+									<dd><a id="planListMemberIdCheck">내 여행</a></dd>
+									<dd><a id="myQnaListMemberIdCheck">Q&A</a></dd>
+									<dd><a id="bookmark">즐겨찾기</a></dd>
+								</c:if>		
+								<dd><a id="logoutButton">로그아웃</a></dd>
+							</dl>
+						</div>
 					</c:if>
 					<input type="hidden" id="facebookCheck" value="${facebookCheck}"/>			
 				</li>
