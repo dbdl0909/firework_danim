@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.danim.service.search.BookmarkDto;
 import com.danim.service.search.SearchDto;
 import com.danim.service.search.SearchService;
 
@@ -98,15 +100,24 @@ public class SearchController {
 		return "/search/stayInformation";
 	}
 	
-	@RequestMapping(value="/search/insertBookmark")
+	@RequestMapping(value="/search/insertBookmark", method = RequestMethod.POST)
 	public String insertBookmark(@RequestParam(value="bookmarkInfo") String bookmarkInfo,
-						@RequestParam(value="memberId") String memberId) {
+								@RequestParam(value="memberId") String memberId) {
 		logger.info("bookmarkInfo 값 {} 입니다", bookmarkInfo);
 		logger.info("memberId 값 {} 입니다", memberId);
 		
-		searchService.getInsertBookmark(bookmarkInfo, memberId);
+		BookmarkDto bookmarkCheck = searchService.bookmarkCheck(bookmarkInfo);
 		
-		return "redirect:/search/selectBookmark?memberId="+memberId;
+		String bookmarkReturn = null;
+		
+		if(bookmarkInfo.equals(bookmarkCheck.getBookmarkInfo())) {
+			bookmarkReturn = "/search/landmarkInformation";
+		}else{
+			searchService.getInsertBookmark(bookmarkInfo, memberId);
+			bookmarkReturn = "redirect:/search/selectBookmark?memberId="+memberId;
+		}
+		
+		return bookmarkReturn;
 		
 	}
 	

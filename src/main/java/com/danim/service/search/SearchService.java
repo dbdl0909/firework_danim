@@ -144,4 +144,13 @@ public class SearchService {
 		return selectBookmark;
 	}
 	
+	// 즐겨찾기 중복검사
+	public BookmarkDto bookmarkCheck(String bookmarkInfo) {
+		logger.info("bookmarkCheck() SearchService.java");
+		
+		BookmarkDto bookmarkCheck = searchDao.bookmarkCheck(bookmarkInfo);
+		
+		return bookmarkCheck;
+	}
+	
 }

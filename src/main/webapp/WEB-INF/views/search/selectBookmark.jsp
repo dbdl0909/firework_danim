@@ -96,7 +96,7 @@
 	<body>
 		<div class="container">
 			<div id="searchGuide">
-				<h3>관심 리스트</h3>
+				<h3 style="color: #e35e54">즐겨찾기</h3>
 			</div>
 			<div class="table-responsive">
 				<table class="table">

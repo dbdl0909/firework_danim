@@ -316,5 +316,18 @@
 		WHERE
 			member_id = #{memberId}
 		)	
-	</select>		
+	</select>
+	
+	<!-- 즐겨찾기 중복검사 -->
+	<select id="bookmarkCheck"
+			resultType="com.danim.service.search.BookmarkDto"
+			parameterType="String">
+		SELECT
+			bookmark_no as 'bookmarkNo',
+			bookmark_info as 'bookmarkInfo'
+		FROM
+			bookmark
+		WHERE
+			bookmark_info = #{bookmarkInfo}
+	</select>	
 </mapper>		

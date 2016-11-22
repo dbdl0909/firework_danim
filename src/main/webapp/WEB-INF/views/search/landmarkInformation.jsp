@@ -13,13 +13,27 @@
 		<!-- 자체 css -->
 		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">		
 		<title>다님 플래너</title>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('#bookmarkButton').click(function() {
+				console.log('왜안되지');
+				console.log($('#a').val());
+				$("#AllformSubmit").attr("action", "/search/insertBookmark");
+				$('#AllformSubmit').submit();
+			});			
+		});
+		</script>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
+		<form id="AllformSubmit" action="" method="post">
+			<input id="a" name="bookmarkInfo" type="hidden" value="${selectLandmarkInfoOne.landmarkInfoNo}"/>
+			<input name="memberId" type="hidden" value="${sessionScope.memberId}"/>
+		</form>
 		<div class="container">
 			<p class="infoButton">
-				<a href="/" role="button" class="btn btn-info">홈으로</a>
-				<a href="/search/insertBookmark?bookmarkInfo=${selectLandmarkInfoOne.landmarkInfoNo}&memberId=${sessionScope.memberId}" role="button" class="btn btn-info">관심목록에 추가</a>
+				<!-- <a href="/" role="button" class="btn btn-info">홈으로</a> -->
+				<a id="bookmarkButton" class="btn btn-info">관심목록에 추가</a>
 				<!-- <a id="addToPlan" role="button" class="btn btn-info">일정에 추가</a> -->
 			</p>
 			

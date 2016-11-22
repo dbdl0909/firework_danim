@@ -131,4 +131,10 @@ public class SearchDao {
 		return sessionTemplate.selectList(nameSpace + ".selectStayBookmark", memberId);
 	}
 	
+	// 즐겨찾기 중복검사
+	public BookmarkDto bookmarkCheck(String bookmarkInfo) {
+		logger.info("bookmarkCheck() SearchDao.java");
+		
+		return sessionTemplate.selectOne(nameSpace + ".bookmarkCheck", bookmarkInfo);
+	}
 }
