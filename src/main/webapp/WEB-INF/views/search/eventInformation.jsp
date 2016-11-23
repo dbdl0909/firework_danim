@@ -13,10 +13,40 @@
 		<!-- 자체 css -->
 		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">		
 		<title>다님 플래너</title>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			
+			var bookmarkInfo = "${selectEventInfoOne.eventInfoName}";
+			var memberId = "${sessionScope.memberId}";
+			
+			function bookmarkAjax(){
+				$.ajax({
+					type:"POST",  
+					url:"/search/insertBookmark",    
+					data:{bookmarkInfo: bookmarkInfo, memberId: memberId},     
+					success:function(data){
+						alert(data.msg);
+					}					
+				});
+			};
+			
+			$('#bookmarkButton').click(function() {
+				if(memberId != "") {
+					bookmarkAjax();
+				}else if(memberId == "") {
+					alert('로그인이 필요한 서비스입니다');
+				}
+			});
+		});
+		</script>		
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
+			<p class="infoButton">
+				<a id="bookmarkButton" class="btn btn-info">즐겨찾기에 추가</a>
+			</p>
+					
 			<h1>${selectEventInfoOne.eventInfoName}</h1>
 			<p>${cityInfoName} > 볼만한 것</p>
 			<div class="infoImage">
@@ -42,11 +72,6 @@
 						<li>홈페이지 : <a href="${selectEventInfoOne.eventInfoHomepage}">${selectEventInfoOne.eventInfoHomepage}</a></li>
 						<li>주소지 : ${selectEventInfoOne.eventInfoAddress}</li>
 					</ul>
-				</p>
-				<p class="infoButton">
-					<a href="/" role="button" class="btn btn-info">홈으로</a>
-					<a href="" role="button" class="btn btn-info">버튼2</a>
-					<a href="" role="button" class="btn btn-info">버튼3</a>
 				</p>
 			</div>
 		</div>

@@ -18,8 +18,6 @@
 			
 			var bookmarkInfo = "${selectLandmarkInfoOne.landmarkInfoNo}";
 			var memberId = "${sessionScope.memberId}";
-			console.log(bookmarkInfo)
-			console.log(memberId)
 			
 			function bookmarkAjax(){
 				$.ajax({
