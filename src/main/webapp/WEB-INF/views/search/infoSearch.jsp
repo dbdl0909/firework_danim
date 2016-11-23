@@ -98,30 +98,8 @@
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
 		<div class="container">
-			<!-- <div class="searchCityNameSpan">
-				<br>
-				<div id="searchNotice">
-					알고싶은 도시의 이름을 검색하세요! <span class="glyphicon glyphicon-search"></span>
-				</div>
-				<div id="searchForm">
-					<form id="infoSearch" action="/search/infoSearch" method="post">						
-						<div id="closeSearchForm">X</div>
-						<input id="infoSearchInput" name="search" class="form-control" placeholder="알고싶은 도시의 이름을 검색하세요!" type="text" />
-						<div id="infoSearchButton" >
-						    <button type="button" id="searchButton" class="btn btn-default">
-						    	<span class="glyphicon glyphicon-search"></span> 검색
-						    </button>
-					    </div>
-					</form>	
-				</div>
-			</div> -->
 			<div id="searchGuide">
 				<h3>"<span id="searchSpan">${search}</span>" (으)로 검색한 결과입니다</h3>
-				<%-- <c:forEach var="selectCityInfoName" items="${selectCityInfoName}">
-					<h2>
-						<a id="cityName" href="infoSearch?search=${selectCityInfoName.cityInfoName}">${selectCityInfoName.cityInfoName}</a>
-					</h2>
-				</c:forEach> --%>
 			</div>
 			<div class="table-responsive">
 				<table class="table">

@@ -1,5 +1,6 @@
 package com.danim.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.danim.service.search.BookmarkDto;
@@ -102,7 +104,8 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/search/insertBookmark")
-	public void insertBookmark(@RequestParam(value="bookmarkInfo") String bookmarkInfo,
+	@ResponseBody
+	public Map<String, Object> insertBookmark(@RequestParam(value="bookmarkInfo") String bookmarkInfo,
 								@RequestParam(value="memberId") String memberId) {
 		logger.info("bookmarkInfo 값 {} 입니다", bookmarkInfo);
 		logger.info("memberId 값 {} 입니다", memberId);
@@ -114,9 +117,16 @@ public class SearchController {
 			}
 		}else*/
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if(bookmarkCheck == null) {
 			searchService.getInsertBookmark(bookmarkInfo, memberId);
+			map.put("msg", "즐겨찾기에 등록했습니다");
+		}else if(bookmarkCheck != null) {
+			map.put("msg", "이미 즐겨찾기에 등록되어있습니다");
 		}
+		
+		return map;
 		
 	}
 	

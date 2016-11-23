@@ -18,6 +18,8 @@
 			
 			var bookmarkInfo = "${selectLandmarkInfoOne.landmarkInfoNo}";
 			var memberId = "${sessionScope.memberId}";
+			console.log(bookmarkInfo)
+			console.log(memberId)
 			
 			function bookmarkAjax(){
 				$.ajax({
@@ -25,10 +27,7 @@
 					url:"/search/insertBookmark",    
 					data:{bookmarkInfo: bookmarkInfo, memberId: memberId},     
 					success:function(data){
-						alert('즐겨찾기에 추가했습니다');
-					},
-					error:function(request,status,error){
-						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						alert(data.msg);
 					}
 				});
 			};
