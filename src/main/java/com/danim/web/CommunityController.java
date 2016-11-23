@@ -82,7 +82,7 @@ public class CommunityController {
 		
 		communityService.updateAndInsertCommunityBan(communityNoArray, reportReasonArray, reportNoArray);
 		
-		return "/community/communityReportSubmit";
+		return "redirect:/community/reportList";
 	}
 	
 	// 나의 QNA 리스트 조회
