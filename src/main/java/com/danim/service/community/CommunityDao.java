@@ -1,5 +1,6 @@
 package com.danim.service.community;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,5 +105,33 @@ public class CommunityDao {
 	public List<ReportDto> selectReportList() {
 		logger.info("selectReportList CommunityDao.java");
 		return sqlSession.selectList(NS + ".selectReportList");
+	}
+	//신고게시글 삭제게시판으로 이동
+	public void updateCommunityBan(int[] communityNoArray, List<String> reportReasonArray) {
+		logger.info("updateCommunityBan CommunityDao.java");
+		Map<String, Object> map = new HashMap<String, Object>();
+		int i=0;
+		for(i=0; i<communityNoArray.length; i++) {
+			map.put("communityNo", communityNoArray[i]);
+			map.put("communityBanReason", reportReasonArray.get(i));
+			sqlSession.update(NS + ".updateCommunityBan", map);
+		}
+	}
+	public void insertCommunityBan(int[] communityNoArray) {
+		logger.info("insertCommunityBan CommunityDao.java");
+		int i=0;
+		for(i=0; i<communityNoArray.length; i++) {
+			int communityNo =  communityNoArray[i];
+			sqlSession.insert(NS + ".insertCommunityBan", communityNo);
+		}
+	}
+	public void deleteReportNo(int[] reportNoArray) {
+		logger.info("deleteReportNo CommunityDao.java");
+		Map<String, Object> map = new HashMap<String, Object>();
+		int i=0;
+		for(i=0; i<reportNoArray.length; i++) {
+			map.put("reportNo", reportNoArray[i]);
+			sqlSession.delete(NS + ".deleteReportNo", map);
+		}
 	}
 }

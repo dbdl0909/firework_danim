@@ -197,9 +197,18 @@ public class CommunityService {
 	public List<ReportDto> selectReportList() {
 		logger.info("selectReportList() CommunityService.java");
 		List<ReportDto> SelectReportList =  communityDao.selectReportList();
+		//logger.info("이거확인!!!! SelectReportList {}", SelectReportList);
+		
 		for(int i=0; i<SelectReportList.size(); i++) {
 			logger.info("MemberListAll : {}", SelectReportList.get(i));
 		}
 		return SelectReportList;
+	}
+	//신고게시글 삭제
+	public void updateAndInsertCommunityBan(int[] communityNoArray, List<String> reportReasonArray, int[] reportNoArray) {
+		logger.info("updateAndInsertCommunityBan() CommunityService.java");
+		communityDao.updateCommunityBan(communityNoArray, reportReasonArray);
+		communityDao.insertCommunityBan(communityNoArray);
+		communityDao.deleteReportNo(reportNoArray);
 	}
 }

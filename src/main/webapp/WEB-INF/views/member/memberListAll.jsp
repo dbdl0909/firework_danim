@@ -16,8 +16,8 @@
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="../module/header.jsp" />
-	<h3 align="center">전체회원 리스트</h3>
-	<!-- <form class="memberList" action="" method="post"> -->
+	<div class="container">
+		<h3 align="center">전체회원 리스트</h3>
 		<table class="table table-hover">
 			<thead>
 				<ul>
@@ -99,7 +99,7 @@
 				</li>
 			</ul>
 		</div>
-	<!-- </form> -->
+	</div>
 	<!-- 풋터 -->
 	<jsp:include page="../module/footer.jsp" />
 </body>

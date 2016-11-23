@@ -70,6 +70,21 @@ public class CommunityController {
         model.addAttribute("lastPage", lastPage);
 		return "/community/list";
 	}
+	//신고게시글 삭제
+	@RequestMapping(value="/community/communityReportSubmit", method = RequestMethod.POST)
+	public String reportDelete(Model model,
+							@RequestParam(value="communityNo") int[] communityNoArray,
+							@RequestParam(value="reportReason") List<String> reportReasonArray,
+							@RequestParam(value="reportNo") int[] reportNoArray) {
+		logger.info("communityNoArray : {} CommunityController.java", communityNoArray);
+		logger.info("reportReasonArray : {} CommunityController.java", reportReasonArray);
+		logger.info("reportNoArray : {} CommunityController.java", reportNoArray);
+		
+		communityService.updateAndInsertCommunityBan(communityNoArray, reportReasonArray, reportNoArray);
+		
+		return "/community/communityReportSubmit";
+	}
+	
 	// 나의 QNA 리스트 조회
 	@RequestMapping(value="/community/myQnaList")
 	public String myQnaList(Model model,

@@ -458,4 +458,34 @@
 			communityNo DESC
 
 	</select>
+	<!-- 신고게시글 수정 -->
+	<update id="updateCommunityBan"
+			parameterType="Map">
+		UPDATE                
+			community          
+		SET                   
+			community_ban = 'T',
+			community_ban_reason = '${communityBanReason}'
+		WHERE                 
+			community_no = #{communityNo}
+	</update>
+	<!-- 신고게시글 이동 -->
+	<insert id="insertCommunityBan"
+			parameterType="int">
+		INSERT INTO
+			delete_community (
+				community_no,
+				delete_community_date
+			) VALUES (
+				#{communityNo},
+				CURDATE()
+			)
+	</insert>
+	<delete id="deleteReportNo"
+			parameterType="Map">
+		DELETE FROM
+			report
+		WHERE
+			report_no = ${reportNo}
+	</delete>
 </mapper>	
