@@ -149,6 +149,7 @@ public class MemberController {
 			}
 		}
 		countMember = memberService.countMemberList(memberIdCheck, memberStatus);
+		logger.info("memberStatus {} Controller.java",memberStatus );
 		logger.info("countMember {}",countMember);
 		//페이징
 		int startPage = memberService.getStartPage(page);
