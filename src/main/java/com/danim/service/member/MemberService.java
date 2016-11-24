@@ -59,9 +59,10 @@ public class MemberService {
 		return resultMap;
 	}
 	//모든 회원 수
-		public int countMemberList(String memberIdCheck){
+		public int countMemberList(String memberIdCheck, String memberStatus){
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("memberIdCheck", memberIdCheck);
+			map.put("memberStatus", memberStatus);
 			return memberDao.countMemberList(map);
 		}
 	//연동로그인 아이디 체크
@@ -94,8 +95,8 @@ public class MemberService {
         return this.endPage;
     }
     
-    public int getLastPage(String memberIdCheck, int page) {
-    	int totalCount = countMemberList(memberIdCheck);
+    public int getLastPage(String memberIdCheck, int page, int countMember) {
+    	int totalCount = countMember;
 		int lastPage = (int) Math.ceil((double)totalCount/LINE_PER_PAGE);
     	logger.info("getLastPage() MemberService.java");
 		return lastPage;

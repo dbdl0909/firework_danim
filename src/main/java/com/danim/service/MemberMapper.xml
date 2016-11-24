@@ -9,25 +9,33 @@
 	<!-- 총 회원수 -->
 	<select id="countMemberList" 
 			parameterType="java.util.Map"
-			resultType="Integer" >
-		SELECT
-			COUNT(*)
-		FROM
-		<!-- 	<choose>
-				<when test ="">	정상회원
-				
-				</when>
-				<when test ="">	정지회원
-				
-				</when>
-				<when test =""> 탈퇴회원
-				
-				</when>
-				<otherwise>		전체회원
-					
-				</otherwise>
-			</choose> -->
-			member_total
+			resultType="int" >
+		<choose>
+			<when test="memberStatus =='allMember'">
+				SELECT
+					COUNT(*)
+				FROM
+					member_total
+			</when>
+			<when test="memberStatus !='allMember'">
+				SELECT
+					COUNT(*)
+				FROM
+					member_total
+				WHERE
+				<choose>
+					<when test ="memberStatus = 'normalMember'">	<!-- 정상회원 -->
+						member_status = '정상회원'
+					</when>
+					<when test ="memberStatus == 'stopMember'">		<!-- 정지회원 -->
+						member_status = '정지회원'
+					</when>
+					<when test ="memberStatus == 'leaveMember'"> 	<!-- 탈퇴회원 -->
+						member_status = '탈퇴회원'
+					</when>
+				</choose>
+			</when>	
+		</choose>
 	</select>
 	<!-- 회원정보 조회 -->
 	<select id="memberSelectInfo"
