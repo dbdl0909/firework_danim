@@ -486,6 +486,6 @@
 		DELETE FROM
 			report
 		WHERE
-			report_no = ${reportNo}
+			report_no = #{reportNo}
 	</delete>
 </mapper>	

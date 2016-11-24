@@ -10,9 +10,23 @@
 	<select id="countMemberList" 
 			parameterType="java.util.Map"
 			resultType="Integer" >
-		SELECT 
-			COUNT(*) 
-		FROM 
+		SELECT
+			COUNT(*)
+		FROM
+		<!-- 	<choose>
+				<when test ="">	정상회원
+				
+				</when>
+				<when test ="">	정지회원
+				
+				</when>
+				<when test =""> 탈퇴회원
+				
+				</when>
+				<otherwise>		전체회원
+					
+				</otherwise>
+			</choose> -->
 			member_total
 	</select>
 	<!-- 회원정보 조회 -->
