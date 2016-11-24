@@ -15,6 +15,23 @@
 		<!-- 자체 css -->
 		<link href="../../../resources/css/style.css" rel="stylesheet" type="text/css">
 		<title>다님 플래너</title>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			var bookmarkTr = 0;
+			
+		    $(".bookmarkDelete").click(function(){
+		    	bookmarkTr = $('.bookmarkTr').index(this);
+				console.log(bookmarkInfo);
+		        $('div.modal').modal();
+		        bookmarkTr = $('.bookmarkTr').val();
+		    });
+		    
+		    $('#deleteSubmit').click(function(){
+		    	alert(bookmarkInfo);
+		    	//$('.bookmarkDelete').attr("href", "")
+		    });
+		});
+		</script>
 	</head>
 	<jsp:include page="../module/header.jsp"></jsp:include>
 	<body>
@@ -32,15 +49,19 @@
 							<th>
 							
 							</th>
+							<th>
+							
+							</th>
 						</tr>
 					</thead>
 					<tbody id="landmarkTbody">
 						<c:set var="landmarkBookmark" value="${selectBookmark.landmarkBookmark}"/>
 						<c:if test="${!empty selectBookmark.landmarkBookmark}">			
 							<c:forEach var="landmarkBookmark" items="${landmarkBookmark}">
-								<tr>
+								<tr class="bookmarkTr">
 									<td>${landmarkBookmark.cityInfoDoName} > ${landmarkBookmark.cityInfoName} > ${landmarkBookmark.landmarkInfoName}</td>
 									<td><a class="landmarkInfo" href="landmarkInfo?landmarkInfoNo=${landmarkBookmark.landmarkInfoNo}&cityInfoName=${landmarkBookmark.cityInfoName}">가이드북</a></td>
+									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -64,6 +85,9 @@
 							<th>
 							
 							</th>
+							<th>
+							
+							</th>
 						</tr>
 					</thead>
 					<tbody id="eateryTbody">
@@ -73,6 +97,7 @@
 								<tr>
 									<td>${eateryBookmark.cityInfoDoName} > ${eateryBookmark.cityInfoName} > ${eateryBookmark.eateryName}</td>
 									<td><a class="eateryInfo" href="eateryInfo?eateryNo=${eateryBookmark.eateryNo}&cityInfoName=${eateryBookmark.cityInfoName}">가이드북</a></td>
+									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -96,15 +121,19 @@
 							<th>
 							
 							</th>
+							<th>
+							
+							</th>							
 						</tr>
 					</thead>
 					<tbody id="eventTbody">
 						<c:set var="eventBookmark" value="${selectBookmark.eventBookmark}"/>
 						<c:if test="${!empty selectBookmark.eventBookmark}">			
 							<c:forEach var="eventBookmark" items="${eventBookmark}">
-								<tr>
+								<tr>									
 									<td>${eventBookmark.cityInfoDoName} > ${eventBookmark.cityInfoName} > ${eventBookmark.eventInfoName}</td>
 									<td><a class="eventInfo" href="eventInfo?eventInfoName=${eventBookmark.eventInfoName}&cityInfoName=${eventBookmark.cityInfoName}">가이드북</a></td>
+									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -128,6 +157,9 @@
 							<th>
 							
 							</th>
+							<th>
+							
+							</th>							
 						</tr>
 					</thead>
 					<tbody id="stayTbody">
@@ -135,8 +167,9 @@
 						<c:if test="${!empty selectBookmark.stayBookmark}">			
 							<c:forEach var="stayBookmark" items="${stayBookmark}">
 								<tr>
-									<td>${stayBookmark.cityInfoDoName} > ${stayBookmark.cityInfoName} > ${stayBookmark.eventInfoName}</td>
+									<td>${stayBookmark.cityInfoDoName} > ${stayBookmark.cityInfoName} > ${stayBookmark.stayInfoName}</td>
 									<td><a class="stayInfo" href="stayInfo?stayInfoNo=${stayBookmark.stayInfoNo}&cityInfoName=${stayBookmark.cityInfoName}">가이드북</a></td>
+									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -149,7 +182,25 @@
 						</c:if>	
 					</tbody>
 				</table>
-			</div>									
+			</div>
+			<div class="bookmarkModal">
+				<div class="modal fade" id="bookmarkModal" role="dialog">
+					<div class="modal-dialog">	
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">Close</button>
+								<h4 class="modal-title">즐겨찾기 삭제</h4>
+							</div>
+							<div class="modal-body">
+								해당 항목을 즐겨찾기에서 삭제 하시겠습니까?
+							</div>
+							<div class="modal-footer">
+								<a id="deleteSubmit" type="button" class="btn btn-default">삭제</a>
+							</div>
+						</div>			      
+					</div>
+				</div>
+			</div>					
 		</div>
 	</body>
 	<jsp:include page="../module/footer.jsp"></jsp:include>

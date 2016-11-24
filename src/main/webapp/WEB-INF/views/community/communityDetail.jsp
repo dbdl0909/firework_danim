@@ -53,7 +53,7 @@
 				
 			    $("#reportButton").click(function(){
 			        $('div.modal').modal();
-			    })
+			    });
 			    
 			    $('#reportSubmit').click(function(){
 			    	$('#reportForm').submit();

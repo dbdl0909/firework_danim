@@ -103,33 +103,7 @@ public class SearchController {
 		return "/search/stayInformation";
 	}
 	
-	@RequestMapping(value="/search/insertBookmark")
-	@ResponseBody
-	public Map<String, Object> insertBookmark(@RequestParam(value="bookmarkInfo") String bookmarkInfo,
-								@RequestParam(value="memberId") String memberId) {
-		logger.info("bookmarkInfo 값 {} 입니다", bookmarkInfo);
-		logger.info("memberId 값 {} 입니다", memberId);
-		
-		BookmarkDto bookmarkCheck = searchService.bookmarkCheck(bookmarkInfo);
-		
-		/*if(bookmarkCheck != null) {
-			if(bookmarkInfo.equals(bookmarkCheck.getBookmarkInfo())) {
-			}
-		}else*/
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(bookmarkCheck == null) {
-			searchService.getInsertBookmark(bookmarkInfo, memberId);
-			map.put("msg", "즐겨찾기에 등록했습니다");
-		}else if(bookmarkCheck != null) {
-			map.put("msg", "이미 즐겨찾기에 등록되어있습니다");
-		}
-		
-		return map;
-		
-	}
-	
+	// 즐겨찾기 조회
 	@RequestMapping(value="/search/selectBookmark")
 	public String selectBookmark(Model model, @RequestParam(value="memberId") String memberId) {
 		logger.info("memberId 값 {} 입니다", memberId);
@@ -137,6 +111,13 @@ public class SearchController {
 		model.addAttribute("selectBookmark", searchService.selectBookmark(memberId));
 				
 		return "/search/selectBookmark";
+	}
+	
+	// 즐겨찾기 삭제
+	@RequestMapping(value="/search/deleteBookmark")
+	public String deleteBookmark(@RequestParam(value="memberId") String memberId) {
+		
+		return "redirect:/search/selectBookmark?memberId="+memberId;
 	}
 
 }

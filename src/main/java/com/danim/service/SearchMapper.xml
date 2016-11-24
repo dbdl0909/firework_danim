@@ -337,5 +337,15 @@
 			bookmark
 		WHERE
 			bookmark_info = #{bookmarkInfo}
-	</select>	
+	</select>
+	
+	<!-- 즐겨찾기 삭제 -->
+	<delete id="deleteBookmark"
+			parameterType="String">
+		DELETE
+		FROM
+			bookmark
+		WHERE
+			bookmark_info = #{bookmarkInfo}
+	</delete>	
 </mapper>		

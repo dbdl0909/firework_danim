@@ -489,7 +489,7 @@ p {
 #header #headerWrap #headerNav{float:left; margin-top:16px;}
 #header #headerWrap #headerNav .hiddenNavWrap{float:left; padding:0 30px;}
 #header #headerWrap #headerNav .hiddenNavWrap:first-child{padding-left:0;}
-#header #headerWrap #headerNav .hiddenNavWrap a{font-size:16px; color:#687074; font-weight: 400; line-height:3em;}
+#header #headerWrap #headerNav .hiddenNavWrap a{font-size:16px; color:#687074; font-weight: 400; line-height:3em; cursor: pointer;}
 #header #headerWrap #headerNav .hiddenNavWrap .hiddenNav{width:290px; background:#fff; position:absolute; z-index:99999;
 -webkit-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); -moz-box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); box-shadow: 10px 10px 116px -31px rgba(67,67,67,1); 
 display:none; margin-left:-130px; top:130px;}
@@ -1154,6 +1154,8 @@ a.voted:hover {
 .container .table-responsive .table .eventInfo{text-decoration: none; float: right;}
 .container .table-responsive .table .stayInfo{text-decoration: none; float: right;}
 .container .table-responsive .table .moreView{text-align: right; cursor: pointer;}
+.container .table-responsive .table .bookmarkDelete{text-decoration: none; float: right; cursor: pointer;}
+.container .table-responsive .table #deleteTd{width: 3.8%;}
 .table .eateryInfo{text-decoration: none; float: right;}
 
 /* 검색상세정보화면 */
@@ -1341,3 +1343,9 @@ a.voted:hover {
 	font-size: .85em;
 	padding: 10px;
 }
+
+/* 북마크 모달 */
+.bookmarkModal .modal-dialog{z-index: 3000;}
+.bookmarkModal .modal-content{margin-top: 200px;}
+.bookmarkModal #reportForm{height: 180px;}
+.bookmarkModal #reportReason{height: 200px; width: 568px;}

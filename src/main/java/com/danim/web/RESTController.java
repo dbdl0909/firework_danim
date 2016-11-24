@@ -1,6 +1,8 @@
 package com.danim.web;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.danim.service.plan.TotalInfoService;
 import com.danim.service.recommand.RecommandService;
+import com.danim.service.search.BookmarkDto;
 import com.danim.service.search.SearchMoreService;
+import com.danim.service.search.SearchService;
 
 @Controller
 public class RESTController {
@@ -26,6 +31,9 @@ public class RESTController {
 	
 	@Autowired
 	private RecommandService recommandService;
+	
+	@Autowired
+	private SearchService searchService;
 	
 	Model model;
 	
@@ -183,5 +191,33 @@ public class RESTController {
 		model.addAttribute("gender", gender);
 		
 		return "/recommand/recommandMember";
+	}
+	
+	// 즐겨찾기에 추가
+	@RequestMapping(value="/search/insertBookmark")
+	@ResponseBody
+	public Map<String, Object> insertBookmark(@RequestParam(value="bookmarkInfo") String bookmarkInfo,
+								@RequestParam(value="memberId") String memberId) {
+		logger.info("bookmarkInfo 값 {} 입니다", bookmarkInfo);
+		logger.info("memberId 값 {} 입니다", memberId);
+		
+		BookmarkDto bookmarkCheck = searchService.bookmarkCheck(bookmarkInfo);
+		
+		/*if(bookmarkCheck != null) {
+			if(bookmarkInfo.equals(bookmarkCheck.getBookmarkInfo())) {
+			}
+		}else*/
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(bookmarkCheck == null) {
+			searchService.getInsertBookmark(bookmarkInfo, memberId);
+			map.put("msg", "즐겨찾기에 등록했습니다");
+		}else if(bookmarkCheck != null) {
+			map.put("msg", "이미 즐겨찾기에 등록되어있습니다");
+		}
+		
+		return map;
+		
 	}
 }
