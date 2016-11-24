@@ -246,8 +246,8 @@
 			.container #recommandView{float: right; width: 70%;}
 			.container #recommandTab div{cursor: pointer; font-size: 26px; margin: 18px;}
 			.container #recommandTab li{font-size: 18px; cursor: pointer; margin: 7px;}
-			.container #recommandView #popularityTitle{margin-left: 160px; margin-bottom: 30px; font-size: 26px;}	
-			.container #recommandView #popularityProvinceImage img{margin-left: 215px;}	
+			.container #recommandView #popularityTitle{margin-bottom: 30px; font-size: 26px;}	
+			.container #recommandView #popularityProvinceImage img{215px;}	
 			.container #recommandView #typeRank li{text-align: center; font-size: 20px; margin-top: 8px; border-bottom: 1px;}	
 			.container #recommandView #typeRankTitle{text-align: center; font-size: 26px;}
 			.container {text-align: center;}
