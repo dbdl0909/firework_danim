@@ -24,7 +24,7 @@
 					member_total
 				WHERE
 				<choose>
-					<when test ="memberStatus = 'normalMember'">	<!-- 정상회원 -->
+					<when test ="memberStatus == 'normalMember'">	<!-- 정상회원 -->
 						member_status = '정상회원'
 					</when>
 					<when test ="memberStatus == 'stopMember'">		<!-- 정지회원 -->

@@ -149,10 +149,14 @@ public class MemberController {
 			}
 		}
 		countMember = memberService.countMemberList(memberIdCheck, memberStatus);
+		logger.info("countMember {}",countMember);
 		//페이징
 		int startPage = memberService.getStartPage(page);
 		int endPage = memberService.getEndPage(startPage);
 		int lastPage = memberService.getLastPage(memberIdCheck, page, countMember);
+		logger.info("startPage {}",startPage);
+		logger.info("endPage {}",endPage);
+		logger.info("lastPage {}",lastPage);
 		if(lastPage < endPage){
 			endPage = lastPage;
 		}

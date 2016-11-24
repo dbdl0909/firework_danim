@@ -63,6 +63,7 @@ public class MemberService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("memberIdCheck", memberIdCheck);
 			map.put("memberStatus", memberStatus);
+			logger.info("memberStatus {} countMemberList", memberStatus);
 			return memberDao.countMemberList(map);
 		}
 	//연동로그인 아이디 체크

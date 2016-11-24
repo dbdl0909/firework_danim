@@ -17,18 +17,21 @@
 		<title>다님 플래너</title>
 		<script type="text/javascript">
 		$(document).ready(function(){
-			var bookmarkTr = 0;
 			
 		    $(".bookmarkDelete").click(function(){
-		    	bookmarkTr = $('.bookmarkTr').index(this);
-				console.log(bookmarkInfo);
+		    	var thisTest = $(".bookmarkDelete").index(this);
+		    	var a = $(".bookmarkInfo").index(this);
+		    	console.log(thisTest);
+		    	console.log(a);
 		        $('div.modal').modal();
-		        bookmarkTr = $('.bookmarkTr').val();
-		    });
+		       
+		        var bookmarkInfo = $('.bookmarkDelete').val();
+		        $('#bookmarkModal').val(bookmarkInfo);
+		    	console.log($('#bookmarkModal').val());
+		    });	
 		    
 		    $('#deleteSubmit').click(function(){
-		    	alert(bookmarkInfo);
-		    	//$('.bookmarkDelete').attr("href", "")
+		    	
 		    });
 		});
 		</script>
@@ -61,7 +64,9 @@
 								<tr class="bookmarkTr">
 									<td>${landmarkBookmark.cityInfoDoName} > ${landmarkBookmark.cityInfoName} > ${landmarkBookmark.landmarkInfoName}</td>
 									<td><a class="landmarkInfo" href="landmarkInfo?landmarkInfoNo=${landmarkBookmark.landmarkInfoNo}&cityInfoName=${landmarkBookmark.cityInfoName}">가이드북</a></td>
-									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
+									<td id="deleteTd">
+										<a class="bookmarkDelete">삭제<input class="bookmarkInfo" type="hidden" value="${landmarkBookmark.landmarkInfoNo}"/></a>
+									</td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -97,7 +102,7 @@
 								<tr>
 									<td>${eateryBookmark.cityInfoDoName} > ${eateryBookmark.cityInfoName} > ${eateryBookmark.eateryName}</td>
 									<td><a class="eateryInfo" href="eateryInfo?eateryNo=${eateryBookmark.eateryNo}&cityInfoName=${eateryBookmark.cityInfoName}">가이드북</a></td>
-									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
+									<td id="deleteTd"><a class="bookmarkDelete">삭제</a><input class="bookmarkInfo" type="hidden" value="${eateryBookmark.eateryNo}"/></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -133,7 +138,7 @@
 								<tr>									
 									<td>${eventBookmark.cityInfoDoName} > ${eventBookmark.cityInfoName} > ${eventBookmark.eventInfoName}</td>
 									<td><a class="eventInfo" href="eventInfo?eventInfoName=${eventBookmark.eventInfoName}&cityInfoName=${eventBookmark.cityInfoName}">가이드북</a></td>
-									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
+									<td id="deleteTd"><a class="bookmarkDelete" value="${eventBookmark.eventInfoName}">삭제</a></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -169,7 +174,7 @@
 								<tr>
 									<td>${stayBookmark.cityInfoDoName} > ${stayBookmark.cityInfoName} > ${stayBookmark.stayInfoName}</td>
 									<td><a class="stayInfo" href="stayInfo?stayInfoNo=${stayBookmark.stayInfoNo}&cityInfoName=${stayBookmark.cityInfoName}">가이드북</a></td>
-									<td id="deleteTd"><a class="bookmarkDelete">삭제</a></td>
+									<td id="deleteTd"><a class="bookmarkDelete" value="${stayBookmark.stayInfoNo}">삭제</a></td>
 								</tr>	
 							</c:forEach>
 						</c:if>
@@ -193,6 +198,7 @@
 							</div>
 							<div class="modal-body">
 								해당 항목을 즐겨찾기에서 삭제 하시겠습니까?
+								<input id="bookmarkModal" type="hidden" value="falval"/>
 							</div>
 							<div class="modal-footer">
 								<a id="deleteSubmit" type="button" class="btn btn-default">삭제</a>
