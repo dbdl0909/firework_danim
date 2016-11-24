@@ -121,18 +121,16 @@
 				</c:forEach>
 					<div id="map" style="float:left;width:200;"></div> 
 
-				<c:forEach end="0" items="${PlanDetailList}" var="PlanDetailList"
+				<c:forEach  items="${PlanDetailList}" var="PlanDetailList"
 					varStatus="PlanDetail">
 					
 					<dl>
 						<dt>${PlanDetailList.cityRouteDepartureCity}(${PlanDetailList.cityRouteArrivalCity})</dt>
+						<dd>여행메모:${PlanDetailList.planMemo}</dd>
 						<dd>날짜:${PlanDetailList.cityRouteDate}</dd>
 						<dd>시간:${PlanDetailList.cityRouteDepartureTime}~${PlanDetailList.cityRouteArrivalTime}</dd>
 						<dd>메모:${PlanDetailList.cityRouteMemo}</dd>
 						<dt>랜드마크:${PlanDetailList.landmarkPlanNo}(${PlanDetailList.landmarkInfoNo})</dt>
-						<dt>숙박정보:${PlanDetailList.stayPlanNo}(${PlanDetailList.stayInfoNo})</dt>
-						<dd>체크인:${PlanDetailList.stayPlanTime}</dd>
-						<dd>메모:${PlanDetailList.stayPlanMemo}</dd>
 						
 					</dl>
 					

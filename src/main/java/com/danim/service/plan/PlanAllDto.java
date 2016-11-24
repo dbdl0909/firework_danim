@@ -9,6 +9,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Text;
 
 public class PlanAllDto {
 	private int planNo;
+	private Text planMemo;
 	private String planName;
 	private int cityRouteNo;
 	private Date cityRouteDate;
@@ -20,23 +21,23 @@ public class PlanAllDto {
 	
 	private int landmarkPlanNo;
 	private String landmarkInfoNo;
-
-	private int stayPlanNo;
-	private String stayInfoNo;
-	private Time stayPlanTime;
-	private String stayPlanMemo;
-	
-	public String getPlanName() {
-		return planName;
-	}
-	public void setPlanName(String planName) {
-		this.planName = planName;
-	}
 	public int getPlanNo() {
 		return planNo;
 	}
 	public void setPlanNo(int planNo) {
 		this.planNo = planNo;
+	}
+	public Text getPlanMemo() {
+		return planMemo;
+	}
+	public void setPlanMemo(Text planMemo) {
+		this.planMemo = planMemo;
+	}
+	public String getPlanName() {
+		return planName;
+	}
+	public void setPlanName(String planName) {
+		this.planName = planName;
 	}
 	public int getCityRouteNo() {
 		return cityRouteNo;
@@ -92,30 +93,6 @@ public class PlanAllDto {
 	public void setLandmarkInfoNo(String landmarkInfoNo) {
 		this.landmarkInfoNo = landmarkInfoNo;
 	}
-	public int getStayPlanNo() {
-		return stayPlanNo;
-	}
-	public void setStayPlanNo(int stayPlanNo) {
-		this.stayPlanNo = stayPlanNo;
-	}
-	public String getStayInfoNo() {
-		return stayInfoNo;
-	}
-	public void setStayInfoNo(String stayInfoNo) {
-		this.stayInfoNo = stayInfoNo;
-	}
-	public Time getStayPlanTime() {
-		return stayPlanTime;
-	}
-	public void setStayPlanTime(Time stayPlanTime) {
-		this.stayPlanTime = stayPlanTime;
-	}
-	public String getStayPlanMemo() {
-		return stayPlanMemo;
-	}
-	public void setStayPlanMemo(String stayPlanMemo) {
-		this.stayPlanMemo = stayPlanMemo;
-	}
-	
 
+	
 }
